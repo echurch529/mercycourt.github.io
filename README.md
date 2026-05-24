@@ -98,6 +98,11 @@ The site is deployed via GitHub Pages with a custom domain via Cloudflare.
 | Contact          | `contact.html`          | mailto form, map, social links                 |
 | Quick Links      | `quick-links.html`      | Navigation hub (23 links)                      |
 
+## UI Conventions
+
+- **Hero banners** — all pages with an image hero use `h-[70vh]`, keeping content partially visible below the fold to invite scrolling
+- **Nav logo** — the logo in the top-left of every page is wrapped in `<a href="index.html">` so clicking it returns to the homepage
+
 ## Remaining Placeholders
 
 The following items still require real content before launch:
