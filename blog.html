@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Mercy Court RCCG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-red': '#D95A2B',
+                        'brand-dark': '#0A0A0A',
+                        'brand-footer': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        'anton': ['Anton', 'sans-serif'],
+                        'lato': ['Lato', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .carousel-slide {
+            transition: opacity 0.8s ease-in-out;
+        }
+        .carousel-dot.active {
+            background-color: #D95A2B;
+        }
+    </style>
+</head>
+<body class="font-lato bg-white text-gray-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 py-4">
+        <div class="container mx-auto px-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="assets/images/2026/branding/mercy-court-logo-white.png" alt="Mercy Court RCCG Logo" class="h-10 w-auto">
+            </div>
+            <div class="hidden lg:flex items-center gap-6 text-xs uppercase font-medium text-white">
+                <a href="index.html" class="hover:text-brand-red transition">Home</a>
+                <div class="relative group">
+                    <a href="who-we-are.html" class="hover:text-brand-red transition cursor-pointer flex items-center gap-1">
+                        About Us
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="absolute top-full left-0 mt-2 bg-black/95 backdrop-blur-sm rounded-lg py-2 min-w-[160px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <a href="contact.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">Contact</a>
+                    </div>
+                </div>
+                <div class="relative group">
+                    <a href="ministries.html" class="hover:text-brand-red transition cursor-pointer flex items-center gap-1">
+                        Ministries
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="absolute top-full left-0 mt-2 bg-black/95 backdrop-blur-sm rounded-lg py-2 min-w-[180px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <a href="the-new-mc.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">The New MC</a>
+                        <a href="mercy-kidz.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">God's Heritage</a>
+                        <a href="quick-links.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">Quick Links</a>
+                    </div>
+                </div>
+                <a href="community-impact.html" class="hover:text-brand-red transition">Community Impact</a>
+                <a href="watch-live.html" class="hover:text-brand-red transition">Watch Live</a>
+                <a href="blog.html" class="hover:text-brand-red transition">Blog</a>
+                <a href="give.html" class="bg-brand-red px-5 py-2 rounded-full hover:bg-[#C04E25] transition">Give</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="lg:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-black/95 backdrop-blur-sm mt-4 px-6 pb-6">
+            <a href="index.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Home</a>
+            <div>
+                <a href="who-we-are.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">About Us</a>
+                <a href="contact.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">Contact</a>
+            </div>
+            <div>
+                <a href="ministries.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Ministries</a>
+                <a href="the-new-mc.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">The New MC</a>
+                <a href="mercy-kidz.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">God's Heritage</a>
+                <a href="quick-links.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">Quick Links</a>
+            </div>
+            <a href="community-impact.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Community Impact</a>
+            <a href="watch-live.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Watch Live</a>
+            <a href="blog.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Blog</a>
+            <a href="give.html" class="inline-block mt-3 bg-brand-red px-5 py-2 rounded-full text-xs uppercase font-medium text-white hover:bg-[#C04E25] transition">Give</a>
+        </div>
+    </nav>
+
+    <!-- Hero Carousel Banner -->
+    <section class="relative h-[75vh] overflow-hidden" id="carousel">
+        <!-- Slide 1 -->
+        <div class="carousel-slide absolute inset-0 opacity-100" data-slide="0">
+            <div class="absolute inset-0">
+                <img src="assets/images/2026/congregation/congregation-worship-service-02.jpg" alt="Mercy Court Worship" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+            </div>
+            <div class="relative z-10 h-full flex items-center justify-center text-center px-6">
+                <div class="max-w-4xl">
+                    <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Featured</span>
+                    <h2 class="font-anton text-4xl md:text-6xl lg:text-7xl uppercase text-white tracking-tight leading-none mb-4">
+                        Easter Celebration<br><span class="text-brand-red">2026</span>
+                    </h2>
+                    <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-8">
+                        Join us as we celebrate the risen King. Special services, worship, and fellowship for the whole family.
+                    </p>
+                    <a href="#" class="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition">
+                        Read More
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-slide absolute inset-0 opacity-0" data-slide="1">
+            <div class="absolute inset-0">
+                <img src="assets/images/2026/congregation/congregation-seated-service-01.jpg" alt="Community Outreach" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+            </div>
+            <div class="relative z-10 h-full flex items-center justify-center text-center px-6">
+                <div class="max-w-4xl">
+                    <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Community</span>
+                    <h2 class="font-anton text-4xl md:text-6xl lg:text-7xl uppercase text-white tracking-tight leading-none mb-4">
+                        Serving Our<br><span class="text-brand-red">Community</span>
+                    </h2>
+                    <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-8">
+                        Mercy Court continues to make an impact in Baltimore through outreach, food drives, and neighborhood partnerships.
+                    </p>
+                    <a href="#" class="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition">
+                        Read More
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-slide absolute inset-0 opacity-0" data-slide="2">
+            <div class="absolute inset-0">
+                <img src="assets/images/2026/congregation/worship-team-on-stage-01.jpg" alt="Youth Ministry" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+            </div>
+            <div class="relative z-10 h-full flex items-center justify-center text-center px-6">
+                <div class="max-w-4xl">
+                    <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Youth</span>
+                    <h2 class="font-anton text-4xl md:text-6xl lg:text-7xl uppercase text-white tracking-tight leading-none mb-4">
+                        The New MC<br><span class="text-brand-red">Launch Week</span>
+                    </h2>
+                    <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-8">
+                        Our youth ministry is growing! See what God is doing through the next generation of pacesetters at Mercy Court.
+                    </p>
+                    <a href="the-new-mc.html" class="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition">
+                        Read More
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel Controls -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
+            <button class="carousel-dot active w-3 h-3 rounded-full bg-white/50 transition" data-dot="0"></button>
+            <button class="carousel-dot w-3 h-3 rounded-full bg-white/50 transition" data-dot="1"></button>
+            <button class="carousel-dot w-3 h-3 rounded-full bg-white/50 transition" data-dot="2"></button>
+        </div>
+
+        <!-- Arrow Controls -->
+        <button id="prevSlide" class="absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/30 hover:bg-black/50 flex items-center justify-center text-white transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </button>
+        <button id="nextSlide" class="absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/30 hover:bg-black/50 flex items-center justify-center text-white transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </button>
+    </section>
+
+    <!-- Blog Section Label -->
+    <section class="bg-white pt-16 pb-4 px-6">
+        <div class="container mx-auto max-w-7xl">
+            <div class="text-center mb-4">
+                <div class="inline-flex items-center gap-2 mb-4">
+                    <span class="w-8 h-[2px] bg-brand-red"></span>
+                    <span class="text-brand-red text-xs uppercase font-bold tracking-widest">Blog</span>
+                    <span class="w-8 h-[2px] bg-brand-red"></span>
+                </div>
+                <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-tight">
+                    News & <span class="text-brand-red">Updates</span>
+                </h2>
+                <p class="text-gray-500 text-lg mt-3 max-w-xl mx-auto">
+                    Stay connected with the latest from Mercy Court — stories, announcements, and articles that impact our community.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="bg-white pb-8 px-6">
+        <div class="container mx-auto max-w-7xl">
+            <div class="flex flex-wrap justify-center gap-3">
+                <button class="bg-brand-red text-white px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide">All</button>
+                <button class="border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide hover:border-brand-red hover:text-brand-red transition">News</button>
+                <button class="border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide hover:border-brand-red hover:text-brand-red transition">Events</button>
+                <button class="border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide hover:border-brand-red hover:text-brand-red transition">Devotionals</button>
+                <button class="border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide hover:border-brand-red hover:text-brand-red transition">Testimonies</button>
+                <button class="border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide hover:border-brand-red hover:text-brand-red transition">Announcements</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section class="bg-white pb-12 px-6">
+        <div class="container mx-auto max-w-7xl">
+            <div class="grid md:grid-cols-2 gap-0 rounded-xl overflow-hidden shadow-lg">
+                <div class="relative h-[350px] md:h-[420px]">
+                    <img src="assets/images/2026/congregation/congregation-worship-service-01.jpg" alt="Featured Post" class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-brand-red text-white px-4 py-1 rounded-full text-xs font-bold uppercase">Featured</span>
+                    </div>
+                </div>
+                <div class="bg-brand-dark p-10 md:p-12 flex flex-col justify-center">
+                    <span class="text-brand-red text-xs font-bold uppercase tracking-widest mb-3">March 20, 2026</span>
+                    <h3 class="font-anton text-3xl md:text-4xl uppercase text-white tracking-tight mb-4 leading-tight">
+                        A New Season of Growth at Mercy Court
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        As we step into a new season, Mercy Court is experiencing incredible growth — both spiritually and in numbers. From expanded ministries to deeper community engagement, God is doing something special among us. Hear from our leadership about what's ahead.
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <a href="#" class="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition">
+                            Read Article
+                        </a>
+                        <span class="text-gray-500 text-sm">5 min read</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="bg-gray-50 py-16 px-6">
+        <div class="container mx-auto max-w-7xl">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Post 1 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-01.jpg" alt="Community Outreach" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-brand-red text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">News</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-brand-red text-xs font-bold uppercase tracking-widest">March 15, 2026</span>
+                        <h3 class="font-anton text-xl uppercase mt-2 mb-3 tracking-tight leading-tight">
+                            Spring Community Outreach Recap
+                        </h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Over 200 families served through our annual spring outreach. Food, clothing, and prayer were shared across the Baltimore community.
+                        </p>
+                        <a href="#" class="text-brand-red font-bold text-sm uppercase hover:underline">Read More &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="assets/images/2026/congregation/congregation-prayer-moment-02.jpg" alt="Worship Night" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-brand-red text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">Events</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-brand-red text-xs font-bold uppercase tracking-widest">March 10, 2026</span>
+                        <h3 class="font-anton text-xl uppercase mt-2 mb-3 tracking-tight leading-tight">
+                            Night of Worship & Prayer — April 2026
+                        </h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Mark your calendars for a powerful evening of worship, intercession, and encounter. Open to all members and guests.
+                        </p>
+                        <a href="#" class="text-brand-red font-bold text-sm uppercase hover:underline">Read More &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="assets/images/2026/congregation/worship-team-on-stage-01.jpg" alt="Devotional" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-brand-red text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">Devotionals</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-brand-red text-xs font-bold uppercase tracking-widest">March 5, 2026</span>
+                        <h3 class="font-anton text-xl uppercase mt-2 mb-3 tracking-tight leading-tight">
+                            Walking in Purpose: A Devotional Series
+                        </h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Discover God's unique purpose for your life. This 7-day devotional series from PJ will help you align your steps with God's plan.
+                        </p>
+                        <a href="#" class="text-brand-red font-bold text-sm uppercase hover:underline">Read More &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- Post 4 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="assets/images/2026/congregation/congregation-seated-service-01.jpg" alt="Testimony" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-brand-red text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">Testimonies</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-brand-red text-xs font-bold uppercase tracking-widest">February 28, 2026</span>
+                        <h3 class="font-anton text-xl uppercase mt-2 mb-3 tracking-tight leading-tight">
+                            "God Restored My Family" — A Testimony
+                        </h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Read how one family experienced God's mercy and restoration through the community and prayers of Mercy Court.
+                        </p>
+                        <a href="#" class="text-brand-red font-bold text-sm uppercase hover:underline">Read More &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- Post 5 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="assets/images/2026/congregation/congregation-seated-service-02.jpg" alt="Announcement" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-brand-red text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">Announcements</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-brand-red text-xs font-bold uppercase tracking-widest">February 20, 2026</span>
+                        <h3 class="font-anton text-xl uppercase mt-2 mb-3 tracking-tight leading-tight">
+                            New Membership Class Starting Soon
+                        </h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Interested in becoming an official member of Mercy Court? Our next membership class begins in April. Sign up today.
+                        </p>
+                        <a href="#" class="text-brand-red font-bold text-sm uppercase hover:underline">Read More &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- Post 6 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="assets/images/2026/the-new-mc/the-new-mc-team-group-on-stage.jpg" alt="Youth Update" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-brand-red text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">News</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-brand-red text-xs font-bold uppercase tracking-widest">February 14, 2026</span>
+                        <h3 class="font-anton text-xl uppercase mt-2 mb-3 tracking-tight leading-tight">
+                            The New MC: Building the Next Generation
+                        </h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Our youth ministry continues to thrive. Learn about the latest programs, events, and how young people are finding their purpose.
+                        </p>
+                        <a href="the-new-mc.html" class="text-brand-red font-bold text-sm uppercase hover:underline">Read More &rarr;</a>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Load More -->
+            <div class="text-center mt-12">
+                <button class="border-2 border-brand-dark text-brand-dark px-10 py-3 rounded-full font-bold uppercase text-sm hover:bg-brand-dark hover:text-white transition">
+                    Load More Posts
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscribe / Stay Updated Section -->
+    <section class="bg-brand-dark py-20 px-6">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="font-anton text-4xl md:text-5xl uppercase text-white tracking-tight mb-4">
+                Never Miss <span class="text-brand-red">An Update</span>
+            </h2>
+            <p class="text-gray-400 text-lg mb-8 max-w-xl mx-auto">
+                Subscribe to our blog and get the latest news, devotionals, and community stories delivered straight to your inbox.
+            </p>
+            <div class="max-w-lg mx-auto flex flex-col sm:flex-row gap-4">
+                <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-3 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-brand-red">
+                <button class="bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition whitespace-nowrap">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Give Section -->
+    <section class="bg-white pt-24 pb-20 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <div class="border-l-4 border-brand-red pl-8">
+                <h2 class="font-anton text-4xl md:text-5xl uppercase mb-4 tracking-tight">
+                    Give to Mercy Court
+                </h2>
+                <p class="text-gray-600 text-lg mb-8">
+                    Your generosity keeps blessing lives, thank you for giving.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="give.html" class="inline-block border-2 border-brand-dark text-brand-dark px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-brand-dark hover:text-white transition">
+                        Give Now
+                    </a>
+                    <a href="#" class="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition">
+                        Building Project
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Our Mailing List -->
+    <section class="bg-brand-red py-16 px-6">
+        <div class="container mx-auto max-w-2xl text-center">
+            <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-tight">
+                JOIN OUR MAILING LIST
+            </h2>
+            <p class="text-white/80 text-sm mb-8">
+                We promise not to spam you, but send you edifying and amazing
+                content regularly from Mercy Court RCCG.
+            </p>
+            <div class="max-w-md mx-auto space-y-4">
+                <input type="email" placeholder="Email" class="w-full px-6 py-3 rounded-full border-2 border-white/30 bg-transparent text-white placeholder-white/60 focus:outline-none focus:border-white">
+                <button class="w-full bg-white text-brand-red px-6 py-3 rounded-full font-bold uppercase text-sm hover:bg-gray-100 transition">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-footer text-white py-12 px-6">
+        <div class="container mx-auto max-w-7xl">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="font-bold text-xl mb-4">
+                        <span class="text-brand-red">MERCY COURT</span> RCCG
+                    </h3>
+                    <p class="text-gray-400 text-sm">
+                        The home of pacesetters, where we experience God and enjoy life.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4 uppercase">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="who-we-are.html" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition">Service Times</a></li>
+                        <li><a href="ministries.html" class="text-gray-400 hover:text-white transition">Ministries</a></li>
+                        <li><a href="who-we-are.html#leadership" class="text-gray-400 hover:text-white transition">Leadership</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4 uppercase">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="watch-live.html" class="text-gray-400 hover:text-white transition">Live Stream</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="quick-links.html" class="text-gray-400 hover:text-white transition">Quick Links</a></li>
+                        <li><a href="give.html" class="text-gray-400 hover:text-white transition">Give Online</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4 uppercase">Contact</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>529 Walker Avenue</li>
+                        <li>Baltimore, MD 21212</li>
+                        <li class="pt-2">+1 (410) 900-9111</li>
+                        <li>info@mercycourt.org</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-400">
+                    &copy; 2026 Mercy Court RCCG. All rights reserved.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Carousel Script -->
+    <script>
+        (function() {
+            let current = 0;
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const total = slides.length;
+            let interval;
+
+            function goTo(index) {
+                slides[current].style.opacity = '0';
+                dots[current].classList.remove('active');
+                current = (index + total) % total;
+                slides[current].style.opacity = '1';
+                dots[current].classList.add('active');
+            }
+
+            function next() { goTo(current + 1); }
+            function prev() { goTo(current - 1); }
+
+            function startAutoplay() {
+                interval = setInterval(next, 5000);
+            }
+
+            function resetAutoplay() {
+                clearInterval(interval);
+                startAutoplay();
+            }
+
+            document.getElementById('nextSlide').addEventListener('click', function() { next(); resetAutoplay(); });
+            document.getElementById('prevSlide').addEventListener('click', function() { prev(); resetAutoplay(); });
+
+            dots.forEach(function(dot) {
+                dot.addEventListener('click', function() {
+                    goTo(parseInt(this.getAttribute('data-dot')));
+                    resetAutoplay();
+                });
+            });
+
+            startAutoplay();
+        })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Give - Mercy Court RCCG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-red': '#D95A2B',
+                        'brand-dark': '#0A0A0A',
+                        'brand-footer': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        'anton': ['Anton', 'sans-serif'],
+                        'lato': ['Lato', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-lato bg-white text-gray-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 py-4">
+        <div class="container mx-auto px-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="assets/images/2026/branding/mercy-court-logo-white.png" alt="Mercy Court RCCG Logo" class="h-10 w-auto">
+            </div>
+            <div class="hidden lg:flex items-center gap-6 text-xs uppercase font-medium text-white">
+                <a href="index.html" class="hover:text-brand-red transition">Home</a>
+                <div class="relative group">
+                    <a href="who-we-are.html" class="hover:text-brand-red transition cursor-pointer flex items-center gap-1">
+                        About Us
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="absolute top-full left-0 mt-2 bg-black/95 backdrop-blur-sm rounded-lg py-2 min-w-[160px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <a href="contact.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">Contact</a>
+                    </div>
+                </div>
+                <div class="relative group">
+                    <a href="ministries.html" class="hover:text-brand-red transition cursor-pointer flex items-center gap-1">
+                        Ministries
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="absolute top-full left-0 mt-2 bg-black/95 backdrop-blur-sm rounded-lg py-2 min-w-[180px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <a href="the-new-mc.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">The New MC</a>
+                        <a href="mercy-kidz.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">God's Heritage</a>
+                        <a href="quick-links.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">Quick Links</a>
+                    </div>
+                </div>
+                <a href="community-impact.html" class="hover:text-brand-red transition">Community Impact</a>
+                <a href="watch-live.html" class="hover:text-brand-red transition">Watch Live</a>
+                <a href="blog.html" class="hover:text-brand-red transition">Blog</a>
+                <a href="give.html" class="bg-brand-red px-5 py-2 rounded-full hover:bg-[#C04E25] transition">Give</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="lg:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-black/95 backdrop-blur-sm mt-4 px-6 pb-6">
+            <a href="index.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Home</a>
+            <div>
+                <a href="who-we-are.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">About Us</a>
+                <a href="contact.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">Contact</a>
+            </div>
+            <div>
+                <a href="ministries.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Ministries</a>
+                <a href="the-new-mc.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">The New MC</a>
+                <a href="mercy-kidz.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">God's Heritage</a>
+                <a href="quick-links.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">Quick Links</a>
+            </div>
+            <a href="community-impact.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Community Impact</a>
+            <a href="watch-live.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Watch Live</a>
+            <a href="blog.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Blog</a>
+            <a href="give.html" class="inline-block mt-3 bg-brand-red px-5 py-2 rounded-full text-xs uppercase font-medium text-white hover:bg-[#C04E25] transition">Give</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-[50vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/images/2026/congregation/worship-team-on-stage-01.jpg');">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
+        </div>
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <h1 class="font-anton text-5xl md:text-7xl lg:text-8xl uppercase leading-[1.1] mb-4 text-white tracking-tight">
+                GIVE TO <span class="text-brand-red">MERCY COURT</span>
+            </h1>
+            <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto">
+                Your generosity keeps blessing lives. Thank you for giving.
+            </p>
+        </div>
+    </section>
+
+    <!-- Give Options -->
+    <section class="bg-white py-20 px-6">
+        <div class="container mx-auto max-w-4xl text-center">
+            <div class="border-l-4 border-brand-red pl-8 text-left mb-16">
+                <h2 class="font-anton text-4xl md:text-5xl uppercase mb-4 tracking-tight">
+                    Give to Mercy Court
+                </h2>
+                <p class="text-gray-600 text-lg">
+                    We believe that generosity is an act of worship and a reflection of God's love.
+                    Your financial support helps us reach more people, serve our community,
+                    and advance the kingdom of God.
+                </p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-6 mb-16">
+                <a href="#" class="inline-block bg-brand-red text-white px-10 py-4 rounded-full font-bold uppercase text-lg hover:bg-[#C04E25] transition shadow-lg">
+                    Give Now
+                </a>
+                <a href="#" class="inline-block border-2 border-brand-dark text-brand-dark px-10 py-4 rounded-full font-bold uppercase text-lg hover:bg-brand-dark hover:text-white transition">
+                    Set Up Recurring
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Give Section -->
+    <section class="bg-brand-dark py-20 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="font-anton text-4xl md:text-5xl uppercase text-white tracking-tight mb-4">
+                    WHY WE <span class="text-brand-red">GIVE</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Giving is an expression of our gratitude to God and our trust in His provision.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-8">
+                    <div class="w-16 h-16 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-anton text-xl uppercase text-white mb-3">Worship</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Giving is an act of worship. When we give, we acknowledge that everything
+                        we have comes from God.
+                    </p>
+                </div>
+                <div class="text-center p-8">
+                    <div class="w-16 h-16 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-anton text-xl uppercase text-white mb-3">Community</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Your giving supports our community outreach programs, feeding the hungry,
+                        and serving those in need.
+                    </p>
+                </div>
+                <div class="text-center p-8">
+                    <div class="w-16 h-16 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-anton text-xl uppercase text-white mb-3">Mission</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Your generosity funds our mission to spread the gospel and plant
+                        churches across communities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Giving Methods -->
+    <section class="bg-white py-20 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-tight mb-4">
+                    WAYS TO <span class="text-brand-red">GIVE</span>
+                </h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-8 text-center border border-gray-100 hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-brand-dark rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-anton text-xl uppercase mb-3">Online</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Give securely online through our website. One-time or recurring donations available.
+                    </p>
+                    <a href="#" class="inline-block bg-brand-red text-white px-6 py-2 rounded-full font-bold uppercase text-xs hover:bg-[#C04E25] transition">
+                        Give Online
+                    </a>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 text-center border border-gray-100 hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-brand-dark rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-anton text-xl uppercase mb-3">In Person</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Give during any of our services. Offering envelopes are available at the welcome desk.
+                    </p>
+                    <a href="contact.html" class="inline-block bg-brand-red text-white px-6 py-2 rounded-full font-bold uppercase text-xs hover:bg-[#C04E25] transition">
+                        Visit Us
+                    </a>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 text-center border border-gray-100 hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-brand-dark rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-anton text-xl uppercase mb-3">By Mail</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Mail your gift to: Mercy Court RCCG, 529 Walker Avenue, Baltimore, MD 21212.
+                    </p>
+                    <a href="contact.html" class="inline-block bg-brand-red text-white px-6 py-2 rounded-full font-bold uppercase text-xs hover:bg-[#C04E25] transition">
+                        Get Address
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Building Project -->
+    <section class="bg-brand-red py-16 px-6">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="font-anton text-3xl md:text-5xl uppercase mb-4 text-white tracking-tight">
+                BUILDING PROJECT
+            </h2>
+            <p class="text-white/90 text-lg max-w-2xl mx-auto mb-8">
+                Support our building project as we expand our facilities to serve more people
+                and create a permanent home for Mercy Court.
+            </p>
+            <a href="#" class="inline-block bg-white text-brand-red px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-gray-100 transition shadow-lg">
+                Contribute to Building Project
+            </a>
+        </div>
+    </section>
+
+    <!-- Tax Info -->
+    <section class="bg-gray-50 py-16 px-6">
+        <div class="container mx-auto max-w-4xl text-center">
+            <p class="text-gray-600 text-sm">
+                Mercy Court RCCG is a registered 501(c)(3) nonprofit organization. All donations are tax-deductible
+                to the extent allowed by law. You will receive a giving statement for your records at the end of each year.
+            </p>
+        </div>
+    </section>
+
+    <!-- Join Our Mailing List -->
+    <section class="bg-brand-red py-16 px-6">
+        <div class="container mx-auto max-w-2xl text-center">
+            <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-tight">
+                JOIN OUR MAILING LIST
+            </h2>
+            <p class="text-white/80 text-sm mb-8">
+                We promise not to spam you, but send you edifying and amazing
+                content regularly from Mercy Court RCCG.
+            </p>
+            <div class="max-w-md mx-auto space-y-4">
+                <input type="email" placeholder="Email" class="w-full px-6 py-3 rounded-full border-2 border-white/30 bg-transparent text-white placeholder-white/60 focus:outline-none focus:border-white">
+                <button class="w-full bg-white text-brand-red px-6 py-3 rounded-full font-bold uppercase text-sm hover:bg-gray-100 transition">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-footer text-white py-12 px-6">
+        <div class="container mx-auto max-w-7xl">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="font-bold text-xl mb-4">
+                        <span class="text-brand-red">MERCY COURT</span> RCCG
+                    </h3>
+                    <p class="text-gray-400 text-sm">
+                        The home of pacesetters, where we experience God and enjoy life.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4 uppercase">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="who-we-are.html" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition">Service Times</a></li>
+                        <li><a href="ministries.html" class="text-gray-400 hover:text-white transition">Ministries</a></li>
+                        <li><a href="who-we-are.html#leadership" class="text-gray-400 hover:text-white transition">Leadership</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4 uppercase">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="watch-live.html" class="text-gray-400 hover:text-white transition">Live Stream</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Sermons</a></li>
+                        <li><a href="quick-links.html" class="text-gray-400 hover:text-white transition">Quick Links</a></li>
+                        <li><a href="give.html" class="text-gray-400 hover:text-white transition">Give Online</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4 uppercase">Contact</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>529 Walker Avenue</li>
+                        <li>Baltimore, MD 21212</li>
+                        <li class="pt-2">+1 (410) 900-9111</li>
+                        <li>info@mercycourt.org</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-400">
+                    &copy; 2026 Mercy Court RCCG. All rights reserved.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
