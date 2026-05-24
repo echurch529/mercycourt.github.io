@@ -1,8 +1,8 @@
-# Mercy Court RCCG — Website
+# RCCG Mercy Court — Website
 
-A modern, responsive static website for Mercy Court RCCG (Redeemed Christian Church of God), Baltimore, Maryland. Built with HTML5 and Tailwind CSS. Deployed to GitHub Pages at [mercycourt.org](https://mercycourt.org).
+A modern, responsive static website for RCCG Mercy Court (Redeemed Christian Church of God), Baltimore, Maryland. Built with HTML5 and Tailwind CSS. Deployed to GitHub Pages at [mercycourt.org](https://mercycourt.org).
 
-**Church:** Mercy Court RCCG  
+**Church:** RCCG Mercy Court  
 **Location:** 529 Walker Avenue, Baltimore, MD 21212  
 **Phone:** +1 (410) 900-9111  
 **Email:** info@mercycourt.org  
