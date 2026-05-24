@@ -111,7 +111,7 @@ The site is deployed via GitHub Pages with a custom domain via Cloudflare.
 | Nav Item | Dropdown |
 |----------|----------|
 | Home | — |
-| About Us | Who We Are, Contact, Quick Links |
+| About Us | Contact, Quick Links |
 | Ministries | The New MC, God's Heritage |
 | Community Impact | — |
 | Watch Live | — |
