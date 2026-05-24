@@ -102,6 +102,9 @@ The site is deployed via GitHub Pages with a custom domain via Cloudflare.
 
 - **Hero banners** — all pages with an image hero use `h-[70vh]`, keeping content partially visible below the fold to invite scrolling
 - **Nav logo** — the logo in the top-left of every page is wrapped in `<a href="index.html">` so clicking it returns to the homepage
+- **Church name** — correct naming convention is `RCCG Mercy Court` (not "Mercy Court RCCG") — enforced across all pages
+- **Leadership section** — references both lead pastors: Pastor John Itakpe (PJ) and Pastor Rosemary Itakpe (Paz); photo uses `object-position: center 10%` to keep faces in frame
+- **"Maximize Your Potential" CTA** — background image is `congregation-worship-service-07.jpg` (hands raised in worship)
 
 ## Navigation Structure
 
