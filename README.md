@@ -1,106 +1,113 @@
-# Mercy Court RCCG — Website Template
+# Mercy Court RCCG — Website
 
-A modern, responsive website template for Mercy Court RCCG (Redeemed Christian Church of God), Baltimore, Maryland. Built with static HTML and Tailwind CSS.
-
-## Project Overview
-
-This template covers all major pages for a church website, including a homepage, about, ministries, giving, blog, watch live, community impact, and contact. It is designed to be deployed as-is or migrated into a CMS (e.g., WordPress/Elementor).
+A modern, responsive static website for Mercy Court RCCG (Redeemed Christian Church of God), Baltimore, Maryland. Built with HTML5 and Tailwind CSS. Deployed to GitHub Pages at [mercycourt.org](https://mercycourt.org).
 
 **Church:** Mercy Court RCCG  
 **Location:** 529 Walker Avenue, Baltimore, MD 21212  
 **Phone:** +1 (410) 900-9111  
-**Email:** info@mercycourt.org
+**Email:** info@mercycourt.org  
+**GitHub Pages repo:** https://github.com/echurch529/mercycourt.github.io
 
 ## Tech Stack
 
-- **HTML5** — static pages, no framework required
+- **HTML5** — static pages, no framework or build step required
 - **Tailwind CSS** — via CDN with custom theme config inline per page
 - **Google Fonts** — Anton (headings), Lato (body)
-- **Puppeteer** — screenshot automation for page previews
 
 ## Project Structure
 
 ```
-CCI Template/
-├── pages/                    # All website pages
-│   ├── index.html            # Homepage
-│   ├── who-we-are.html       # About / mission
-│   ├── contact.html          # Contact form and location
-│   ├── ministries.html       # Ministries overview
-│   ├── mercy-kidz.html       # Children's ministry
-│   ├── the-new-mc.html       # Ministry page
-│   ├── community-impact.html # Outreach
-│   ├── watch-live.html       # Live stream
-│   ├── blog.html             # News and updates
-│   ├── give.html             # Donations
-│   └── quick-links.html      # Quick links
-├── assets/                   # Organised media library
-│   └── 2026/
-│       ├── branding/         # Mercy Court logos (orange, black, white)
-│       ├── congregation/     # Service photography — arrivals, worship, prayer, full-room
-│       ├── community-outreach/ # Food distribution, truck commissioning, children's events
-│       ├── event-posters/    # Designed graphics for specific events
-│       ├── mercy-kidz/       # Children's ministry classroom photos
-│       ├── the-new-mc/       # Youth ministry team photos
-│       ├── service-slides/   # In-service screen slides (Bible Study, Sunday School, etc.)
-│       ├── miscellaneous/    # Stock / generic images
-│       └── documents/        # Archives and PDF files
-├── screenshots/              # Generated page previews (Puppeteer)
-├── Reference/                # Design reference images
-├── elementor-guide.xls       # WordPress/Elementor integration notes
-├── package.json
-└── README.md
+mercycourt.github.io/
+├── index.html                # Homepage
+├── who-we-are.html           # About / mission / pastor bio
+├── contact.html              # Contact form and location
+├── ministries.html           # Ministries overview
+├── mercy-kidz.html           # Children's ministry
+├── the-new-mc.html           # Youth ministry
+├── community-impact.html     # Outreach
+├── watch-live.html           # YouTube livestream embed
+├── blog.html                 # News and updates
+├── give.html                 # Donations
+├── quick-links.html          # Navigation hub (23 links)
+├── CNAME                     # mercycourt.org (GitHub Pages custom domain)
+├── sitemap.xml               # All 11 pages for search indexing
+├── robots.txt                # Allows all crawlers
+├── assets/
+│   └── images/
+│       └── 2026/
+│           ├── branding/         # Logos (black, orange, white PNG)
+│           ├── leadership/       # Pastor photos (PJ-and-PA.jpeg, etc.)
+│           ├── congregation/     # Service photography
+│           ├── community-outreach/ # Outreach event photos
+│           ├── mercy-kidz/       # Children's ministry photos
+│           ├── the-new-mc/       # Youth ministry team photos
+│           ├── service-slides/   # In-service screen slides
+│           └── miscellaneous/    # Stock / generic images
+└── pages/                    # Original source files (not served)
 ```
 
-## Getting Started
+## Local Preview
 
-No build step is required — open any page in `pages/` directly in a browser.
-
-To generate page screenshots:
+No build step required. Start a local server from the project root:
 
 ```bash
-npm install
-node screenshots/screenshot.js
+python3 -m http.server 8080
 ```
+
+Then open [http://localhost:8080](http://localhost:8080) in your browser.
+
+## Deployment
+
+The site is deployed via GitHub Pages with a custom domain via Cloudflare.
+
+- All HTML pages are at the repo root so GitHub Pages serves them at `mercycourt.org/<page>.html`
+- `CNAME` file contains `mercycourt.org`
+- Cloudflare DNS should point to GitHub Pages servers
 
 ## Brand
 
-| Element     | Value                              |
-|-------------|-------------------------------------|
-| Primary     | `#D95A2B` (red-orange)             |
-| Background  | `#0A0A0A` (near black)             |
-| Footer      | `#1a1a1a`                          |
-| Heading font | Anton (Google Fonts)              |
-| Body font   | Lato (Google Fonts)                |
+| Element      | Value                    |
+|--------------|--------------------------|
+| Primary      | `#D95A2B` (red-orange)   |
+| Background   | `#0A0A0A` (near black)   |
+| Footer       | `#1a1a1a`                |
+| Heading font | Anton (Google Fonts)     |
+| Body font    | Lato (Google Fonts)      |
+
+## Social Media
+
+| Platform  | URL                                          |
+|-----------|----------------------------------------------|
+| Facebook  | https://www.facebook.com/rccgmercycourt       |
+| Instagram | https://www.instagram.com/rccgmercycourt/     |
+| YouTube   | https://www.youtube.com/@RCCGMercyCourt       |
 
 ## Pages
 
-| Page | File | Description |
-|------|------|-------------|
-| Home | `index.html` | Hero, service times, leadership, giving CTA |
-| About | `who-we-are.html` | Mission, pastor bio, testimonials |
-| Ministries | `ministries.html` | Worship, children's, outreach |
-| Mercy Kidz | `mercy-kidz.html` | Children's ministry detail |
-| Community Impact | `community-impact.html` | Outreach initiatives |
-| Watch Live | `watch-live.html` | Streaming content |
-| Blog | `blog.html` | News and updates |
-| Give | `give.html` | Donation options |
-| Contact | `contact.html` | Form, map, social links |
-| Quick Links | `quick-links.html` | Navigation hub |
+| Page             | File                    | Description                                    |
+|------------------|-------------------------|------------------------------------------------|
+| Home             | `index.html`            | Hero, service times, leadership, giving CTA    |
+| About            | `who-we-are.html`       | Mission, pastor bio, testimonials              |
+| Ministries       | `ministries.html`       | Worship, children's, outreach                  |
+| Mercy Kidz       | `mercy-kidz.html`       | Children's ministry detail                     |
+| The New MC       | `the-new-mc.html`       | Youth ministry detail                          |
+| Community Impact | `community-impact.html` | Outreach initiatives                           |
+| Watch Live       | `watch-live.html`       | YouTube livestream embed + channel link        |
+| Blog             | `blog.html`             | News and updates                               |
+| Give             | `give.html`             | Donation options                               |
+| Contact          | `contact.html`          | mailto form, map, social links                 |
+| Quick Links      | `quick-links.html`      | Navigation hub (23 links)                      |
 
-## Known Placeholders (pending client content)
+## Remaining Placeholders
 
-The following items are intentionally left as placeholders and require real content before launch:
+The following items still require real content before launch:
 
 | Item | Location |
 |------|----------|
-| Placeholder images (`placehold.co`) | `ministries.html`, `mercy-kidz.html`, `community-impact.html`, `blog.html` |
-| Social media footer links | All pages — replace `href="#"` with real profile URLs |
-| Blog "Read More" links | `blog.html` — replace with real post URLs |
-| Ministry "Learn More" links | `ministries.html` — replace with real page URLs |
-| Quick link button URLs | `quick-links.html` — all 23 buttons use `href="#"` |
+| Blog "Read More" links | `blog.html` — replace `href="#"` with real post URLs |
+| Ministry "Learn More" links | `ministries.html` — replace `href="#"` with real page URLs |
 | Building Project CTA links | Multiple pages |
-| Contact form submission | `contact.html` — add `action` URL or JS handler |
 | Email subscription forms | `blog.html`, `give.html`, `watch-live.html` |
-| Live stream embed | `watch-live.html` — replace placeholder with YouTube/Vimeo embed URL |
 | Donation action buttons | `give.html` |
+| Contact form backend | `contact.html` — currently mailto, upgrade to Formspree when ready |
+| Individual pastor portraits | `assets/images/2026/leadership/` — add `pj.jpg` and `paz.jpg` if separate photos needed |
