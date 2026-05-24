@@ -103,6 +103,18 @@ The site is deployed via GitHub Pages with a custom domain via Cloudflare.
 - **Hero banners** — all pages with an image hero use `h-[70vh]`, keeping content partially visible below the fold to invite scrolling
 - **Nav logo** — the logo in the top-left of every page is wrapped in `<a href="index.html">` so clicking it returns to the homepage
 
+## Navigation Structure
+
+| Nav Item | Dropdown |
+|----------|----------|
+| Home | — |
+| About Us | Who We Are, Contact, Quick Links |
+| Ministries | The New MC, God's Heritage |
+| Community Impact | — |
+| Watch Live | — |
+| Blog | — |
+| Give | — (button) |
+
 ## Remaining Placeholders
 
 The following items still require real content before launch:
@@ -110,9 +122,9 @@ The following items still require real content before launch:
 | Item | Location |
 |------|----------|
 | Blog "Read More" links | `blog.html` — replace `href="#"` with real post URLs |
-| Ministry "Learn More" links | `ministries.html` — replace `href="#"` with real page URLs |
 | Building Project CTA links | Multiple pages |
 | Email subscription forms | `blog.html`, `give.html`, `watch-live.html` |
 | Donation action buttons | `give.html` |
 | Contact form backend | `contact.html` — currently mailto, upgrade to Formspree when ready |
 | Individual pastor portraits | `assets/images/2026/leadership/` — add `pj.jpg` and `paz.jpg` if separate photos needed |
+| Google Maps embed | `index.html`, `contact.html` — replace embed src with a verified API-keyed URL for production |
