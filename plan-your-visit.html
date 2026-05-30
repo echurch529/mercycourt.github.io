@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Your Visit | RCCG Mercy Court — Baltimore, MD</title>
+    <meta name="description" content="Planning your first visit to Mercy Court? Find out what to expect, get answers to common questions, and let us know you are coming. We can't wait to meet you.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-red': '#D95A2B',
+                        'brand-dark': '#0A0A0A',
+                        'brand-footer': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        'anton': ['Anton', 'sans-serif'],
+                        'lato': ['Lato', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/1f6d34239bf35c1b0512b77c8/08dc922941bacce45fba209ed.js");</script>
+    <style>
+        /* ── Visit Modal ── */
+        #visit-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.65);
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 24px 16px;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        #visit-modal-overlay.active { display: flex; }
+        #visit-modal-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 560px;
+            width: 100%;
+            position: relative;
+            margin: auto;
+        }
+
+        /* ── Modal Mailchimp form ── */
+        #mc_embed_visit { background: transparent !important; clear: left; width: 100%; }
+        #mc_embed_visit .mc-field-group { padding-bottom: 14px; width: 100%; min-height: unset; }
+        #mc_embed_visit .mc-field-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #1B2A4A;
+            font-weight: 600;
+            font-size: 14px;
+            font-family: 'Lato', sans-serif;
+        }
+        #mc_embed_visit input[type="text"],
+        #mc_embed_visit input[type="email"],
+        #mc_embed_visit select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            background: #fff;
+            font-size: 14px;
+            box-sizing: border-box;
+            font-family: 'Lato', sans-serif;
+            color: #333;
+            appearance: auto;
+        }
+        #mc_embed_visit input[type="text"]:focus,
+        #mc_embed_visit input[type="email"]:focus,
+        #mc_embed_visit select:focus { outline: none; border-color: #E8541A; box-shadow: 0 0 0 2px rgba(232,84,26,0.12); }
+        #mc_embed_visit .clear { padding-top: 8px; }
+        #mc_embed_visit input.button {
+            width: 100%;
+            padding: 14px;
+            background: #E8541A !important;
+            color: #fff !important;
+            border: none !important;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-family: 'Lato', sans-serif;
+        }
+        #mc_embed_visit input.button:hover { background: #C04E25 !important; }
+        #mc_embed_visit #mce-responses-v { display: none; }
+        #mc_embed_visit .asterisk { color: #E8541A; }
+        #mc_embed_visit h2 { display: none !important; }
+
+        /* ── FAQ icon ── */
+        .faq-icon { transition: transform 0.2s ease; }
+    </style>
+</head>
+<body class="font-lato bg-white text-gray-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 py-4">
+        <div class="container mx-auto px-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="index.html"><img src="assets/images/2026/branding/mercy-court-logo-white.png" alt="RCCG Mercy Court Logo" class="h-10 w-auto"></a>
+            </div>
+            <div class="hidden lg:flex items-center gap-6 text-xs uppercase font-medium text-white">
+                <a href="index.html" class="hover:text-brand-red transition">Home</a>
+                <div class="relative group">
+                    <a href="about-us.html" class="hover:text-brand-red transition cursor-pointer flex items-center gap-1">
+                        About Us
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="absolute top-full left-0 mt-2 bg-black/95 backdrop-blur-sm rounded-lg py-2 min-w-[160px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <a href="contact.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">Contact</a>
+                        <a href="quick-links.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">Quick Links</a>
+                    </div>
+                </div>
+                <div class="relative group">
+                    <a href="ministries.html" class="hover:text-brand-red transition cursor-pointer flex items-center gap-1">
+                        Ministries
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="absolute top-full left-0 mt-2 bg-black/95 backdrop-blur-sm rounded-lg py-2 min-w-[180px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <a href="tehillah-voices.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">Tehillah Voices</a>
+                        <a href="the-new-mc.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">The New MC</a>
+                        <a href="mercy-kidz.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">God's Heritage</a>
+                    </div>
+                </div>
+                <a href="community-impact.html" class="hover:text-brand-red transition">Community Impact</a>
+                <a href="watch-live.html" class="hover:text-brand-red transition">Watch Live</a>
+                <a href="blog.html" class="hover:text-brand-red transition">Blog</a>
+                <a href="give.html" class="bg-brand-red px-5 py-2 rounded-full hover:bg-[#C04E25] transition">Give</a>
+            </div>
+            <button class="lg:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-black/95 backdrop-blur-sm mt-4 px-6 pb-6">
+            <a href="index.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Home</a>
+            <div>
+                <a href="about-us.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">About Us</a>
+                <a href="contact.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">Contact</a>
+                <a href="quick-links.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">Quick Links</a>
+            </div>
+            <div>
+                <a href="ministries.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Ministries</a>
+                <a href="tehillah-voices.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">Tehillah Voices</a>
+                <a href="the-new-mc.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">The New MC</a>
+                <a href="mercy-kidz.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">God's Heritage</a>
+            </div>
+            <a href="community-impact.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Community Impact</a>
+            <a href="watch-live.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Watch Live</a>
+            <a href="blog.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Blog</a>
+            <a href="give.html" class="inline-block mt-3 bg-brand-red px-5 py-2 rounded-full text-xs uppercase font-medium text-white hover:bg-[#C04E25] transition">Give</a>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: Hero Banner -->
+    <section class="relative overflow-hidden" style="height: 60vh;">
+        <div class="absolute inset-0">
+            <img src="assets/images/2026/congregation/congregation-worship-service-02.jpg" alt="Mercy Court congregation worship" class="w-full h-full object-cover" style="object-position: center center;">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80"></div>
+        </div>
+        <div class="relative z-10 h-full flex items-center justify-center px-6">
+            <div class="max-w-4xl text-center">
+                <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">First Time?</span>
+                <h1 class="font-anton text-4xl md:text-5xl lg:text-6xl uppercase text-white tracking-tight leading-tight">
+                    A Place to Grow, Belong,<br>and Enjoy Life in Christ
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: Welcome Blurb -->
+    <section class="bg-white py-20 px-6">
+        <div class="container mx-auto max-w-3xl text-center">
+            <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Welcome</span>
+            <h2 class="font-anton text-4xl uppercase mb-8 tracking-tight">We're Glad You're Here</h2>
+            <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                We believe church is more than a building you walk into. It is a family you can belong to, a place where you can grow, serve, worship, and discover the life God has called you to live.
+            </p>
+            <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                At Mercy Court, you will find people from different walks of life coming together with one heart: to experience God's mercy, grow in faith, and become Christlike pacesetters in our world. Whether you are new to church, returning after a long time, searching for community, or looking for a place where your family can grow spiritually, we would love to welcome you.
+            </p>
+            <p class="text-gray-600 text-lg leading-relaxed mb-10">
+                Come as you are. There is a place for you here.
+            </p>
+            <button onclick="openVisitModal()" class="inline-block bg-brand-red text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition cursor-pointer">
+                Let Us Know You're Coming
+            </button>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Video Section -->
+    <section class="py-20 px-6" style="background: #F5F5F5;">
+        <div class="container mx-auto max-w-4xl text-center">
+            <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Get to Know Us</span>
+            <h2 class="font-anton text-4xl uppercase mb-6 tracking-tight">Get to Know Mercy Court</h2>
+            <p class="text-gray-600 text-lg leading-relaxed mb-12 max-w-2xl mx-auto">
+                Before you visit, we want you to get a glimpse of who we are. Mercy Court is a church family passionate about God, people, excellence, service, and helping every person maximize their God-given potential. Watch this short welcome video to learn what to expect, hear from our pastors, and see why so many people call Mercy Court home.
+            </p>
+            <div class="mx-auto" style="max-width: 800px;">
+                <div class="relative rounded-xl overflow-hidden shadow-2xl" style="padding-bottom: 56.25%;">
+                    <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/ieV0AIcH7Tw" title="Welcome to Mercy Court" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: What to Expect -->
+    <section class="bg-white py-20 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-12">
+                <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Your First Visit</span>
+                <h2 class="font-anton text-4xl uppercase mb-8 tracking-tight">What to Expect When You Visit</h2>
+                <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                    Visiting a church for the first time can feel like a big step, so we want to make it simple and comfortable for you. From the moment you arrive, our goal is to make you feel welcomed, valued, and at home.
+                </p>
+                <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                    You do not have to know all the songs. You do not have to have everything figured out. You do not have to look a certain way. Just come with an open heart, and we will be glad to receive you.
+                </p>
+                <p class="text-gray-600 text-lg leading-relaxed">
+                    At Mercy Court, you can expect passionate worship, practical Bible teaching, a loving church family, and a peaceful environment where you and your family can connect with God and people.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12">
+                <div class="bg-gray-50 rounded-xl p-8 flex gap-5 items-start">
+                    <div class="text-3xl flex-shrink-0">🎵</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-lg mb-2">Passionate Worship</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">Heartfelt, Spirit-filled music that draws you into God's presence</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 flex gap-5 items-start">
+                    <div class="text-3xl flex-shrink-0">📖</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-lg mb-2">Practical Teaching</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">Bible-based messages that speak to real life</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 flex gap-5 items-start">
+                    <div class="text-3xl flex-shrink-0">👨‍👩‍👧</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-lg mb-2">Loving Community</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">A warm church family ready to welcome you</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 flex gap-5 items-start">
+                    <div class="text-3xl flex-shrink-0">✝️</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 text-lg mb-2">A Place for Everyone</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">Come as you are. No pressure. No judgment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: FAQ Accordion -->
+    <section class="py-20 px-6" style="background: #F5F5F5;">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-12">
+                <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">FAQs</span>
+                <h2 class="font-anton text-4xl uppercase tracking-tight">Questions Before You Visit?</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <!-- Column 1 -->
+                <div class="space-y-3">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                        <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between font-bold text-gray-900 transition" onclick="toggleFaq(this,'faq-1')">
+                            <span class="pr-4">Need transportation to church?</span>
+                            <svg class="faq-icon w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq-1" class="faq-answer hidden px-6 pb-6">
+                            <p class="text-gray-600 text-sm leading-relaxed">We understand that getting to church is not always easy, and we do not want transportation to be the reason you miss the opportunity to worship with us. If you are planning to visit Mercy Court and need help with transportation, please let us know ahead of time. Our team will do our best to connect with you, understand your need, and provide available guidance or support where possible. To request transportation assistance, please call Mercy Court's contact line before your planned visit.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                        <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between font-bold text-gray-900 transition" onclick="toggleFaq(this,'faq-2')">
+                            <span class="pr-4">What should I wear?</span>
+                            <svg class="faq-icon w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq-2" class="faq-answer hidden px-6 pb-6">
+                            <p class="text-gray-600 text-sm leading-relaxed">Wear what makes you comfortable and respectful for worship. Some people dress formally, while others come in more casual clothing. You do not need to dress a certain way to belong here. We are more excited to meet you than to inspect what you are wearing.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                        <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between font-bold text-gray-900 transition" onclick="toggleFaq(this,'faq-3')">
+                            <span class="pr-4">Can I get food in church?</span>
+                            <svg class="faq-icon w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq-3" class="faq-answer hidden px-6 pb-6">
+                            <p class="text-gray-600 text-sm leading-relaxed">At Mercy Court, we believe church is not only a place of worship, but also a place where God's love is expressed through care and practical support. Through our Food Pantry, we serve individuals and families who may need food assistance. Whether you are a member, a visitor, or someone in the community looking for support, we would love to share more about how this ministry serves people with compassion and dignity.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                        <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between font-bold text-gray-900 transition" onclick="toggleFaq(this,'faq-4')">
+                            <span class="pr-4">What kind of music do you sing?</span>
+                            <svg class="faq-icon w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq-4" class="faq-answer hidden px-6 pb-6">
+                            <p class="text-gray-600 text-sm leading-relaxed">Our worship is joyful, heartfelt, and Spirit-filled. You may hear contemporary worship, traditional gospel sounds, African praise, hymns, and songs that reflect our diverse church family. Our goal is simple: to create an atmosphere where people can genuinely worship God.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                        <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between font-bold text-gray-900 transition" onclick="toggleFaq(this,'faq-5')">
+                            <span class="pr-4">How long are your services?</span>
+                            <svg class="faq-icon w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq-5" class="faq-answer hidden px-6 pb-6">
+                            <p class="text-gray-600 text-sm leading-relaxed">Our Sunday services usually last about two hours. During that time, we worship, pray, hear announcements, receive teaching from God's Word, and connect as a church family. Some Sundays may be slightly longer during special programs or celebrations.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column 2 -->
+                <div class="space-y-3">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                        <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between font-bold text-gray-900 transition" onclick="toggleFaq(this,'faq-6')">
+                            <span class="pr-4">Are there refreshments after service?</span>
+                            <svg class="faq-icon w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq-6" class="faq-answer hidden px-6 pb-6">
+                            <p class="text-gray-600 text-sm leading-relaxed">Yes, depending on the Sunday or event, refreshments may be available after service. More importantly, there is always room for conversation, connection, and fellowship. We encourage visitors to stay for a few minutes after service so we can meet you properly.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                        <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between font-bold text-gray-900 transition" onclick="toggleFaq(this,'faq-7')">
+                            <span class="pr-4">What is the children's ministry like?</span>
+                            <svg class="faq-icon w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq-7" class="faq-answer hidden px-6 pb-6">
+                            <p class="text-gray-600 text-sm leading-relaxed">Our children's ministry is designed to help children learn about God in a safe, joyful, and age-appropriate environment. We want children to love church, understand God's Word, build godly friendships, and grow with confidence in who God created them to be.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                        <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between font-bold text-gray-900 transition" onclick="toggleFaq(this,'faq-8')">
+                            <span class="pr-4">Do I need to be a Christian to visit?</span>
+                            <svg class="faq-icon w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq-8" class="faq-answer hidden px-6 pb-6">
+                            <p class="text-gray-600 text-sm leading-relaxed">No. You are welcome even if you are exploring faith, asking questions, or simply looking for community. Mercy Court is a place where people can encounter God, grow at their own pace, and find support for life's journey.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                        <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between font-bold text-gray-900 transition" onclick="toggleFaq(this,'faq-9')">
+                            <span class="pr-4">Will I be asked to introduce myself publicly?</span>
+                            <svg class="faq-icon w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq-9" class="faq-answer hidden px-6 pb-6">
+                            <p class="text-gray-600 text-sm leading-relaxed">We love welcoming new people, but we also want you to feel comfortable. Depending on the service, visitors may be acknowledged warmly, but you will not be pressured or embarrassed. Our goal is to honor you, not put you on the spot.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm">
+                        <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between font-bold text-gray-900 transition" onclick="toggleFaq(this,'faq-10')">
+                            <span class="pr-4">Can I watch online before visiting?</span>
+                            <svg class="faq-icon w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="faq-10" class="faq-answer hidden px-6 pb-6">
+                            <p class="text-gray-600 text-sm leading-relaxed">Yes. You can connect with us through our online platforms and YouTube channel. Our E-Church experience exists to help online worshipers stay engaged and connected, whether they are watching from home or preparing to visit in person.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: Families -->
+    <section class="py-20 px-6" style="background: #1B2A4A;">
+        <div class="container mx-auto max-w-7xl">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="assets/images/2026/congregation/congregation-worship-service-04.jpg" alt="Church family worshipping" class="rounded-xl object-cover w-full h-64">
+                    <img src="assets/images/2026/congregation/congregation-seated-service-02.jpg" alt="Church family seated" class="rounded-xl object-cover w-full h-64 mt-8">
+                </div>
+                <div>
+                    <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Families</span>
+                    <h2 class="font-anton text-4xl uppercase mb-6 tracking-tight text-white">A Place for Families to Grow Together</h2>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                        At Mercy Court, we believe families are important to God and central to a healthy church community. Whether you are raising young children, parenting teenagers, building a marriage, or seeking a stronger spiritual foundation for your home, we want to walk with you.
+                    </p>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                        Our church is a place where families can worship together, grow together, serve together, and build lasting relationships with other families. We want every family that walks through our doors to feel supported, strengthened, and encouraged.
+                    </p>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        From children's ministry to youth engagement, family-centered events, prayer, and practical teaching, Mercy Court is committed to helping homes flourish.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: Children's Ministry -->
+    <section class="bg-white py-20 px-6">
+        <div class="container mx-auto max-w-7xl">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Children's Ministry</span>
+                    <h2 class="font-anton text-4xl uppercase mb-6 tracking-tight">A Joyful Place for Children to Know God</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        We believe children are not just the future of the church. They are a vital part of the church today.
+                    </p>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        Our children's ministry creates a safe, welcoming, and joyful environment where children can learn about God, build friendships, and develop a strong foundation of faith. Through age-appropriate teaching, engaging activities, prayer, and loving guidance, we help children understand that they are known, loved, and created for purpose.
+                    </p>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                        When you visit Mercy Court, your children will be received with care, patience, and joy.
+                    </p>
+                    <a href="mercy-kidz.html" class="inline-block border-2 border-brand-red text-brand-red px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-brand-red hover:text-white transition">
+                        Learn More About Children's Ministry
+                    </a>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-03.jpg" alt="Children's ministry class" class="rounded-xl object-cover w-full h-52">
+                    <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-07.jpg" alt="Children's ministry class" class="rounded-xl object-cover w-full h-52 mt-8">
+                    <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-10.jpg" alt="Children's ministry class" class="rounded-xl object-cover w-full h-52">
+                    <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-14.jpg" alt="Children's ministry class" class="rounded-xl object-cover w-full h-52 mt-8">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: Youth -->
+    <section class="py-20 px-6" style="background: #0A0A0A;">
+        <div class="container mx-auto max-w-7xl">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="assets/images/2026/the-new-mc/the-new-mc-team-group-on-stage.jpg" alt="Youth ministry" class="rounded-xl object-cover w-full h-52">
+                    <img src="assets/images/2026/the-new-mc/the-new-mc-team-merch-display.jpg" alt="Youth ministry" class="rounded-xl object-cover w-full h-52 mt-8">
+                    <img src="assets/images/2026/the-new-mc/the-new-mc-team-welcome-signs.jpg" alt="Youth ministry" class="rounded-xl object-cover w-full h-52">
+                    <img src="assets/images/2026/the-new-mc/the-new-mc-team-preparing-refreshments.jpg" alt="Youth ministry" class="rounded-xl object-cover w-full h-52 mt-8">
+                </div>
+                <div>
+                    <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Youth</span>
+                    <h2 class="font-anton text-4xl uppercase mb-6 tracking-tight text-white">A Place for Youth to Belong, Grow, and Lead</h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        We believe young people need more than activities. They need identity, guidance, friendship, purpose, and a safe place to ask real questions.
+                    </p>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        At Mercy Court, our youth are encouraged to grow in faith, develop godly character, build meaningful friendships, and discover their gifts. We want them to know that church is not just for adults. It is a place where they can be seen, heard, equipped, and inspired to become the pacesetters God has called them to be.
+                    </p>
+                    <p class="text-gray-400 text-lg leading-relaxed">
+                        Whether they are navigating school, friendships, identity, purpose, or the pressures of today's world, we want our youth to know they do not have to walk alone.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9: Plan Your Visit CTA -->
+    <section class="py-20 px-6" style="background: #E8541A;">
+        <div class="container mx-auto max-w-2xl text-center">
+            <h2 class="font-anton text-4xl md:text-5xl uppercase mb-6 text-white tracking-tight">Plan Your Visit</h2>
+            <p class="text-white/90 text-lg leading-relaxed mb-10">
+                We would love to know you are coming. Fill out this short form and someone from our team will help you prepare for your visit.
+            </p>
+            <button onclick="openVisitModal()" class="inline-block bg-white text-[#E8541A] px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-gray-100 transition cursor-pointer">
+                Plan My Visit
+            </button>
+        </div>
+    </section>
+
+    <!-- SECTION 10: Give to Mercy Court -->
+    <section class="bg-white py-20 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <div class="border-l-4 border-brand-red pl-8">
+                <h2 class="font-anton text-4xl md:text-4xl uppercase mb-4 tracking-tight">
+                    Give to Mercy Court
+                </h2>
+                <p class="text-gray-600 text-lg mb-8">
+                    Your generosity keeps blessing lives, thank you for giving.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="give.html" class="inline-block border-2 border-brand-dark text-brand-dark px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-brand-dark hover:text-white transition">
+                        Give Now
+                    </a>
+                    <a href="contact.html" class="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition">
+                        Building Project
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 11: Join Our Mailing List -->
+    <section class="bg-brand-red py-16 px-6" style="padding-bottom: 60px;">
+        <div class="container mx-auto max-w-2xl text-center">
+            <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-tight">
+                JOIN OUR MAILING LIST
+            </h2>
+            <p class="text-white/80 text-sm mb-8">
+                We promise not to spam you, but send you edifying and amazing
+                content regularly from RCCG Mercy Court.
+            </p>
+            <div class="max-w-md mx-auto">
+                <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+                <style>
+                    #mc_embed_signup { background: transparent; clear: left; width: 100%; overflow: visible; margin-bottom: 0; }
+                    #mc_embed_signup_scroll { padding-bottom: 40px; }
+                    #mc_embed_signup .mc-field-group { padding-bottom: 12px; width: 100%; }
+                    #mc_embed_signup input.email,
+                    #mc_embed_signup input.text {
+                        width: 100%;
+                        padding: 12px 24px;
+                        border-radius: 9999px;
+                        border: 2px solid rgba(255,255,255,0.3);
+                        background: transparent;
+                        color: #ffffff;
+                        font-size: 14px;
+                        box-sizing: border-box;
+                    }
+                    #mc_embed_signup input.email::placeholder,
+                    #mc_embed_signup input.text::placeholder { color: rgba(255,255,255,0.6); }
+                    #mc_embed_signup input.email:focus,
+                    #mc_embed_signup input.text:focus { outline: none; border-color: #ffffff; }
+                    #mc_embed_signup .clear { padding-top: 4px; }
+                    #mc_embed_signup input#mc-embedded-subscribe {
+                        width: 100%;
+                        padding: 12px 24px;
+                        height: 61px;
+                        border-radius: 9999px;
+                        border: 2px solid transparent;
+                        background: #FFFFFF;
+                        color: #E8541A;
+                        font-weight: 700;
+                        font-size: 14px;
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        cursor: pointer;
+                        transition: background 0.2s;
+                        text-align: center;
+                        line-height: 1;
+                        display: block;
+                        box-sizing: border-box;
+                        margin-bottom: 20px;
+                    }
+                    #mc_embed_signup input#mc-embedded-subscribe:hover { background: #f3f3f3; }
+                    #mc_embed_signup div#mce-responses { display: none; }
+                </style>
+                <div id="mc_embed_shell">
+                    <div id="mc_embed_signup">
+                        <form action="https://mercycourt.us2.list-manage.com/subscribe/post?u=1f6d34239bf35c1b0512b77c8&id=888af1f4b9&f_id=0060c5e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                            <div id="mc_embed_signup_scroll">
+                                <div class="mc-field-group"><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required placeholder="Email Address"></div>
+                                <div class="mc-field-group"><input type="text" name="FNAME" class="text" id="mce-FNAME" placeholder="First Name"></div>
+                                <div aria-hidden="true" style="position: absolute; left: -5000px;"><input type="text" name="b_1f6d34239bf35c1b0512b77c8_888af1f4b9" tabindex="-1" value=""></div>
+                                <div class="clear"><input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 12: Footer -->
+    <footer class="bg-brand-footer text-white py-12 px-6">
+        <div class="container mx-auto max-w-7xl">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="font-bold text-xl mb-4">
+                        RCCG <span class="text-brand-red">MERCY COURT</span>
+                    </h3>
+                    <p class="text-gray-400 text-sm">
+                        The home of pacesetters, where we experience God and enjoy life.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4 uppercase">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="about-us.html" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition">Service Times</a></li>
+                        <li><a href="ministries.html" class="text-gray-400 hover:text-white transition">Ministries</a></li>
+                        <li><a href="about-us.html#leadership" class="text-gray-400 hover:text-white transition">Leadership</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4 uppercase">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="watch-live.html" class="text-gray-400 hover:text-white transition">Live Stream</a></li>
+                        <li><a href="https://www.facebook.com/rccgmercycourt" class="text-gray-400 hover:text-white transition">Sermons</a></li>
+                        <li><a href="quick-links.html" class="text-gray-400 hover:text-white transition">Quick Links</a></li>
+                        <li><a href="give.html" class="text-gray-400 hover:text-white transition">Give Online</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4 uppercase">Contact</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>529 Walker Avenue</li>
+                        <li>Baltimore, MD 21212</li>
+                        <li class="pt-2">+1 (410) 900-9111</li>
+                        <li>info@mercycourt.org</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-400">
+                    &copy; 2026 RCCG Mercy Court. All rights reserved.
+                </p>
+                <div class="flex gap-4">
+                    <a href="https://www.instagram.com/rccgmercycourt/" class="text-gray-400 hover:text-white transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                    <a href="https://www.youtube.com/@RCCGMercyCourt" class="text-gray-400 hover:text-white transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Plan Your Visit Modal -->
+    <div id="visit-modal-overlay" onclick="handleOverlayClick(event)">
+        <div id="visit-modal-card">
+            <button onclick="closeVisitModal()" style="position:absolute;top:16px;right:20px;font-size:28px;line-height:1;color:#9ca3af;background:none;border:none;cursor:pointer;padding:0;" aria-label="Close">&times;</button>
+            <h2 class="font-anton text-3xl uppercase tracking-tight mb-2" style="color:#1B2A4A;">Plan Your Visit</h2>
+            <p class="text-gray-500 text-sm mb-6 leading-relaxed">Fill out this short form and our Meet and Greet team will be in touch before your visit.</p>
+
+            <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+            <div id="mc_embed_visit">
+                <form action="https://mercycourt.us2.list-manage.com/subscribe/post?u=1f6d34239bf35c1b0512b77c8&amp;id=888af1f4b9&amp;f_id=0065c5e1f0" method="post" id="mc-visit-subscribe-form" name="mc-visit-subscribe-form" class="validate" target="_blank">
+                    <div id="mc_visit_signup_scroll">
+                        <div class="mc-field-group">
+                            <label for="mce-FNAME-v">First Name <span class="asterisk">*</span></label>
+                            <input type="text" name="FNAME" class="required text" id="mce-FNAME-v" required value="">
+                        </div>
+                        <div class="mc-field-group">
+                            <label for="mce-LNAME-v">Last Name</label>
+                            <input type="text" name="LNAME" class="text" id="mce-LNAME-v" value="">
+                        </div>
+                        <div class="mc-field-group">
+                            <label for="mce-EMAIL-v">Email Address <span class="asterisk">*</span></label>
+                            <input type="email" name="EMAIL" class="required email" id="mce-EMAIL-v" required value="">
+                        </div>
+                        <div class="mc-field-group">
+                            <label for="mce-PHONE-v">Phone Number</label>
+                            <input type="text" name="PHONE" id="mce-PHONE-v" value="">
+                        </div>
+                        <div class="mc-field-group">
+                            <label for="mce-MMERGE10-v">Anything you'd like us to know?</label>
+                            <input type="text" name="MMERGE10" class="text" id="mce-MMERGE10-v" value="">
+                        </div>
+                        <div class="mc-field-group">
+                            <label for="mce-group-hear">How did you hear about us?</label>
+                            <select name="group[10562]" id="mce-group-hear">
+                                <option value=""></option>
+                                <option value="1">Friend or Family</option>
+                                <option value="2">Social Media</option>
+                                <option value="4">Google Search</option>
+                                <option value="8">Drove Past the Church</option>
+                                <option value="16">Other</option>
+                            </select>
+                        </div>
+                        <div class="mc-field-group">
+                            <label for="mce-group-with">Are you coming with friend(s) or family?</label>
+                            <select name="group[10563]" id="mce-group-with">
+                                <option value=""></option>
+                                <option value="32">Just me</option>
+                                <option value="64">With a friend</option>
+                                <option value="128">With my spouse</option>
+                                <option value="256">With family and/or children</option>
+                            </select>
+                        </div>
+                        <div hidden><input type="hidden" name="tags" value="5993"></div>
+                        <div id="mce-responses-v">
+                            <div id="mce-error-response-v" style="display:none;"></div>
+                            <div id="mce-success-response-v" style="display:none;"></div>
+                        </div>
+                        <div aria-hidden="true" style="position:absolute;left:-5000px;">
+                            <input type="text" name="b_1f6d34239bf35c1b0512b77c8_888af1f4b9" tabindex="-1" value="">
+                        </div>
+                        <div class="clear">
+                            <input type="submit" name="subscribe" id="mc-visit-submit" class="button" value="Plan My Visit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openVisitModal() {
+            document.getElementById('visit-modal-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeVisitModal() {
+            document.getElementById('visit-modal-overlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        function handleOverlayClick(e) {
+            if (e.target === document.getElementById('visit-modal-overlay')) closeVisitModal();
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeVisitModal();
+        });
+
+        function toggleFaq(btn, answerId) {
+            const answer = document.getElementById(answerId);
+            const isOpen = !answer.classList.contains('hidden');
+            document.querySelectorAll('.faq-answer').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.faq-btn').forEach(el => { el.style.color = ''; });
+            document.querySelectorAll('.faq-icon').forEach(el => { el.style.transform = ''; });
+            if (!isOpen) {
+                answer.classList.remove('hidden');
+                btn.style.color = '#E8541A';
+                btn.querySelector('.faq-icon').style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
+</body>
+</html>
