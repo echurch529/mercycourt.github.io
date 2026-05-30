@@ -721,8 +721,8 @@
             const email = document.getElementById('mce-EMAIL-v').value;
             const phone = document.getElementById('mce-PHONE-v').value;
             const message = document.getElementById('mce-MMERGE10-v').value;
-            const howDidYouHear = document.querySelector('[name="group[10562]"]').value;
-            const comingWith = document.querySelector('[name="group[10563]"]').value;
+            const howDidYouHear = document.querySelector('#mc-visit-plan-form [name="group[10562]"]').value;
+            const comingWith = document.querySelector('#mc-visit-plan-form [name="group[10563]"]').value;
 
             // Step 1 — Submit to Formspree via fetch
             fetch('https://formspree.io/f/xreddnbn', {
@@ -739,18 +739,9 @@
                 })
             });
 
-            // Step 2 — Submit to Mailchimp via dynamically created iframe + form
-            const mcIframe = document.createElement('iframe');
-            mcIframe.name = 'mc-iframe';
-            mcIframe.style.display = 'none';
-            document.body.appendChild(mcIframe);
-
-            const mcForm = document.createElement('form');
-            mcForm.method = 'POST';
-            mcForm.action = 'https://mercycourt.us2.list-manage.com/subscribe/post?u=1f6d34239bf35c1b0512b77c8&id=888af1f4b9&f_id=0065c5e1f0';
-            mcForm.target = 'mc-iframe';
-
-            const fields = {
+            // Step 2 — Submit to Mailchimp via JSONP (Mailchimp's own AJAX method)
+            const cbName = 'mc_cb_' + Date.now();
+            const params = new URLSearchParams({
                 'FNAME': fname,
                 'LNAME': lname,
                 'EMAIL': email,
@@ -759,19 +750,16 @@
                 'group[10562]': howDidYouHear,
                 'group[10563]': comingWith,
                 'tags': '5993',
-                'b_1f6d34239bf35c1b0512b77c8_888af1f4b9': ''
-            };
-
-            Object.keys(fields).forEach(function(key) {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = key;
-                input.value = fields[key];
-                mcForm.appendChild(input);
+                'b_1f6d34239bf35c1b0512b77c8_888af1f4b9': '',
+                'c': cbName
             });
-
-            document.body.appendChild(mcForm);
-            mcForm.submit();
+            window[cbName] = function() {
+                delete window[cbName];
+                if (script.parentNode) script.parentNode.removeChild(script);
+            };
+            const script = document.createElement('script');
+            script.src = 'https://mercycourt.us2.list-manage.com/subscribe/post-json?u=1f6d34239bf35c1b0512b77c8&id=888af1f4b9&f_id=0065c5e1f0&' + params.toString();
+            document.body.appendChild(script);
 
             // Step 3 — Show success message
             document.getElementById('mc_visit_signup_scroll').style.display = 'none';
