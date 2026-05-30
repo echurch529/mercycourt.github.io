@@ -626,7 +626,7 @@
         <div id="visit-modal-card">
             <button onclick="closeVisitModal()" style="position:absolute;top:16px;right:20px;font-size:28px;line-height:1;color:#9ca3af;background:none;border:none;cursor:pointer;padding:0;" aria-label="Close">&times;</button>
             <h2 class="font-anton text-3xl uppercase tracking-tight mb-2" style="color:#1B2A4A;">Plan Your Visit</h2>
-            <p class="text-gray-500 text-sm mb-6 leading-relaxed">Fill out this short form and our Meet and Greet team will be in touch before your visit.</p>
+            <p class="text-gray-500 text-sm mb-6 leading-relaxed">We would love to know you are coming. Fill out this short form and we will make sure you are welcomed when you arrive.</p>
 
             <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
             <div id="mc_embed_visit">
@@ -687,8 +687,13 @@
                     </div>
                 </form>
             </div>
+            <div id="visit-success-message" style="display:none; font-size:20px; color:#1B2A4A; font-weight:bold; text-align:center; padding:40px 20px;">
+                Thank you! We are so excited to meet you. See you Sunday at 529 Walker Avenue, Baltimore, MD 21212. Service begins at 10:00 AM.
+            </div>
         </div>
     </div>
+
+    <iframe name="mc-visit-iframe" style="display:none;" aria-hidden="true"></iframe>
 
     <script>
         function openVisitModal() {
@@ -698,12 +703,39 @@
         function closeVisitModal() {
             document.getElementById('visit-modal-overlay').classList.remove('active');
             document.body.style.overflow = '';
+            document.getElementById('mc_embed_visit').style.display = '';
+            document.getElementById('visit-success-message').style.display = 'none';
+            document.getElementById('mc-visit-subscribe-form').reset();
         }
         function handleOverlayClick(e) {
             if (e.target === document.getElementById('visit-modal-overlay')) closeVisitModal();
         }
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeVisitModal();
+        });
+
+        document.getElementById('mc-visit-subscribe-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            fetch('https://formspree.io/f/xreddnbn', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    firstName: document.getElementById('mce-FNAME-v').value,
+                    lastName: document.getElementById('mce-LNAME-v').value,
+                    email: document.getElementById('mce-EMAIL-v').value,
+                    phone: document.getElementById('mce-PHONE-v').value,
+                    message: document.getElementById('mce-MMERGE10-v').value,
+                    howDidYouHear: document.querySelector('#mc-visit-subscribe-form [name="group[10562]"]').value,
+                    comingWith: document.querySelector('#mc-visit-subscribe-form [name="group[10563]"]').value
+                })
+            });
+
+            this.target = 'mc-visit-iframe';
+            this.submit();
+
+            document.getElementById('mc_embed_visit').style.display = 'none';
+            document.getElementById('visit-success-message').style.display = 'block';
         });
 
         function toggleFaq(btn, answerId) {
