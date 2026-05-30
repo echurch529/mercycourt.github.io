@@ -554,7 +554,7 @@
                                 <div class="mc-field-group"><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required placeholder="Email Address"></div>
                                 <div class="mc-field-group"><input type="text" name="FNAME" class="text" id="mce-FNAME" placeholder="First Name"></div>
                                 <div aria-hidden="true" style="position: absolute; left: -5000px;"><input type="text" name="b_1f6d34239bf35c1b0512b77c8_888af1f4b9" tabindex="-1" value=""></div>
-                                <div class="clear"><input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe"></div>
+                                <div class="clear"><input type="submit" name="subscribe" id="mc-visit-submit" class="button" value="Subscribe"></div>
                             </div>
                         </form>
                     </div>
@@ -630,7 +630,7 @@
 
             <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
             <div id="mc_embed_visit">
-                <form action="https://mercycourt.us2.list-manage.com/subscribe/post?u=1f6d34239bf35c1b0512b77c8&amp;id=888af1f4b9&amp;f_id=0065c5e1f0" method="post" id="mc-visit-subscribe-form" name="mc-visit-subscribe-form" class="validate" target="_blank">
+                <form action="https://mercycourt.us2.list-manage.com/subscribe/post?u=1f6d34239bf35c1b0512b77c8&amp;id=888af1f4b9&amp;f_id=0065c5e1f0" method="post" id="mc-visit-plan-form" name="mc-visit-plan-form" class="validate" target="_blank">
                     <div id="mc_visit_signup_scroll">
                         <div class="mc-field-group">
                             <label for="mce-FNAME-v">First Name <span class="asterisk">*</span></label>
@@ -687,13 +687,12 @@
                     </div>
                 </form>
             </div>
-            <div id="visit-success-message" style="display:none; font-size:20px; color:#1B2A4A; font-weight:bold; text-align:center; padding:40px 20px;">
-                Thank you! We are so excited to meet you. See you Sunday at 529 Walker Avenue, Baltimore, MD 21212. Service begins at 10:00 AM.
+            <div id="plan-visit-success" style="display:none; text-align:center; padding:40px 20px;">
+                <p style="font-size:20px; color:#1B2A4A; font-weight:bold;">Thank you! We are so excited to meet you. See you Sunday at 529 Walker Avenue, Baltimore, MD 21212. Service begins at 10:00 AM.</p>
             </div>
         </div>
     </div>
 
-    <iframe name="mc-visit-iframe" style="display:none;" aria-hidden="true"></iframe>
 
     <script>
         function openVisitModal() {
@@ -703,9 +702,9 @@
         function closeVisitModal() {
             document.getElementById('visit-modal-overlay').classList.remove('active');
             document.body.style.overflow = '';
-            document.getElementById('mc_embed_visit').style.display = '';
-            document.getElementById('visit-success-message').style.display = 'none';
-            document.getElementById('mc-visit-subscribe-form').reset();
+            document.getElementById('mc_visit_signup_scroll').style.display = '';
+            document.getElementById('plan-visit-success').style.display = 'none';
+            document.getElementById('mc-visit-plan-form').reset();
         }
         function handleOverlayClick(e) {
             if (e.target === document.getElementById('visit-modal-overlay')) closeVisitModal();
@@ -714,28 +713,69 @@
             if (e.key === 'Escape') closeVisitModal();
         });
 
-        document.getElementById('mc-visit-subscribe-form').addEventListener('submit', function(e) {
+        document.getElementById('mc-visit-plan-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
+            const fname = document.getElementById('mce-FNAME-v').value;
+            const lname = document.getElementById('mce-LNAME-v').value;
+            const email = document.getElementById('mce-EMAIL-v').value;
+            const phone = document.getElementById('mce-PHONE-v').value;
+            const message = document.getElementById('mce-MMERGE10-v').value;
+            const howDidYouHear = document.querySelector('[name="group[10562]"]').value;
+            const comingWith = document.querySelector('[name="group[10563]"]').value;
+
+            // Step 1 — Submit to Formspree via fetch
             fetch('https://formspree.io/f/xreddnbn', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify({
-                    firstName: document.getElementById('mce-FNAME-v').value,
-                    lastName: document.getElementById('mce-LNAME-v').value,
-                    email: document.getElementById('mce-EMAIL-v').value,
-                    phone: document.getElementById('mce-PHONE-v').value,
-                    message: document.getElementById('mce-MMERGE10-v').value,
-                    howDidYouHear: document.querySelector('#mc-visit-subscribe-form [name="group[10562]"]').value,
-                    comingWith: document.querySelector('#mc-visit-subscribe-form [name="group[10563]"]').value
+                    firstName: fname,
+                    lastName: lname,
+                    email: email,
+                    phone: phone,
+                    message: message,
+                    howDidYouHear: howDidYouHear,
+                    comingWith: comingWith
                 })
             });
 
-            this.target = 'mc-visit-iframe';
-            this.submit();
+            // Step 2 — Submit to Mailchimp via dynamically created iframe + form
+            const mcIframe = document.createElement('iframe');
+            mcIframe.name = 'mc-iframe';
+            mcIframe.style.display = 'none';
+            document.body.appendChild(mcIframe);
 
-            document.getElementById('mc_embed_visit').style.display = 'none';
-            document.getElementById('visit-success-message').style.display = 'block';
+            const mcForm = document.createElement('form');
+            mcForm.method = 'POST';
+            mcForm.action = 'https://mercycourt.us2.list-manage.com/subscribe/post?u=1f6d34239bf35c1b0512b77c8&id=888af1f4b9&f_id=0065c5e1f0';
+            mcForm.target = 'mc-iframe';
+
+            const fields = {
+                'FNAME': fname,
+                'LNAME': lname,
+                'EMAIL': email,
+                'PHONE': phone,
+                'MMERGE10': message,
+                'group[10562]': howDidYouHear,
+                'group[10563]': comingWith,
+                'tags': '5993',
+                'b_1f6d34239bf35c1b0512b77c8_888af1f4b9': ''
+            };
+
+            Object.keys(fields).forEach(function(key) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = fields[key];
+                mcForm.appendChild(input);
+            });
+
+            document.body.appendChild(mcForm);
+            mcForm.submit();
+
+            // Step 3 — Show success message
+            document.getElementById('mc_visit_signup_scroll').style.display = 'none';
+            document.getElementById('plan-visit-success').style.display = 'block';
         });
 
         function toggleFaq(btn, answerId) {
