@@ -1,22 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core pages -->
   <url>
     <loc>https://mercycourt.org/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mercycourt.org/who-we-are.html</loc>
+    <loc>https://mercycourt.org/about-us.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://mercycourt.org/plan-your-visit.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mercycourt.org/contact.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mercycourt.org/give.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mercycourt.org/watch-live.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mercycourt.org/community-impact.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Ministries -->
   <url>
     <loc>https://mercycourt.org/ministries.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mercycourt.org/mercy-kidz.html</loc>
+    <loc>https://mercycourt.org/tehillah-voices.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -26,30 +53,38 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mercycourt.org/community-impact.html</loc>
+    <loc>https://mercycourt.org/mercy-kidz.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://mercycourt.org/watch-live.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- Blog -->
   <url>
     <loc>https://mercycourt.org/blog.html</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mercycourt.org/give.html</loc>
-    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mercycourt.org/contact.html</loc>
+    <loc>https://mercycourt.org/blog-posts/the-compound-effect.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://mercycourt.org/blog-posts/repositioned-for-greatness.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mercycourt.org/blog-posts/the-power-of-your-circle.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Events -->
+  <url>
+    <loc>https://mercycourt.org/one-bring-one.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Other -->
   <url>
     <loc>https://mercycourt.org/quick-links.html</loc>
     <changefreq>monthly</changefreq>
