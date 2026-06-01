@@ -164,37 +164,37 @@
     <section class="bg-white pb-8 px-6">
         <div class="container mx-auto max-w-7xl">
             <div class="flex flex-wrap justify-center gap-3">
-                <button class="bg-brand-red text-white px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide">All</button>
-                <button class="border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide hover:border-brand-red hover:text-brand-red transition">News</button>
-                <button class="border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide hover:border-brand-red hover:text-brand-red transition">Events</button>
-                <button class="border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide hover:border-brand-red hover:text-brand-red transition">Inspiration</button>
+                <button class="filter-btn bg-brand-red text-white px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide" data-category="all">All</button>
+                <button class="filter-btn border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide hover:border-brand-red hover:text-brand-red transition" data-category="news">News</button>
+                <button class="filter-btn border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide hover:border-brand-red hover:text-brand-red transition" data-category="events">Events</button>
+                <button class="filter-btn border-2 border-gray-300 text-gray-600 px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wide hover:border-brand-red hover:text-brand-red transition" data-category="inspiration">Inspiration</button>
             </div>
         </div>
     </section>
 
     <!-- Featured Post -->
-    <section class="bg-white pb-12 px-6">
+    <section id="featured-post" data-category="news" class="bg-white pb-12 px-6">
         <div class="container mx-auto max-w-7xl">
             <div class="grid md:grid-cols-2 gap-0 rounded-xl overflow-hidden shadow-lg">
                 <div class="relative h-[350px] md:h-[420px]">
-                    <img src="assets/images/2026/blog-photos/planting-seed-grow-step-concept-in-garden-and-sunl-2026-03-05-11-53-22-utc.jpg" alt="The Compound Effect" class="w-full h-full object-cover">
+                    <img src="assets/images/2026/Be.lievi.ng/Site%20banner%20_%201920_600.png" alt="Mercy Court launches be.lievi.ng Bible Study App" class="w-full h-full object-cover">
                     <div class="absolute top-4 left-4">
                         <span class="bg-brand-red text-white px-4 py-1 rounded-full text-xs font-bold uppercase">Featured</span>
                     </div>
                 </div>
                 <div class="bg-brand-dark p-10 md:p-12 flex flex-col justify-center">
-                    <span class="text-brand-red text-xs font-bold uppercase tracking-widest mb-3">May 18, 2026</span>
+                    <span class="text-brand-red text-xs font-bold uppercase tracking-widest mb-3">June 1, 2026</span>
                     <h3 class="font-anton text-3xl md:text-4xl uppercase text-white tracking-tight mb-4 leading-tight">
-                        The Compound Effect: Why Little by Little Builds Real Wealth
+                        Introducing be.lievi.ng: Mercy Court's Bible Study App Built for the World
                     </h3>
                     <p class="text-gray-400 leading-relaxed mb-6">
-                        Tired of chasing quick wins that never last? Discover why slow, consistent growth is the most powerful wealth strategy — and how to start applying it today.
+                        Mercy Court has launched be.lievi.ng — a free, study-first Bible app with AI-powered tools, smart notes, colour-coded highlights, and character search.
                     </p>
                     <div class="flex items-center gap-4">
-                        <a href="blog-posts/the-compound-effect.html" class="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition">
+                        <a href="blog-posts/mercy-court-launches-believing-bible-study-app.html" class="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition">
                             Read Article
                         </a>
-                        <span class="text-gray-500 text-sm">5 min read</span>
+                        <span class="text-gray-500 text-sm">8 min read</span>
                     </div>
                 </div>
             </div>
@@ -204,10 +204,30 @@
     <!-- Blog Posts Grid -->
     <section class="bg-gray-50 py-16 px-6">
         <div class="container mx-auto max-w-7xl">
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- The Compound Effect -->
+                <article data-category="inspiration" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="assets/images/2026/blog-photos/planting-seed-grow-step-concept-in-garden-and-sunl-2026-03-05-11-53-22-utc.jpg" alt="The Compound Effect" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-brand-red text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">Inspiration</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-brand-red text-xs font-bold uppercase tracking-widest">May 18, 2026</span>
+                        <h3 class="font-anton text-xl uppercase mt-2 mb-3 tracking-tight leading-tight">
+                            The Compound Effect: Little by Little Wins
+                        </h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Tired of chasing quick wins? Discover why slow, consistent growth is the most powerful strategy for your life — and how to start applying it today.
+                        </p>
+                        <a href="blog-posts/the-compound-effect.html" class="text-brand-red font-bold text-sm uppercase hover:underline">Read More &rarr;</a>
+                    </div>
+                </article>
 
                 <!-- Repositioned for Greatness -->
-                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                <article data-category="inspiration" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
                     <div class="relative h-56 overflow-hidden">
                         <img src="assets/images/2026/blog-photos/adventurous-adult-man-hiking-on-top-of-a-mountain-2026-03-24-23-52-07-utc (1).jpg" alt="Repositioned for Greatness" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute top-4 left-4">
@@ -227,7 +247,7 @@
                 </article>
 
                 <!-- The Power of Your Circle -->
-                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                <article data-category="inspiration" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
                     <div class="relative h-56 overflow-hidden">
                         <img src="assets/images/2026/blog-photos/friends-laughing-together-in-an-urban-setting-2026-01-09-00-29-59-utc.jpg" alt="The Power of Your Circle" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute top-4 left-4">
@@ -249,6 +269,33 @@
             </div>
         </div>
     </section>
+
+    <script>
+      (function () {
+        var buttons = document.querySelectorAll('.filter-btn');
+        var featured = document.getElementById('featured-post');
+        var cards = document.querySelectorAll('#blog-grid article[data-category]');
+
+        buttons.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var cat = this.dataset.category;
+
+            buttons.forEach(function (b) {
+              b.classList.remove('bg-brand-red', 'text-white');
+              b.classList.add('border-2', 'border-gray-300', 'text-gray-600');
+            });
+            this.classList.add('bg-brand-red', 'text-white');
+            this.classList.remove('border-2', 'border-gray-300', 'text-gray-600');
+
+            featured.style.display = (cat === 'all' || featured.dataset.category === cat) ? '' : 'none';
+
+            cards.forEach(function (card) {
+              card.style.display = (cat === 'all' || card.dataset.category === cat) ? '' : 'none';
+            });
+          });
+        });
+      })();
+    </script>
 
     <!-- Subscribe / Stay Updated Section -->
     <section class="bg-brand-dark py-20 px-6">
