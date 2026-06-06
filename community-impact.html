@@ -336,8 +336,33 @@
     </section>
 
     <!-- Section 9: Moments of Impact Gallery -->
-    <section class="py-20 px-6" style="background-color: #0A0A0A;">
-        <div class="container mx-auto max-w-7xl">
+    <style>
+        .gallery-item {
+            flex-shrink: 0;
+            width: 380px;
+            height: 264px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease, filter 0.3s ease;
+            pointer-events: none;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.07);
+            filter: brightness(1.15);
+        }
+        @media (max-width: 640px) {
+            .gallery-item { width: 260px; height: 188px; }
+        }
+    </style>
+    <section class="py-20" style="background-color: #0A0A0A;">
+        <div class="container mx-auto max-w-7xl px-6">
             <div class="text-center mb-12">
                 <h2 class="font-anton text-4xl md:text-5xl uppercase text-white tracking-tight mb-4">
                     MOMENTS OF <span class="text-brand-red">IMPACT</span>
@@ -346,34 +371,52 @@
                     A glimpse into the lives we are touching across Baltimore.
                 </p>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div class="relative overflow-hidden rounded-xl h-64 group">
-                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-01.jpg" alt="Food distribution volunteers" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300"></div>
+        </div>
+        <div id="gallery-track-outer" style="overflow: hidden; width: 100%; padding: 8px 0; user-select: none; -webkit-user-select: none;">
+            <div id="gallery-track" style="display: flex; gap: 12px; width: max-content; will-change: transform;">
+                <!-- Set 1 -->
+                <div class="gallery-item" role="button" aria-label="View photo: Food distribution volunteers" onclick="openLightbox('assets/images/2026/community-outreach/outreach-team-food-distribution-01.jpg','Food distribution volunteers')">
+                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-01.jpg" alt="Food distribution volunteers">
                 </div>
-                <div class="relative overflow-hidden rounded-xl h-64 group md:col-span-2">
-                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-03.jpg" alt="Food pantry team at work" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300"></div>
+                <div class="gallery-item" role="button" aria-label="View photo: Food pantry team at work" onclick="openLightbox('assets/images/2026/community-outreach/outreach-team-food-distribution-03.jpg','Food pantry team at work')">
+                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-03.jpg" alt="Food pantry team at work">
                 </div>
-                <div class="relative overflow-hidden rounded-xl h-64 group md:col-span-2">
-                    <img src="assets/images/2026/community-outreach/outreach-truck-arrival-02.jpg" alt="Food delivery truck arriving" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300"></div>
+                <div class="gallery-item" role="button" aria-label="View photo: Food delivery truck arriving" onclick="openLightbox('assets/images/2026/community-outreach/outreach-truck-arrival-02.jpg','Food delivery truck arriving')">
+                    <img src="assets/images/2026/community-outreach/outreach-truck-arrival-02.jpg" alt="Food delivery truck arriving">
                 </div>
-                <div class="relative overflow-hidden rounded-xl h-64 group">
-                    <img src="assets/images/2026/community-outreach/outreach-community-event-04.jpg" alt="Community gathering" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300"></div>
+                <div class="gallery-item" role="button" aria-label="View photo: Community gathering" onclick="openLightbox('assets/images/2026/community-outreach/outreach-community-event-04.jpg','Community gathering')">
+                    <img src="assets/images/2026/community-outreach/outreach-community-event-04.jpg" alt="Community gathering">
                 </div>
-                <div class="relative overflow-hidden rounded-xl h-52 group">
-                    <img src="assets/images/2026/community-outreach/community-event-service-02.jpg" alt="Community service event" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300"></div>
+                <div class="gallery-item" role="button" aria-label="View photo: Community service event" onclick="openLightbox('assets/images/2026/community-outreach/community-event-service-02.jpg','Community service event')">
+                    <img src="assets/images/2026/community-outreach/community-event-service-02.jpg" alt="Community service event">
                 </div>
-                <div class="relative overflow-hidden rounded-xl h-52 group">
-                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-04.jpg" alt="Volunteers distributing groceries" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300"></div>
+                <div class="gallery-item" role="button" aria-label="View photo: Volunteers distributing groceries" onclick="openLightbox('assets/images/2026/community-outreach/outreach-team-food-distribution-04.jpg','Volunteers distributing groceries')">
+                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-04.jpg" alt="Volunteers distributing groceries">
                 </div>
-                <div class="relative overflow-hidden rounded-xl h-52 group">
-                    <img src="assets/images/2026/community-outreach/outreach-truck-commissioning.jpg" alt="Outreach truck commissioning ceremony" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300"></div>
+                <div class="gallery-item" role="button" aria-label="View photo: Outreach truck commissioning ceremony" onclick="openLightbox('assets/images/2026/community-outreach/outreach-truck-commissioning.jpg','Outreach truck commissioning ceremony')">
+                    <img src="assets/images/2026/community-outreach/outreach-truck-commissioning.jpg" alt="Outreach truck commissioning ceremony">
+                </div>
+                <!-- Set 2 — duplicate for seamless infinite loop -->
+                <div class="gallery-item" role="button" aria-label="View photo: Food distribution volunteers" onclick="openLightbox('assets/images/2026/community-outreach/outreach-team-food-distribution-01.jpg','Food distribution volunteers')">
+                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-01.jpg" alt="Food distribution volunteers">
+                </div>
+                <div class="gallery-item" role="button" aria-label="View photo: Food pantry team at work" onclick="openLightbox('assets/images/2026/community-outreach/outreach-team-food-distribution-03.jpg','Food pantry team at work')">
+                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-03.jpg" alt="Food pantry team at work">
+                </div>
+                <div class="gallery-item" role="button" aria-label="View photo: Food delivery truck arriving" onclick="openLightbox('assets/images/2026/community-outreach/outreach-truck-arrival-02.jpg','Food delivery truck arriving')">
+                    <img src="assets/images/2026/community-outreach/outreach-truck-arrival-02.jpg" alt="Food delivery truck arriving">
+                </div>
+                <div class="gallery-item" role="button" aria-label="View photo: Community gathering" onclick="openLightbox('assets/images/2026/community-outreach/outreach-community-event-04.jpg','Community gathering')">
+                    <img src="assets/images/2026/community-outreach/outreach-community-event-04.jpg" alt="Community gathering">
+                </div>
+                <div class="gallery-item" role="button" aria-label="View photo: Community service event" onclick="openLightbox('assets/images/2026/community-outreach/community-event-service-02.jpg','Community service event')">
+                    <img src="assets/images/2026/community-outreach/community-event-service-02.jpg" alt="Community service event">
+                </div>
+                <div class="gallery-item" role="button" aria-label="View photo: Volunteers distributing groceries" onclick="openLightbox('assets/images/2026/community-outreach/outreach-team-food-distribution-04.jpg','Volunteers distributing groceries')">
+                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-04.jpg" alt="Volunteers distributing groceries">
+                </div>
+                <div class="gallery-item" role="button" aria-label="View photo: Outreach truck commissioning ceremony" onclick="openLightbox('assets/images/2026/community-outreach/outreach-truck-commissioning.jpg','Outreach truck commissioning ceremony')">
+                    <img src="assets/images/2026/community-outreach/outreach-truck-commissioning.jpg" alt="Outreach truck commissioning ceremony">
                 </div>
             </div>
         </div>
@@ -789,8 +832,78 @@
             document.body.style.overflow = '';
         }
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeGivingModal();
+            if (e.key === 'Escape') { closeGivingModal(); closeLightbox(); }
         });
+    </script>
+
+    <!-- Gallery Lightbox -->
+    <div id="gallery-lightbox" onclick="closeLightbox()" style="display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.92); align-items: center; justify-content: center;">
+        <button onclick="event.stopPropagation(); closeLightbox()" aria-label="Close lightbox" style="position: absolute; top: 20px; right: 24px; background: rgba(255,255,255,0.15); border: none; border-radius: 50%; width: 48px; height: 48px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; line-height: 1; backdrop-filter: blur(4px);">&#x2715;</button>
+        <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" style="max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 10px; box-shadow: 0 30px 80px rgba(0,0,0,0.8); display: block;">
+    </div>
+
+    <script>
+        (function () {
+            var outer = document.getElementById('gallery-track-outer');
+            var track = document.getElementById('gallery-track');
+            var totalWidth = 0;
+            var offset = 0;
+            var paused = false;
+            var lightboxOpen = false;
+
+            window.addEventListener('load', function () {
+                totalWidth = track.scrollWidth / 2;
+                requestAnimationFrame(step);
+            });
+
+            function step() {
+                if (!paused && !lightboxOpen) {
+                    offset += 0.5;
+                    if (offset >= totalWidth) offset = 0;
+                    track.style.transform = 'translateX(-' + offset + 'px)';
+                }
+                requestAnimationFrame(step);
+            }
+
+            outer.addEventListener('mouseenter', function () { paused = true; });
+            outer.addEventListener('mouseleave', function () { paused = false; });
+
+            var touchStartX = 0;
+            var touchStartOffset = 0;
+
+            outer.addEventListener('touchstart', function (e) {
+                touchStartX = e.touches[0].clientX;
+                touchStartOffset = offset;
+                paused = true;
+            }, { passive: true });
+
+            outer.addEventListener('touchmove', function (e) {
+                var dx = touchStartX - e.touches[0].clientX;
+                offset = touchStartOffset + dx;
+                if (offset < 0) offset += totalWidth;
+                if (offset >= totalWidth) offset -= totalWidth;
+                track.style.transform = 'translateX(-' + offset + 'px)';
+            }, { passive: true });
+
+            outer.addEventListener('touchend', function () { paused = false; });
+
+            window.openLightbox = function (src, alt) {
+                var lb = document.getElementById('gallery-lightbox');
+                document.getElementById('lightbox-img').src = src;
+                document.getElementById('lightbox-img').alt = alt;
+                lb.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                lightboxOpen = true;
+            };
+
+            window.closeLightbox = function () {
+                var lb = document.getElementById('gallery-lightbox');
+                if (!lb) return;
+                lb.style.display = 'none';
+                document.body.style.overflow = '';
+                lightboxOpen = false;
+            };
+        })();
     </script>
 </body>
 </html>
