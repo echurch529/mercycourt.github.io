@@ -137,6 +137,19 @@
   </script>
   <script src="assets/js/analytics.js" defer></script>
     <style>[id]{scroll-margin-top:80px}</style>
+<style>
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease-out,transform 0.6s ease-out}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal:nth-child(2){transition-delay:0.1s}
+.reveal:nth-child(3){transition-delay:0.2s}
+.reveal:nth-child(4){transition-delay:0.3s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+<style>
+@keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(-8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+#giving-modal>div:last-child.animate{animation:modalIn 0.25s ease-out forwards}
+@media(prefers-reduced-motion:reduce){#giving-modal>div:last-child.animate{animation:none}}
+</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
@@ -267,28 +280,28 @@
                 </p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12">
-                <div class="bg-gray-50 rounded-xl p-8 flex gap-5 items-start">
+                <div class="bg-gray-50 rounded-xl p-8 flex gap-5 items-start reveal">
                     <div class="text-3xl flex-shrink-0">🎵</div>
                     <div>
                         <h3 class="font-bold text-gray-900 text-lg mb-2">Passionate Worship</h3>
                         <p class="text-gray-600 text-sm leading-relaxed">Heartfelt, Spirit-filled music that draws you into God's presence</p>
                     </div>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-8 flex gap-5 items-start">
+                <div class="bg-gray-50 rounded-xl p-8 flex gap-5 items-start reveal">
                     <div class="text-3xl flex-shrink-0">📖</div>
                     <div>
                         <h3 class="font-bold text-gray-900 text-lg mb-2">Practical Teaching</h3>
                         <p class="text-gray-600 text-sm leading-relaxed">Bible-based messages that speak to real life</p>
                     </div>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-8 flex gap-5 items-start">
+                <div class="bg-gray-50 rounded-xl p-8 flex gap-5 items-start reveal">
                     <div class="text-3xl flex-shrink-0">👨‍👩‍👧</div>
                     <div>
                         <h3 class="font-bold text-gray-900 text-lg mb-2">Loving Community</h3>
                         <p class="text-gray-600 text-sm leading-relaxed">A warm church family ready to welcome you</p>
                     </div>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-8 flex gap-5 items-start">
+                <div class="bg-gray-50 rounded-xl p-8 flex gap-5 items-start reveal">
                     <div class="text-3xl flex-shrink-0">✝️</div>
                     <div>
                         <h3 class="font-bold text-gray-900 text-lg mb-2">A Place for Everyone</h3>
@@ -845,6 +858,7 @@
             }
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
+            var mc=document.querySelector('#giving-modal > div:last-child');if(mc){mc.classList.remove('animate');void mc.offsetWidth;mc.classList.add('animate');}
         }
         function closeGivingModal() {
             document.getElementById('giving-modal').classList.add('hidden');
@@ -854,5 +868,8 @@
             if (e.key === 'Escape') closeGivingModal();
         });
     </script>
+<script>
+(function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');obs.unobserve(entry.target);}});},{threshold:0.12});document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});})();
+</script>
 </body>
 </html>

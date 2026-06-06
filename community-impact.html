@@ -61,6 +61,19 @@
   </script>
   <script src="assets/js/analytics.js" defer></script>
     <style>[id]{scroll-margin-top:80px}</style>
+<style>
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease-out,transform 0.6s ease-out}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal:nth-child(2){transition-delay:0.1s}
+.reveal:nth-child(3){transition-delay:0.2s}
+.reveal:nth-child(4){transition-delay:0.3s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+<style>
+@keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(-8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+#giving-modal>div:last-child.animate{animation:modalIn 0.25s ease-out forwards}
+@media(prefers-reduced-motion:reduce){#giving-modal>div:last-child.animate{animation:none}}
+</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
@@ -168,7 +181,7 @@
     <!-- Section 3: Impact Numbers -->
     <section class="py-16 px-6" style="background-color: #1B2A4A;">
         <div class="container mx-auto max-w-6xl">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center reveal">
                 <div>
                     <p class="font-anton text-5xl md:text-6xl mb-3" style="color: #E8541A;">60+</p>
                     <p class="text-white text-sm uppercase tracking-wider leading-snug">Households Served Yearly</p>
@@ -215,21 +228,21 @@
                 </h2>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300">
+                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300 reveal">
                     <div class="text-5xl mb-5">🍎</div>
                     <h3 class="font-anton text-2xl uppercase tracking-tight mb-4">Food Pantry and Distribution</h3>
                     <p class="text-gray-600 leading-relaxed text-sm">
                         We store and distribute groceries to families in need every week. Our Food Pantry serves the Govans community and surrounding neighborhoods, providing dignified access to fresh and non-perishable food items. Open every Thursday from 1:00 PM to 5:00 PM.
                     </p>
                 </div>
-                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300">
+                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300 reveal">
                     <div class="text-5xl mb-5">🤝</div>
                     <h3 class="font-anton text-2xl uppercase tracking-tight mb-4">Welfare Support</h3>
                     <p class="text-gray-600 leading-relaxed text-sm">
                         We provide practical assistance to individuals and families navigating difficult seasons — connecting people to resources, offering emotional support, and walking alongside those who need a helping hand.
                     </p>
                 </div>
-                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300">
+                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300 reveal">
                     <div class="text-5xl mb-5">👴</div>
                     <h3 class="font-anton text-2xl uppercase tracking-tight mb-4">Elderly Care Support</h3>
                     <p class="text-gray-600 leading-relaxed text-sm">
@@ -253,19 +266,19 @@
                 </p>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300" style="background-color: #F5F5F5;">
+                <div class="rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300 reveal" style="background-color: #F5F5F5;">
                     <h3 class="font-anton text-2xl uppercase tracking-tight mb-3" style="color: #1B2A4A;">Maryland Food Bank</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">
                         Our primary food sourcing partner — connecting us to thousands of pounds of groceries every month.
                     </p>
                 </div>
-                <div class="rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300" style="background-color: #F5F5F5;">
+                <div class="rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300 reveal" style="background-color: #F5F5F5;">
                     <h3 class="font-anton text-2xl uppercase tracking-tight mb-3" style="color: #1B2A4A;">Operation Warm</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">
                         Partnering to provide warmth and essentials to children and families in need across Baltimore.
                     </p>
                 </div>
-                <div class="rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300" style="background-color: #F5F5F5;">
+                <div class="rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300 reveal" style="background-color: #F5F5F5;">
                     <h3 class="font-anton text-2xl uppercase tracking-tight mb-3" style="color: #1B2A4A;">Hope for You</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">
                         Working together to extend hope and practical support to individuals navigating hardship in our community.
@@ -285,14 +298,14 @@
                 </h2>
             </div>
             <div class="grid md:grid-cols-2 gap-8">
-                <div class="rounded-2xl p-8 shadow-xl" style="background-color: #1B2A4A;">
+                <div class="rounded-2xl p-8 shadow-xl reveal" style="background-color: #1B2A4A;">
                     <div class="font-anton text-6xl mb-4 leading-none" style="color: #E8541A;">"</div>
                     <p class="text-white text-lg leading-relaxed mb-6 italic">
                         For over fifteen years that I have lived here, no organization has shared so much household items like this.
                     </p>
                     <p class="font-bold text-sm uppercase tracking-wide" style="color: #E8541A;">— Community Resident, Govans Baltimore</p>
                 </div>
-                <div class="rounded-2xl p-8 shadow-xl" style="background-color: #1B2A4A;">
+                <div class="rounded-2xl p-8 shadow-xl reveal" style="background-color: #1B2A4A;">
                     <div class="font-anton text-6xl mb-4 leading-none" style="color: #E8541A;">"</div>
                     <p class="text-white text-lg leading-relaxed mb-6 italic">
                         Because of your activities, my household has spent less on groceries. Please keep doing what you are doing.
@@ -444,21 +457,21 @@
                 </h2>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300">
+                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300 reveal">
                     <div class="text-5xl mb-5">📈</div>
                     <h3 class="font-anton text-xl uppercase tracking-tight mb-4">Short Term Goal</h3>
                     <p class="text-gray-600 leading-relaxed text-sm">
                         Scale our Food Pantry to serve more than 75 households and launch food hubs operating three times a week in nearby apartment communities.
                     </p>
                 </div>
-                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300">
+                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300 reveal">
                     <div class="text-5xl mb-5">🏥</div>
                     <h3 class="font-anton text-xl uppercase tracking-tight mb-4">Long Term Vision</h3>
                     <p class="text-gray-600 leading-relaxed text-sm">
                         Expand our services to provide mental health support, shelter assistance, and rehabilitation programs for those recovering from substance abuse.
                     </p>
                 </div>
-                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300">
+                <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300 reveal">
                     <div class="text-5xl mb-5">🤲</div>
                     <h3 class="font-anton text-xl uppercase tracking-tight mb-4">How You Can Help</h3>
                     <p class="text-gray-600 leading-relaxed text-sm">
@@ -850,6 +863,7 @@
             }
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
+            var mc=document.querySelector('#giving-modal > div:last-child');if(mc){mc.classList.remove('animate');void mc.offsetWidth;mc.classList.add('animate');}
         }
         function closeGivingModal() {
             document.getElementById('giving-modal').classList.add('hidden');
@@ -956,5 +970,8 @@
             };
         })();
     </script>
+<script>
+(function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');obs.unobserve(entry.target);}});},{threshold:0.12});document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});})();
+</script>
 </body>
 </html>

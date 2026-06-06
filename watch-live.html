@@ -60,6 +60,19 @@
   </script>
   <script src="assets/js/analytics.js" defer></script>
     <style>[id]{scroll-margin-top:80px}</style>
+<style>
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease-out,transform 0.6s ease-out}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal:nth-child(2){transition-delay:0.1s}
+.reveal:nth-child(3){transition-delay:0.2s}
+.reveal:nth-child(4){transition-delay:0.3s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+<style>
+@keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(-8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+#giving-modal>div:last-child.animate{animation:modalIn 0.25s ease-out forwards}
+@media(prefers-reduced-motion:reduce){#giving-modal>div:last-child.animate{animation:none}}
+</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
@@ -183,7 +196,7 @@
                 </p>
             </div>
             <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-gray-50 rounded-xl p-8 text-center border border-gray-100 hover:shadow-lg transition">
+                <div class="bg-gray-50 rounded-xl p-8 text-center border border-gray-100 hover:shadow-lg transition reveal">
                     <div class="w-14 h-14 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-4">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
@@ -193,7 +206,7 @@
                     <p class="text-brand-red font-bold text-2xl mb-1">10:00 AM</p>
                     <p class="text-gray-500 text-sm">Every Sunday</p>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-8 text-center border border-gray-100 hover:shadow-lg transition">
+                <div class="bg-gray-50 rounded-xl p-8 text-center border border-gray-100 hover:shadow-lg transition reveal">
                     <div class="w-14 h-14 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-4">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
@@ -203,7 +216,7 @@
                     <p class="text-brand-red font-bold text-2xl mb-1">7:00 PM</p>
                     <p class="text-gray-500 text-sm">Every Wednesday</p>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-8 text-center border border-gray-100 hover:shadow-lg transition">
+                <div class="bg-gray-50 rounded-xl p-8 text-center border border-gray-100 hover:shadow-lg transition reveal">
                     <div class="w-14 h-14 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-4">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
@@ -300,7 +313,7 @@
                 <h2 class="font-anton text-3xl md:text-4xl uppercase tracking-tight">Latest from Mercy Court</h2>
             </div>
             <div class="grid md:grid-cols-3 gap-6">
-                <a href="blog-posts/the-compound-effect.html" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+                <a href="blog-posts/the-compound-effect.html" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 reveal">
                     <div style="height: 160px; overflow: hidden;">
                         <img loading="lazy" src="assets/images/2026/blog-photos/planting-seed-grow-step-concept-in-garden-and-sunl-2026-03-05-11-53-22-utc.jpg" alt="The Compound Effect" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
@@ -310,7 +323,7 @@
                         <p class="font-bold text-xs mt-3 text-brand-red">Read More &rarr;</p>
                     </div>
                 </a>
-                <a href="blog-posts/repositioned-for-greatness.html" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+                <a href="blog-posts/repositioned-for-greatness.html" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 reveal">
                     <div style="height: 160px; overflow: hidden;">
                         <img loading="lazy" src="assets/images/2026/blog-photos/adventurous-adult-man-hiking-on-top-of-a-mountain-2026-03-24-23-52-07-utc (1).jpg" alt="Repositioned for Greatness" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
@@ -320,7 +333,7 @@
                         <p class="font-bold text-xs mt-3 text-brand-red">Read More &rarr;</p>
                     </div>
                 </a>
-                <a href="blog-posts/the-power-of-your-circle.html" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+                <a href="blog-posts/the-power-of-your-circle.html" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 reveal">
                     <div style="height: 160px; overflow: hidden;">
                         <img loading="lazy" src="assets/images/2026/congregation/congregation-worship-service-01.jpg" alt="The Power of Your Circle" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
@@ -529,6 +542,7 @@
             }
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
+            var mc=document.querySelector('#giving-modal > div:last-child');if(mc){mc.classList.remove('animate');void mc.offsetWidth;mc.classList.add('animate');}
         }
         function closeGivingModal() {
             document.getElementById('giving-modal').classList.add('hidden');
@@ -636,5 +650,8 @@
             }
         })();
     </script>
+<script>
+(function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');obs.unobserve(entry.target);}});},{threshold:0.12});document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});})();
+</script>
 </body>
 </html>

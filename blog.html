@@ -61,6 +61,19 @@
   </script>
   <script src="assets/js/analytics.js" defer></script>
     <style>[id]{scroll-margin-top:80px}</style>
+<style>
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease-out,transform 0.6s ease-out}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal:nth-child(2){transition-delay:0.1s}
+.reveal:nth-child(3){transition-delay:0.2s}
+.reveal:nth-child(4){transition-delay:0.3s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+<style>
+@keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(-8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+#giving-modal>div:last-child.animate{animation:modalIn 0.25s ease-out forwards}
+@media(prefers-reduced-motion:reduce){#giving-modal>div:last-child.animate{animation:none}}
+</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
@@ -210,7 +223,7 @@
             <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
                 <!-- The Compound Effect -->
-                <article data-category="inspiration" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                <article data-category="inspiration" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group reveal">
                     <div class="relative overflow-hidden" style="height: 220px;">
                         <img loading="lazy" src="assets/images/2026/blog-photos/planting-seed-grow-step-concept-in-garden-and-sunl-2026-03-05-11-53-22-utc.jpg" alt="The Compound Effect" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;" class="group-hover:scale-105 transition duration-500">
                         <div class="absolute top-4 left-4">
@@ -230,7 +243,7 @@
                 </article>
 
                 <!-- Repositioned for Greatness -->
-                <article data-category="inspiration" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                <article data-category="inspiration" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group reveal">
                     <div class="relative overflow-hidden" style="height: 220px;">
                         <img loading="lazy" src="assets/images/2026/blog-photos/adventurous-adult-man-hiking-on-top-of-a-mountain-2026-03-24-23-52-07-utc (1).jpg" alt="Repositioned for Greatness" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;" class="group-hover:scale-105 transition duration-500">
                         <div class="absolute top-4 left-4">
@@ -250,7 +263,7 @@
                 </article>
 
                 <!-- The Power of Your Circle -->
-                <article data-category="inspiration" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                <article data-category="inspiration" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group reveal">
                     <div class="relative overflow-hidden" style="height: 220px;">
                         <img loading="lazy" src="assets/images/2026/blog-photos/friends-laughing-together-in-an-urban-setting-2026-01-09-00-29-59-utc.jpg" alt="The Power of Your Circle" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;" class="group-hover:scale-105 transition duration-500">
                         <div class="absolute top-4 left-4">
@@ -559,6 +572,7 @@
             }
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
+            var mc=document.querySelector('#giving-modal > div:last-child');if(mc){mc.classList.remove('animate');void mc.offsetWidth;mc.classList.add('animate');}
         }
         function closeGivingModal() {
             document.getElementById('giving-modal').classList.add('hidden');
@@ -568,5 +582,8 @@
             if (e.key === 'Escape') closeGivingModal();
         });
     </script>
+<script>
+(function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');obs.unobserve(entry.target);}});},{threshold:0.12});document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});})();
+</script>
 </body>
 </html>
