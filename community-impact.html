@@ -372,7 +372,12 @@
                 </p>
             </div>
         </div>
-        <div id="gallery-track-outer" style="overflow: hidden; width: 100%; padding: 8px 0; user-select: none; -webkit-user-select: none;">
+        <div style="display: flex; align-items: center; padding: 0 16px; gap: 12px;">
+            <button id="gallery-prev" aria-label="Previous photos"
+                onmouseover="this.style.background='rgba(255,255,255,0.28)'"
+                onmouseout="this.style.background='rgba(255,255,255,0.15)'"
+                style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; backdrop-filter: blur(4px);">&#8592;</button>
+            <div id="gallery-track-outer" style="overflow: hidden; flex: 1; padding: 8px 0; user-select: none; -webkit-user-select: none;">
             <div id="gallery-track" style="display: flex; gap: 12px; width: max-content; will-change: transform;">
                 <!-- Set 1 -->
                 <div class="gallery-item" role="button" aria-label="View photo: Food distribution volunteers" onclick="openLightbox('assets/images/2026/community-outreach/outreach-team-food-distribution-01.jpg','Food distribution volunteers')">
@@ -419,6 +424,11 @@
                     <img src="assets/images/2026/community-outreach/outreach-truck-commissioning.jpg" alt="Outreach truck commissioning ceremony">
                 </div>
             </div>
+            </div>
+            <button id="gallery-next" aria-label="Next photos"
+                onmouseover="this.style.background='rgba(255,255,255,0.28)'"
+                onmouseout="this.style.background='rgba(255,255,255,0.15)'"
+                style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; backdrop-filter: blur(4px);">&#8594;</button>
         </div>
     </section>
 
@@ -846,10 +856,14 @@
         (function () {
             var outer = document.getElementById('gallery-track-outer');
             var track = document.getElementById('gallery-track');
+            var prevBtn = document.getElementById('gallery-prev');
+            var nextBtn = document.getElementById('gallery-next');
             var totalWidth = 0;
             var offset = 0;
             var paused = false;
             var lightboxOpen = false;
+            var nudgeAmount = 0;
+            var nudgeDir = 1;
 
             window.addEventListener('load', function () {
                 totalWidth = track.scrollWidth / 2;
@@ -857,7 +871,14 @@
             });
 
             function step() {
-                if (!paused && !lightboxOpen) {
+                if (nudgeAmount > 0) {
+                    var px = Math.min(nudgeAmount, 20);
+                    offset += px * nudgeDir;
+                    nudgeAmount -= px;
+                    if (offset < 0) offset += totalWidth;
+                    if (offset >= totalWidth) offset -= totalWidth;
+                    track.style.transform = 'translateX(-' + offset + 'px)';
+                } else if (!paused && !lightboxOpen) {
                     offset += 0.5;
                     if (offset >= totalWidth) offset = 0;
                     track.style.transform = 'translateX(-' + offset + 'px)';
@@ -867,6 +888,14 @@
 
             outer.addEventListener('mouseenter', function () { paused = true; });
             outer.addEventListener('mouseleave', function () { paused = false; });
+
+            prevBtn.addEventListener('mouseenter', function () { paused = true; });
+            prevBtn.addEventListener('mouseleave', function () { paused = false; });
+            nextBtn.addEventListener('mouseenter', function () { paused = true; });
+            nextBtn.addEventListener('mouseleave', function () { paused = false; });
+
+            prevBtn.addEventListener('click', function () { nudgeDir = -1; nudgeAmount = 392; });
+            nextBtn.addEventListener('click', function () { nudgeDir = 1; nudgeAmount = 392; });
 
             var touchStartX = 0;
             var touchStartOffset = 0;
