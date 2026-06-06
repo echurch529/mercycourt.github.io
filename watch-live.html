@@ -600,7 +600,9 @@
                 document.getElementById('sermons-grid').innerHTML = recent.map(function(item) {
                     var vid   = item.snippet.resourceId.videoId;
                     var title = item.snippet.title;
-                    var thumb = (item.snippet.thumbnails.high || item.snippet.thumbnails.medium).url;
+                    var t     = item.snippet.thumbnails;
+                    var thumb = (t.maxres || t.high || t.standard || t.medium || t.default || {}).url
+                                || 'https://i.ytimg.com/vi/' + vid + '/hqdefault.jpg';
                     var date  = new Date(item.snippet.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
                     return '<a href="https://www.youtube.com/watch?v=' + vid + '" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition group border border-gray-100">'
                         + '<div class="relative h-48 overflow-hidden bg-gray-900">'
