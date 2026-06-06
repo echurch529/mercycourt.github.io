@@ -549,7 +549,10 @@
 
             try {
                 // 1. Resolve channel handle → channel ID + uploads playlist ID (1 quota unit)
-                const chData = await fetch(`${BASE}/channels?part=id,contentDetails&forHandle=${HANDLE}&key=${API_KEY}`).then(r => r.json());
+                const chRes = await fetch(`${BASE}/channels?part=id,contentDetails&forHandle=${HANDLE}&key=${API_KEY}`);
+                const chData = await chRes.json();
+                if (chData.error) throw new Error('channels.list: ' + chData.error.message + ' (code ' + chData.error.code + ')');
+                if (!chData.items || chData.items.length === 0) throw new Error('channels.list: No channel found for handle @' + HANDLE);
                 const channelId = chData.items[0].id;
                 const uploadsId = chData.items[0].contentDetails.relatedPlaylists.uploads;
 
@@ -559,13 +562,17 @@
                 if (hit && Date.now() - hit.ts < CACHE_TTL) {
                     liveId = hit.id;
                 } else {
-                    const liveData = await fetch(`${BASE}/search?part=snippet&channelId=${channelId}&eventType=live&type=video&maxResults=1&key=${API_KEY}`).then(r => r.json());
+                    const liveRes = await fetch(`${BASE}/search?part=snippet&channelId=${channelId}&eventType=live&type=video&maxResults=1&key=${API_KEY}`);
+                    const liveData = await liveRes.json();
+                    if (liveData.error) throw new Error('search.list (live): ' + liveData.error.message + ' (code ' + liveData.error.code + ')');
                     liveId = liveData.items?.[0]?.id?.videoId ?? null;
                     sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), id: liveId }));
                 }
 
                 // 3. Latest 3 uploads (1 quota unit)
-                const vidData = await fetch(`${BASE}/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=3&key=${API_KEY}`).then(r => r.json());
+                const vidRes = await fetch(`${BASE}/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=3&key=${API_KEY}`);
+                const vidData = await vidRes.json();
+                if (vidData.error) throw new Error('playlistItems.list: ' + vidData.error.message + ' (code ' + vidData.error.code + ')');
                 const recent = vidData.items;
 
                 // Update main embed
