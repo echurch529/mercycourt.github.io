@@ -491,6 +491,11 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeGivingModal();
         });
+        document.querySelector('form[action*="formspree"]').addEventListener('submit', function() {
+            var btn = this.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+        });
     </script>
 </body>
 </html>
