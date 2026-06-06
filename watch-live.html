@@ -582,11 +582,18 @@
                     }
                 }
 
-                // 3. Latest 3 uploads (1 quota unit)
-                const vidRes = await fetch(`${BASE}/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=3&key=${API_KEY}`);
+                // 3. Latest uploads — fetch 10 then deduplicate by title to handle
+                //    channels that upload multiple takes of the same event
+                const vidRes = await fetch(`${BASE}/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=10&key=${API_KEY}`);
                 const vidData = await vidRes.json();
                 if (vidData.error) throw new Error('playlistItems.list: ' + vidData.error.message + ' (code ' + vidData.error.code + ')');
-                const recent = vidData.items;
+                var seenTitles = {};
+                const recent = vidData.items.filter(function(item) {
+                    var key = item.snippet.title.trim().toLowerCase();
+                    if (seenTitles[key]) return false;
+                    seenTitles[key] = true;
+                    return true;
+                }).slice(0, 3);
 
                 // Update main embed
                 const embedId = liveId || recent[0].snippet.resourceId.videoId;
