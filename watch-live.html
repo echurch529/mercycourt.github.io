@@ -140,10 +140,21 @@
     <!-- Live Stream Embed -->
     <section class="bg-brand-dark py-16 px-6">
         <div class="container mx-auto max-w-5xl">
-            <div class="aspect-video bg-black rounded-xl overflow-hidden shadow-2xl">
+            <div class="relative aspect-video bg-black rounded-xl overflow-hidden shadow-2xl">
+                <!-- Loading skeleton -->
+                <div id="stream-loading" class="absolute inset-0 flex flex-col items-center justify-center bg-gray-900">
+                    <div class="w-12 h-12 border-4 border-brand-red border-t-transparent rounded-full animate-spin mb-4"></div>
+                    <p class="text-white/60 text-sm uppercase tracking-widest">Loading stream…</p>
+                </div>
+                <!-- LIVE badge -->
+                <div id="live-badge" class="hidden absolute top-4 left-4 z-10 flex items-center gap-2 bg-red-600 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">
+                    <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE
+                </div>
+                <!-- Dynamic embed -->
                 <iframe
-                    class="w-full h-full"
-                    src="https://www.youtube.com/embed/WJQsQPAkVhU"
+                    id="stream-iframe"
+                    class="w-full h-full hidden"
+                    src=""
                     title="RCCG Mercy Court Live Stream"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -216,55 +227,38 @@
                     Missed a service? Catch up on recent messages.
                 </p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition group border border-gray-100">
-                    <div class="relative h-48 overflow-hidden bg-gray-900">
-                        <img src="assets/images/2026/service-slides/midweek-bible-study-slide.jpg" alt="Sermon" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-14 h-14 bg-brand-red/90 rounded-full flex items-center justify-center">
-                                <svg class="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-brand-red text-xs font-bold uppercase mb-2">March 23, 2026</p>
-                        <h3 class="font-bold text-lg mb-2">Walking in Divine Favour</h3>
-                        <p class="text-gray-500 text-sm">Pastor Johnson Olumide</p>
+            <div id="sermons-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Skeleton loaders shown while YouTube API loads -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 animate-pulse">
+                    <div class="h-48 bg-gray-200"></div>
+                    <div class="p-6 space-y-3">
+                        <div class="h-3 bg-gray-200 rounded w-1/3"></div>
+                        <div class="h-4 bg-gray-200 rounded w-full"></div>
+                        <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                        <div class="h-3 bg-gray-200 rounded w-1/4 mt-2"></div>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition group border border-gray-100">
-                    <div class="relative h-48 overflow-hidden bg-gray-900">
-                        <img src="assets/images/2026/service-slides/sunday-school-slide.jpg" alt="Sermon" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-14 h-14 bg-brand-red/90 rounded-full flex items-center justify-center">
-                                <svg class="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-brand-red text-xs font-bold uppercase mb-2">March 16, 2026</p>
-                        <h3 class="font-bold text-lg mb-2">The Power of Persistent Prayer</h3>
-                        <p class="text-gray-500 text-sm">Pastor Johnson Olumide</p>
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 animate-pulse">
+                    <div class="h-48 bg-gray-200"></div>
+                    <div class="p-6 space-y-3">
+                        <div class="h-3 bg-gray-200 rounded w-1/3"></div>
+                        <div class="h-4 bg-gray-200 rounded w-full"></div>
+                        <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                        <div class="h-3 bg-gray-200 rounded w-1/4 mt-2"></div>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition group border border-gray-100">
-                    <div class="relative h-48 overflow-hidden bg-gray-900">
-                        <img src="assets/images/2026/service-slides/daniel-fast-slide.jpg" alt="Sermon" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-14 h-14 bg-brand-red/90 rounded-full flex items-center justify-center">
-                                <svg class="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-brand-red text-xs font-bold uppercase mb-2">March 9, 2026</p>
-                        <h3 class="font-bold text-lg mb-2">Living a Life of Purpose</h3>
-                        <p class="text-gray-500 text-sm">Pastor Johnson Olumide</p>
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 animate-pulse">
+                    <div class="h-48 bg-gray-200"></div>
+                    <div class="p-6 space-y-3">
+                        <div class="h-3 bg-gray-200 rounded w-1/3"></div>
+                        <div class="h-4 bg-gray-200 rounded w-full"></div>
+                        <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                        <div class="h-3 bg-gray-200 rounded w-1/4 mt-2"></div>
                     </div>
                 </div>
             </div>
             <div class="text-center mt-10">
-                <a href="watch-live.html" class="inline-block border-2 border-brand-dark text-brand-dark px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-brand-dark hover:text-white transition">
+                <a href="https://www.youtube.com/@RCCGMercyCourt" target="_blank" rel="noopener noreferrer" class="inline-block border-2 border-brand-dark text-brand-dark px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-brand-dark hover:text-white transition">
                     View All Sermons
                 </a>
             </div>
@@ -542,6 +536,75 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeGivingModal();
         });
+    </script>
+
+    <!-- YouTube Live + Recent Sermons -->
+    <script>
+        (async function () {
+            const API_KEY  = 'AIzaSyC58jGaywtEp0zwY6GQsxDf5CZb1gWFMxw';
+            const HANDLE   = 'RCCGMercyCourt';
+            const CACHE_KEY = 'mc_live_check';
+            const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+            const BASE = 'https://www.googleapis.com/youtube/v3';
+
+            try {
+                // 1. Resolve channel handle → channel ID + uploads playlist ID (1 quota unit)
+                const chData = await fetch(`${BASE}/channels?part=id,contentDetails&forHandle=${HANDLE}&key=${API_KEY}`).then(r => r.json());
+                const channelId = chData.items[0].id;
+                const uploadsId = chData.items[0].contentDetails.relatedPlaylists.uploads;
+
+                // 2. Live check — cached in sessionStorage for 5 min (100 quota units)
+                let liveId = null;
+                const hit = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
+                if (hit && Date.now() - hit.ts < CACHE_TTL) {
+                    liveId = hit.id;
+                } else {
+                    const liveData = await fetch(`${BASE}/search?part=snippet&channelId=${channelId}&eventType=live&type=video&maxResults=1&key=${API_KEY}`).then(r => r.json());
+                    liveId = liveData.items?.[0]?.id?.videoId ?? null;
+                    sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), id: liveId }));
+                }
+
+                // 3. Latest 3 uploads (1 quota unit)
+                const vidData = await fetch(`${BASE}/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=3&key=${API_KEY}`).then(r => r.json());
+                const recent = vidData.items;
+
+                // Update main embed
+                const embedId = liveId || recent[0].snippet.resourceId.videoId;
+                const iframe  = document.getElementById('stream-iframe');
+                iframe.src = `https://www.youtube.com/embed/${embedId}` + (liveId ? '?autoplay=1' : '');
+                document.getElementById('stream-loading').classList.add('hidden');
+                iframe.classList.remove('hidden');
+                if (liveId) document.getElementById('live-badge').classList.remove('hidden');
+
+                // Populate Recent Sermons grid
+                document.getElementById('sermons-grid').innerHTML = recent.map(function(item) {
+                    var vid   = item.snippet.resourceId.videoId;
+                    var title = item.snippet.title;
+                    var thumb = (item.snippet.thumbnails.high || item.snippet.thumbnails.medium).url;
+                    var date  = new Date(item.snippet.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                    return '<a href="https://www.youtube.com/watch?v=' + vid + '" target="_blank" rel="noopener noreferrer" class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition group border border-gray-100">'
+                        + '<div class="relative h-48 overflow-hidden bg-gray-900">'
+                        + '<img src="' + thumb + '" alt="' + title.replace(/"/g, '&quot;') + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">'
+                        + '<div class="absolute inset-0 flex items-center justify-center">'
+                        + '<div class="w-14 h-14 bg-brand-red/90 rounded-full flex items-center justify-center">'
+                        + '<svg class="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
+                        + '</div></div></div>'
+                        + '<div class="p-6">'
+                        + '<p class="text-brand-red text-xs font-bold uppercase mb-2">' + date + '</p>'
+                        + '<h3 class="font-bold text-lg mb-2 leading-snug">' + title + '</h3>'
+                        + '<p class="text-gray-500 text-sm">RCCG Mercy Court</p>'
+                        + '</div></a>';
+                }).join('');
+
+            } catch (err) {
+                // Fallback: replace skeleton with a YouTube link
+                document.getElementById('stream-loading').innerHTML =
+                    '<div class="text-white/60 text-center p-12 text-lg">Stream unavailable. <a href="https://www.youtube.com/@RCCGMercyCourt" target="_blank" rel="noopener noreferrer" class="text-brand-red underline">Watch on YouTube &rarr;</a></div>';
+                document.getElementById('sermons-grid').innerHTML =
+                    '<div class="col-span-3 text-center text-gray-400 py-8">Could not load recent sermons. <a href="https://www.youtube.com/@RCCGMercyCourt" target="_blank" rel="noopener noreferrer" class="text-brand-red underline">View on YouTube &rarr;</a></div>';
+                console.error('YouTube API error:', err);
+            }
+        })();
     </script>
 </body>
 </html>
