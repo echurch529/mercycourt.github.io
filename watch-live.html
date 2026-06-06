@@ -547,6 +547,17 @@
             const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
             const BASE = 'https://www.googleapis.com/youtube/v3';
 
+            // Returns true only during Mercy Court service windows (US Eastern time)
+            // Sunday 9:55 AM – 1:00 PM  |  Wednesday 7:00 PM – 9:00 PM
+            function isInServiceWindow() {
+                const etStr = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+                const et   = new Date(etStr);
+                const day  = et.getDay();
+                const mins = et.getHours() * 60 + et.getMinutes();
+                return (day === 0 && mins >= 595 && mins < 780) ||   // Sun 9:55–13:00
+                       (day === 3 && mins >= 1140 && mins < 1260);   // Wed 19:00–21:00
+            }
+
             try {
                 // 1. Resolve channel handle → channel ID + uploads playlist ID (1 quota unit)
                 const chRes = await fetch(`${BASE}/channels?part=id,contentDetails&forHandle=${HANDLE}&key=${API_KEY}`);
@@ -556,17 +567,19 @@
                 const channelId = chData.items[0].id;
                 const uploadsId = chData.items[0].contentDetails.relatedPlaylists.uploads;
 
-                // 2. Live check — cached in sessionStorage for 5 min (100 quota units)
+                // 2. Live check — only during service windows (100 quota units, cached 5 min)
                 let liveId = null;
-                const hit = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
-                if (hit && Date.now() - hit.ts < CACHE_TTL) {
-                    liveId = hit.id;
-                } else {
-                    const liveRes = await fetch(`${BASE}/search?part=snippet&channelId=${channelId}&eventType=live&type=video&maxResults=1&key=${API_KEY}`);
-                    const liveData = await liveRes.json();
-                    if (liveData.error) throw new Error('search.list (live): ' + liveData.error.message + ' (code ' + liveData.error.code + ')');
-                    liveId = liveData.items?.[0]?.id?.videoId ?? null;
-                    sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), id: liveId }));
+                if (isInServiceWindow()) {
+                    const hit = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
+                    if (hit && Date.now() - hit.ts < CACHE_TTL) {
+                        liveId = hit.id;
+                    } else {
+                        const liveRes = await fetch(`${BASE}/search?part=snippet&channelId=${channelId}&eventType=live&type=video&maxResults=1&key=${API_KEY}`);
+                        const liveData = await liveRes.json();
+                        if (liveData.error) throw new Error('search.list (live): ' + liveData.error.message + ' (code ' + liveData.error.code + ')');
+                        liveId = liveData.items?.[0]?.id?.videoId ?? null;
+                        sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), id: liveId }));
+                    }
                 }
 
                 // 3. Latest 3 uploads (1 quota unit)
