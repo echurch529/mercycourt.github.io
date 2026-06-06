@@ -560,7 +560,7 @@
 
             try {
                 // 1. Resolve channel handle → channel ID + uploads playlist ID (1 quota unit)
-                const chRes = await fetch(`${BASE}/channels?part=id,contentDetails&forHandle=${HANDLE}&key=${API_KEY}`);
+                const chRes = await fetch(`${BASE}/channels?part=id,contentDetails&forHandle=${HANDLE}&key=${API_KEY}&origin=https://mercycourt.org`);
                 const chData = await chRes.json();
                 if (chData.error) throw new Error('channels.list: ' + chData.error.message + ' (code ' + chData.error.code + ')');
                 if (!chData.items || chData.items.length === 0) throw new Error('channels.list: No channel found for handle @' + HANDLE);
@@ -574,7 +574,7 @@
                     if (hit && Date.now() - hit.ts < CACHE_TTL) {
                         liveId = hit.id;
                     } else {
-                        const liveRes = await fetch(`${BASE}/search?part=snippet&channelId=${channelId}&eventType=live&type=video&maxResults=1&key=${API_KEY}`);
+                        const liveRes = await fetch(`${BASE}/search?part=snippet&channelId=${channelId}&eventType=live&type=video&maxResults=1&key=${API_KEY}&origin=https://mercycourt.org`);
                         const liveData = await liveRes.json();
                         if (liveData.error) throw new Error('search.list (live): ' + liveData.error.message + ' (code ' + liveData.error.code + ')');
                         liveId = liveData.items?.[0]?.id?.videoId ?? null;
@@ -583,7 +583,7 @@
                 }
 
                 // 3. Latest 3 uploads (1 quota unit)
-                const vidRes = await fetch(`${BASE}/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=3&key=${API_KEY}`);
+                const vidRes = await fetch(`${BASE}/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=3&key=${API_KEY}&origin=https://mercycourt.org`);
                 const vidData = await vidRes.json();
                 if (vidData.error) throw new Error('playlistItems.list: ' + vidData.error.message + ' (code ' + vidData.error.code + ')');
                 const recent = vidData.items;
