@@ -18,7 +18,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -144,6 +144,7 @@
     gtag('config', 'G-JWGVNRLKJL');
   </script>
   <script src="assets/js/analytics.js" defer></script>
+    <style>[id]{scroll-margin-top:80px}</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
@@ -151,7 +152,7 @@
     <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 py-4">
         <div class="container mx-auto px-6 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <a href="../index.html"><img src="../assets/images/2026/branding/mercy-court-logo-white.png" alt="RCCG Mercy Court Logo" class="h-10 w-auto"></a>
+                <a href="../index.html"><img loading="lazy" src="../assets/images/2026/branding/mercy-court-logo-white.png" alt="RCCG Mercy Court Logo" class="h-10 w-auto"></a>
             </div>
             <div class="hidden lg:flex items-center gap-6 text-xs uppercase font-medium text-white">
                 <a href="../give.html" class="bg-brand-red px-5 py-2 rounded-full hover:bg-[#C04E25] transition">Give</a>
@@ -180,7 +181,7 @@
                 <a href="../watch-live.html" class="hover:text-brand-red transition">Watch Live</a>
                 <a href="../blog.html" class="hover:text-brand-red transition">Blog</a>
             </div>
-            <button class="lg:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+            <button class="lg:hidden text-white" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); this.setAttribute('aria-label', document.getElementById('mobile-menu').classList.contains('hidden') ? 'Open menu' : 'Close menu')">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -208,7 +209,7 @@
     <!-- SECTION 1: Hero -->
     <section class="relative overflow-hidden" style="height: 100vh;">
         <div class="absolute inset-0">
-            <img src="../assets/images/2026/congregation/congregation-worship-service-01.jpg" alt="Mercy Court congregation worship" class="w-full h-full object-cover">
+            <img loading="lazy" src="../assets/images/2026/congregation/congregation-worship-service-01.jpg" alt="Mercy Court congregation worship" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20"></div>
         </div>
         <div class="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
@@ -394,7 +395,7 @@
                     <h4 class="font-bold text-lg mb-4 uppercase">Resources</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="../watch-live.html" class="text-gray-400 hover:text-white transition">Live Stream</a></li>
-                        <li><a href="https://www.facebook.com/rccgmercycourt" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition">Sermons</a></li>
+                        <li><a href="watch-live.html" class="text-gray-400 hover:text-white transition">Sermons</a></li>
                         <li><a href="../quick-links.html" class="text-gray-400 hover:text-white transition">Quick Links</a></li>
                         <li><a href="../give.html" class="text-gray-400 hover:text-white transition">Give Online</a></li>
                     </ul>

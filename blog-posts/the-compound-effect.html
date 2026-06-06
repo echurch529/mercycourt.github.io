@@ -18,7 +18,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -71,6 +71,7 @@
     gtag('config', 'G-JWGVNRLKJL');
   </script>
   <script src="../assets/js/analytics.js" defer></script>
+    <style>[id]{scroll-margin-top:80px}</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
@@ -78,7 +79,7 @@
     <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 py-4">
         <div class="container mx-auto px-6 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <a href="../index.html"><img src="../assets/images/2026/branding/mercy-court-logo-white.png" alt="RCCG Mercy Court Logo" class="h-10 w-auto"></a>
+                <a href="../index.html"><img loading="lazy" src="../assets/images/2026/branding/mercy-court-logo-white.png" alt="RCCG Mercy Court Logo" class="h-10 w-auto"></a>
             </div>
             <div class="hidden lg:flex items-center gap-6 text-xs uppercase font-medium text-white">
                 <a href="../give.html" class="bg-brand-red px-5 py-2 rounded-full hover:bg-[#C04E25] transition">Give</a>
@@ -108,7 +109,7 @@
                 <a href="../blog.html" class="hover:text-brand-red transition">Blog</a>
             </div>
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="lg:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+            <button id="mobile-menu-btn" class="lg:hidden text-white" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); this.setAttribute('aria-label', document.getElementById('mobile-menu').classList.contains('hidden') ? 'Open menu' : 'Close menu')">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -137,7 +138,7 @@
     <!-- Hero Section -->
     <section class="relative overflow-hidden" style="height: 60vh;">
         <div class="absolute inset-0">
-            <img src="../assets/images/2026/blog-photos/planting-seed-grow-step-concept-in-garden-and-sunl-2026-03-05-11-53-22-utc.jpg" alt="Planting a seed in sunlight" class="w-full h-full object-cover" style="object-position: center;">
+            <img loading="lazy" src="../assets/images/2026/blog-photos/planting-seed-grow-step-concept-in-garden-and-sunl-2026-03-05-11-53-22-utc.jpg" alt="Planting a seed in sunlight" class="w-full h-full object-cover" style="object-position: center;">
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80"></div>
         </div>
         <div class="relative z-10 h-full flex items-end justify-center pb-12 px-6">
@@ -276,7 +277,7 @@
             <div class="grid md:grid-cols-2 gap-6">
                 <a href="repositioned-for-greatness.html" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300" style="border-radius: 12px;">
                     <div style="height: 160px; overflow: hidden;">
-                        <img src="../assets/images/2026/blog-photos/adventurous-adult-man-hiking-on-top-of-a-mountain-2026-03-24-23-52-07-utc (1).jpg" alt="Repositioned for Greatness" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img loading="lazy" src="../assets/images/2026/blog-photos/adventurous-adult-man-hiking-on-top-of-a-mountain-2026-03-24-23-52-07-utc (1).jpg" alt="Repositioned for Greatness" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
                     <div class="p-5">
                         <span class="inline-block text-xs font-bold uppercase px-3 py-1 rounded-full mb-2" style="background-color: #FFF0EA; color: #E8541A;">Inspiration</span>
@@ -286,7 +287,7 @@
                 </a>
                 <a href="the-power-of-your-circle.html" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300" style="border-radius: 12px;">
                     <div style="height: 160px; overflow: hidden;">
-                        <img src="../assets/images/2026/congregation/congregation-worship-service-01.jpg" alt="The Power of Your Circle" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img loading="lazy" src="../assets/images/2026/congregation/congregation-worship-service-01.jpg" alt="The Power of Your Circle" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
                     <div class="p-5">
                         <span class="inline-block text-xs font-bold uppercase px-3 py-1 rounded-full mb-2" style="background-color: #FFF0EA; color: #E8541A;">Inspiration</span>

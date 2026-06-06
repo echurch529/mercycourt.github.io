@@ -18,7 +18,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -59,6 +59,7 @@
     gtag('config', 'G-JWGVNRLKJL');
   </script>
   <script src="assets/js/analytics.js" defer></script>
+    <style>[id]{scroll-margin-top:80px}</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
@@ -66,7 +67,7 @@
     <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 py-4">
         <div class="container mx-auto px-6 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <a href="index.html"><img src="assets/images/2026/branding/mercy-court-logo-white.png" alt="RCCG Mercy Court Logo" class="h-10 w-auto"></a>
+                <a href="index.html"><img loading="lazy" src="assets/images/2026/branding/mercy-court-logo-white.png" alt="RCCG Mercy Court Logo" class="h-10 w-auto"></a>
             </div>
             <div class="hidden lg:flex items-center gap-6 text-xs uppercase font-medium text-white">
                 <a href="give.html" class="bg-brand-red px-5 py-2 rounded-full hover:bg-[#C04E25] transition">Give</a>
@@ -96,7 +97,7 @@
                 <a href="blog.html" class="hover:text-brand-red transition">Blog</a>
             </div>
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="lg:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+            <button id="mobile-menu-btn" class="lg:hidden text-white" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); this.setAttribute('aria-label', document.getElementById('mobile-menu').classList.contains('hidden') ? 'Open menu' : 'Close menu')">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -219,7 +220,7 @@
                 <!-- Early Childhood -->
                 <div class="group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300">
                     <div class="relative h-72 overflow-hidden">
-                        <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-08.jpg" alt="Early Childhood" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img loading="lazy" src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-08.jpg" alt="Early Childhood" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 p-6">
                             <span class="inline-block bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold uppercase mb-2">6 weeks – 5 years</span>
@@ -237,7 +238,7 @@
                 <!-- Elementary -->
                 <div class="group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300">
                     <div class="relative h-72 overflow-hidden">
-                        <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-03.jpg" alt="Elementary" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img loading="lazy" src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-03.jpg" alt="Elementary" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 p-6">
                             <span class="inline-block bg-brand-red text-white px-3 py-1 rounded-full text-xs font-bold uppercase mb-2">6 – 12 years</span>
@@ -261,16 +262,16 @@
         <div class="container mx-auto max-w-6xl">
             <div class="grid grid-cols-4 gap-3">
                 <div class="rounded-xl overflow-hidden h-40 md:h-56">
-                    <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-04.jpg" alt="Children engaged in learning at Mercy Kidz classroom" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                    <img loading="lazy" src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-04.jpg" alt="Children engaged in learning at Mercy Kidz classroom" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
                 <div class="rounded-xl overflow-hidden h-40 md:h-56">
-                    <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-06.jpg" alt="Mercy Kidz children participating in a Bible lesson" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                    <img loading="lazy" src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-06.jpg" alt="Mercy Kidz children participating in a Bible lesson" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
                 <div class="rounded-xl overflow-hidden h-40 md:h-56">
-                    <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-11.jpg" alt="Kids enjoying activities at God's Heritage children's ministry" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                    <img loading="lazy" src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-11.jpg" alt="Kids enjoying activities at God's Heritage children's ministry" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
                 <div class="rounded-xl overflow-hidden h-40 md:h-56">
-                    <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-14.jpg" alt="Young children worshipping at Mercy Kidz, RCCG Mercy Court" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                    <img loading="lazy" src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-14.jpg" alt="Young children worshipping at Mercy Kidz, RCCG Mercy Court" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                 </div>
             </div>
         </div>
@@ -338,16 +339,16 @@
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div class="rounded-xl overflow-hidden h-48">
-                        <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-05.jpg" alt="Mercy Kidz children learning together in Sunday class" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                        <img loading="lazy" src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-05.jpg" alt="Mercy Kidz children learning together in Sunday class" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                     </div>
                     <div class="rounded-xl overflow-hidden h-48 mt-6">
-                        <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-09.jpg" alt="Children at God's Heritage ministry discovering faith" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                        <img loading="lazy" src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-09.jpg" alt="Children at God's Heritage ministry discovering faith" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                     </div>
                     <div class="rounded-xl overflow-hidden h-48">
-                        <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-12.jpg" alt="Mercy Kidz classroom session at RCCG Mercy Court" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                        <img loading="lazy" src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-12.jpg" alt="Mercy Kidz classroom session at RCCG Mercy Court" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                     </div>
                     <div class="rounded-xl overflow-hidden h-48 mt-6">
-                        <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-16.jpg" alt="Kids enjoying creative learning activities at Mercy Kidz" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                        <img loading="lazy" src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-16.jpg" alt="Kids enjoying creative learning activities at Mercy Kidz" class="w-full h-full object-cover hover:scale-105 transition duration-300">
                     </div>
                 </div>
             </div>
@@ -521,7 +522,7 @@
                     <h4 class="font-bold text-lg mb-4 uppercase">Resources</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="watch-live.html" class="text-gray-400 hover:text-white transition">Live Stream</a></li>
-                        <li><a href="https://www.facebook.com/rccgmercycourt" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition">Sermons</a></li>
+                        <li><a href="watch-live.html" class="text-gray-400 hover:text-white transition">Sermons</a></li>
                         <li><a href="quick-links.html" class="text-gray-400 hover:text-white transition">Quick Links</a></li>
                         <li><button onclick="openGivingModal()" class="text-gray-400 hover:text-white transition cursor-pointer">Give Online</button></li>
                     </ul>

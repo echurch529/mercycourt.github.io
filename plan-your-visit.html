@@ -18,7 +18,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -135,6 +135,7 @@
     gtag('config', 'G-JWGVNRLKJL');
   </script>
   <script src="assets/js/analytics.js" defer></script>
+    <style>[id]{scroll-margin-top:80px}</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
@@ -142,7 +143,7 @@
     <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 py-4">
         <div class="container mx-auto px-6 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <a href="index.html"><img src="assets/images/2026/branding/mercy-court-logo-white.png" alt="RCCG Mercy Court Logo" class="h-10 w-auto"></a>
+                <a href="index.html"><img loading="lazy" src="assets/images/2026/branding/mercy-court-logo-white.png" alt="RCCG Mercy Court Logo" class="h-10 w-auto"></a>
             </div>
             <div class="hidden lg:flex items-center gap-6 text-xs uppercase font-medium text-white">
                 <a href="give.html" class="bg-brand-red px-5 py-2 rounded-full hover:bg-[#C04E25] transition">Give</a>
@@ -171,7 +172,7 @@
                 <a href="quick-links.html" class="hover:text-brand-red transition">Quick Links</a>
                 <a href="blog.html" class="hover:text-brand-red transition">Blog</a>
             </div>
-            <button class="lg:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+            <button class="lg:hidden text-white" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); this.setAttribute('aria-label', document.getElementById('mobile-menu').classList.contains('hidden') ? 'Open menu' : 'Close menu')">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -199,7 +200,7 @@
     <!-- SECTION 1: Hero Banner -->
     <section class="relative overflow-hidden" style="height: 60vh;">
         <div class="absolute inset-0">
-            <img src="assets/images/2026/congregation/congregation-worship-service-02.jpg" alt="Mercy Court congregation worship" class="w-full h-full object-cover" style="object-position: center center;">
+            <img loading="lazy" src="assets/images/2026/congregation/congregation-worship-service-02.jpg" alt="Mercy Court congregation worship" class="w-full h-full object-cover" style="object-position: center center;">
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80"></div>
         </div>
         <div class="relative z-10 h-full flex items-center justify-center px-6">
@@ -410,8 +411,8 @@
         <div class="container mx-auto max-w-7xl">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="grid grid-cols-2 gap-4">
-                    <img src="assets/images/2026/congregation/DSC_5609-copy.jpg" alt="Church family worshipping" class="rounded-xl object-cover w-full h-64">
-                    <img src="assets/images/2026/congregation/congregation-worship-service-06.jpg" alt="Church family seated" class="rounded-xl object-cover w-full h-64 mt-8">
+                    <img loading="lazy" src="assets/images/2026/congregation/DSC_5609-copy.jpg" alt="Church family worshipping" class="rounded-xl object-cover w-full h-64">
+                    <img loading="lazy" src="assets/images/2026/congregation/congregation-worship-service-06.jpg" alt="Church family seated" class="rounded-xl object-cover w-full h-64 mt-8">
                 </div>
                 <div>
                     <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Families</span>
@@ -451,10 +452,10 @@
                     </a>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
-                    <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-03.jpg" alt="Children's ministry class" class="rounded-xl object-cover w-full h-52">
-                    <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-07.jpg" alt="Children's ministry class" class="rounded-xl object-cover w-full h-52 mt-8">
-                    <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-10.jpg" alt="Children's ministry class" class="rounded-xl object-cover w-full h-52">
-                    <img src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-14.jpg" alt="Children's ministry class" class="rounded-xl object-cover w-full h-52 mt-8">
+                    <img loading="lazy" src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-03.jpg" alt="Children's ministry class" class="rounded-xl object-cover w-full h-52">
+                    <img loading="lazy" src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-07.jpg" alt="Children's ministry class" class="rounded-xl object-cover w-full h-52 mt-8">
+                    <img loading="lazy" src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-10.jpg" alt="Children's ministry class" class="rounded-xl object-cover w-full h-52">
+                    <img loading="lazy" src="assets/images/2026/mercy-kidz/mercy-kidz-classroom-14.jpg" alt="Children's ministry class" class="rounded-xl object-cover w-full h-52 mt-8">
                 </div>
             </div>
         </div>
@@ -465,10 +466,10 @@
         <div class="container mx-auto max-w-7xl">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="grid grid-cols-2 gap-4">
-                    <img src="assets/images/2026/congregation/congregation-worship-service-08.jpg" alt="Youth ministry" class="rounded-xl object-cover w-full h-52">
-                    <img src="assets/images/2026/congregation/DSC_7284-copy.jpg" alt="Youth ministry" class="rounded-xl object-cover w-full h-52 mt-8" style="object-position: center top;">
-                    <img src="assets/images/2026/the-new-mc/the-new-mc-team-welcome-signs.jpg" alt="Youth ministry" class="rounded-xl object-cover w-full h-52">
-                    <img src="assets/images/2026/the-new-mc/the-new-mc-team-preparing-refreshments.jpg" alt="Youth ministry" class="rounded-xl object-cover w-full h-52 mt-8">
+                    <img loading="lazy" src="assets/images/2026/congregation/congregation-worship-service-08.jpg" alt="Youth ministry" class="rounded-xl object-cover w-full h-52">
+                    <img loading="lazy" src="assets/images/2026/congregation/DSC_7284-copy.jpg" alt="Youth ministry" class="rounded-xl object-cover w-full h-52 mt-8" style="object-position: center top;">
+                    <img loading="lazy" src="assets/images/2026/the-new-mc/the-new-mc-team-welcome-signs.jpg" alt="Youth ministry" class="rounded-xl object-cover w-full h-52">
+                    <img loading="lazy" src="assets/images/2026/the-new-mc/the-new-mc-team-preparing-refreshments.jpg" alt="Youth ministry" class="rounded-xl object-cover w-full h-52 mt-8">
                 </div>
                 <div>
                     <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Youth</span>
@@ -620,7 +621,7 @@
                     <h4 class="font-bold text-lg mb-4 uppercase">Resources</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="watch-live.html" class="text-gray-400 hover:text-white transition">Live Stream</a></li>
-                        <li><a href="https://www.facebook.com/rccgmercycourt" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition">Sermons</a></li>
+                        <li><a href="watch-live.html" class="text-gray-400 hover:text-white transition">Sermons</a></li>
                         <li><a href="quick-links.html" class="text-gray-400 hover:text-white transition">Quick Links</a></li>
                         <li><button onclick="openGivingModal()" class="text-gray-400 hover:text-white transition cursor-pointer">Give Online</button></li>
                     </ul>

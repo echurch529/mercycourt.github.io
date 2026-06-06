@@ -18,7 +18,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -59,6 +59,7 @@
     gtag('config', 'G-JWGVNRLKJL');
   </script>
   <script src="assets/js/analytics.js" defer></script>
+    <style>[id]{scroll-margin-top:80px}</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
@@ -66,7 +67,7 @@
     <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 py-4">
         <div class="container mx-auto px-6 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <a href="index.html"><img src="assets/images/2026/branding/mercy-court-logo-white.png" alt="RCCG Mercy Court Logo" class="h-10 w-auto"></a>
+                <a href="index.html"><img loading="lazy" src="assets/images/2026/branding/mercy-court-logo-white.png" alt="RCCG Mercy Court Logo" class="h-10 w-auto"></a>
             </div>
             <div class="hidden lg:flex items-center gap-6 text-xs uppercase font-medium text-white">
                 <a href="give.html" class="bg-brand-red px-5 py-2 rounded-full hover:bg-[#C04E25] transition">Give</a>
@@ -96,7 +97,7 @@
                 <a href="blog.html" class="hover:text-brand-red transition">Blog</a>
             </div>
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="lg:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+            <button id="mobile-menu-btn" class="lg:hidden text-white" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); this.setAttribute('aria-label', document.getElementById('mobile-menu').classList.contains('hidden') ? 'Open menu' : 'Close menu')">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -157,7 +158,7 @@
                     </p>
                 </div>
                 <div class="relative rounded-2xl overflow-hidden shadow-2xl h-[480px]">
-                    <img src="assets/images/2026/community-outreach/outreach-vegetable-giveaway-team.jpg" alt="Mercy Court volunteers serving the community" class="w-full h-full object-cover">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/outreach-vegetable-giveaway-team.jpg" alt="Mercy Court volunteers serving the community" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
@@ -306,7 +307,7 @@
         <div class="container mx-auto max-w-7xl">
             <div class="grid lg:grid-cols-2 items-stretch">
                 <div class="relative min-h-[500px] lg:min-h-[600px]">
-                    <img src="assets/images/2026/community-outreach/food-distribution-02.jpg" alt="Mercy Court food pantry distribution" class="absolute inset-0 w-full h-full object-cover">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/food-distribution-02.jpg" alt="Mercy Court food pantry distribution" class="absolute inset-0 w-full h-full object-cover">
                 </div>
                 <div class="py-16 px-8 lg:px-14 flex flex-col justify-center">
                     <p class="text-[#E8541A] text-sm font-bold uppercase tracking-widest mb-3">FOOD PANTRY</p>
@@ -381,47 +382,47 @@
             <div id="gallery-track" style="display: flex; gap: 12px; width: max-content; will-change: transform;">
                 <!-- Set 1 -->
                 <div class="gallery-item" role="button" aria-label="View photo: Food distribution volunteers" onclick="openLightbox('assets/images/2026/community-outreach/outreach-team-food-distribution-01.jpg','Food distribution volunteers')">
-                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-01.jpg" alt="Food distribution volunteers">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/outreach-team-food-distribution-01.jpg" alt="Food distribution volunteers">
                 </div>
                 <div class="gallery-item" role="button" aria-label="View photo: Food pantry team at work" onclick="openLightbox('assets/images/2026/community-outreach/outreach-team-food-distribution-03.jpg','Food pantry team at work')">
-                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-03.jpg" alt="Food pantry team at work">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/outreach-team-food-distribution-03.jpg" alt="Food pantry team at work">
                 </div>
                 <div class="gallery-item" role="button" aria-label="View photo: Food delivery truck arriving" onclick="openLightbox('assets/images/2026/community-outreach/outreach-truck-arrival-02.jpg','Food delivery truck arriving')">
-                    <img src="assets/images/2026/community-outreach/outreach-truck-arrival-02.jpg" alt="Food delivery truck arriving">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/outreach-truck-arrival-02.jpg" alt="Food delivery truck arriving">
                 </div>
                 <div class="gallery-item" role="button" aria-label="View photo: Community gathering" onclick="openLightbox('assets/images/2026/community-outreach/outreach-community-event-04.jpg','Community gathering')">
-                    <img src="assets/images/2026/community-outreach/outreach-community-event-04.jpg" alt="Community gathering">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/outreach-community-event-04.jpg" alt="Community gathering">
                 </div>
                 <div class="gallery-item" role="button" aria-label="View photo: Community service event" onclick="openLightbox('assets/images/2026/community-outreach/community-event-service-02.jpg','Community service event')">
-                    <img src="assets/images/2026/community-outreach/community-event-service-02.jpg" alt="Community service event">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/community-event-service-02.jpg" alt="Community service event">
                 </div>
                 <div class="gallery-item" role="button" aria-label="View photo: Volunteers distributing groceries" onclick="openLightbox('assets/images/2026/community-outreach/outreach-team-food-distribution-04.jpg','Volunteers distributing groceries')">
-                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-04.jpg" alt="Volunteers distributing groceries">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/outreach-team-food-distribution-04.jpg" alt="Volunteers distributing groceries">
                 </div>
                 <div class="gallery-item" role="button" aria-label="View photo: Outreach truck commissioning ceremony" onclick="openLightbox('assets/images/2026/community-outreach/outreach-truck-commissioning.jpg','Outreach truck commissioning ceremony')">
-                    <img src="assets/images/2026/community-outreach/outreach-truck-commissioning.jpg" alt="Outreach truck commissioning ceremony">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/outreach-truck-commissioning.jpg" alt="Outreach truck commissioning ceremony">
                 </div>
                 <!-- Set 2 — duplicate for seamless infinite loop -->
                 <div class="gallery-item" role="button" aria-label="View photo: Food distribution volunteers" onclick="openLightbox('assets/images/2026/community-outreach/outreach-team-food-distribution-01.jpg','Food distribution volunteers')">
-                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-01.jpg" alt="Food distribution volunteers">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/outreach-team-food-distribution-01.jpg" alt="Food distribution volunteers">
                 </div>
                 <div class="gallery-item" role="button" aria-label="View photo: Food pantry team at work" onclick="openLightbox('assets/images/2026/community-outreach/outreach-team-food-distribution-03.jpg','Food pantry team at work')">
-                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-03.jpg" alt="Food pantry team at work">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/outreach-team-food-distribution-03.jpg" alt="Food pantry team at work">
                 </div>
                 <div class="gallery-item" role="button" aria-label="View photo: Food delivery truck arriving" onclick="openLightbox('assets/images/2026/community-outreach/outreach-truck-arrival-02.jpg','Food delivery truck arriving')">
-                    <img src="assets/images/2026/community-outreach/outreach-truck-arrival-02.jpg" alt="Food delivery truck arriving">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/outreach-truck-arrival-02.jpg" alt="Food delivery truck arriving">
                 </div>
                 <div class="gallery-item" role="button" aria-label="View photo: Community gathering" onclick="openLightbox('assets/images/2026/community-outreach/outreach-community-event-04.jpg','Community gathering')">
-                    <img src="assets/images/2026/community-outreach/outreach-community-event-04.jpg" alt="Community gathering">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/outreach-community-event-04.jpg" alt="Community gathering">
                 </div>
                 <div class="gallery-item" role="button" aria-label="View photo: Community service event" onclick="openLightbox('assets/images/2026/community-outreach/community-event-service-02.jpg','Community service event')">
-                    <img src="assets/images/2026/community-outreach/community-event-service-02.jpg" alt="Community service event">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/community-event-service-02.jpg" alt="Community service event">
                 </div>
                 <div class="gallery-item" role="button" aria-label="View photo: Volunteers distributing groceries" onclick="openLightbox('assets/images/2026/community-outreach/outreach-team-food-distribution-04.jpg','Volunteers distributing groceries')">
-                    <img src="assets/images/2026/community-outreach/outreach-team-food-distribution-04.jpg" alt="Volunteers distributing groceries">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/outreach-team-food-distribution-04.jpg" alt="Volunteers distributing groceries">
                 </div>
                 <div class="gallery-item" role="button" aria-label="View photo: Outreach truck commissioning ceremony" onclick="openLightbox('assets/images/2026/community-outreach/outreach-truck-commissioning.jpg','Outreach truck commissioning ceremony')">
-                    <img src="assets/images/2026/community-outreach/outreach-truck-commissioning.jpg" alt="Outreach truck commissioning ceremony">
+                    <img loading="lazy" src="assets/images/2026/community-outreach/outreach-truck-commissioning.jpg" alt="Outreach truck commissioning ceremony">
                 </div>
             </div>
             </div>
@@ -482,7 +483,7 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
                     <div class="relative h-48 overflow-hidden">
-                        <img src="assets/images/2026/community-outreach/outreach-community-event-02.jpg" alt="Community outreach" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img loading="lazy" src="assets/images/2026/community-outreach/outreach-community-event-02.jpg" alt="Community outreach" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center gap-3 mb-3">
@@ -747,7 +748,7 @@
                     <h4 class="font-bold text-lg mb-4 uppercase">Resources</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="watch-live.html" class="text-gray-400 hover:text-white transition">Live Stream</a></li>
-                        <li><a href="https://www.facebook.com/rccgmercycourt" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition">Sermons</a></li>
+                        <li><a href="watch-live.html" class="text-gray-400 hover:text-white transition">Sermons</a></li>
                         <li><a href="quick-links.html" class="text-gray-400 hover:text-white transition">Quick Links</a></li>
                         <li><button onclick="openGivingModal()" class="text-gray-400 hover:text-white transition cursor-pointer">Give Online</button></li>
                     </ul>
@@ -849,7 +850,7 @@
     <!-- Gallery Lightbox -->
     <div id="gallery-lightbox" onclick="closeLightbox()" style="display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.92); align-items: center; justify-content: center;">
         <button onclick="event.stopPropagation(); closeLightbox()" aria-label="Close lightbox" style="position: absolute; top: 20px; right: 24px; background: rgba(255,255,255,0.15); border: none; border-radius: 50%; width: 48px; height: 48px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; line-height: 1; backdrop-filter: blur(4px);">&#x2715;</button>
-        <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" style="max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 10px; box-shadow: 0 30px 80px rgba(0,0,0,0.8); display: block;">
+        <img loading="lazy" id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" style="max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 10px; box-shadow: 0 30px 80px rgba(0,0,0,0.8); display: block;">
     </div>
 
     <script>

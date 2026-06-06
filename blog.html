@@ -18,7 +18,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -60,6 +60,7 @@
     gtag('config', 'G-JWGVNRLKJL');
   </script>
   <script src="assets/js/analytics.js" defer></script>
+    <style>[id]{scroll-margin-top:80px}</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
@@ -67,7 +68,7 @@
     <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 py-4">
         <div class="container mx-auto px-6 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <a href="index.html"><img src="assets/images/2026/branding/mercy-court-logo-white.png" alt="RCCG Mercy Court Logo" class="h-10 w-auto"></a>
+                <a href="index.html"><img loading="lazy" src="assets/images/2026/branding/mercy-court-logo-white.png" alt="RCCG Mercy Court Logo" class="h-10 w-auto"></a>
             </div>
             <div class="hidden lg:flex items-center gap-6 text-xs uppercase font-medium text-white">
                 <a href="give.html" class="bg-brand-red px-5 py-2 rounded-full hover:bg-[#C04E25] transition">Give</a>
@@ -97,7 +98,7 @@
                 <a href="blog.html" class="hover:text-brand-red transition">Blog</a>
             </div>
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="lg:hidden text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+            <button id="mobile-menu-btn" class="lg:hidden text-white" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); this.setAttribute('aria-label', document.getElementById('mobile-menu').classList.contains('hidden') ? 'Open menu' : 'Close menu')">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -126,7 +127,7 @@
     <!-- Hero Banner -->
     <section class="relative h-[65vh] overflow-hidden">
         <div class="absolute inset-0">
-            <img src="assets/images/2026/community-outreach/outreach-community-event-02.jpg" alt="Mercy Court Community" class="w-full h-full object-cover" style="object-position: center 20%;">
+            <img loading="lazy" src="assets/images/2026/community-outreach/outreach-community-event-02.jpg" alt="Mercy Court Community" class="w-full h-full object-cover" style="object-position: center 20%;">
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
         </div>
         <div class="relative z-10 h-full flex items-center justify-center text-center px-6">
@@ -178,7 +179,7 @@
             <div class="grid md:grid-cols-2 gap-0 rounded-xl overflow-hidden shadow-lg">
                 <div class="relative h-[350px] md:h-[420px]">
                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #1a1a1a; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                        <img src="assets/images/2026/Be.lievi.ng/Site%20banner%20_%201920_600.png" alt="Mercy Court launches be.lievi.ng Bible Study App" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        <img loading="lazy" src="assets/images/2026/Be.lievi.ng/Site%20banner%20_%201920_600.png" alt="Mercy Court launches be.lievi.ng Bible Study App" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                     </div>
                     <div class="absolute top-4 left-4">
                         <span class="bg-brand-red text-white px-4 py-1 rounded-full text-xs font-bold uppercase">Featured</span>
@@ -211,7 +212,7 @@
                 <!-- The Compound Effect -->
                 <article data-category="inspiration" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
                     <div class="relative overflow-hidden" style="height: 220px;">
-                        <img src="assets/images/2026/blog-photos/planting-seed-grow-step-concept-in-garden-and-sunl-2026-03-05-11-53-22-utc.jpg" alt="The Compound Effect" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;" class="group-hover:scale-105 transition duration-500">
+                        <img loading="lazy" src="assets/images/2026/blog-photos/planting-seed-grow-step-concept-in-garden-and-sunl-2026-03-05-11-53-22-utc.jpg" alt="The Compound Effect" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;" class="group-hover:scale-105 transition duration-500">
                         <div class="absolute top-4 left-4">
                             <span class="bg-brand-red text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">Inspiration</span>
                         </div>
@@ -231,7 +232,7 @@
                 <!-- Repositioned for Greatness -->
                 <article data-category="inspiration" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
                     <div class="relative overflow-hidden" style="height: 220px;">
-                        <img src="assets/images/2026/blog-photos/adventurous-adult-man-hiking-on-top-of-a-mountain-2026-03-24-23-52-07-utc (1).jpg" alt="Repositioned for Greatness" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;" class="group-hover:scale-105 transition duration-500">
+                        <img loading="lazy" src="assets/images/2026/blog-photos/adventurous-adult-man-hiking-on-top-of-a-mountain-2026-03-24-23-52-07-utc (1).jpg" alt="Repositioned for Greatness" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;" class="group-hover:scale-105 transition duration-500">
                         <div class="absolute top-4 left-4">
                             <span class="bg-brand-red text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">Inspiration</span>
                         </div>
@@ -251,7 +252,7 @@
                 <!-- The Power of Your Circle -->
                 <article data-category="inspiration" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
                     <div class="relative overflow-hidden" style="height: 220px;">
-                        <img src="assets/images/2026/blog-photos/friends-laughing-together-in-an-urban-setting-2026-01-09-00-29-59-utc.jpg" alt="The Power of Your Circle" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;" class="group-hover:scale-105 transition duration-500">
+                        <img loading="lazy" src="assets/images/2026/blog-photos/friends-laughing-together-in-an-urban-setting-2026-01-09-00-29-59-utc.jpg" alt="The Power of Your Circle" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;" class="group-hover:scale-105 transition duration-500">
                         <div class="absolute top-4 left-4">
                             <span class="bg-brand-red text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">Inspiration</span>
                         </div>
