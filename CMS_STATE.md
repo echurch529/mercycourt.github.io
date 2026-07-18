@@ -13,7 +13,7 @@
 | 2 — Cloudflare Pages build settings | ✅ Done | Build confirmed live: 48s, NODE_VERSION 18; clean URLs verified in DevTools (0 .html hrefs) |
 | 3 — Decap CMS admin panel | ✅ Done | `admin/index.html` + `admin/config.yml` created |
 | 4 — GitHub OAuth Worker | ✅ Done | Live at `oauth-mercycourt.echurch.workers.dev`; incognito login confirmed; Decap dashboard loads with 4 posts |
-| 5 — Access control | ❌ Pending | GitHub branch protection + Cloudflare Zero Trust |
+| 5 — Access control | 🔶 Partial | Part A (branch protection) ✅ verified 2026-07-18; Part B (Zero Trust) ⏳ awaiting email list |
 | 6 — Delete old HTML blog posts | ❌ Pending | After verifying live site |
 
 ---
@@ -196,10 +196,31 @@ CMS dashboard loads — editor is authenticated
 
 ---
 
-## Phase 5 — Access Control (PENDING)
+## Phase 5 — Access Control
 
-- GitHub: Settings → Branches → rule on `main`: require PR + 1 approval, dismiss stale. Do NOT include administrators.
-- Cloudflare Zero Trust → Access → Applications → Self-hosted: `mercycourt.org/admin/*`, allow specific emails, 24h session, one-time PIN auth.
+### Part A — GitHub Branch Protection (✅ DONE — 2026-07-18)
+
+Branch ruleset on `main`:
+- Require PR before merging: ✅
+- Required approvals: 1
+- Dismiss stale approvals on new commits: ✅
+- Include administrators: ❌ (admins retain bypass — enables admin self-publish via Decap)
+
+Verified full loop: Decap draft → Ready to Review → PR created → admin approve/bypass-merge → Cloudflare auto-deploy → live post.
+
+Editor workflow: ends at "Set status → Ready to Review." Admin merges on GitHub. Editors clicking Publish will be silently blocked by GitHub — tell editors not to use the Publish button.
+
+### Part B — Cloudflare Zero Trust on `/admin/*` (⏳ AWAITING EMAIL LIST)
+
+Steps (to run once email list is confirmed):
+1. Cloudflare dashboard → **Zero Trust** → **Access** → **Applications** → **Add an application** → **Self-hosted**
+2. Application name: `Mercy Court CMS`
+3. Domain: `mercycourt.org`, Path: `/admin`
+4. Policy: **Allow**, rule type: **Emails**, value: (confirmed list)
+5. Session duration: `24 hours`
+6. Authentication method: **One-time PIN**
+
+After enabling: flow becomes `visit /admin/` → Cloudflare email PIN challenge → GitHub OAuth inside Decap.
 
 ---
 
