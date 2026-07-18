@@ -13,37 +13,54 @@ A modern, responsive static website for RCCG Mercy Court (Redeemed Christian Chu
 - **HTML5** — static pages, no framework or build step required
 - **Tailwind CSS** — via CDN with custom theme config inline per page
 - **Google Fonts** — Anton (headings), Lato (body)
+- **Google Analytics 4** — tracking ID `G-JWGVNRLKJL`, loaded via `assets/js/analytics.js`
+- **Meta Pixel** — Pixel ID `1027268596866855`, installed in `<head>` on all pages
 
 ## Project Structure
 
 ```
 mercycourt.github.io/
 ├── index.html                # Homepage
-├── who-we-are.html           # About / mission / pastor bio
+├── about-us.html             # About / mission / pastor bio
 ├── contact.html              # Contact form and location
+├── plan-your-visit.html      # First-time visitor guide
 ├── ministries.html           # Ministries overview
-├── mercy-kidz.html           # Children's ministry
+├── mercy-kidz.html           # God's Heritage children's ministry
+├── tehillah-voices.html      # Tehillah Voices choir ministry
 ├── the-new-mc.html           # Youth ministry
 ├── community-impact.html     # Outreach
 ├── watch-live.html           # YouTube livestream embed
 ├── blog.html                 # News and updates
+├── one-bring-one.html        # Events / One Bring One initiative
 ├── give.html                 # Donations
-├── quick-links.html          # Navigation hub (23 links)
 ├── CNAME                     # mercycourt.org (GitHub Pages custom domain)
-├── sitemap.xml               # All 11 pages for search indexing
+├── sitemap.xml               # Pages for search indexing
 ├── robots.txt                # Allows all crawlers
 ├── assets/
+│   ├── js/
+│   │   └── analytics.js          # GA4 helper
+│   ├── blog/                     # Blog post assets
 │   └── images/
 │       └── 2026/
 │           ├── branding/         # Logos (black, orange, white PNG)
-│           ├── leadership/       # Pastor photos (PJ-and-PA.jpeg, etc.)
+│           ├── leadership/       # Pastor photos
 │           ├── congregation/     # Service photography
 │           ├── community-outreach/ # Outreach event photos
 │           ├── mercy-kidz/       # Children's ministry photos
+│           ├── tehillah-voices/  # Choir ministry photos
 │           ├── the-new-mc/       # Youth ministry team photos
 │           ├── service-slides/   # In-service screen slides
+│           ├── blog-photos/      # Blog post images
+│           ├── flyers/           # Event flyers
+│           │   └── anniversary/
+│           ├── Be.lievi.ng/      # Be.lievi.ng app assets
 │           └── miscellaneous/    # Stock / generic images
-└── pages/                    # Original source files (not served)
+├── blog-posts/               # Individual blog post pages
+│   ├── repositioned-for-greatness.html
+│   ├── the-compound-effect.html
+│   ├── the-power-of-your-circle.html
+│   └── mercy-court-launches-believing-bible-study-app.html
+└── pages/                    # Legacy source files (not actively maintained)
 ```
 
 ## Local Preview
@@ -87,16 +104,18 @@ The site is deployed via GitHub Pages with a custom domain via Cloudflare.
 | Page             | File                    | Description                                    |
 |------------------|-------------------------|------------------------------------------------|
 | Home             | `index.html`            | Hero, service times, leadership, giving CTA    |
-| About            | `who-we-are.html`       | Mission, pastor bio, testimonials              |
-| Ministries       | `ministries.html`       | Worship, children's, outreach                  |
-| Mercy Kidz       | `mercy-kidz.html`       | Children's ministry detail                     |
+| About            | `about-us.html`         | Mission, pastor bio, testimonials              |
+| Plan Your Visit  | `plan-your-visit.html`  | First-time visitor information                 |
+| Ministries       | `ministries.html`       | Ministries overview                            |
+| God's Heritage   | `mercy-kidz.html`       | Children's ministry detail                     |
+| Tehillah Voices  | `tehillah-voices.html`  | Choir ministry detail                          |
 | The New MC       | `the-new-mc.html`       | Youth ministry detail                          |
 | Community Impact | `community-impact.html` | Outreach initiatives                           |
 | Watch Live       | `watch-live.html`       | YouTube livestream embed + channel link        |
 | Blog             | `blog.html`             | News and updates                               |
+| Events           | `one-bring-one.html`    | One Bring One and church events                |
 | Give             | `give.html`             | Donation options                               |
 | Contact          | `contact.html`          | mailto form, map, social links                 |
-| Quick Links      | `quick-links.html`      | Navigation hub (23 links)                      |
 
 ## UI Conventions
 
@@ -108,15 +127,15 @@ The site is deployed via GitHub Pages with a custom domain via Cloudflare.
 
 ## Navigation Structure
 
-| Nav Item | Dropdown |
-|----------|----------|
-| Home | — |
-| About Us | Contact, Quick Links |
-| Ministries | The New MC, God's Heritage |
-| Community Impact | — |
-| Watch Live | — |
-| Blog | — |
-| Give | — (button) |
+| Nav Item         | Dropdown                         |
+|------------------|----------------------------------|
+| Home             | —                                |
+| About Us         | Contact, Events                  |
+| Ministries       | Tehillah Voices, God's Heritage  |
+| Community Impact | —                                |
+| Watch Live       | —                                |
+| Blog             | —                                |
+| Give             | — (button)                       |
 
 ## Remaining Placeholders
 
