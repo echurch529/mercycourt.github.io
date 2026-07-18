@@ -12,7 +12,7 @@
 | 1 — Eleventy build | ✅ Done | `npm run build` → `_site/` clean, 18 files |
 | 2 — Cloudflare Pages build settings | ✅ Done | Build confirmed live: 48s, NODE_VERSION 18; clean URLs verified in DevTools (0 .html hrefs) |
 | 3 — Decap CMS admin panel | ✅ Done | `admin/index.html` + `admin/config.yml` created |
-| 4 — GitHub OAuth Worker | ⏳ User action | Worker script ready at `cloudflare-worker/oauth-worker.js` — deploy steps below |
+| 4 — GitHub OAuth Worker | ✅ Done | Live at `oauth-mercycourt.echurch.workers.dev`; incognito login confirmed; Decap dashboard loads with 4 posts |
 | 5 — Access control | ❌ Pending | GitHub branch protection + Cloudflare Zero Trust |
 | 6 — Delete old HTML blog posts | ❌ Pending | After verifying live site |
 
@@ -96,7 +96,7 @@ backend:
   name: github
   repo: echurch529/mercycourt.github.io
   branch: main
-  base_url: https://oauth.mercycourt.workers.dev
+  base_url: https://oauth-mercycourt.echurch.workers.dev
 
 publish_mode: editorial_workflow
 media_folder: "assets/images/cms-uploads"
@@ -107,7 +107,7 @@ Collection fields: `title, seo_title, seo_description, date (datetime, YYYY-MM-D
 
 ---
 
-## Phase 4 — OAuth Worker (⏳ USER ACTION)
+## Phase 4 — OAuth Worker (✅ DONE)
 
 Worker script: `cloudflare-worker/oauth-worker.js`
 
@@ -116,14 +116,14 @@ Worker script: `cloudflare-worker/oauth-worker.js`
 2. Fill in:
    - **Application name:** `RCCG Mercy Court CMS`
    - **Homepage URL:** `https://mercycourt.org`
-   - **Authorization callback URL:** `https://oauth.mercycourt.workers.dev/callback`
+   - **Authorization callback URL:** `https://oauth-mercycourt.echurch.workers.dev/callback`
 3. Click **Register application**
 4. On the next screen: copy the **Client ID** (visible immediately)
 5. Click **Generate a new client secret** → copy the secret **immediately** (it is shown only once)
 
 ### Step B — Create Cloudflare Worker
 1. Cloudflare dashboard → **Workers & Pages** → **Create** → **Create Worker**
-2. Set name to exactly `oauth-mercycourt` (this sets the URL to `oauth.mercycourt.workers.dev`)
+2. Set name to exactly `oauth-mercycourt` (this sets the URL to `oauth-mercycourt.echurch.workers.dev`)
 3. Click **Deploy** (ignore the default hello-world code — you'll replace it next)
 4. On the success screen, click **Edit code**
 5. Select all the default code and replace it with the full contents of `cloudflare-worker/oauth-worker.js`
@@ -140,7 +140,7 @@ Click **Save and deploy** after adding both.
 
 ### Step D — Validate
 **Worker isolation test (before touching /admin/):**
-1. Visit `https://oauth.mercycourt.workers.dev/auth` in a browser
+1. Visit `https://oauth-mercycourt.echurch.workers.dev/auth` in a browser
 2. Expected: immediate redirect to `https://github.com/login/oauth/authorize?client_id=...`
 3. If you see a GitHub login/authorize page, the worker is working
 
@@ -149,7 +149,7 @@ Click **Save and deploy** after adding both.
 2. Decap CMS loads (no GitHub auth yet) — you see a "Login with GitHub" button
 3. Click the button → a **popup window** opens (not a full redirect)
 4. The popup redirects to GitHub → you authorize `RCCG Mercy Court CMS`
-5. GitHub redirects popup to `https://oauth.mercycourt.workers.dev/callback?code=...`
+5. GitHub redirects popup to `https://oauth-mercycourt.echurch.workers.dev/callback?code=...`
 6. The worker exchanges the code for a token and renders a small HTML page
 7. The popup closes automatically
 8. The main Decap tab is now logged in — you see the CMS dashboard with the Posts collection
@@ -173,13 +173,13 @@ User visits /admin/
 Decap CMS loads (static HTML/JS — no server)
       │
       ▼ (clicks "Login with GitHub")
-Popup opens → GET oauth.mercycourt.workers.dev/auth
+Popup opens → GET oauth-mercycourt.echurch.workers.dev/auth
       │
       ▼ (302 redirect)
 github.com/login/oauth/authorize?client_id=...
       │
       ▼ (user authorizes)
-GET oauth.mercycourt.workers.dev/callback?code=abc123
+GET oauth-mercycourt.echurch.workers.dev/callback?code=abc123
       │
       ▼ (worker POSTs to GitHub)
 github.com/login/oauth/access_token → returns token
