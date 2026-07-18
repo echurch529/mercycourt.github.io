@@ -10,7 +10,7 @@
 |-------|--------|-------|
 | 0 — Backup | ✅ Done | User has backup ZIP |
 | 1 — Eleventy build | ✅ Done | `npm run build` → `_site/` clean, 18 files |
-| 2 — Cloudflare Pages build settings | ⏳ User action | See instructions below |
+| 2 — Cloudflare Pages build settings | ✅ Done | Build confirmed live: 48s, NODE_VERSION 18; clean URLs verified in DevTools (0 .html hrefs) |
 | 3 — Decap CMS admin panel | ✅ Done | `admin/index.html` + `admin/config.yml` created |
 | 4 — GitHub OAuth Worker | ⏳ User action | Worker script ready at `cloudflare-worker/oauth-worker.js` — deploy steps below |
 | 5 — Access control | ❌ Pending | GitHub branch protection + Cloudflare Zero Trust |
@@ -71,14 +71,10 @@ The app post body (`mercy-court-launches-believing-bible-study-app.md`) contains
 
 ---
 
-## Phase 2 — Cloudflare Pages Build Settings (USER ACTION)
+## Phase 2 — Cloudflare Pages Build Settings (✅ DONE)
 
-Cloudflare dashboard → Pages → mercycourt.github.io project → Settings → Builds & deployments:
-- **Build command:** `npm ci && npm run build`
-- **Build output directory:** `_site`
-- **Environment variables → Production:** `NODE_VERSION = 18`
-
-Then trigger a deployment (push a commit or manual trigger in dashboard).
+Build confirmed: `npm ci && npm run build` → `_site/`, NODE_VERSION 18, 48s deploy time.
+Clean URL fix verified 2026-07-18 via DevTools Elements panel search: 0 `.html` hrefs on live `/blog`.
 
 ---
 
@@ -116,29 +112,87 @@ Collection fields: `title, seo_title, seo_description, date (datetime, YYYY-MM-D
 Worker script: `cloudflare-worker/oauth-worker.js`
 
 ### Step A — Create GitHub OAuth App
-GitHub → Settings → Developer Settings → OAuth Apps → New OAuth App:
-- Application name: `RCCG Mercy Court CMS`
-- Homepage URL: `https://mercycourt.org`
-- Authorization callback URL: `https://oauth.mercycourt.workers.dev/callback`
-
-Copy the **Client ID** and generate + copy the **Client Secret**.
+1. Go to GitHub → **Settings** (top-right avatar) → **Developer Settings** → **OAuth Apps** → **New OAuth App**
+2. Fill in:
+   - **Application name:** `RCCG Mercy Court CMS`
+   - **Homepage URL:** `https://mercycourt.org`
+   - **Authorization callback URL:** `https://oauth.mercycourt.workers.dev/callback`
+3. Click **Register application**
+4. On the next screen: copy the **Client ID** (visible immediately)
+5. Click **Generate a new client secret** → copy the secret **immediately** (it is shown only once)
 
 ### Step B — Create Cloudflare Worker
-Cloudflare dashboard → Workers & Pages → Create → Worker:
-- Name: `oauth-mercycourt` (sets URL to `oauth.mercycourt.workers.dev`)
-- Replace default code with the full contents of `cloudflare-worker/oauth-worker.js`
-- Deploy
+1. Cloudflare dashboard → **Workers & Pages** → **Create** → **Create Worker**
+2. Set name to exactly `oauth-mercycourt` (this sets the URL to `oauth.mercycourt.workers.dev`)
+3. Click **Deploy** (ignore the default hello-world code — you'll replace it next)
+4. On the success screen, click **Edit code**
+5. Select all the default code and replace it with the full contents of `cloudflare-worker/oauth-worker.js`
+6. Click **Save and deploy**
 
 ### Step C — Add Secrets
-Worker → Settings → Variables → Environment Variables → Add variable (as **Secret**):
-- `GITHUB_CLIENT_ID` = (paste Client ID from Step A)
-- `GITHUB_CLIENT_SECRET` = (paste Client Secret from Step A)
+Worker → **Settings** → **Variables** → **Environment Variables** → **Add variable**:
+
+For each variable, change type to **Secret** (not plain text) before saving:
+- Name: `GITHUB_CLIENT_ID` → Value: (paste Client ID from Step A)
+- Name: `GITHUB_CLIENT_SECRET` → Value: (paste Client Secret from Step A)
+
+Click **Save and deploy** after adding both.
 
 ### Step D — Validate
-- Visit `https://oauth.mercycourt.workers.dev/auth` — should redirect to GitHub OAuth page
-- Visit `https://mercycourt.org/admin/` → Login with GitHub → complete auth → Decap panel loads
-- Create a test draft post → confirm branch `cms/posts/...` appears in the GitHub repo
-- Delete the test draft
+**Worker isolation test (before touching /admin/):**
+1. Visit `https://oauth.mercycourt.workers.dev/auth` in a browser
+2. Expected: immediate redirect to `https://github.com/login/oauth/authorize?client_id=...`
+3. If you see a GitHub login/authorize page, the worker is working
+
+**Full end-to-end test (incognito window):**
+1. Open incognito → go to `https://mercycourt.org/admin/`
+2. Decap CMS loads (no GitHub auth yet) — you see a "Login with GitHub" button
+3. Click the button → a **popup window** opens (not a full redirect)
+4. The popup redirects to GitHub → you authorize `RCCG Mercy Court CMS`
+5. GitHub redirects popup to `https://oauth.mercycourt.workers.dev/callback?code=...`
+6. The worker exchanges the code for a token and renders a small HTML page
+7. The popup closes automatically
+8. The main Decap tab is now logged in — you see the CMS dashboard with the Posts collection
+9. The 4 existing posts should be listed
+
+**Session behavior:**
+- Decap stores the GitHub token in `localStorage` — you remain logged in across page reloads until you explicitly log out or clear browser data
+- Incognito windows clear on close, so editors using incognito must log in each session
+- A normal browser tab stays authenticated indefinitely unless the user logs out
+
+**Test draft (confirm write access):**
+1. Create a new post → save as draft
+2. Confirm branch `cms/posts/...` appears in the GitHub repo
+3. Delete the draft from Decap (or close the branch on GitHub)
+
+### Auth flow diagram (for sign-off verification)
+```
+User visits /admin/
+      │
+      ▼
+Decap CMS loads (static HTML/JS — no server)
+      │
+      ▼ (clicks "Login with GitHub")
+Popup opens → GET oauth.mercycourt.workers.dev/auth
+      │
+      ▼ (302 redirect)
+github.com/login/oauth/authorize?client_id=...
+      │
+      ▼ (user authorizes)
+GET oauth.mercycourt.workers.dev/callback?code=abc123
+      │
+      ▼ (worker POSTs to GitHub)
+github.com/login/oauth/access_token → returns token
+      │
+      ▼
+Worker renders popup page → postMessage("authorization:github:success:{token:...}")
+      │
+      ▼
+Popup closes → Decap receives token → stores in localStorage
+      │
+      ▼
+CMS dashboard loads — editor is authenticated
+```
 
 ---
 
