@@ -44,6 +44,10 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addFilter("limit", (array, n) => (array || []).slice(0, n));
 
+  eleventyConfig.addFilter("cleanUrl", (url) =>
+    (url || "").replace(/\.html$/, "") || "/"
+  );
+
   return {
     dir: { input: ".", output: "_site", includes: "_includes", data: "_data" },
     templateFormats: ["html", "njk", "md"],

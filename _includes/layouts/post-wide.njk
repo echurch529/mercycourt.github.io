@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ seo_title }}</title>
     <meta name="description" content="{{ seo_description }}">
-    <link rel="canonical" href="https://mercycourt.org{{ page.url }}">
+    <link rel="canonical" href="https://mercycourt.org{{ page.url | cleanUrl }}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="RCCG Mercy Court">
     <meta property="og:title" content="{{ seo_title }}">
     <meta property="og:description" content="{{ seo_description }}">
-    <meta property="og:url" content="https://mercycourt.org{{ page.url }}">
+    <meta property="og:url" content="https://mercycourt.org{{ page.url | cleanUrl }}">
     <meta property="og:image" content="https://mercycourt.org{{ hero_image }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ seo_title }}">
@@ -43,7 +43,7 @@
       "@type": "BlogPosting",
       "headline": {{ title | dump | safe }},
       "description": {{ seo_description | dump | safe }},
-      "url": "https://mercycourt.org{{ page.url }}",
+      "url": "https://mercycourt.org{{ page.url | cleanUrl }}",
       "datePublished": "{{ date | isoDate }}",
       "dateModified": "{{ date | isoDate }}",
       "image": "https://mercycourt.org{{ hero_image }}",
@@ -58,7 +58,7 @@
       },
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://mercycourt.org{{ page.url }}"
+        "@id": "https://mercycourt.org{{ page.url | cleanUrl }}"
       }{% if article_keywords %},
       "keywords": {{ article_keywords | dump | safe }}
       {% endif %}
