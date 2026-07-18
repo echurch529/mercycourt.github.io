@@ -1,22 +1,27 @@
 ---
 title: "Repositioned for Greatness: 5 Keys to Unlock Your Potential"
 seo_title: "Repositioned for Greatness: 5 Keys | Mercy Court"
-seo_description: "Feeling stuck despite working hard? Learn 5 practical ways to reposition yourself — mentally, spiritually, and emotionally — for the life you were made for."
+seo_description: Feeling stuck despite working hard? Learn 5 practical ways to
+  reposition yourself — mentally, spiritually, and emotionally — for the life
+  you were made for.
 date: 2026-05-11
-author: "Pastor John Itakpe"
+author: Dr. John Itakpe
 category: inspiration
 featured: false
-hero_image: "/assets/images/2026/blog-photos/adventurous-adult-man-hiking-on-top-of-a-mountain-2026-03-24-23-52-07-utc (1).jpg"
-hero_image_alt: "Man on a mountain summit"
-excerpt: "Greatness is rarely about luck — it's about position. Discover 5 practical keys to reposition yourself mentally, spiritually, and emotionally for the life you were made for."
+hero_image: /assets/images/2026/blog-photos/adventurous-adult-man-hiking-on-top-of-a-mountain-2026-03-24-23-52-07-utc
+  (1).jpg
+hero_image_alt: Man on a mountain summit
+excerpt: Greatness is rarely about luck — it's about position. Discover 5
+  practical keys to reposition yourself mentally, spiritually, and emotionally
+  for the life you were made for.
 read_time: 5
 scripture_references:
-  - "Jeremiah 29:11"
-  - "Proverbs 11:3"
-  - "2 Timothy 2:3"
-  - "Psalm 114:1–8"
-  - "Mark 11:23–25"
-  - "Psalm 1:1–3"
+  - Jeremiah 29:11
+  - Proverbs 11:3
+  - 2 Timothy 2:3
+  - Psalm 114:1–8
+  - Mark 11:23–25
+  - Psalm 1:1–3
 ---
 
 Greatness is rarely about luck. It's about position. Think of a satellite dish pointed in the wrong direction — it doesn't matter how strong the signal is if the dish isn't aligned to receive it. Many of us work hard but see little return, not because we lack talent or effort, but because we're slightly out of alignment with our purpose. Repositioning yourself isn't about starting over. It's about adjusting where you're standing so you can receive what was always meant for you.
