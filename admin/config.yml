@@ -2,7 +2,7 @@ backend:
   name: github
   repo: echurch529/mercycourt.github.io
   branch: main
-  base_url: https://oauth.mercycourt.workers.dev
+  base_url: https://oauth-mercycourt.echurch.workers.dev
 
 publish_mode: editorial_workflow
 
