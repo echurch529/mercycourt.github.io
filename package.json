@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "screenshot.js",
   "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,5 +13,9 @@
   "description": "",
   "dependencies": {
     "puppeteer": "^24.37.3"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "luxon": "^3.5.0"
   }
 }

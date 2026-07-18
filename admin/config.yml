@@ -1,0 +1,46 @@
+backend:
+  name: github
+  repo: echurch529/mercycourt.github.io
+  branch: main
+  base_url: https://oauth.mercycourt.workers.dev
+
+publish_mode: editorial_workflow
+
+media_folder: "assets/images/cms-uploads"
+public_folder: "/assets/images/cms-uploads"
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    label_singular: "Blog Post"
+    folder: "src/blog-posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "SEO Title", name: "seo_title", widget: "string" }
+      - { label: "SEO Description", name: "seo_description", widget: "text" }
+      - label: "Publish Date"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        time_format: false
+      - { label: "Author", name: "author", widget: "string", default: "Mercy Court Team" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "News", value: "news" }
+          - { label: "Events", value: "events" }
+          - { label: "Inspiration", value: "inspiration" }
+      - { label: "Featured Post", name: "featured", widget: "boolean", default: false }
+      - { label: "Hero Image", name: "hero_image", widget: "image" }
+      - { label: "Hero Image Alt Text", name: "hero_image_alt", widget: "string" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Read Time (minutes)", name: "read_time", widget: "number", value_type: "int", default: 5 }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - label: "Scripture References"
+        name: "scripture_references"
+        widget: "list"
+        required: false
+        field: { label: "Reference", name: "reference", widget: "string" }
