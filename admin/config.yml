@@ -87,6 +87,17 @@ collections:
               - { label: "Link URL", name: "link", widget: "string", hint: "e.g. tehillah-voices.html" }
           - { label: "CTA Section Body", name: "cta_body", widget: "text" }
 
+      - name: "contact"
+        label: "Contact"
+        file: "contact.html"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Background Image", name: "image", widget: "image" }
+
       - name: "community-impact"
         label: "Community Impact"
         file: "community-impact.html"
