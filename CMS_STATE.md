@@ -15,7 +15,7 @@
 | 4 — GitHub OAuth Worker | ✅ Done | Live at `oauth-mercycourt.echurch.workers.dev`; incognito login confirmed; Decap dashboard loads with 4 posts |
 | 5 — Access control | ✅ Done | Part A (branch protection) + Part B (Zero Trust) both verified 2026-07-18 |
 | 6 — Delete old HTML blog posts | ✅ Done | All four files deleted via PR #2; live URLs verified post-deploy; /blog clean (0 .html in DOM) |
-| 7 — Static pages CMS | ⏳ In progress | 5 pages → CMS conversion; ministries ✅, tehillah-voices ✅, mercy-kidz ✅, about-us ✅ (commit b8dac1d); next: the-new-mc.html (blocked on Formspree) |
+| 7 — Static pages CMS | ⏳ In progress | ministries ✅, tehillah-voices ✅, mercy-kidz ✅, about-us ✅; the-new-mc removed; next batch: index, community-impact, contact, plan-your-visit |
 | 8 — Event landing pages | ❌ Pending | New `events` collection + `event-page.njk` layout; one-bring-one nav bug fix first |
 
 ---
@@ -251,16 +251,18 @@ Editable fields extracted to front matter YAML; HTML body unchanged except hardc
 
 ### Scope
 
-**Tier 1 — Convert (5 pages, in pilot order):**
+**Completed conversions:**
 1. `ministries.html` — ✅ **verified**
 2. `tehillah-voices.html` — ✅ **verified**
 3. `mercy-kidz.html` — ✅ **verified** (commit 8924f54)
 4. `about-us.html` — ✅ **verified** (commit b8dac1d)
-5. `the-new-mc.html` — **blocked:** user must create Formspree form for Get Connected form and provide endpoint
+5. `the-new-mc.html` — ❌ **removed** from project entirely (not converted)
 
-**Tier 2 — Shared site data only:** `_data/site.json` — ✅ **created** (address, phone, email, social URLs, service times, Zeffy URLs, Mailchimp action); `contact.html` + `index.html` stay as pass-through HTML.
+**Next batch (in progress):** `index.html`, `community-impact.html`, `contact.html`, `plan-your-visit.html`
 
-**Deferred:** `community-impact.html`, `plan-your-visit.html` (complex interactive JS); `give.html`, `watch-live.html`, `index.html`.
+**Shared site data:** `_data/site.json` — ✅ **created** (address, phone, email, social URLs, service times, Zeffy URLs, Mailchimp action).
+
+**Deferred:** `give.html` (Zeffy iframes, minimal copy), `watch-live.html` (YouTube API JS, minimal copy), `blog.njk` (already .njk, posts auto-render).
 
 ### `_data/site.json` (confirmed from source files)
 
@@ -321,22 +323,16 @@ Commits: `5091c42` (paths fix), `fa006ac` (delete legacy file), `87851b0` (renam
 - Builds to `_site/ministries.html` (not a subdirectory) — Cloudflare pretty-URL routing serves it at `/ministries`
 - `admin/config.yml` entry: `file: "ministries.html"`, no `format:` line
 
-### `the-new-mc.html` notes
-- `<meta name="robots" content="noindex, nofollow">` — preserved during conversion; removal is a separate explicit decision
-- Get Connected form has no `action` and no JS handler — broken. Fix: add Formspree endpoint + async submit handler (same pattern as `community-impact.html`). **User must create the Formspree form and provide the endpoint first.**
-
 ### Decap `files` collection — field summary per page
-
-Full YAML schema is in the plan file (`/Users/oluwaseunimohi/.claude/plans/modular-waddling-sky.md`).
 
 - **ministries** ✅: `hero` (object: image, subtitle), `intro_eyebrow`, `intro_body`, `ministries` (list: image/image_alt/title/description/link)
 - **tehillah** ✅: `hero` (object: image, badge, tagline), `vision` (object: heading/body), `gallery` (list max 3), `about` (object: heading/body1/body2/instagram_url), `youtube_url`, `youtube_playlist_url`, `join_url`, `scripture_quote`, `scripture_ref`
-- **mercy-kidz** ✅: `hero` (object: image, tagline), `about_body`, `mission_heading_prefix`, `mission_heading_highlight`, `mission_body`, `connect` (object: instagram_url/instagram_handle/youtube_url/youtube_handle), `faq` (list: question/answer). Static: 5S values, age groups, curriculum, farmers section, what-to-expect steps, yearly programs (all use per-card SVG icons + hardcoded Tailwind color classes)
-- **the-new-mc** (blocked): `hero`, `mission`, `vision`, `serve_teams` (list), `leaders`, `leader_bio` (markdown), `formspree_endpoint`
-- **about** ✅: `hero` (object: image, headline, headline_highlight), `serve_body1`, `serve_body2`, `pastor` (object: photo/bio1/bio2/bio3), `vision_body1`, `vision_body2`, `testimonials` (list: title/quote/attribution). Static: "Our Approach" 4-pillar section, pastor quote with red spans, service times, "We Do Community Differently" image grid. Also fixed mismatched social icons in footer (FB/Instagram/YouTube were wrong).
-
-### Pending user action
-- Create a Formspree form for The New MC "Get Connected" and provide the endpoint URL before that page can be converted. This is the only remaining Tier 1 page.
+- **mercy-kidz** ✅: `hero` (object: image, tagline), `about_body`, `mission_heading_prefix`, `mission_heading_highlight`, `mission_body`, `connect` (object: instagram_url/instagram_handle/youtube_url/youtube_handle), `faq` (list: question/answer). Static: 5S values, age groups, curriculum, farmers section, what-to-expect steps, yearly programs
+- **about** ✅: `hero` (object: image, headline, headline_highlight), `serve_body1`, `serve_body2`, `pastor` (object: photo/bio1/bio2/bio3), `vision_body1`, `vision_body2`, `testimonials` (list: title/quote/attribution). Static: approach pillars, pastor quote, service times, community grid
+- **home** (next): `hero` (image/headline/headline_highlight/tagline), `about` (body1/body2), `mission_body`, `leadership` (bio/blockquote), `ministries` (list: image/title/subtitle/body/link), `cta_body`
+- **community-impact** (next): `hero`, `mission` (body1/2/3), `stats` (list), `pantry_hours`, `programs` (list with emoji), `partners` (list), `testimonials` (list), `pantry_highlight` (body1/2/3), `goals` (list with emoji), `volunteer_intro1/2`, `volunteer_form_endpoint`, `grant_body`
+- **contact** (next): `hero` (image only — all contact info from site.*)
+- **plan-your-visit** (next): `hero`, `welcome_body`, `video_url`, `faq` (list: question/answer)
 
 ---
 

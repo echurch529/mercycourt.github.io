@@ -63,7 +63,7 @@
     }
 
     // Ministry page clicks
-    if (href.match(/ministries|tehillah|the-new-mc|mercy-kidz/)) {
+    if (href.match(/ministries|tehillah|mercy-kidz/)) {
       track('ministry_clicked', { ministry: text, destination: href, page: page });
     }
 
