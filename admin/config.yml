@@ -49,6 +49,44 @@ collections:
     label: "Pages"
     files:
 
+      - name: "home"
+        label: "Homepage"
+        file: "index.html"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Headline (first line)", name: "headline", widget: "string", hint: "e.g. IT'S OUR YEAR OF" }
+              - { label: "Headline Highlight (red, 2nd line)", name: "headline_highlight", widget: "string", hint: "e.g. BETTER THINGS" }
+              - { label: "Tagline", name: "tagline", widget: "string" }
+          - label: "About Section"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Paragraph 1", name: "body1", widget: "text" }
+              - { label: "Paragraph 2", name: "body2", widget: "text" }
+          - { label: "Mission Body", name: "mission_body", widget: "text" }
+          - label: "Leadership Section"
+            name: "leadership"
+            widget: "object"
+            fields:
+              - { label: "Bio", name: "bio", widget: "text" }
+              - { label: "Blockquote", name: "blockquote", widget: "string" }
+          - label: "Ministry Cards"
+            name: "ministries"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Card Title", name: "title", widget: "string" }
+              - { label: "Card Subtitle", name: "subtitle", widget: "string" }
+              - { label: "Description", name: "body", widget: "text" }
+              - { label: "Link URL", name: "link", widget: "string", hint: "e.g. tehillah-voices.html" }
+          - { label: "CTA Section Body", name: "cta_body", widget: "text" }
+
       - name: "ministries"
         label: "Ministries"
         file: "ministries.html"
