@@ -45,8 +45,8 @@ collections:
         required: false
         field: { label: "Reference", name: "reference", widget: "string" }
 
-  - name: "pages"
-    label: "Pages"
+  - name: "main-pages"
+    label: "Main Pages"
     files:
 
       - name: "home"
@@ -87,6 +87,50 @@ collections:
               - { label: "Link URL", name: "link", widget: "string", hint: "e.g. tehillah-voices.html" }
           - { label: "CTA Section Body", name: "cta_body", widget: "text" }
 
+      - name: "about"
+        label: "About Us"
+        file: "about-us.html"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Headline (first line)", name: "headline", widget: "string", hint: "e.g. IN CHRIST, FOR CHRIST," }
+              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string", hint: "e.g. WITH JOY!" }
+          - { label: "We Serve God — Paragraph 1", name: "serve_body1", widget: "text" }
+          - { label: "We Serve God — Paragraph 2", name: "serve_body2", widget: "text" }
+          - label: "Pastor"
+            name: "pastor"
+            widget: "object"
+            fields:
+              - { label: "Photo", name: "photo", widget: "image" }
+              - { label: "Bio Paragraph 1", name: "bio1", widget: "text" }
+              - { label: "Bio Paragraph 2", name: "bio2", widget: "text" }
+              - { label: "Bio Paragraph 3", name: "bio3", widget: "text" }
+          - { label: "Vision — Paragraph 1", name: "vision_body1", widget: "text" }
+          - { label: "Vision — Paragraph 2", name: "vision_body2", widget: "text" }
+          - label: "Testimonials"
+            name: "testimonials"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Attribution", name: "attribution", widget: "string", hint: "e.g. A Mercy Court Member" }
+
+      - name: "contact"
+        label: "Contact"
+        file: "contact.html"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Background Image", name: "image", widget: "image" }
+
       - name: "plan-your-visit"
         label: "Plan Your Visit"
         file: "plan-your-visit.html"
@@ -108,17 +152,6 @@ collections:
             fields:
               - { label: "Question", name: "question", widget: "string" }
               - { label: "Answer", name: "answer", widget: "text" }
-
-      - name: "contact"
-        label: "Contact"
-        file: "contact.html"
-        fields:
-          - label: "Hero"
-            name: "hero"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Background Image", name: "image", widget: "image" }
 
       - name: "community-impact"
         label: "Community Impact"
@@ -188,8 +221,12 @@ collections:
           - { label: "Volunteer Form Endpoint", name: "volunteer_form_endpoint", widget: "string", hint: "Formspree URL e.g. https://formspree.io/f/xxxxxxx" }
           - { label: "Grant/Anchor Section Body", name: "grant_body", widget: "text" }
 
+  - name: "ministries-pages"
+    label: "Ministries"
+    files:
+
       - name: "ministries"
-        label: "Ministries"
+        label: "Ministries Overview"
         file: "ministries.html"
         fields:
           - label: "Hero"
@@ -211,70 +248,6 @@ collections:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
               - { label: "Link URL", name: "link", widget: "string", hint: "Relative path, e.g. mercy-kidz.html" }
-
-      - name: "mercy-kidz"
-        label: "Mercy Kidz (God's Heritage)"
-        file: "mercy-kidz.html"
-        fields:
-          - label: "Hero"
-            name: "hero"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Background Image", name: "image", widget: "image" }
-              - { label: "Tagline", name: "tagline", widget: "string" }
-          - { label: "About Section Body", name: "about_body", widget: "text" }
-          - { label: "Mission Heading (first part)", name: "mission_heading_prefix", widget: "string" }
-          - { label: "Mission Heading (highlighted in red)", name: "mission_heading_highlight", widget: "string" }
-          - { label: "Mission Body", name: "mission_body", widget: "text" }
-          - label: "Social Media Links"
-            name: "connect"
-            widget: "object"
-            fields:
-              - { label: "Instagram URL", name: "instagram_url", widget: "string", hint: "Full URL e.g. https://www.instagram.com/gods.heritage.kids" }
-              - { label: "Instagram Handle", name: "instagram_handle", widget: "string", hint: "e.g. @gods.heritage.kids" }
-              - { label: "YouTube URL", name: "youtube_url", widget: "string", hint: "Full URL e.g. https://www.youtube.com/@godsheritagekids" }
-              - { label: "YouTube Handle", name: "youtube_handle", widget: "string", hint: "e.g. @godsheritagekids" }
-          - label: "FAQ"
-            name: "faq"
-            widget: "list"
-            summary: "{{fields.question}}"
-            fields:
-              - { label: "Question", name: "question", widget: "string" }
-              - { label: "Answer", name: "answer", widget: "text" }
-
-      - name: "about"
-        label: "About Us"
-        file: "about-us.html"
-        fields:
-          - label: "Hero"
-            name: "hero"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Background Image", name: "image", widget: "image" }
-              - { label: "Headline (first line)", name: "headline", widget: "string", hint: "e.g. IN CHRIST, FOR CHRIST," }
-              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string", hint: "e.g. WITH JOY!" }
-          - { label: "We Serve God — Paragraph 1", name: "serve_body1", widget: "text" }
-          - { label: "We Serve God — Paragraph 2", name: "serve_body2", widget: "text" }
-          - label: "Pastor"
-            name: "pastor"
-            widget: "object"
-            fields:
-              - { label: "Photo", name: "photo", widget: "image" }
-              - { label: "Bio Paragraph 1", name: "bio1", widget: "text" }
-              - { label: "Bio Paragraph 2", name: "bio2", widget: "text" }
-              - { label: "Bio Paragraph 3", name: "bio3", widget: "text" }
-          - { label: "Vision — Paragraph 1", name: "vision_body1", widget: "text" }
-          - { label: "Vision — Paragraph 2", name: "vision_body2", widget: "text" }
-          - label: "Testimonials"
-            name: "testimonials"
-            widget: "list"
-            summary: "{{fields.title}}"
-            fields:
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Quote", name: "quote", widget: "text" }
-              - { label: "Attribution", name: "attribution", widget: "string", hint: "e.g. A Mercy Court Member" }
 
       - name: "tehillah"
         label: "Tehillah Voices"
@@ -314,3 +287,34 @@ collections:
           - { label: "Join the Team Form URL", name: "join_url", widget: "string", hint: "Microsoft Forms URL" }
           - { label: "Scripture Quote", name: "scripture_quote", widget: "string" }
           - { label: "Scripture Reference", name: "scripture_ref", widget: "string", hint: "e.g. Psalm 100:4" }
+
+      - name: "mercy-kidz"
+        label: "Mercy Kidz (God's Heritage)"
+        file: "mercy-kidz.html"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Tagline", name: "tagline", widget: "string" }
+          - { label: "About Section Body", name: "about_body", widget: "text" }
+          - { label: "Mission Heading (first part)", name: "mission_heading_prefix", widget: "string" }
+          - { label: "Mission Heading (highlighted in red)", name: "mission_heading_highlight", widget: "string" }
+          - { label: "Mission Body", name: "mission_body", widget: "text" }
+          - label: "Social Media Links"
+            name: "connect"
+            widget: "object"
+            fields:
+              - { label: "Instagram URL", name: "instagram_url", widget: "string", hint: "Full URL e.g. https://www.instagram.com/gods.heritage.kids" }
+              - { label: "Instagram Handle", name: "instagram_handle", widget: "string", hint: "e.g. @gods.heritage.kids" }
+              - { label: "YouTube URL", name: "youtube_url", widget: "string", hint: "Full URL e.g. https://www.youtube.com/@godsheritagekids" }
+              - { label: "YouTube Handle", name: "youtube_handle", widget: "string", hint: "e.g. @godsheritagekids" }
+          - label: "FAQ"
+            name: "faq"
+            widget: "list"
+            summary: "{{fields.question}}"
+            fields:
+              - { label: "Question", name: "question", widget: "string" }
+              - { label: "Answer", name: "answer", widget: "text" }
