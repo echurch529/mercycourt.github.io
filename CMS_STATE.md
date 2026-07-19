@@ -16,7 +16,7 @@
 | 5 — Access control | ✅ Done | Part A (branch protection) + Part B (Zero Trust) both verified 2026-07-18 |
 | 6 — Delete old HTML blog posts | ✅ Done | All four files deleted via PR #2; live URLs verified post-deploy; /blog clean (0 .html in DOM) |
 | 7 — Static pages CMS | ✅ Done | ministries ✅, tehillah-voices ✅, mercy-kidz ✅, about-us ✅, index ✅, community-impact ✅, contact ✅, plan-your-visit ✅; the-new-mc removed |
-| 8 — Event landing pages | ❌ Pending | New `events` collection + `event-page.njk` layout; one-bring-one nav bug fix first |
+| 8 — Event landing pages | ✅ Done | Folder collection `events/` + `event-page.njk` layout; one-bring-one migrated; redirect stub at root; editable slugs on events + posts |
 
 ---
 
@@ -351,63 +351,87 @@ Two bugs found on all 4 Phase 7 pages after independent verification:
 
 ## CMS Collection Structure (as of 2026-07-19)
 
-`admin/config.yml` now has three top-level collections (sidebar order):
+`admin/config.yml` has four top-level collections (sidebar order):
 
 1. **Main Pages** (`name: "main-pages"`) — Homepage, About Us, Contact, Plan Your Visit, Community Impact
 2. **Ministries** (`name: "ministries-pages"`) — Ministries Overview, Tehillah Voices, Mercy Kidz
-3. **Blog Posts** (`name: "posts"`) — folder collection, `src/blog-posts/*.md`, create: true
+3. **Event Pages** (`name: "events"`) — folder collection, `events/*.html`, create: true, `slug: "{{fields.slug}}"`
+4. **Blog Posts** (`name: "posts"`) — folder collection, `src/blog-posts/*.md`, create: true, `slug: "{{fields.slug}}"`
 
-This mirrors the site nav: Tehillah Voices and God's Heritage nest under the Ministries dropdown; Homepage/About/Contact/etc. are top-level. Split from the original single flat "Pages" collection (commit `4786424`), reordered to put Blog Posts last (commit `c7f3ac5`).
+This mirrors the site nav: Tehillah Voices and God's Heritage nest under the Ministries dropdown; Homepage/About/Contact/etc. are top-level. Split from the original single flat "Pages" collection (commit `4786424`), reordered to put Blog Posts last (commit `c7f3ac5`). Event Pages added in Phase 8 (commit `c5a5c45`).
 
-All 8 pages confirmed showing in `/admin/` → both collections visible in sidebar.
+All 4 collections confirmed visible in `/admin/` sidebar.
 
 ---
 
-## Phase 8 — Event Landing Pages (❌ PENDING)
+## Phase 8 — Event Landing Pages (✅ DONE — 2026-07-19)
 
-### Approach — Variable Type Widgets (block-based)
+### Approach — Folder collection with shared Nunjucks layout
 
-Event pages use Decap's **Variable Type Widgets** (`list` with `types` + `typeKey: "block_type"`). This is the structural equivalent of Statamic Replicator / TinaCMS blocks / Sanity typed arrays. Editors can add, remove, and reorder section blocks in the Decap sidebar. Each block type exposes only its own fields.
+Folder collection (`events/`) identical in pattern to Blog Posts: each file contains front matter only; the shared `_includes/layouts/event-page.njk` template renders everything. `templateEngineOverride: njk` + `layout: layouts/event-page.njk` are injected via hidden Decap fields so editors never set them manually.
 
-`event-page.njk` renders via `{% for section in sections %}` + `{% if section.block_type == "hero" %}` etc. The visit modal form (Formspree + Mailchimp dual-submit) is rendered once outside the sections loop using top-level flat fields.
+Old root `one-bring-one.html` kept as a client-side redirect stub (`<meta http-equiv="refresh">` + `window.location.replace()`) — GitHub Pages has no server-side redirects. Existing shares/traffic not broken.
 
-### Prerequisite
-Fix `one-bring-one.html` nav/footer `../` relative hrefs → absolute paths before any event page templating.
+All nav links across 14 source files updated to `/events/one-bring-one.html` (commit `c5a5c45`).
 
-### File structure
+### Files created
 
-```
-src/event-pages/
-  event-pages.json      → layout + permalink (/{{ page.fileSlug }}) + tags: [events]
-  one-bring-one.md      → first entry, migrated from one-bring-one.html
-_includes/layouts/
-  event-page.njk        → block renderer (for loop + if/elif per block type)
-_data/
-  currentEvent.js       → finds is_current_event: true → exports URL for nav
-```
+| File | Purpose |
+|------|---------|
+| `_includes/layouts/event-page.njk` | Shared layout: hero, 5 optional sections, modal, footer |
+| `events/one-bring-one.html` | First event entry — front matter only, no HTML body |
 
-### Top-level flat fields (per event, not blocks)
+### Files modified
 
-`title`, `seo_title`, `seo_description`, `og_image`, `is_current_event` (boolean), `formspree_endpoint`, `mailchimp_f_id`, `mailchimp_tag`
+| File | Change |
+|------|--------|
+| `one-bring-one.html` (root) | Replaced with meta-refresh + JS redirect stub → `/events/one-bring-one.html` |
+| `admin/config.yml` | `events` folder collection added (3rd position, between Ministries and Blog Posts) |
+| 14 source files | Nav/footer EVENTS links updated to `/events/one-bring-one.html` |
 
-### Block types (`section.block_type` values)
+### `event-page.njk` section structure
 
-| Block | Key fields |
-|-------|-----------|
-| `hero` | image, badge, headline, tagline, cta_primary_text, cta_secondary_text |
-| `welcome` | badge, heading, body (markdown) |
-| `feature_grid` | badge, heading, cards list (emoji/title/body) |
-| `video` | heading, url (YouTube embed URL) |
-| `testimonials` | badge, heading, items list (name/quote), max 3 |
-| `service_info` | heading, address, time, parking_note |
-| `cta` | heading, body (markdown), button_text |
+All sections except hero are optional — leave `heading:` blank (or omit the key entirely) to hide that section:
 
-### Nav — `is_current_event` flag
+| Section key | Required | Notes |
+|-------------|----------|-------|
+| `hero` | ✅ | image, badge, headline, subheadline, primary_cta, secondary_cta_text/url |
+| `welcome` | optional | badge, heading, body (list of paragraphs) |
+| `features` | optional | badge, heading, cards list (emoji/title/body) — 2-col grid |
+| `testimonials` | optional | heading, subheading, video_url, quotes list; adaptive 1/2/3-col grid |
+| `logistics` | optional | heading, custom_note; address + service times from `site.*` |
+| `cta_final` | optional | heading, body (list of paragraphs), button_text |
+| `giving` | optional | heading, body, button_text, url |
 
-`_data/currentEvent.js` finds the event with `is_current_event: true`, exports its URL. Nav uses `{{ currentEvent.url | cleanUrl }}`. Toggle the flag on new event + off old → nav updates on next deploy. Old pages stay live.
+Testimonials video: empty `video_url` → styled placeholder. Non-empty → `<iframe>` embed.
 
-### Existing `one-bring-one.html`
-Stays untouched in the project root until an explicit migration decision is made. No deletion without instruction.
+### Decap `events` collection fields
+
+Hidden fields: `templateEngineOverride: njk`, `layout: layouts/event-page.njk`
+
+Top-level: `title`, `slug` (editable, sets filename/URL), `seo_description`, `og_image`, `date`
+
+Then one collapsed `object` widget per section above. `required: false` on all optional sections.
+
+### Slug + SEO description improvements (commit `bf0893f`)
+
+Both `events` and `posts` collections updated:
+- `slug: "{{fields.slug}}"` at collection level — filename (= URL) is now set by the editor-typed slug field, not auto-derived from title
+- `slug` field added (string widget): hint "Slug (target: 50–60 characters)"
+- `seo_description` hint added: "Description (target: 120–160 characters)"
+- `events/one-bring-one.html` front matter: `slug: one-bring-one` added so existing entry has the field populated
+
+Note: Decap CMS has no computed/dynamic field defaults — the slug field starts blank for new entries. Editors must type the desired slug; the hint explains the format.
+
+### Verified (2026-07-19)
+
+- Old URL `/one-bring-one.html` → redirects to `/events/one-bring-one.html` ✅
+- `/events/one-bring-one.html` renders all 6 sections correctly ✅
+- All nav/footer/image paths root-relative ✅
+- CMS `/admin/` shows Event Pages collection with one-bring-one entry ✅
+- Test event created with long title + manually shortened slug `test-12th-anniversary` → live URL matched typed slug exactly ✅
+- Optional sections (Testimonials, Giving) correctly hide when left blank ✅
+- Test entry deleted ✅
 
 ---
 
