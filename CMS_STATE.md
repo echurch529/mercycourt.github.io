@@ -300,12 +300,20 @@ CSS patterns like `@media(...){#id {...}}` trigger Nunjucks comment parsing (`{#
 - HTML template: `href="/give.html"`, `src="/assets/..."`, `href="/"` for logo
 - Template vars that output user-provided paths (e.g. `{{ ministry.image }}`) inherit the `/` from the front matter value — no need to add it in the template itself
 
-**Bug 2 — Decap CMS format detection:** Decap does not recognize `.njk` as a YAML-frontmatter file. Without an explicit `format` key, all fields appear empty in the CMS and a Save would wipe the file's content. Every `files` collection entry for a `.njk` file MUST include:
+**Bug 2 — Decap CMS format detection:** Decap does not recognize `.njk` as a YAML-frontmatter file. Without an explicit `format`, all fields appear empty. Additionally, setting `format` at the individual **file entry** level inside a `files` collection is unreliably applied in Decap v3 — it must be set at the **collection** level:
 ```yaml
-format: "yaml-frontmatter"
+- name: "pages"
+  label: "Pages"
+  format: "yaml-frontmatter"   # ← on the collection, NOT on each file entry
+  files:
+    - name: "ministries"
+      file: "ministries.njk"
+      fields: [...]             # no format: here
 ```
 
-Both fixes committed as `5091c42` on 2026-07-19.
+**Bug 3 — Legacy source file still deployed:** After renaming `ministries.html` → `ministries.njk`, the original `ministries.html` was only added to `.eleventy.js` ignores — not deleted. Eleventy's ignore rule prevents template processing but NOT static file serving; Cloudflare continued serving the old page at `/ministries.html`. Fix: delete the source file. The ignore rule is then unnecessary and should be removed.
+
+Both sets of fixes committed: `5091c42` (paths + initial format attempt), `fa006ac` (collection-level format + delete legacy file).
 
 ### ministries.html — pilot conversion notes
 
