@@ -15,7 +15,7 @@
 | 4 — GitHub OAuth Worker | ✅ Done | Live at `oauth-mercycourt.echurch.workers.dev`; incognito login confirmed; Decap dashboard loads with 4 posts |
 | 5 — Access control | ✅ Done | Part A (branch protection) + Part B (Zero Trust) both verified 2026-07-18 |
 | 6 — Delete old HTML blog posts | ✅ Done | All four files deleted via PR #2; live URLs verified post-deploy; /blog clean (0 .html in DOM) |
-| 7 — Static pages CMS | ⏳ In progress | ministries ✅, tehillah-voices ✅, mercy-kidz ✅, about-us ✅; the-new-mc removed; next batch: index, community-impact, contact, plan-your-visit |
+| 7 — Static pages CMS | ✅ Done | ministries ✅, tehillah-voices ✅, mercy-kidz ✅, about-us ✅, index ✅, community-impact ✅, contact ✅, plan-your-visit ✅; the-new-mc removed |
 | 8 — Event landing pages | ❌ Pending | New `events` collection + `event-page.njk` layout; one-bring-one nav bug fix first |
 
 ---
@@ -257,8 +257,12 @@ Editable fields extracted to front matter YAML; HTML body unchanged except hardc
 3. `mercy-kidz.html` — ✅ **verified** (commit 8924f54)
 4. `about-us.html` — ✅ **verified** (commit b8dac1d)
 5. `the-new-mc.html` — ❌ **removed** from project entirely (not converted)
+6. `index.html` — ✅ **converted** (commit 0f0b31c) — hero, about (body1/body2), mission_body, leadership (bio/blockquote), ministries list, cta_body; blog cards auto-pull from collections.posts
+7. `community-impact.html` — ✅ **converted** (commit 8e7131c) — hero, mission (body1/2/3), stats loop, pantry_hours, programs/partners/testimonials/goals loops, pantry_highlight (body1/2/3), volunteer_intro1/2, volunteer_form_endpoint, grant_body; gallery kept static
+8. `contact.html` — ✅ **converted** (commit b8a152c) — hero image only; all contact/footer info via site.*; social icon mismatch fixed
+9. `plan-your-visit.html` — ✅ **converted** (commit df62aa6) — hero, welcome_body (×3), video_url, faq list (10 items as loop with loop.index IDs)
 
-**Next batch (in progress):** `index.html`, `community-impact.html`, `contact.html`, `plan-your-visit.html`
+**Deferred (no conversion planned):** `give.html`, `watch-live.html`, `blog.njk`
 
 **Shared site data:** `_data/site.json` — ✅ **created** (address, phone, email, social URLs, service times, Zeffy URLs, Mailchimp action).
 
@@ -329,10 +333,10 @@ Commits: `5091c42` (paths fix), `fa006ac` (delete legacy file), `87851b0` (renam
 - **tehillah** ✅: `hero` (object: image, badge, tagline), `vision` (object: heading/body), `gallery` (list max 3), `about` (object: heading/body1/body2/instagram_url), `youtube_url`, `youtube_playlist_url`, `join_url`, `scripture_quote`, `scripture_ref`
 - **mercy-kidz** ✅: `hero` (object: image, tagline), `about_body`, `mission_heading_prefix`, `mission_heading_highlight`, `mission_body`, `connect` (object: instagram_url/instagram_handle/youtube_url/youtube_handle), `faq` (list: question/answer). Static: 5S values, age groups, curriculum, farmers section, what-to-expect steps, yearly programs
 - **about** ✅: `hero` (object: image, headline, headline_highlight), `serve_body1`, `serve_body2`, `pastor` (object: photo/bio1/bio2/bio3), `vision_body1`, `vision_body2`, `testimonials` (list: title/quote/attribution). Static: approach pillars, pastor quote, service times, community grid
-- **home** (next): `hero` (image/headline/headline_highlight/tagline), `about` (body1/body2), `mission_body`, `leadership` (bio/blockquote), `ministries` (list: image/title/subtitle/body/link), `cta_body`
-- **community-impact** (next): `hero`, `mission` (body1/2/3), `stats` (list), `pantry_hours`, `programs` (list with emoji), `partners` (list), `testimonials` (list), `pantry_highlight` (body1/2/3), `goals` (list with emoji), `volunteer_intro1/2`, `volunteer_form_endpoint`, `grant_body`
-- **contact** (next): `hero` (image only — all contact info from site.*)
-- **plan-your-visit** (next): `hero`, `welcome_body`, `video_url`, `faq` (list: question/answer)
+- **home** ✅: `hero` (image/headline/headline_highlight/tagline), `about` (body1/body2), `mission_body`, `leadership` (bio/blockquote), `ministries` (list: image/title/subtitle/body/link), `cta_body`
+- **community-impact** ✅: `hero`, `mission` (body1/2/3), `stats` (list), `pantry_hours`, `programs` (list with emoji), `partners` (list), `testimonials` (list), `pantry_highlight` (body1/2/3), `goals` (list with emoji), `volunteer_intro1/2`, `volunteer_form_endpoint`, `grant_body`
+- **contact** ✅: `hero` (image only — all contact info from site.*)
+- **plan-your-visit** ✅: `hero`, `welcome_body1/2/3`, `video_url`, `faq` (list: question/answer; rendered with loop.index IDs)
 
 ---
 
