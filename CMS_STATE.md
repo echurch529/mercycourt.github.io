@@ -15,7 +15,7 @@
 | 4 — GitHub OAuth Worker | ✅ Done | Live at `oauth-mercycourt.echurch.workers.dev`; incognito login confirmed; Decap dashboard loads with 4 posts |
 | 5 — Access control | ✅ Done | Part A (branch protection) + Part B (Zero Trust) both verified 2026-07-18 |
 | 6 — Delete old HTML blog posts | ✅ Done | All four files deleted via PR #2; live URLs verified post-deploy; /blog clean (0 .html in DOM) |
-| 7 — Static pages CMS | ⏳ In progress | 5 pages → CMS conversion; pilot (`ministries.html`) ✅ verified 2026-07-19; next: tehillah-voices.html |
+| 7 — Static pages CMS | ⏳ In progress | 5 pages → CMS conversion; ministries ✅, tehillah-voices ✅, mercy-kidz ✅ (commit 8924f54); next: about-us.html or the-new-mc.html (blocked on Formspree) |
 | 8 — Event landing pages | ❌ Pending | New `events` collection + `event-page.njk` layout; one-bring-one nav bug fix first |
 
 ---
@@ -253,10 +253,10 @@ Editable fields extracted to front matter YAML; HTML body unchanged except hardc
 
 **Tier 1 — Convert (5 pages, in pilot order):**
 1. `ministries.html` — ✅ **verified 2026-07-19** (all 3 bugs confirmed fixed; Decap fields fully populated)
-2. `tehillah-voices.html` — **next**; prerequisite: rename `4G6A8444 copy 3.jpg` (space in filename breaks Decap image widget) → e.g. `tehillah-voices-hero.jpg`
-3. `the-new-mc.html` — **blocked:** user must create Formspree form for Get Connected form and provide endpoint
-4. `mercy-kidz.html`
-5. `about-us.html`
+2. `tehillah-voices.html` — ✅ **converted** (commit c55d9ed); awaiting user verification
+3. `mercy-kidz.html` — ✅ **converted** (commit 8924f54); awaiting user verification
+4. `the-new-mc.html` — **blocked:** user must create Formspree form for Get Connected form and provide endpoint
+5. `about-us.html` — **next** (no blockers)
 
 **Tier 2 — Shared site data only:** `_data/site.json` — ✅ **created** (address, phone, email, social URLs, service times, Zeffy URLs, Mailchimp action); `contact.html` + `index.html` stay as pass-through HTML.
 
@@ -292,8 +292,8 @@ Referenced in `.njk` templates as `{{ site.address_street }}`, `{{ site.social.i
 
 ### Nunjucks gotcha — CSS `{#` conflict
 
-CSS patterns like `@media(...){#id {...}}` trigger Nunjucks comment parsing (`{#` = comment open). Fix: add a space → `@media(...){ #id {...}}`. This was fixed in all blog layouts. Known occurrence in Phase 7:
-- `ministries.html` line 74: `@media(prefers-reduced-motion:reduce){#giving-modal>div:last-child.animate{animation:none}}` → needs `){ #giving-modal`
+CSS patterns like `@media(...){#id {...}}` trigger Nunjucks comment parsing (`{#` = comment open). Fix: add a space → `@media(...){ #id {...}}`. This was fixed in all blog layouts. Known occurrences in Phase 7:
+- `mercy-kidz.html`: hit this during conversion — fixed by adding space (`){ #giving-modal`). Any page with the giving modal + minified media query will need the same fix. Check new conversions with `grep -n '{#' filename.html` before running build.
 
 ### ⚠️ Critical patterns for ALL Phase 7 `.njk` conversions (learned from pilot bugs)
 
@@ -329,11 +329,11 @@ Commits: `5091c42` (paths fix), `fa006ac` (delete legacy file), `87851b0` (renam
 
 Full YAML schema is in the plan file (`/Users/oluwaseunimohi/.claude/plans/modular-waddling-sky.md`).
 
-- **ministries**: `hero` (object: image, subtitle), `intro_eyebrow`, `intro_heading`, `intro_body`, `ministries` (list: image/image_alt/title/description/link)
-- **tehillah**: `hero` (object: image, badge, tagline), `vision` (object: heading/body), `gallery` (list max 3), `about` (object: heading/body/instagram_url), `youtube_url`, `join_url`, `roles` (list), `scripture_quote`, `scripture_ref`
-- **the-new-mc**: `hero`, `mission`, `vision`, `serve_teams` (list), `leaders`, `leader_bio` (markdown), `formspree_endpoint`
-- **mercy-kidz**: `hero` (object: image, tagline), `mission`, `values` (5S list), `age_groups` (list), `faq` (list), `programs` (list)
-- **about**: `hero` (object: image, headline), `pastor` (object: photo + bio markdown), `pastor_quote`, `pastor_quote_attr`, `vision_body` (markdown), `testimonials` (list max 2)
+- **ministries** ✅: `hero` (object: image, subtitle), `intro_eyebrow`, `intro_body`, `ministries` (list: image/image_alt/title/description/link)
+- **tehillah** ✅: `hero` (object: image, badge, tagline), `vision` (object: heading/body), `gallery` (list max 3), `about` (object: heading/body1/body2/instagram_url), `youtube_url`, `youtube_playlist_url`, `join_url`, `scripture_quote`, `scripture_ref`
+- **mercy-kidz** ✅: `hero` (object: image, tagline), `about_body`, `mission_heading_prefix`, `mission_heading_highlight`, `mission_body`, `connect` (object: instagram_url/instagram_handle/youtube_url/youtube_handle), `faq` (list: question/answer). Static: 5S values, age groups, curriculum, farmers section, what-to-expect steps, yearly programs (all use per-card SVG icons + hardcoded Tailwind color classes)
+- **the-new-mc** (blocked): `hero`, `mission`, `vision`, `serve_teams` (list), `leaders`, `leader_bio` (markdown), `formspree_endpoint`
+- **about** (next): `hero` (object: image, headline), `pastor` (object: photo + bio markdown), `pastor_quote`, `pastor_quote_attr`, `vision_body` (markdown), `testimonials` (list max 2)
 
 ### Pending user action
 - Create a Formspree form for The New MC "Get Connected" and provide the endpoint URL before page 3 is converted.
