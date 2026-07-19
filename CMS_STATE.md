@@ -15,6 +15,8 @@
 | 4 — GitHub OAuth Worker | ✅ Done | Live at `oauth-mercycourt.echurch.workers.dev`; incognito login confirmed; Decap dashboard loads with 4 posts |
 | 5 — Access control | ✅ Done | Part A (branch protection) + Part B (Zero Trust) both verified 2026-07-18 |
 | 6 — Delete old HTML blog posts | ✅ Done | All four files deleted via PR #2; live URLs verified post-deploy; /blog clean (0 .html in DOM) |
+| 7 — Static pages CMS | ⏳ In progress | 5 pages → `.njk` conversion + Decap `files` collection; pilot: `ministries.html`; see below |
+| 8 — Event landing pages | ❌ Pending | New `events` collection + `event-page.njk` layout; one-bring-one nav bug fix first |
 
 ---
 
@@ -230,6 +232,63 @@ The default "Cloudflare" identity provider (tied to the Cloudflare account login
 Deleted via PR #2 after all four live post URLs independently verified.
 All posts now served exclusively by Eleventy from `src/blog-posts/*.md`.
 `/blog` page confirmed clean post-deploy: 0 `.html` hrefs in live DOM.
+
+---
+
+## Phase 7 — Static Pages CMS (⏳ IN PROGRESS)
+
+### Approach
+
+Pages renamed `.html` → `.njk`; editable fields extracted to front matter YAML; HTML body unchanged except hardcoded strings replaced with `{{ field }}` / `{% for %}` loops. Decap gets a new `files` collection alongside the existing `posts` folder collection. Existing layout, CSS, and JS preserved exactly.
+
+### Scope
+
+**Tier 1 — Convert (5 pages, in pilot order):**
+1. `ministries.html` → `ministries.njk` — **pilot, in progress**
+2. `tehillah-voices.html` → `tehillah-voices.njk`
+3. `the-new-mc.html` → `the-new-mc.njk` — also fixes broken Get Connected form (needs Formspree endpoint from user)
+4. `mercy-kidz.html` → `mercy-kidz.njk`
+5. `about-us.html` → `about-us.njk`
+
+**Tier 2 — Shared site data only:** `_data/site.json` created; `contact.html` + `index.html` stay as pass-through HTML.
+
+**Deferred:** `community-impact.html`, `plan-your-visit.html` (complex interactive JS); `give.html`, `watch-live.html`, `index.html` (low CMS value or needs architectural decision).
+
+### `_data/site.json` fields
+Address, phone, email, social URLs (FB/IG/YT/TikTok), service times (Sun/Wed/Fri/Power Night), Zeffy embed URLs. Referenced in `.njk` pages as `{{ site.address }}` etc.
+
+### Decap `files` collection fields (per page)
+- **ministries**: hero_image, intro_heading, intro_body, ministry cards list (image/title/description/link)
+- **tehillah-voices**: hero_image, vision_heading, vision_body, youtube_url, join_url, gallery (3 images)
+- **the-new-mc**: hero_image, mission, vision, serve_teams list, leaders, leader_bio
+- **mercy-kidz**: hero_image, age_groups list, faq list
+- **about-us**: hero_image, pastor_bio (markdown), pastor_quote, pastor_quote_attr, vision_body, testimonials list
+
+### `the-new-mc.html` notes
+- `<meta name="robots" content="noindex, nofollow">` — preserved during conversion; removal is a separate explicit decision
+- Get Connected form has no `action` and no JS handler — broken. Will add Formspree endpoint + async submit handler (same pattern as `community-impact.html`) during conversion. **User must create the Formspree form and provide the endpoint first.**
+
+### Pending user action
+- Create a Formspree form for The New MC "Get Connected" and provide the endpoint URL before page 3 is converted.
+
+---
+
+## Phase 8 — Event Landing Pages (❌ PENDING)
+
+### Approach
+Folder-based collection: `src/event-pages/*.md` → `_includes/layouts/event-page.njk`. Permalink pattern `/{{ page.fileSlug }}` gives top-level clean URLs. Editors choose the slug at creation time. Old event pages are never deleted (append-only archive).
+
+### Prerequisite
+Fix `one-bring-one.html` nav/footer hrefs — currently use `../` relative paths instead of absolute paths, causing broken links in production. Must fix before any event page templating.
+
+### Nav — `is_current_event` flag (recommended)
+One event page has `is_current_event: true` in front matter. `_data/currentEvent.js` finds it and exports its URL. Nav template reads `{{ currentEvent.url | cleanUrl }}`. Toggling the flag on a new event + off the old one updates the nav on next deploy. Old pages stay live but leave the nav.
+
+### Front matter schema (key per-event fields)
+`hero_image`, `hero_badge`, `hero_headline`, `hero_tagline`, `welcome_heading`, `welcome_body` (markdown), `feature_cards` (list of 4: emoji/title/body), `video_embed_url` (empty = hidden), `testimonials` (list, max 3), `event_date_label`, `event_time`, `location_address`, `parking_note`, `cta_button_text`, `formspree_endpoint`, `mailchimp_f_id`, `mailchimp_tag`, `is_current_event` (boolean)
+
+### Existing `one-bring-one.html`
+Stays untouched in the project root until an explicit decision is made to migrate or retire it. No deletion without instruction.
 
 ---
 
