@@ -87,6 +87,28 @@ collections:
               - { label: "Link URL", name: "link", widget: "string", hint: "e.g. tehillah-voices.html" }
           - { label: "CTA Section Body", name: "cta_body", widget: "text" }
 
+      - name: "plan-your-visit"
+        label: "Plan Your Visit"
+        file: "plan-your-visit.html"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Background Image", name: "image", widget: "image" }
+          - { label: "Welcome Paragraph 1", name: "welcome_body1", widget: "text" }
+          - { label: "Welcome Paragraph 2", name: "welcome_body2", widget: "text" }
+          - { label: "Welcome Paragraph 3", name: "welcome_body3", widget: "text" }
+          - { label: "Welcome Video URL", name: "video_url", widget: "string", hint: "YouTube embed URL e.g. https://www.youtube.com/embed/..." }
+          - label: "FAQ"
+            name: "faq"
+            widget: "list"
+            summary: "{{fields.question}}"
+            fields:
+              - { label: "Question", name: "question", widget: "string" }
+              - { label: "Answer", name: "answer", widget: "text" }
+
       - name: "contact"
         label: "Contact"
         file: "contact.html"
