@@ -293,6 +293,20 @@ Referenced in `.njk` templates as `{{ site.address_street }}`, `{{ site.social.i
 CSS patterns like `@media(...){#id {...}}` trigger Nunjucks comment parsing (`{#` = comment open). Fix: add a space → `@media(...){ #id {...}}`. This was fixed in all blog layouts. Known occurrence in Phase 7:
 - `ministries.html` line 74: `@media(prefers-reduced-motion:reduce){#giving-modal>div:last-child.animate{animation:none}}` → needs `){ #giving-modal`
 
+### ⚠️ Critical patterns for ALL Phase 7 `.njk` conversions (learned from pilot bugs)
+
+**Bug 1 — Path resolution:** When Eleventy outputs `page.njk` to `_site/page/index.html`, ALL relative paths (`assets/...`, `give.html`) resolve from `/page/` not the root. EVERY href, src, and image path — including front matter image and link values — must be root-relative (leading `/`).
+- Front matter: `image: "/assets/images/..."`, `link: "/mercy-kidz.html"` (NOT `"assets/..."`)
+- HTML template: `href="/give.html"`, `src="/assets/..."`, `href="/"` for logo
+- Template vars that output user-provided paths (e.g. `{{ ministry.image }}`) inherit the `/` from the front matter value — no need to add it in the template itself
+
+**Bug 2 — Decap CMS format detection:** Decap does not recognize `.njk` as a YAML-frontmatter file. Without an explicit `format` key, all fields appear empty in the CMS and a Save would wipe the file's content. Every `files` collection entry for a `.njk` file MUST include:
+```yaml
+format: "yaml-frontmatter"
+```
+
+Both fixes committed as `5091c42` on 2026-07-19.
+
 ### ministries.html — pilot conversion notes
 
 - Hero bg: `assets/images/2026/congregation/congregation-seated-service-01.jpg`
