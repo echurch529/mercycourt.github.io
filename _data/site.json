@@ -1,0 +1,21 @@
+{
+  "address_street": "529 Walker Avenue",
+  "address_city_state": "Baltimore, MD 21212",
+  "phone": "+1 (410) 900-9111",
+  "email": "info@mercycourt.org",
+  "service_times": {
+    "sunday":      { "label": "Sunday Service",           "time": "10:00 AM" },
+    "wednesday":   { "label": "Bible Study",              "time": "7:00 PM"  },
+    "friday":      { "label": "Prayer Meeting",           "time": "7:00 PM"  },
+    "power_night": { "label": "Power Night (1st Friday)", "time": "7:00 PM"  }
+  },
+  "social": {
+    "facebook":  "https://www.facebook.com/rccgmercycourt",
+    "instagram": "https://www.instagram.com/mercycourt/",
+    "youtube":   "https://www.youtube.com/@RCCGMercyCourt",
+    "tiktok":    "https://www.tiktok.com/@rccgmercycourt"
+  },
+  "zeffy_general":  "https://www.zeffy.com/en-US/embed/donation-form/general-giving-25",
+  "zeffy_building": "https://www.zeffy.com/en-US/embed/donation-form/building-project-3",
+  "mailchimp_action": "https://mercycourt.us2.list-manage.com/subscribe/post?u=1f6d34239bf35c1b0512b77c8&id=888af1f4b9&f_id=0060c5e1f0"
+}

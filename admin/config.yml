@@ -44,3 +44,31 @@ collections:
         widget: "list"
         required: false
         field: { label: "Reference", name: "reference", widget: "string" }
+
+  - name: "pages"
+    label: "Pages"
+    files:
+
+      - name: "ministries"
+        label: "Ministries"
+        file: "ministries.njk"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Subtitle", name: "subtitle", widget: "string" }
+          - { label: "Intro Eyebrow", name: "intro_eyebrow", widget: "string" }
+          - { label: "Intro Body", name: "intro_body", widget: "text" }
+          - label: "Ministry Cards"
+            name: "ministries"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Link URL", name: "link", widget: "string", hint: "Relative path, e.g. mercy-kidz.html" }

@@ -241,32 +241,82 @@ All posts now served exclusively by Eleventy from `src/blog-posts/*.md`.
 
 Pages renamed `.html` → `.njk`; editable fields extracted to front matter YAML; HTML body unchanged except hardcoded strings replaced with `{{ field }}` / `{% for %}` loops. Decap gets a new `files` collection alongside the existing `posts` folder collection. Existing layout, CSS, and JS preserved exactly.
 
+**UX improvements (inspired by Statamic/TinaCMS/Sanity patterns):**
+- Hero fields grouped under `object` widget — collapses as a unit in the sidebar
+- List items get `summary` templates so collapsed items show meaningful labels (not just "Item 1")
+- URL and technical fields get `hint` text explaining their purpose
+- `default` values pre-populate fields for new editors
+
 ### Scope
 
 **Tier 1 — Convert (5 pages, in pilot order):**
-1. `ministries.html` → `ministries.njk` — **pilot, in progress**
-2. `tehillah-voices.html` → `tehillah-voices.njk`
-3. `the-new-mc.html` → `the-new-mc.njk` — also fixes broken Get Connected form (needs Formspree endpoint from user)
+1. `ministries.html` → `ministries.njk` — ✅ **pilot complete** (built, verified 2026-07-19)
+2. `tehillah-voices.html` → `tehillah-voices.njk` — **prerequisite:** rename `4G6A8444 copy 3.jpg` (space breaks Decap image widget) → e.g. `tehillah-voices-hero.jpg`
+3. `the-new-mc.html` → `the-new-mc.njk` — **blocked:** user must create Formspree form for Get Connected form and provide endpoint
 4. `mercy-kidz.html` → `mercy-kidz.njk`
 5. `about-us.html` → `about-us.njk`
 
-**Tier 2 — Shared site data only:** `_data/site.json` created; `contact.html` + `index.html` stay as pass-through HTML.
+**Tier 2 — Shared site data only:** `_data/site.json` — ✅ **created** (address, phone, email, social URLs, service times, Zeffy URLs, Mailchimp action); `contact.html` + `index.html` stay as pass-through HTML.
 
-**Deferred:** `community-impact.html`, `plan-your-visit.html` (complex interactive JS); `give.html`, `watch-live.html`, `index.html` (low CMS value or needs architectural decision).
+**Deferred:** `community-impact.html`, `plan-your-visit.html` (complex interactive JS); `give.html`, `watch-live.html`, `index.html`.
 
-### `_data/site.json` fields
-Address, phone, email, social URLs (FB/IG/YT/TikTok), service times (Sun/Wed/Fri/Power Night), Zeffy embed URLs. Referenced in `.njk` pages as `{{ site.address }}` etc.
+### `_data/site.json` (confirmed from source files)
 
-### Decap `files` collection fields (per page)
-- **ministries**: hero_image, intro_heading, intro_body, ministry cards list (image/title/description/link)
-- **tehillah-voices**: hero_image, vision_heading, vision_body, youtube_url, join_url, gallery (3 images)
-- **the-new-mc**: hero_image, mission, vision, serve_teams list, leaders, leader_bio
-- **mercy-kidz**: hero_image, age_groups list, faq list
-- **about-us**: hero_image, pastor_bio (markdown), pastor_quote, pastor_quote_attr, vision_body, testimonials list
+```json
+{
+  "address_street": "529 Walker Avenue",
+  "address_city_state": "Baltimore, MD 21212",
+  "phone": "+1 (410) 900-9111",
+  "email": "info@mercycourt.org",
+  "service_times": {
+    "sunday":      { "label": "Sunday Service",           "time": "10:00 AM" },
+    "wednesday":   { "label": "Bible Study",              "time": "7:00 PM"  },
+    "friday":      { "label": "Prayer Meeting",           "time": "7:00 PM"  },
+    "power_night": { "label": "Power Night (1st Friday)", "time": "7:00 PM"  }
+  },
+  "social": {
+    "facebook":  "https://www.facebook.com/rccgmercycourt",
+    "instagram": "https://www.instagram.com/mercycourt/",
+    "youtube":   "https://www.youtube.com/@RCCGMercyCourt",
+    "tiktok":    "https://www.tiktok.com/@rccgmercycourt"
+  },
+  "zeffy_general":  "https://www.zeffy.com/en-US/embed/donation-form/general-giving-25",
+  "zeffy_building": "https://www.zeffy.com/en-US/embed/donation-form/building-project-3",
+  "mailchimp_action": "https://mercycourt.us2.list-manage.com/subscribe/post?u=1f6d34239bf35c1b0512b77c8&id=888af1f4b9&f_id=0060c5e1f0"
+}
+```
+
+Referenced in `.njk` templates as `{{ site.address_street }}`, `{{ site.social.instagram }}`, etc.
+
+### Nunjucks gotcha — CSS `{#` conflict
+
+CSS patterns like `@media(...){#id {...}}` trigger Nunjucks comment parsing (`{#` = comment open). Fix: add a space → `@media(...){ #id {...}}`. This was fixed in all blog layouts. Known occurrence in Phase 7:
+- `ministries.html` line 74: `@media(prefers-reduced-motion:reduce){#giving-modal>div:last-child.animate{animation:none}}` → needs `){ #giving-modal`
+
+### ministries.html — pilot conversion notes
+
+- Hero bg: `assets/images/2026/congregation/congregation-seated-service-01.jpg`
+- Hero subtitle: "Discover the many ways you can connect, grow, and serve at Mercy Court"
+- Intro eyebrow: "We do community differently"
+- Intro body: "At Mercy Court, we believe that every member has a role to play in the body of Christ..."
+- 5 ministry cards: Worship Ministry, Children's Ministry, Community Outreach, Discipleship Groups, Prayer Ministry
+- Footer bug: only 3 social icons with wrong icon/URL pairings → replace with correct 4-link footer from `one-bring-one.html`
+- Canonical/og:url/ld+json: strip `.html` suffix → `/ministries`
+- `.eleventy.js`: add `eleventyConfig.ignores.add("ministries.html")` to prevent duplicate pass-through output
 
 ### `the-new-mc.html` notes
 - `<meta name="robots" content="noindex, nofollow">` — preserved during conversion; removal is a separate explicit decision
-- Get Connected form has no `action` and no JS handler — broken. Will add Formspree endpoint + async submit handler (same pattern as `community-impact.html`) during conversion. **User must create the Formspree form and provide the endpoint first.**
+- Get Connected form has no `action` and no JS handler — broken. Fix: add Formspree endpoint + async submit handler (same pattern as `community-impact.html`). **User must create the Formspree form and provide the endpoint first.**
+
+### Decap `files` collection — field summary per page
+
+Full YAML schema is in the plan file (`/Users/oluwaseunimohi/.claude/plans/modular-waddling-sky.md`).
+
+- **ministries**: `hero` (object: image, subtitle), `intro_eyebrow`, `intro_heading`, `intro_body`, `ministries` (list: image/image_alt/title/description/link)
+- **tehillah**: `hero` (object: image, badge, tagline), `vision` (object: heading/body), `gallery` (list max 3), `about` (object: heading/body/instagram_url), `youtube_url`, `join_url`, `roles` (list), `scripture_quote`, `scripture_ref`
+- **the-new-mc**: `hero`, `mission`, `vision`, `serve_teams` (list), `leaders`, `leader_bio` (markdown), `formspree_endpoint`
+- **mercy-kidz**: `hero` (object: image, tagline), `mission`, `values` (5S list), `age_groups` (list), `faq` (list), `programs` (list)
+- **about**: `hero` (object: image, headline), `pastor` (object: photo + bio markdown), `pastor_quote`, `pastor_quote_attr`, `vision_body` (markdown), `testimonials` (list max 2)
 
 ### Pending user action
 - Create a Formspree form for The New MC "Get Connected" and provide the endpoint URL before page 3 is converted.
@@ -275,20 +325,49 @@ Address, phone, email, social URLs (FB/IG/YT/TikTok), service times (Sun/Wed/Fri
 
 ## Phase 8 — Event Landing Pages (❌ PENDING)
 
-### Approach
-Folder-based collection: `src/event-pages/*.md` → `_includes/layouts/event-page.njk`. Permalink pattern `/{{ page.fileSlug }}` gives top-level clean URLs. Editors choose the slug at creation time. Old event pages are never deleted (append-only archive).
+### Approach — Variable Type Widgets (block-based)
+
+Event pages use Decap's **Variable Type Widgets** (`list` with `types` + `typeKey: "block_type"`). This is the structural equivalent of Statamic Replicator / TinaCMS blocks / Sanity typed arrays. Editors can add, remove, and reorder section blocks in the Decap sidebar. Each block type exposes only its own fields.
+
+`event-page.njk` renders via `{% for section in sections %}` + `{% if section.block_type == "hero" %}` etc. The visit modal form (Formspree + Mailchimp dual-submit) is rendered once outside the sections loop using top-level flat fields.
 
 ### Prerequisite
-Fix `one-bring-one.html` nav/footer hrefs — currently use `../` relative paths instead of absolute paths, causing broken links in production. Must fix before any event page templating.
+Fix `one-bring-one.html` nav/footer `../` relative hrefs → absolute paths before any event page templating.
 
-### Nav — `is_current_event` flag (recommended)
-One event page has `is_current_event: true` in front matter. `_data/currentEvent.js` finds it and exports its URL. Nav template reads `{{ currentEvent.url | cleanUrl }}`. Toggling the flag on a new event + off the old one updates the nav on next deploy. Old pages stay live but leave the nav.
+### File structure
 
-### Front matter schema (key per-event fields)
-`hero_image`, `hero_badge`, `hero_headline`, `hero_tagline`, `welcome_heading`, `welcome_body` (markdown), `feature_cards` (list of 4: emoji/title/body), `video_embed_url` (empty = hidden), `testimonials` (list, max 3), `event_date_label`, `event_time`, `location_address`, `parking_note`, `cta_button_text`, `formspree_endpoint`, `mailchimp_f_id`, `mailchimp_tag`, `is_current_event` (boolean)
+```
+src/event-pages/
+  event-pages.json      → layout + permalink (/{{ page.fileSlug }}) + tags: [events]
+  one-bring-one.md      → first entry, migrated from one-bring-one.html
+_includes/layouts/
+  event-page.njk        → block renderer (for loop + if/elif per block type)
+_data/
+  currentEvent.js       → finds is_current_event: true → exports URL for nav
+```
+
+### Top-level flat fields (per event, not blocks)
+
+`title`, `seo_title`, `seo_description`, `og_image`, `is_current_event` (boolean), `formspree_endpoint`, `mailchimp_f_id`, `mailchimp_tag`
+
+### Block types (`section.block_type` values)
+
+| Block | Key fields |
+|-------|-----------|
+| `hero` | image, badge, headline, tagline, cta_primary_text, cta_secondary_text |
+| `welcome` | badge, heading, body (markdown) |
+| `feature_grid` | badge, heading, cards list (emoji/title/body) |
+| `video` | heading, url (YouTube embed URL) |
+| `testimonials` | badge, heading, items list (name/quote), max 3 |
+| `service_info` | heading, address, time, parking_note |
+| `cta` | heading, body (markdown), button_text |
+
+### Nav — `is_current_event` flag
+
+`_data/currentEvent.js` finds the event with `is_current_event: true`, exports its URL. Nav uses `{{ currentEvent.url | cleanUrl }}`. Toggle the flag on new event + off old → nav updates on next deploy. Old pages stay live.
 
 ### Existing `one-bring-one.html`
-Stays untouched in the project root until an explicit decision is made to migrate or retire it. No deletion without instruction.
+Stays untouched in the project root until an explicit migration decision is made. No deletion without instruction.
 
 ---
 
@@ -296,4 +375,13 @@ Stays untouched in the project root until an explicit decision is made to migrat
 - GA4: `G-JWGVNRLKJL`
 - Meta Pixel: `1027268596866855`
 - Mailchimp form action: `https://mercycourt.us2.list-manage.com/subscribe/post?u=1f6d34239bf35c1b0512b77c8&id=888af1f4b9&f_id=0060c5e1f0`
-- Zeffy embed: `https://www.zeffy.com/en-US/embed/donation-form/general-giving-25`
+- Mailchimp f_id (visit modal / one-bring-one): `0065c5e1f0`
+- Zeffy general giving: `https://www.zeffy.com/en-US/embed/donation-form/general-giving-25`
+- Zeffy building project: `https://www.zeffy.com/en-US/embed/donation-form/building-project-3`
+- Formspree (visit modal / one-bring-one): `https://formspree.io/f/xreddnbn`
+
+## Social URLs (confirmed from one-bring-one.html footer)
+- Facebook: `https://www.facebook.com/rccgmercycourt`
+- Instagram: `https://www.instagram.com/mercycourt/`
+- YouTube: `https://www.youtube.com/@RCCGMercyCourt`
+- TikTok: `https://www.tiktok.com/@rccgmercycourt`

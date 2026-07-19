@@ -16,6 +16,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.ignores.add("Reference");
   eleventyConfig.ignores.add("README.md");
   eleventyConfig.ignores.add("CMS_STATE.md");
+  eleventyConfig.ignores.add("ministries.html");
 
   eleventyConfig.addCollection("posts", (api) =>
     api.getFilteredByGlob("src/blog-posts/*.md").sort((a, b) => b.date - a.date)
