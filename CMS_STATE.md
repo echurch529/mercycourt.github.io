@@ -13,7 +13,7 @@
 | 2 — Cloudflare Pages build settings | ✅ Done | Build confirmed live: 48s, NODE_VERSION 18; clean URLs verified in DevTools (0 .html hrefs) |
 | 3 — Decap CMS admin panel | ✅ Done | `admin/index.html` + `admin/config.yml` created |
 | 4 — GitHub OAuth Worker | ✅ Done | Live at `oauth-mercycourt.echurch.workers.dev`; incognito login confirmed; Decap dashboard loads with 4 posts |
-| 5 — Access control | 🔶 Partial | Part A (branch protection) ✅ verified 2026-07-18; Part B (Zero Trust) ⏳ awaiting email list |
+| 5 — Access control | ✅ Done | Part A (branch protection) + Part B (Zero Trust) both verified 2026-07-18 |
 | 6 — Delete old HTML blog posts | ❌ Pending | After verifying live site |
 
 ---
@@ -210,17 +210,18 @@ Verified full loop: Decap draft → Ready to Review → PR created → admin app
 
 Editor workflow: ends at "Set status → Ready to Review." Admin merges on GitHub. Editors clicking Publish will be silently blocked by GitHub — tell editors not to use the Publish button.
 
-### Part B — Cloudflare Zero Trust on `/admin/*` (⏳ AWAITING EMAIL LIST)
+### Part B — Cloudflare Zero Trust on `/admin/*` (✅ DONE — 2026-07-18)
 
-Steps (to run once email list is confirmed):
-1. Cloudflare dashboard → **Zero Trust** → **Access** → **Applications** → **Add an application** → **Self-hosted**
-2. Application name: `Mercy Court CMS`
-3. Domain: `mercycourt.org`, Path: `/admin`
-4. Policy: **Allow**, rule type: **Emails**, value: (confirmed list)
-5. Session duration: `24 hours`
-6. Authentication method: **One-time PIN**
+Application: `Mercy Court CMS`
+- Domain: `mercycourt.org`, Path: `/admin`
+- Policy: Allow — Emails: `seun.imohi@mercycourt.org`, `blessing.leonard@mercycourt.org`
+- Session duration: 24 hours
+- Authentication method: One-time PIN
 
-After enabling: flow becomes `visit /admin/` → Cloudflare email PIN challenge → GitHub OAuth inside Decap.
+Verified flow: incognito → `mercycourt.org/admin/` → Cloudflare email challenge → PIN → GitHub OAuth → Decap dashboard.
+
+**Identity provider gotcha (for future reference):**
+The default "Cloudflare" identity provider (tied to the Cloudflare account login) was enabled on the account and kept overriding the One-time PIN flow, even with "Accept all identity providers" toggled off on the application. Fix: delete the "Cloudflare" identity provider entirely under **Zero Trust → Settings → Authentication → Identity provider integrations**, then explicitly add "One-time PIN" as its replacement. After that change, the email PIN challenge worked as intended. If Zero Trust auth ever reverts to a Cloudflare account login prompt instead of an email PIN, check this setting first.
 
 ---
 
