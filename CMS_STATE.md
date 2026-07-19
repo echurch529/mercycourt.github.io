@@ -239,7 +239,7 @@ All posts now served exclusively by Eleventy from `src/blog-posts/*.md`.
 
 ### Approach
 
-Editable fields extracted to front matter YAML; HTML body unchanged except hardcoded strings replaced with `{{ field }}` / `{% for %}` loops. Decap gets a new `files` collection alongside the existing `posts` folder collection. Existing layout, CSS, and JS preserved exactly.
+Editable fields extracted to front matter YAML; HTML body unchanged except hardcoded strings replaced with `{{ field }}` / `{% for %}` loops. Decap gets two new `files` collections (`main-pages`, `ministries-pages`) alongside the existing `posts` folder collection. Existing layout, CSS, and JS preserved exactly.
 
 **File extension: stay `.html`, add `templateEngineOverride: njk` to front matter.** Do NOT rename to `.njk` — Decap v3 cannot reliably parse YAML frontmatter from `.njk` files. `.html` extension is natively understood by Decap with no `format` override needed. Eleventy processes the file as Nunjucks via `templateEngineOverride`.
 
@@ -262,11 +262,9 @@ Editable fields extracted to front matter YAML; HTML body unchanged except hardc
 8. `contact.html` — ✅ **converted** (commit b8a152c) — hero image only; all contact/footer info via site.*; social icon mismatch fixed
 9. `plan-your-visit.html` — ✅ **converted** (commit df62aa6) — hero, welcome_body (×3), video_url, faq list (10 items as loop with loop.index IDs)
 
-**Deferred (no conversion planned):** `give.html`, `watch-live.html`, `blog.njk`
+**Deferred (no conversion planned):** `give.html` (Zeffy iframes, minimal copy), `watch-live.html` (YouTube API JS, minimal copy), `blog.njk` (already .njk, posts auto-render).
 
 **Shared site data:** `_data/site.json` — ✅ **created** (address, phone, email, social URLs, service times, Zeffy URLs, Mailchimp action).
-
-**Deferred:** `give.html` (Zeffy iframes, minimal copy), `watch-live.html` (YouTube API JS, minimal copy), `blog.njk` (already .njk, posts auto-render).
 
 ### `_data/site.json` (confirmed from source files)
 
@@ -313,7 +311,7 @@ CSS patterns like `@media(...){#id {...}}` trigger Nunjucks comment parsing (`{#
 
 **Bug 3 — Legacy source file still deployed:** After initially renaming `ministries.html` → `ministries.njk`, the original `ministries.html` was only added to `.eleventy.js` ignores — not deleted. Eleventy's ignore rule prevents template processing but NOT static file serving; Cloudflare continued serving the old page at `/ministries.html`. Fix: delete the source file. The ignore rule is then unnecessary and should be removed.
 
-**Bug 3 — Cloudflare edge cache:** Even after a file is deleted from the repo and a deploy completes, Cloudflare's edge cache can continue serving the old response. **Standard practice:** always confirm via the Cloudflare Pages Deployments tab that the build succeeded. If a URL still shows stale content after a confirmed-successful deploy, the fix is a cache purge (Dashboard → Caching → Configuration → Purge Everything) — not more code changes.
+**Bug 4 — Cloudflare edge cache:** Even after a file is deleted from the repo and a deploy completes, Cloudflare's edge cache can continue serving the old response. **Standard practice:** always confirm via the Cloudflare Pages Deployments tab that the build succeeded. If a URL still shows stale content after a confirmed-successful deploy, the fix is a cache purge (Dashboard → Caching → Configuration → Purge Everything) — not more code changes.
 
 Commits: `5091c42` (paths fix), `fa006ac` (delete legacy file), `87851b0` (rename .njk → .html, add templateEngineOverride).
 
@@ -328,7 +326,7 @@ Commits: `5091c42` (paths fix), `fa006ac` (delete legacy file), `87851b0` (renam
 - Builds to `_site/ministries.html` (not a subdirectory) — Cloudflare pretty-URL routing serves it at `/ministries`
 - `admin/config.yml` entry: `file: "ministries.html"`, no `format:` line
 
-### Decap `files` collection — field summary per page
+### Decap `files` collections — field summary per page
 
 - **ministries** ✅: `hero` (object: image, subtitle), `intro_eyebrow`, `intro_body`, `ministries` (list: image/image_alt/title/description/link)
 - **tehillah** ✅: `hero` (object: image, badge, tagline), `vision` (object: heading/body), `gallery` (list max 3), `about` (object: heading/body1/body2/instagram_url), `youtube_url`, `youtube_playlist_url`, `join_url`, `scripture_quote`, `scripture_ref`
