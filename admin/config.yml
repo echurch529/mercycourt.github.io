@@ -73,6 +73,37 @@ collections:
               - { label: "Description", name: "description", widget: "text" }
               - { label: "Link URL", name: "link", widget: "string", hint: "Relative path, e.g. mercy-kidz.html" }
 
+      - name: "mercy-kidz"
+        label: "Mercy Kidz (God's Heritage)"
+        file: "mercy-kidz.html"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Tagline", name: "tagline", widget: "string" }
+          - { label: "About Section Body", name: "about_body", widget: "text" }
+          - { label: "Mission Heading (first part)", name: "mission_heading_prefix", widget: "string" }
+          - { label: "Mission Heading (highlighted in red)", name: "mission_heading_highlight", widget: "string" }
+          - { label: "Mission Body", name: "mission_body", widget: "text" }
+          - label: "Social Media Links"
+            name: "connect"
+            widget: "object"
+            fields:
+              - { label: "Instagram URL", name: "instagram_url", widget: "string", hint: "Full URL e.g. https://www.instagram.com/gods.heritage.kids" }
+              - { label: "Instagram Handle", name: "instagram_handle", widget: "string", hint: "e.g. @gods.heritage.kids" }
+              - { label: "YouTube URL", name: "youtube_url", widget: "string", hint: "Full URL e.g. https://www.youtube.com/@godsheritagekids" }
+              - { label: "YouTube Handle", name: "youtube_handle", widget: "string", hint: "e.g. @godsheritagekids" }
+          - label: "FAQ"
+            name: "faq"
+            widget: "list"
+            summary: "{{fields.question}}"
+            fields:
+              - { label: "Question", name: "question", widget: "string" }
+              - { label: "Answer", name: "answer", widget: "text" }
+
       - name: "tehillah"
         label: "Tehillah Voices"
         file: "tehillah-voices.html"
