@@ -284,6 +284,123 @@ collections:
               - { label: "Question", name: "question", widget: "string" }
               - { label: "Answer", name: "answer", widget: "text" }
 
+  - name: "events"
+    label: "Event Pages"
+    label_singular: "Event Page"
+    folder: "events"
+    create: true
+    slug: "{{slug}}"
+    extension: "html"
+    format: "frontmatter"
+    fields:
+      - { label: "Template Engine", name: "templateEngineOverride", widget: "hidden", default: "njk" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/event-page.njk" }
+      - { label: "Page Title", name: "title", widget: "string", hint: "Used in browser tab and SEO — e.g. One Bring One — Invite a Friend | Mercy Court" }
+      - { label: "SEO Description", name: "seo_description", widget: "text" }
+      - { label: "OG / Share Image", name: "og_image", widget: "image" }
+      - label: "Publish Date"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        time_format: false
+
+      - label: "Hero"
+        name: "hero"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Background Image", name: "image", widget: "image" }
+          - { label: "Badge Pill Text", name: "badge", widget: "string", required: false, hint: "Small orange pill above the headline, e.g. WELCOME HOME. Leave blank to hide." }
+          - { label: "Headline", name: "headline", widget: "string" }
+          - { label: "Subheadline", name: "subheadline", widget: "text" }
+          - { label: "Primary CTA Button Text", name: "primary_cta", widget: "string", default: "PLAN MY VISIT", hint: "Always opens the Plan My Visit modal" }
+          - { label: "Secondary CTA Text", name: "secondary_cta_text", widget: "string", default: "WATCH ONLINE", required: false, hint: "Leave blank to hide the secondary button" }
+          - { label: "Secondary CTA URL", name: "secondary_cta_url", widget: "string", default: "/watch-live.html", required: false }
+
+      - label: "Welcome / Message Section"
+        name: "welcome"
+        widget: "object"
+        collapsed: true
+        required: false
+        fields:
+          - { label: "Badge Pill Text", name: "badge", widget: "string", required: false, hint: "e.g. A MESSAGE FOR YOU" }
+          - { label: "Heading", name: "heading", widget: "string", required: false, hint: "Leave blank to hide this entire section" }
+          - label: "Body Paragraphs"
+            name: "body"
+            widget: "list"
+            required: false
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+
+      - label: "Feature Cards Section"
+        name: "features"
+        widget: "object"
+        collapsed: true
+        required: false
+        fields:
+          - { label: "Badge Pill Text", name: "badge", widget: "string", required: false, hint: "e.g. WHAT TO EXPECT" }
+          - { label: "Heading", name: "heading", widget: "string", required: false }
+          - label: "Cards"
+            name: "cards"
+            widget: "list"
+            required: false
+            summary: "{{fields.emoji}} {{fields.title}}"
+            fields:
+              - { label: "Emoji", name: "emoji", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+
+      - label: "Testimonials / Social Proof Section"
+        name: "testimonials"
+        widget: "object"
+        collapsed: true
+        required: false
+        fields:
+          - { label: "Heading", name: "heading", widget: "string", required: false, hint: "Leave blank to hide this entire section" }
+          - { label: "Subheading", name: "subheading", widget: "string", required: false }
+          - { label: "Video Embed URL", name: "video_url", widget: "string", required: false, hint: "YouTube embed URL e.g. https://www.youtube.com/embed/... — leave blank to show placeholder" }
+          - label: "Quotes"
+            name: "quotes"
+            widget: "list"
+            required: false
+            summary: "{{fields.attribution}}"
+            fields:
+              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Attribution", name: "attribution", widget: "string" }
+
+      - label: "Service Logistics Section"
+        name: "logistics"
+        widget: "object"
+        collapsed: true
+        required: false
+        fields:
+          - { label: "Section Heading", name: "heading", widget: "string", required: false, default: "Join Us This Sunday", hint: "Leave blank to hide this entire section" }
+          - { label: "Custom Note", name: "custom_note", widget: "string", required: false, hint: "Optional extra line, e.g. Doors open at 9:30 AM. Leave blank to hide." }
+
+      - label: "Final CTA Section"
+        name: "cta_final"
+        widget: "object"
+        collapsed: true
+        required: false
+        fields:
+          - { label: "Heading", name: "heading", widget: "string", required: false, hint: "Leave blank to hide this entire section" }
+          - label: "Body Paragraphs"
+            name: "body"
+            widget: "list"
+            required: false
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - { label: "Button Text", name: "button_text", widget: "string", default: "PLAN MY VISIT", required: false }
+
+      - label: "Giving / Donation Section"
+        name: "giving"
+        widget: "object"
+        collapsed: true
+        required: false
+        fields:
+          - { label: "Heading", name: "heading", widget: "string", required: false, hint: "Leave blank to hide this entire section" }
+          - { label: "Body", name: "body", widget: "text", required: false }
+          - { label: "Button Text", name: "button_text", widget: "string", default: "Give Now", required: false }
+          - { label: "Giving URL", name: "url", widget: "string", required: false, hint: "Zeffy, Stripe, or direct giving link" }
+
   - name: "posts"
     label: "Blog Posts"
     label_singular: "Blog Post"
