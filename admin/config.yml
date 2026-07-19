@@ -72,3 +72,42 @@ collections:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
               - { label: "Link URL", name: "link", widget: "string", hint: "Relative path, e.g. mercy-kidz.html" }
+
+      - name: "tehillah"
+        label: "Tehillah Voices"
+        file: "tehillah-voices.html"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Badge Text", name: "badge", widget: "string" }
+              - { label: "Tagline", name: "tagline", widget: "string" }
+          - label: "Vision Section"
+            name: "vision"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+          - label: "Gallery (3 photos)"
+            name: "gallery"
+            widget: "list"
+            max: 3
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Alt Text", name: "alt", widget: "string" }
+          - label: "About Section"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "First Paragraph", name: "body1", widget: "text" }
+              - { label: "Second Paragraph", name: "body2", widget: "text" }
+              - { label: "Instagram URL", name: "instagram_url", widget: "string", hint: "Full URL e.g. https://www.instagram.com/tehillahvoices/" }
+          - { label: "YouTube Embed URL", name: "youtube_url", widget: "string", hint: "Full embed URL e.g. https://www.youtube.com/embed/..." }
+          - { label: "YouTube Playlist URL", name: "youtube_playlist_url", widget: "string", hint: "Full playlist URL for the Watch on YouTube button" }
+          - { label: "Join the Team Form URL", name: "join_url", widget: "string", hint: "Microsoft Forms URL" }
+          - { label: "Scripture Quote", name: "scripture_quote", widget: "string" }
+          - { label: "Scripture Reference", name: "scripture_ref", widget: "string", hint: "e.g. Psalm 100:4" }
