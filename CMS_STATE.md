@@ -15,7 +15,7 @@
 | 4 — GitHub OAuth Worker | ✅ Done | Live at `oauth-mercycourt.echurch.workers.dev`; incognito login confirmed; Decap dashboard loads with 4 posts |
 | 5 — Access control | ✅ Done | Part A (branch protection) + Part B (Zero Trust) both verified 2026-07-18 |
 | 6 — Delete old HTML blog posts | ✅ Done | All four files deleted via PR #2; live URLs verified post-deploy; /blog clean (0 .html in DOM) |
-| 7 — Static pages CMS | ⏳ In progress | 5 pages → `.njk` conversion + Decap `files` collection; pilot: `ministries.html`; see below |
+| 7 — Static pages CMS | ⏳ In progress | 5 pages → CMS conversion; pilot (`ministries.html`) ✅ verified 2026-07-19; next: tehillah-voices.html |
 | 8 — Event landing pages | ❌ Pending | New `events` collection + `event-page.njk` layout; one-bring-one nav bug fix first |
 
 ---
@@ -252,8 +252,8 @@ Editable fields extracted to front matter YAML; HTML body unchanged except hardc
 ### Scope
 
 **Tier 1 — Convert (5 pages, in pilot order):**
-1. `ministries.html` — ✅ **pilot complete** (`templateEngineOverride: njk` added, Decap CMS fix pending verification after deploy `87851b0`)
-2. `tehillah-voices.html` — **prerequisite:** rename `4G6A8444 copy 3.jpg` (space breaks Decap image widget) → e.g. `tehillah-voices-hero.jpg`
+1. `ministries.html` — ✅ **verified 2026-07-19** (all 3 bugs confirmed fixed; Decap fields fully populated)
+2. `tehillah-voices.html` — **next**; prerequisite: rename `4G6A8444 copy 3.jpg` (space in filename breaks Decap image widget) → e.g. `tehillah-voices-hero.jpg`
 3. `the-new-mc.html` — **blocked:** user must create Formspree form for Get Connected form and provide endpoint
 4. `mercy-kidz.html`
 5. `about-us.html`
@@ -306,7 +306,7 @@ CSS patterns like `@media(...){#id {...}}` trigger Nunjucks comment parsing (`{#
 
 **Bug 3 — Legacy source file still deployed:** After initially renaming `ministries.html` → `ministries.njk`, the original `ministries.html` was only added to `.eleventy.js` ignores — not deleted. Eleventy's ignore rule prevents template processing but NOT static file serving; Cloudflare continued serving the old page at `/ministries.html`. Fix: delete the source file. The ignore rule is then unnecessary and should be removed.
 
-**Bug 3 — Cloudflare edge cache:** Even after a file is deleted from the repo and a deploy completes, Cloudflare's edge cache can continue serving the old response. If a URL still shows stale content after a confirmed deploy, manually purge the Cloudflare cache (Dashboard → Caching → Purge Everything) before assuming a deployment failure.
+**Bug 3 — Cloudflare edge cache:** Even after a file is deleted from the repo and a deploy completes, Cloudflare's edge cache can continue serving the old response. **Standard practice:** always confirm via the Cloudflare Pages Deployments tab that the build succeeded. If a URL still shows stale content after a confirmed-successful deploy, the fix is a cache purge (Dashboard → Caching → Configuration → Purge Everything) — not more code changes.
 
 Commits: `5091c42` (paths fix), `fa006ac` (delete legacy file), `87851b0` (rename .njk → .html, add templateEngineOverride).
 
