@@ -51,8 +51,7 @@ collections:
 
       - name: "ministries"
         label: "Ministries"
-        file: "ministries.njk"
-        format: "yaml-frontmatter"
+        file: "ministries.html"
         fields:
           - label: "Hero"
             name: "hero"
