@@ -104,6 +104,39 @@ collections:
               - { label: "Question", name: "question", widget: "string" }
               - { label: "Answer", name: "answer", widget: "text" }
 
+      - name: "about"
+        label: "About Us"
+        file: "about-us.html"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Headline (first line)", name: "headline", widget: "string", hint: "e.g. IN CHRIST, FOR CHRIST," }
+              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string", hint: "e.g. WITH JOY!" }
+          - { label: "We Serve God — Paragraph 1", name: "serve_body1", widget: "text" }
+          - { label: "We Serve God — Paragraph 2", name: "serve_body2", widget: "text" }
+          - label: "Pastor"
+            name: "pastor"
+            widget: "object"
+            fields:
+              - { label: "Photo", name: "photo", widget: "image" }
+              - { label: "Bio Paragraph 1", name: "bio1", widget: "text" }
+              - { label: "Bio Paragraph 2", name: "bio2", widget: "text" }
+              - { label: "Bio Paragraph 3", name: "bio3", widget: "text" }
+          - { label: "Vision — Paragraph 1", name: "vision_body1", widget: "text" }
+          - { label: "Vision — Paragraph 2", name: "vision_body2", widget: "text" }
+          - label: "Testimonials"
+            name: "testimonials"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Attribution", name: "attribution", widget: "string", hint: "e.g. A Mercy Court Member" }
+
       - name: "tehillah"
         label: "Tehillah Voices"
         file: "tehillah-voices.html"
