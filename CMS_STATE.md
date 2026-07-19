@@ -235,7 +235,7 @@ All posts now served exclusively by Eleventy from `src/blog-posts/*.md`.
 
 ---
 
-## Phase 7 — Static Pages CMS (⏳ IN PROGRESS)
+## Phase 7 — Static Pages CMS (✅ DONE)
 
 ### Approach
 
@@ -307,6 +307,7 @@ CSS patterns like `@media(...){#id {...}}` trigger Nunjucks comment parsing (`{#
 - Front matter: `image: "/assets/images/..."`, `link: "/mercy-kidz.html"` (NOT `"assets/..."`)
 - HTML template: `href="/give.html"`, `src="/assets/..."`, `href="/"` for logo
 - Template vars that output user-provided paths (e.g. `{{ ministry.image }}`) inherit the `/` from the front matter value — no need to add it in the template itself
+- **Nav links must also be root-relative** — bare `href="about-us.html"` in nav/footer works when served from root but breaks in some hosting environments. Always use `href="/about-us.html"`. Verify with `grep 'href="[a-z]' _site/pagename.html` after build; should return 0 nav/footer matches.
 
 **Bug 2 — Decap CMS format detection:** Decap v3 does not reliably parse YAML frontmatter from `.njk` files — `format: yaml-frontmatter` at either the collection or file-entry level was tried and failed. **Fix: keep the `.html` extension and add `templateEngineOverride: njk` to front matter.** Decap natively understands `.html` with YAML frontmatter; Eleventy processes it as Nunjucks via the override. No `format:` field needed in config.yml. This is the required pattern for ALL Phase 7 page conversions.
 
@@ -337,6 +338,30 @@ Commits: `5091c42` (paths fix), `fa006ac` (delete legacy file), `87851b0` (renam
 - **community-impact** ✅: `hero`, `mission` (body1/2/3), `stats` (list), `pantry_hours`, `programs` (list with emoji), `partners` (list), `testimonials` (list), `pantry_highlight` (body1/2/3), `goals` (list with emoji), `volunteer_intro1/2`, `volunteer_form_endpoint`, `grant_body`
 - **contact** ✅: `hero` (image only — all contact info from site.*)
 - **plan-your-visit** ✅: `hero`, `welcome_body1/2/3`, `video_url`, `faq` (list: question/answer; rendered with loop.index IDs)
+
+### Post-conversion fixes (commit bb336d6 — 2026-07-19)
+
+Two bugs found on all 4 Phase 7 pages after independent verification:
+
+**Bug: Bare relative nav hrefs** — All 4 pages used `href="about-us.html"` style links instead of root-relative `/about-us.html`. For `index.html`, three ministry card `link:` values in front matter also needed the `/` prefix. Fixed by sed across all 4 files + front matter edits. Verified with `grep -c 'href="[a-z]...*\.html"'` on built output: 0 matches.
+
+**Bug: Facebook missing from footer** — Footer social row on community-impact, contact, and plan-your-visit had only 3 icons (Instagram, YouTube, TikTok); Facebook was omitted during conversion. Inserted the Facebook block before Instagram in each footer, matching the 4-icon pattern from ministries.html. `index.html` footer has no social row (by design — its Connect section mid-page carries all 4).
+
+**Root cause of delayed discovery:** The 5 Phase 7 conversion commits were local-only and never pushed to `origin/main`. The live site was running pre-conversion code. Standing rule added: always run `git log --oneline origin/main..HEAD` before any status report; never claim work is "live" or "in the CMS" if that returns commits.
+
+---
+
+## CMS Collection Structure (as of 2026-07-19)
+
+`admin/config.yml` now has three top-level collections (sidebar order):
+
+1. **Main Pages** (`name: "main-pages"`) — Homepage, About Us, Contact, Plan Your Visit, Community Impact
+2. **Ministries** (`name: "ministries-pages"`) — Ministries Overview, Tehillah Voices, Mercy Kidz
+3. **Blog Posts** (`name: "posts"`) — folder collection, `src/blog-posts/*.md`, create: true
+
+This mirrors the site nav: Tehillah Voices and God's Heritage nest under the Ministries dropdown; Homepage/About/Contact/etc. are top-level. Split from the original single flat "Pages" collection (commit `4786424`), reordered to put Blog Posts last (commit `c7f3ac5`).
+
+All 8 pages confirmed showing in `/admin/` → both collections visible in sidebar.
 
 ---
 
