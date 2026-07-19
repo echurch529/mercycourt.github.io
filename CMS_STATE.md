@@ -14,7 +14,7 @@
 | 3 — Decap CMS admin panel | ✅ Done | `admin/index.html` + `admin/config.yml` created |
 | 4 — GitHub OAuth Worker | ✅ Done | Live at `oauth-mercycourt.echurch.workers.dev`; incognito login confirmed; Decap dashboard loads with 4 posts |
 | 5 — Access control | ✅ Done | Part A (branch protection) + Part B (Zero Trust) both verified 2026-07-18 |
-| 6 — Delete old HTML blog posts | ❌ Pending | After verifying live site |
+| 6 — Delete old HTML blog posts | ✅ Done | All four files deleted via PR #2; live URLs verified post-deploy; /blog clean (0 .html in DOM) |
 
 ---
 
@@ -225,13 +225,11 @@ The default "Cloudflare" identity provider (tied to the Cloudflare account login
 
 ---
 
-## Phase 6 — Delete Old Blog HTML (PENDING)
+## Phase 6 — Delete Old Blog HTML (✅ DONE — 2026-07-18)
 
-Files to delete after verifying live output:
-- `blog-posts/the-power-of-your-circle.html`
-- `blog-posts/repositioned-for-greatness.html`
-- `blog-posts/the-compound-effect.html`
-- `blog-posts/mercy-court-launches-believing-bible-study-app.html`
+Deleted via PR #2 after all four live post URLs independently verified.
+All posts now served exclusively by Eleventy from `src/blog-posts/*.md`.
+`/blog` page confirmed clean post-deploy: 0 `.html` hrefs in live DOM.
 
 ---
 
