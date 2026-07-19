@@ -239,7 +239,9 @@ All posts now served exclusively by Eleventy from `src/blog-posts/*.md`.
 
 ### Approach
 
-Pages renamed `.html` → `.njk`; editable fields extracted to front matter YAML; HTML body unchanged except hardcoded strings replaced with `{{ field }}` / `{% for %}` loops. Decap gets a new `files` collection alongside the existing `posts` folder collection. Existing layout, CSS, and JS preserved exactly.
+Editable fields extracted to front matter YAML; HTML body unchanged except hardcoded strings replaced with `{{ field }}` / `{% for %}` loops. Decap gets a new `files` collection alongside the existing `posts` folder collection. Existing layout, CSS, and JS preserved exactly.
+
+**File extension: stay `.html`, add `templateEngineOverride: njk` to front matter.** Do NOT rename to `.njk` — Decap v3 cannot reliably parse YAML frontmatter from `.njk` files. `.html` extension is natively understood by Decap with no `format` override needed. Eleventy processes the file as Nunjucks via `templateEngineOverride`.
 
 **UX improvements (inspired by Statamic/TinaCMS/Sanity patterns):**
 - Hero fields grouped under `object` widget — collapses as a unit in the sidebar
@@ -250,11 +252,11 @@ Pages renamed `.html` → `.njk`; editable fields extracted to front matter YAML
 ### Scope
 
 **Tier 1 — Convert (5 pages, in pilot order):**
-1. `ministries.html` → `ministries.njk` — ✅ **pilot complete** (built, verified 2026-07-19)
-2. `tehillah-voices.html` → `tehillah-voices.njk` — **prerequisite:** rename `4G6A8444 copy 3.jpg` (space breaks Decap image widget) → e.g. `tehillah-voices-hero.jpg`
-3. `the-new-mc.html` → `the-new-mc.njk` — **blocked:** user must create Formspree form for Get Connected form and provide endpoint
-4. `mercy-kidz.html` → `mercy-kidz.njk`
-5. `about-us.html` → `about-us.njk`
+1. `ministries.html` — ✅ **pilot complete** (`templateEngineOverride: njk` added, Decap CMS fix pending verification after deploy `87851b0`)
+2. `tehillah-voices.html` — **prerequisite:** rename `4G6A8444 copy 3.jpg` (space breaks Decap image widget) → e.g. `tehillah-voices-hero.jpg`
+3. `the-new-mc.html` — **blocked:** user must create Formspree form for Get Connected form and provide endpoint
+4. `mercy-kidz.html`
+5. `about-us.html`
 
 **Tier 2 — Shared site data only:** `_data/site.json` — ✅ **created** (address, phone, email, social URLs, service times, Zeffy URLs, Mailchimp action); `contact.html` + `index.html` stay as pass-through HTML.
 
@@ -300,31 +302,24 @@ CSS patterns like `@media(...){#id {...}}` trigger Nunjucks comment parsing (`{#
 - HTML template: `href="/give.html"`, `src="/assets/..."`, `href="/"` for logo
 - Template vars that output user-provided paths (e.g. `{{ ministry.image }}`) inherit the `/` from the front matter value — no need to add it in the template itself
 
-**Bug 2 — Decap CMS format detection:** Decap does not recognize `.njk` as a YAML-frontmatter file. Without an explicit `format`, all fields appear empty. Additionally, setting `format` at the individual **file entry** level inside a `files` collection is unreliably applied in Decap v3 — it must be set at the **collection** level:
-```yaml
-- name: "pages"
-  label: "Pages"
-  format: "yaml-frontmatter"   # ← on the collection, NOT on each file entry
-  files:
-    - name: "ministries"
-      file: "ministries.njk"
-      fields: [...]             # no format: here
-```
+**Bug 2 — Decap CMS format detection:** Decap v3 does not reliably parse YAML frontmatter from `.njk` files — `format: yaml-frontmatter` at either the collection or file-entry level was tried and failed. **Fix: keep the `.html` extension and add `templateEngineOverride: njk` to front matter.** Decap natively understands `.html` with YAML frontmatter; Eleventy processes it as Nunjucks via the override. No `format:` field needed in config.yml. This is the required pattern for ALL Phase 7 page conversions.
 
-**Bug 3 — Legacy source file still deployed:** After renaming `ministries.html` → `ministries.njk`, the original `ministries.html` was only added to `.eleventy.js` ignores — not deleted. Eleventy's ignore rule prevents template processing but NOT static file serving; Cloudflare continued serving the old page at `/ministries.html`. Fix: delete the source file. The ignore rule is then unnecessary and should be removed.
+**Bug 3 — Legacy source file still deployed:** After initially renaming `ministries.html` → `ministries.njk`, the original `ministries.html` was only added to `.eleventy.js` ignores — not deleted. Eleventy's ignore rule prevents template processing but NOT static file serving; Cloudflare continued serving the old page at `/ministries.html`. Fix: delete the source file. The ignore rule is then unnecessary and should be removed.
 
-Both sets of fixes committed: `5091c42` (paths + initial format attempt), `fa006ac` (collection-level format + delete legacy file).
+**Bug 3 — Cloudflare edge cache:** Even after a file is deleted from the repo and a deploy completes, Cloudflare's edge cache can continue serving the old response. If a URL still shows stale content after a confirmed deploy, manually purge the Cloudflare cache (Dashboard → Caching → Purge Everything) before assuming a deployment failure.
+
+Commits: `5091c42` (paths fix), `fa006ac` (delete legacy file), `87851b0` (rename .njk → .html, add templateEngineOverride).
 
 ### ministries.html — pilot conversion notes
 
-- Hero bg: `assets/images/2026/congregation/congregation-seated-service-01.jpg`
+- `templateEngineOverride: njk` in front matter — required; DO NOT add this file to `.eleventy.js` ignores
+- Hero bg: `/assets/images/2026/congregation/congregation-seated-service-01.jpg`
 - Hero subtitle: "Discover the many ways you can connect, grow, and serve at Mercy Court"
 - Intro eyebrow: "We do community differently"
 - Intro body: "At Mercy Court, we believe that every member has a role to play in the body of Christ..."
 - 5 ministry cards: Worship Ministry, Children's Ministry, Community Outreach, Discipleship Groups, Prayer Ministry
-- Footer bug: only 3 social icons with wrong icon/URL pairings → replace with correct 4-link footer from `one-bring-one.html`
-- Canonical/og:url/ld+json: strip `.html` suffix → `/ministries`
-- `.eleventy.js`: add `eleventyConfig.ignores.add("ministries.html")` to prevent duplicate pass-through output
+- Builds to `_site/ministries.html` (not a subdirectory) — Cloudflare pretty-URL routing serves it at `/ministries`
+- `admin/config.yml` entry: `file: "ministries.html"`, no `format:` line
 
 ### `the-new-mc.html` notes
 - `<meta name="robots" content="noindex, nofollow">` — preserved during conversion; removal is a separate explicit decision
