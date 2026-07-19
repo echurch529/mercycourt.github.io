@@ -289,14 +289,15 @@ collections:
     label_singular: "Event Page"
     folder: "events"
     create: true
-    slug: "{{slug}}"
+    slug: "{{fields.slug}}"
     extension: "html"
     format: "frontmatter"
     fields:
       - { label: "Template Engine", name: "templateEngineOverride", widget: "hidden", default: "njk" }
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/event-page.njk" }
       - { label: "Page Title", name: "title", widget: "string", hint: "Used in browser tab and SEO — e.g. One Bring One — Invite a Friend | Mercy Court" }
-      - { label: "SEO Description", name: "seo_description", widget: "text" }
+      - { label: "URL Slug", name: "slug", widget: "string", hint: "Slug (target: 50–60 characters) — sets the page URL: /events/{slug}. Use lowercase letters and hyphens only, e.g. 12th-anniversary or one-bring-one." }
+      - { label: "SEO Description", name: "seo_description", widget: "text", hint: "Description (target: 120–160 characters)" }
       - { label: "OG / Share Image", name: "og_image", widget: "image" }
       - label: "Publish Date"
         name: "date"
@@ -406,11 +407,12 @@ collections:
     label_singular: "Blog Post"
     folder: "src/blog-posts"
     create: true
-    slug: "{{slug}}"
+    slug: "{{fields.slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "URL Slug", name: "slug", widget: "string", hint: "Slug (target: 50–60 characters) — derive from the title but shorten if needed. Lowercase and hyphens only, e.g. 5-ways-grow-faith not the-five-most-powerful-ways-to-grow-your-faith-as-a-christian." }
       - { label: "SEO Title", name: "seo_title", widget: "string" }
-      - { label: "SEO Description", name: "seo_description", widget: "text" }
+      - { label: "SEO Description", name: "seo_description", widget: "text", hint: "Description (target: 120–160 characters)" }
       - label: "Publish Date"
         name: "date"
         widget: "datetime"
