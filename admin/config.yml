@@ -87,6 +87,74 @@ collections:
               - { label: "Link URL", name: "link", widget: "string", hint: "e.g. tehillah-voices.html" }
           - { label: "CTA Section Body", name: "cta_body", widget: "text" }
 
+      - name: "community-impact"
+        label: "Community Impact"
+        file: "community-impact.html"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Subtitle", name: "subtitle", widget: "string" }
+          - label: "Mission Section"
+            name: "mission"
+            widget: "object"
+            fields:
+              - { label: "Paragraph 1", name: "body1", widget: "text" }
+              - { label: "Paragraph 2", name: "body2", widget: "text" }
+              - { label: "Paragraph 3", name: "body3", widget: "text" }
+          - label: "Impact Stats"
+            name: "stats"
+            widget: "list"
+            summary: "{{fields.number}} — {{fields.label}}"
+            fields:
+              - { label: "Number", name: "number", widget: "string", hint: "e.g. 60+ or 8,500+" }
+              - { label: "Label", name: "label", widget: "string" }
+          - { label: "Pantry Hours Line", name: "pantry_hours", widget: "string", hint: "One-line summary shown in the orange banner" }
+          - label: "Programs"
+            name: "programs"
+            widget: "list"
+            summary: "{{fields.emoji}} {{fields.title}}"
+            fields:
+              - { label: "Emoji", name: "emoji", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+          - label: "Community Partners"
+            name: "partners"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Partner Name", name: "name", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Testimonials"
+            name: "testimonials"
+            widget: "list"
+            summary: "{{fields.attribution}}"
+            fields:
+              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Attribution", name: "attribution", widget: "string" }
+          - label: "Food Pantry Highlight"
+            name: "pantry_highlight"
+            widget: "object"
+            fields:
+              - { label: "Paragraph 1", name: "body1", widget: "text" }
+              - { label: "Paragraph 2", name: "body2", widget: "text" }
+              - { label: "Paragraph 3", name: "body3", widget: "text" }
+          - label: "Future Goals"
+            name: "goals"
+            widget: "list"
+            summary: "{{fields.emoji}} {{fields.title}}"
+            fields:
+              - { label: "Emoji", name: "emoji", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+          - { label: "Volunteer Section — Paragraph 1", name: "volunteer_intro1", widget: "text" }
+          - { label: "Volunteer Section — Paragraph 2", name: "volunteer_intro2", widget: "text" }
+          - { label: "Volunteer Form Endpoint", name: "volunteer_form_endpoint", widget: "string", hint: "Formspree URL e.g. https://formspree.io/f/xxxxxxx" }
+          - { label: "Grant/Anchor Section Body", name: "grant_body", widget: "text" }
+
       - name: "ministries"
         label: "Ministries"
         file: "ministries.html"
