@@ -348,6 +348,24 @@ collections:
           - { label: "Secondary CTA Text", name: "secondary_cta_text", widget: "string", default: "WATCH ONLINE", required: false, hint: "Leave blank to hide the secondary button" }
           - { label: "Secondary CTA URL", name: "secondary_cta_url", widget: "string", default: "/watch-live.html", required: false }
 
+      - label: "Testimonials / Social Proof Section"
+        name: "testimonials"
+        widget: "object"
+        collapsed: true
+        required: false
+        fields:
+          - { label: "Heading", name: "heading", widget: "string", required: false, hint: "Leave blank to hide this entire section" }
+          - { label: "Subheading", name: "subheading", widget: "string", required: false }
+          - { label: "Video Embed URL", name: "video_url", widget: "string", required: false, hint: "YouTube embed URL e.g. https://www.youtube.com/embed/... — leave blank to show placeholder" }
+          - label: "Quotes"
+            name: "quotes"
+            widget: "list"
+            required: false
+            summary: "{{fields.attribution}}"
+            fields:
+              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Attribution", name: "attribution", widget: "string" }
+
       - label: "Welcome / Message Section"
         name: "welcome"
         widget: "object"
@@ -379,24 +397,6 @@ collections:
               - { label: "Emoji", name: "emoji", widget: "string" }
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Body", name: "body", widget: "text" }
-
-      - label: "Testimonials / Social Proof Section"
-        name: "testimonials"
-        widget: "object"
-        collapsed: true
-        required: false
-        fields:
-          - { label: "Heading", name: "heading", widget: "string", required: false, hint: "Leave blank to hide this entire section" }
-          - { label: "Subheading", name: "subheading", widget: "string", required: false }
-          - { label: "Video Embed URL", name: "video_url", widget: "string", required: false, hint: "YouTube embed URL e.g. https://www.youtube.com/embed/... — leave blank to show placeholder" }
-          - label: "Quotes"
-            name: "quotes"
-            widget: "list"
-            required: false
-            summary: "{{fields.attribution}}"
-            fields:
-              - { label: "Quote", name: "quote", widget: "text" }
-              - { label: "Attribution", name: "attribution", widget: "string" }
 
       - label: "Service Logistics Section"
         name: "logistics"
