@@ -764,4 +764,611 @@
 
   window.CMS.registerPreviewTemplate('posts', BlogPostPreview);
 
+  /* ══════════════════════════════════════════════════════════════════
+     Shared helpers for Main Pages and Ministries previews
+     ══════════════════════════════════════════════════════════════════ */
+
+  function getData(props) {
+    var raw = props.entry.get('data');
+    return (raw && raw.toJS) ? raw.toJS() : {};
+  }
+
+  function noticeBar() {
+    return h('div', {
+      style: {
+        background: '#111', color: '#666', fontSize: '11px', fontFamily: BODY,
+        padding: '7px 16px', textAlign: 'center', letterSpacing: '0.08em', textTransform: 'uppercase'
+      }
+    }, 'Preview — nav, footer, and modal not shown');
+  }
+
+  /* Standard page hero: image bg + dark overlay + centered children */
+  function pageHero(imgSrc, height, children) {
+    return h('section', {
+      style: { position: 'relative', overflow: 'hidden', height: height || '65vh', minHeight: '360px', display: 'flex', alignItems: 'center', justifyContent: 'center' }
+    },
+      imgSrc && h('img', {
+        src: imgSrc, alt: '',
+        style: { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }
+      }),
+      h('div', { style: { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.45), rgba(0,0,0,0.75))' } }),
+      h('div', { style: { position: 'relative', zIndex: 10, textAlign: 'center', padding: '0 24px', maxWidth: '900px', margin: '0 auto', width: '100%' } },
+        children
+      )
+    );
+  }
+
+  /* Section wrapper with max-width container */
+  function wrap(bg, py, children) {
+    return h('section', { style: { background: bg || '#fff', padding: py || '80px 24px' } },
+      h('div', { style: { maxWidth: '960px', margin: '0 auto' } }, children)
+    );
+  }
+
+  /* Headline with red second line — shared by home + about hero */
+  function splitHeadline(line1, line2, size) {
+    return h('h1', {
+      style: {
+        fontFamily: DISPLAY, fontSize: size || 'clamp(40px, 8vw, 80px)',
+        textTransform: 'uppercase', color: '#fff', lineHeight: '1.1',
+        letterSpacing: '-0.01em', margin: '0 0 24px'
+      }
+    }, line1, h('br'), h('span', { style: { color: '#D95A2B' } }, line2 || ''));
+  }
+
+  /* Orange pill badge */
+  function pill(text) {
+    if (!text) return null;
+    return h('span', {
+      style: {
+        display: 'inline-block', background: ORANGE, color: '#fff', padding: '8px 24px',
+        borderRadius: '999px', fontSize: '11px', fontWeight: '700', textTransform: 'uppercase',
+        letterSpacing: '0.1em', marginBottom: '24px', fontFamily: BODY
+      }
+    }, text);
+  }
+
+  /* CTA button (outline white) */
+  function ctaBtn(label, solid) {
+    return h('span', {
+      style: {
+        display: 'inline-block',
+        background: solid ? ORANGE : 'transparent',
+        border: solid ? 'none' : '2px solid #fff',
+        color: '#fff',
+        padding: '14px 40px', borderRadius: '999px', fontFamily: BODY,
+        fontWeight: '700', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em'
+      }
+    }, label);
+  }
+
+  /* Anton h2 heading */
+  function h2Anton(text, color) {
+    return h('h2', {
+      style: {
+        fontFamily: DISPLAY, fontSize: 'clamp(28px, 4vw, 44px)',
+        textTransform: 'uppercase', color: color || NAVY,
+        letterSpacing: '-0.01em', margin: '0 0 24px', lineHeight: '1.1'
+      }
+    }, text);
+  }
+
+  /* Body paragraph */
+  function para(text, style) {
+    return h('p', {
+      style: Object.assign({ fontFamily: BODY, fontSize: '17px', color: '#4b5563', lineHeight: '1.8', marginBottom: '16px' }, style || {})
+    }, text || '');
+  }
+
+  /* ══════════════════════════════════════════════════════════════════
+     Homepage Preview  (file entry name: 'home')
+     ══════════════════════════════════════════════════════════════════ */
+  function HomePreview(props) {
+    injectTailwind();
+    try {
+      var data       = getData(props);
+      var hero       = data.hero        || {};
+      var about      = data.about       || {};
+      var leadership = data.leadership  || {};
+      var mins       = data.ministries  || [];
+
+      return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
+        noticeBar(),
+
+        /* Hero */
+        pageHero(resolveImage(props, hero.image), '100vh',
+          h('div', null,
+            splitHeadline(hero.headline || '', hero.headline_highlight || '', 'clamp(48px,10vw,96px)'),
+            h('p', { style: { fontFamily: BODY, color: 'rgba(255,255,255,0.9)', fontSize: '20px', fontWeight: '300', maxWidth: '700px', margin: '0 auto 40px', lineHeight: '1.6' } }, hero.tagline || ''),
+            h('div', { style: { display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' } },
+              ctaBtn('Plan Your Visit', true), ctaBtn('Watch Online', false)
+            )
+          )
+        ),
+
+        /* About */
+        h('section', { style: { background: '#fff', padding: '96px 24px 48px' } },
+          h('div', { style: { maxWidth: '960px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', alignItems: 'center' } },
+            h('div', { style: { background: '#f3f4f6', borderRadius: '8px', height: '320px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', fontSize: '13px', fontFamily: BODY } }, 'Congregation photo (static)'),
+            h('div', null,
+              pill('Who We Are'),
+              h2Anton('WE ARE ', NAVY),
+              h('h2', { style: { fontFamily: DISPLAY, fontSize: 'clamp(28px,4vw,44px)', textTransform: 'uppercase', color: ORANGE, letterSpacing: '-0.01em', margin: '-16px 0 24px', lineHeight: '1.1' } }, 'PACESETTERS'),
+              para(about.body1), para(about.body2)
+            )
+          )
+        ),
+
+        /* Blog placeholder */
+        wrap('#fff', '16px 24px 80px',
+          h('div', { style: { textAlign: 'center' } },
+            h('p', { style: { fontFamily: BODY, fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.12em', color: ORANGE, marginBottom: '12px' } }, 'From the Blog'),
+            h2Anton('Latest Insights and Updates', NAVY),
+            h('div', { style: { background: '#f9fafb', borderRadius: '12px', padding: '28px', color: '#9ca3af', fontFamily: BODY, fontSize: '13px', marginTop: '16px' } }, '✦  Blog cards auto-generated from the two most recent posts — visible on the live site  ✦')
+          )
+        ),
+
+        /* Mission */
+        h('section', { style: { background: '#0A0A0A', padding: '96px 24px', textAlign: 'center' } },
+          h('div', { style: { maxWidth: '900px', margin: '0 auto' } },
+            h('p', { style: { fontFamily: BODY, color: '#9ca3af', fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '32px' } }, 'Our Mission'),
+            h('h2', { style: { fontFamily: DISPLAY, fontSize: 'clamp(36px,7vw,72px)', textTransform: 'uppercase', color: '#fff', lineHeight: '1.2', marginBottom: '40px' } },
+              'RAISING CHRIST-LIKE PACESETTERS', h('br'),
+              'WHO ', h('span', { style: { color: '#D95A2B' } }, 'MAXIMIZE THEIR POTENTIAL'), h('br'),
+              'AND ENJOY LIFE'
+            ),
+            h('p', { style: { fontFamily: BODY, color: '#d1d5db', fontSize: '17px', lineHeight: '1.8' } }, data.mission_body || '')
+          )
+        ),
+
+        /* Leadership */
+        h('section', { style: { background: '#0A0A0A', padding: '80px 24px' } },
+          h('div', { style: { maxWidth: '960px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'center' } },
+            h('img', { src: '/assets/images/2026/leadership/PJ-and-PA.jpeg', alt: 'Lead Pastors', style: { width: '100%', height: '420px', objectFit: 'cover', borderRadius: '8px' } }),
+            h('div', { style: { color: '#fff' } },
+              pill('Our Leadership'),
+              h('h2', { style: { fontFamily: DISPLAY, fontSize: '36px', textTransform: 'uppercase', lineHeight: '1.1', margin: '0 0 20px' } },
+                'MEET OUR', h('br'), h('span', { style: { color: '#D95A2B' } }, 'LEAD PASTORS')
+              ),
+              h('h3', { style: { fontFamily: BODY, fontSize: '18px', fontWeight: '700', marginBottom: '16px', color: '#fff' } }, 'Pastor John & Pastor Rosemary Itakpe'),
+              h('p', { style: { fontFamily: BODY, color: '#d1d5db', fontSize: '16px', lineHeight: '1.8', marginBottom: '20px' } }, leadership.bio || ''),
+              leadership.blockquote && h('div', { style: { background: 'rgba(255,255,255,0.08)', borderLeft: '4px solid #D95A2B', padding: '20px 24px', borderRadius: '0 8px 8px 0' } },
+                h('p', { style: { fontFamily: BODY, color: 'rgba(255,255,255,0.9)', fontStyle: 'italic', fontSize: '16px' } }, '“' + leadership.blockquote + '”')
+              )
+            )
+          )
+        ),
+
+        /* Ministry cards */
+        mins.length > 0 && h('section', { style: { background: '#f5f5f5', padding: '80px 24px' } },
+          h('div', { style: { maxWidth: '960px', margin: '0 auto' } },
+            h('div', { style: { textAlign: 'center', marginBottom: '48px' } },
+              h2Anton('Get Involved', NAVY)
+            ),
+            h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px' } },
+              mins.map(function (m, i) {
+                return h('div', { key: i, style: { background: '#fff', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' } },
+                  h('div', { style: { height: '160px', overflow: 'hidden' } },
+                    h('img', { src: resolveImage(props, m.image), alt: m.title || '', style: { width: '100%', height: '100%', objectFit: 'cover' } })
+                  ),
+                  h('div', { style: { padding: '20px' } },
+                    h('h3', { style: { fontFamily: DISPLAY, fontSize: '16px', textTransform: 'uppercase', color: NAVY, marginBottom: '4px' } }, m.title || ''),
+                    h('p', { style: { fontFamily: BODY, fontSize: '11px', color: ORANGE, fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '10px' } }, m.subtitle || ''),
+                    h('p', { style: { fontFamily: BODY, fontSize: '13px', color: '#4b5563', lineHeight: '1.6' } }, m.body || '')
+                  )
+                );
+              })
+            )
+          )
+        ),
+
+        /* CTA */
+        data.cta_body && h('section', { style: { background: ORANGE, padding: '80px 24px', textAlign: 'center' } },
+          h('div', { style: { maxWidth: '700px', margin: '0 auto' } },
+            h('p', { style: { fontFamily: BODY, color: '#fff', fontSize: '20px', lineHeight: '1.8', marginBottom: '36px' } }, data.cta_body),
+            h('span', { style: { display: 'inline-block', background: '#fff', color: ORANGE, padding: '16px 48px', borderRadius: '999px', fontFamily: BODY, fontWeight: '700', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' } }, 'Join Us This Sunday')
+          )
+        )
+      );
+    } catch (err) {
+      return h('div', { style: { padding: '32px', fontFamily: 'monospace', fontSize: '13px', color: '#c00', background: '#fff1f1' } }, 'Preview error: ' + err.message);
+    }
+  }
+  window.CMS.registerPreviewTemplate('home', HomePreview);
+
+  /* ══════════════════════════════════════════════════════════════════
+     About Us Preview  (file entry name: 'about')
+     ══════════════════════════════════════════════════════════════════ */
+  function AboutPreview(props) {
+    injectTailwind();
+    try {
+      var data     = getData(props);
+      var hero     = data.hero    || {};
+      var pastor   = data.pastor  || {};
+      var tests    = data.testimonials || [];
+
+      return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
+        noticeBar(),
+
+        /* Hero */
+        pageHero(resolveImage(props, hero.image), '65vh',
+          splitHeadline(hero.headline || '', hero.headline_highlight || '')
+        ),
+
+        /* We Serve God */
+        wrap('#fff', '80px 24px',
+          h('div', null,
+            h2Anton('WE SERVE GOD ', NAVY),
+            h('h2', { style: { fontFamily: DISPLAY, fontSize: 'clamp(28px,4vw,44px)', textTransform: 'uppercase', color: ORANGE, letterSpacing: '-0.01em', margin: '-16px 0 28px', lineHeight: '1.1' } }, 'BY HIS SPIRIT'),
+            para(data.serve_body1), para(data.serve_body2)
+          )
+        ),
+
+        /* Approach pillars — static */
+        wrap('#fff', '0 24px 64px',
+          h('div', { style: { textAlign: 'center' } },
+            h2Anton('Our Approach', NAVY),
+            h('div', { style: { width: '64px', height: '4px', background: ORANGE, margin: '0 auto 40px' } }),
+            h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '24px' } },
+              ['Word', 'Worship', 'Community', 'Impact'].map(function (name, i) {
+                return h('div', { key: i, style: { textAlign: 'center' } },
+                  h('div', { style: { width: '64px', height: '64px', background: '#f3f4f6', borderRadius: '50%', margin: '0 auto 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' } },
+                    ['📖','🎵','🤝','🌍'][i]
+                  ),
+                  h('h3', { style: { fontFamily: BODY, fontWeight: '700', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' } }, name)
+                );
+              })
+            )
+          )
+        ),
+
+        /* Pastor */
+        wrap('#f5f5f5', '80px 24px',
+          h('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'start' } },
+            h('img', { src: resolveImage(props, pastor.photo) || '/assets/images/2026/leadership/PJ-and-PA.jpeg', alt: 'Lead Pastors', style: { width: '100%', height: '400px', objectFit: 'cover', borderRadius: '8px' } }),
+            h('div', null,
+              pill('Our Lead Pastors'),
+              h2Anton('Pastor John & Pastor Rosemary Itakpe', NAVY),
+              para(pastor.bio1), para(pastor.bio2), para(pastor.bio3)
+            )
+          )
+        ),
+
+        /* Vision */
+        wrap('#0A0A0A', '80px 24px',
+          h('div', { style: { maxWidth: '760px', margin: '0 auto', textAlign: 'center' } },
+            pill('Our Vision'),
+            h2Anton('A Vision for Every Life', '#fff'),
+            h('p', { style: { fontFamily: BODY, fontSize: '17px', color: '#d1d5db', lineHeight: '1.8', marginBottom: '16px' } }, data.vision_body1 || ''),
+            h('p', { style: { fontFamily: BODY, fontSize: '17px', color: '#d1d5db', lineHeight: '1.8' } }, data.vision_body2 || '')
+          )
+        ),
+
+        /* Testimonials */
+        tests.length > 0 && wrap('#fff', '80px 24px',
+          h('div', null,
+            h('div', { style: { textAlign: 'center', marginBottom: '48px' } },
+              pill('What People Say'),
+              h2Anton('Voices of Transformation', NAVY)
+            ),
+            h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '24px' } },
+              tests.map(function (t, i) {
+                return h('div', { key: i, style: { background: '#f9fafb', borderRadius: '16px', padding: '32px' } },
+                  h('p', { style: { fontFamily: BODY, fontSize: '36px', fontWeight: '900', color: ORANGE, lineHeight: '1', marginBottom: '12px' } }, '“'),
+                  h('p', { style: { fontFamily: BODY, fontSize: '15px', color: '#374151', lineHeight: '1.7', fontStyle: 'italic', marginBottom: '20px' } }, t.quote || ''),
+                  h('p', { style: { fontFamily: BODY, fontWeight: '700', fontSize: '13px', color: ORANGE } }, '— ' + (t.attribution || ''))
+                );
+              })
+            )
+          )
+        )
+      );
+    } catch (err) {
+      return h('div', { style: { padding: '32px', fontFamily: 'monospace', fontSize: '13px', color: '#c00', background: '#fff1f1' } }, 'Preview error: ' + err.message);
+    }
+  }
+  window.CMS.registerPreviewTemplate('about', AboutPreview);
+
+  /* ══════════════════════════════════════════════════════════════════
+     Contact Preview  (file entry name: 'contact')
+     Hero image is the only CMS-managed field; all contact info is
+     static (from site.*). Preview shows the full page layout.
+     ══════════════════════════════════════════════════════════════════ */
+  function ContactPreview(props) {
+    injectTailwind();
+    try {
+      var data = getData(props);
+      var hero = data.hero || {};
+
+      var infoRow = function (icon, label, value) {
+        return h('div', { style: { display: 'flex', alignItems: 'flex-start', gap: '16px', marginBottom: '20px' } },
+          h('div', { style: { width: '40px', height: '40px', background: '#FFF0EA', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px' } }, icon),
+          h('div', null,
+            h('p', { style: { fontFamily: BODY, fontWeight: '600', marginBottom: '2px' } }, label),
+            h('p', { style: { fontFamily: BODY, color: '#4b5563', fontSize: '15px', lineHeight: '1.6' } }, value)
+          )
+        );
+      };
+
+      return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
+        noticeBar(),
+
+        pageHero(resolveImage(props, hero.image), '60vh',
+          h('div', null,
+            h('h1', { style: { fontFamily: DISPLAY, fontSize: 'clamp(40px,8vw,72px)', textTransform: 'uppercase', color: '#fff', lineHeight: '1', letterSpacing: '-0.01em', margin: 0 } }, 'Contact Us')
+          )
+        ),
+
+        /* Contact + form */
+        h('section', { style: { background: '#f5f5f5', padding: '80px 24px' } },
+          h('div', { style: { maxWidth: '960px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px' } },
+
+            /* Form */
+            h('div', { style: { background: '#fff', borderRadius: '16px', padding: '40px' } },
+              h2Anton('Send Us a Message', NAVY),
+              ['Full Name', 'Email', 'Phone'].map(function (label, i) {
+                return h('div', { key: i, style: { marginBottom: '16px' } },
+                  h('label', { style: { fontFamily: BODY, fontSize: '13px', fontWeight: '600', display: 'block', marginBottom: '6px' } }, label),
+                  h('div', { style: { border: '1px solid #d1d5db', borderRadius: '8px', padding: '12px 16px', background: '#f9fafb', color: '#9ca3af', fontSize: '14px', fontFamily: BODY } }, 'Enter ' + label.toLowerCase() + '…')
+                );
+              }),
+              h('div', { style: { marginBottom: '20px' } },
+                h('label', { style: { fontFamily: BODY, fontSize: '13px', fontWeight: '600', display: 'block', marginBottom: '6px' } }, 'Message'),
+                h('div', { style: { border: '1px solid #d1d5db', borderRadius: '8px', padding: '12px 16px', background: '#f9fafb', color: '#9ca3af', fontSize: '14px', fontFamily: BODY, height: '100px' } }, 'How can we help you?')
+              ),
+              h('div', { style: { background: ORANGE, color: '#fff', padding: '14px', borderRadius: '999px', textAlign: 'center', fontFamily: BODY, fontWeight: '700', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' } }, 'Send Message')
+            ),
+
+            /* Contact details */
+            h('div', null,
+              h('div', { style: { background: '#fff', borderRadius: '16px', padding: '32px', marginBottom: '24px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' } },
+                h('h3', { style: { fontFamily: DISPLAY, fontSize: '22px', textTransform: 'uppercase', color: NAVY, marginBottom: '24px' } }, 'Location'),
+                infoRow('📍', 'Address', '529 Walker Avenue\nBaltimore, MD 21212'),
+                infoRow('📞', 'Phone', '+1 (410) 900-9111'),
+                infoRow('✉️', 'Email', 'info@mercycourt.org')
+              ),
+              h('div', { style: { background: '#0A0A0A', borderRadius: '16px', padding: '32px', color: '#fff' } },
+                h('h3', { style: { fontFamily: DISPLAY, fontSize: '22px', textTransform: 'uppercase', marginBottom: '24px' } }, 'Service Times'),
+                [['Sunday Service', '10:00 AM'], ['Wednesday Bible Study', '7:00 PM'], ['Friday Prayer Meeting', '7:00 PM']].map(function (row, i) {
+                  return h('div', { key: i, style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: i < 2 ? '1px solid #374151' : 'none', paddingBottom: i < 2 ? '12px' : 0, marginBottom: i < 2 ? '12px' : 0 } },
+                    h('span', { style: { fontFamily: BODY, fontWeight: '600', fontSize: '14px' } }, row[0]),
+                    h('span', { style: { fontFamily: BODY, fontWeight: '700', color: '#D95A2B', fontSize: '14px' } }, row[1])
+                  );
+                })
+              )
+            )
+          )
+        )
+      );
+    } catch (err) {
+      return h('div', { style: { padding: '32px', fontFamily: 'monospace', fontSize: '13px', color: '#c00', background: '#fff1f1' } }, 'Preview error: ' + err.message);
+    }
+  }
+  window.CMS.registerPreviewTemplate('contact', ContactPreview);
+
+  /* ══════════════════════════════════════════════════════════════════
+     Plan Your Visit Preview  (file entry name: 'plan-your-visit')
+     ══════════════════════════════════════════════════════════════════ */
+  function PlanYourVisitPreview(props) {
+    injectTailwind();
+    try {
+      var data = getData(props);
+      var hero = data.hero || {};
+      var faq  = data.faq  || [];
+
+      return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
+        noticeBar(),
+
+        pageHero(resolveImage(props, hero.image), '65vh',
+          h('div', null,
+            h('h1', { style: { fontFamily: DISPLAY, fontSize: 'clamp(40px,8vw,72px)', textTransform: 'uppercase', color: '#fff', lineHeight: '1', letterSpacing: '-0.01em', margin: 0 } }, 'Plan Your Visit')
+          )
+        ),
+
+        /* Welcome */
+        wrap('#fff', '80px 24px',
+          h('div', { style: { maxWidth: '760px', margin: '0 auto', textAlign: 'center' } },
+            pill('We’ve Been Expecting You'),
+            h2Anton('A Warm Welcome Awaits', NAVY),
+            para(data.welcome_body1), para(data.welcome_body2), para(data.welcome_body3)
+          )
+        ),
+
+        /* Video */
+        wrap('#f5f5f5', '64px 24px',
+          h('div', { style: { maxWidth: '760px', margin: '0 auto' } },
+            h('div', { style: { borderRadius: '16px', overflow: 'hidden', aspectRatio: '16/9', background: '#0F1E35' } },
+              data.video_url
+                ? h('iframe', { src: data.video_url, frameBorder: '0', allowFullScreen: true, style: { width: '100%', height: '100%', display: 'block', minHeight: '320px' } })
+                : h('div', { style: { width: '100%', minHeight: '320px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px' } },
+                    h('div', { style: { width: '72px', height: '72px', borderRadius: '50%', background: 'rgba(255,255,255,0.12)', border: '2px solid rgba(255,255,255,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+                      h('svg', { style: { width: '36px', height: '36px', color: '#fff', marginLeft: '4px' }, fill: 'currentColor', viewBox: '0 0 24 24' },
+                        h('path', { d: 'M8 5v14l11-7z' })
+                      )
+                    ),
+                    h('p', { style: { fontFamily: BODY, color: 'rgba(255,255,255,0.5)', fontSize: '13px' } }, 'Add a video URL in the Video field to embed here')
+                  )
+            )
+          )
+        ),
+
+        /* FAQ */
+        faq.length > 0 && wrap('#fff', '64px 24px',
+          h('div', null,
+            h('div', { style: { textAlign: 'center', marginBottom: '48px' } },
+              pill('Questions & Answers'),
+              h2Anton('We’ve Got Answers', NAVY)
+            ),
+            h('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' } },
+              faq.map(function (item, i) {
+                return h('div', { key: i, style: { background: '#f9fafb', borderRadius: '12px', padding: '24px' } },
+                  h('p', { style: { fontFamily: BODY, fontWeight: '700', fontSize: '15px', color: NAVY, marginBottom: '10px' } }, item.question || ''),
+                  h('p', { style: { fontFamily: BODY, fontSize: '14px', color: '#4b5563', lineHeight: '1.7' } }, item.answer || '')
+                );
+              })
+            )
+          )
+        )
+      );
+    } catch (err) {
+      return h('div', { style: { padding: '32px', fontFamily: 'monospace', fontSize: '13px', color: '#c00', background: '#fff1f1' } }, 'Preview error: ' + err.message);
+    }
+  }
+  window.CMS.registerPreviewTemplate('plan-your-visit', PlanYourVisitPreview);
+
+  /* ══════════════════════════════════════════════════════════════════
+     Community Impact Preview  (file entry name: 'community-impact')
+     ══════════════════════════════════════════════════════════════════ */
+  function CommunityImpactPreview(props) {
+    injectTailwind();
+    try {
+      var data     = getData(props);
+      var hero     = data.hero     || {};
+      var mission  = data.mission  || {};
+      var stats    = data.stats    || [];
+      var programs = data.programs || [];
+      var partners = data.partners || [];
+      var tests    = data.testimonials     || [];
+      var pantry   = data.pantry_highlight || {};
+      var goals    = data.goals            || [];
+
+      return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
+        noticeBar(),
+
+        /* Hero with subtitle */
+        pageHero(resolveImage(props, hero.image), '65vh',
+          h('div', null,
+            h('h1', { style: { fontFamily: DISPLAY, fontSize: 'clamp(40px,7vw,64px)', textTransform: 'uppercase', color: '#fff', lineHeight: '1', letterSpacing: '-0.01em', margin: '0 0 20px' } }, 'Community Impact'),
+            hero.subtitle && h('p', { style: { fontFamily: BODY, color: 'rgba(255,255,255,0.9)', fontSize: '18px', lineHeight: '1.7', maxWidth: '600px', margin: '0 auto' } }, hero.subtitle)
+          )
+        ),
+
+        /* Mission */
+        wrap('#fff', '80px 24px',
+          h('div', { style: { maxWidth: '760px', margin: '0 auto' } },
+            pill('Our Mission'),
+            h2Anton('We Exist to Serve, Empower, and Transform', NAVY),
+            para(mission.body1), para(mission.body2), para(mission.body3)
+          )
+        ),
+
+        /* Stats */
+        stats.length > 0 && h('section', { style: { background: ORANGE, padding: '64px 24px' } },
+          h('div', { style: { maxWidth: '960px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(' + Math.min(stats.length, 4) + ',1fr)', gap: '24px', textAlign: 'center' } },
+            stats.map(function (s, i) {
+              return h('div', { key: i },
+                h('p', { style: { fontFamily: DISPLAY, fontSize: 'clamp(40px,6vw,64px)', color: '#fff', lineHeight: '1', marginBottom: '8px' } }, s.number || ''),
+                h('p', { style: { fontFamily: BODY, color: 'rgba(255,255,255,0.85)', fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' } }, s.label || '')
+              );
+            })
+          )
+        ),
+
+        /* Pantry hours banner */
+        data.pantry_hours && h('section', { style: { background: NAVY, padding: '20px 24px', textAlign: 'center' } },
+          h('p', { style: { fontFamily: BODY, color: '#fff', fontSize: '14px', fontWeight: '600' } }, '🗓 Food Pantry: ' + data.pantry_hours)
+        ),
+
+        /* Programs */
+        programs.length > 0 && wrap('#f5f5f5', '72px 24px',
+          h('div', null,
+            h('div', { style: { textAlign: 'center', marginBottom: '40px' } },
+              pill('What We Do'),
+              h2Anton('Our Programs', NAVY)
+            ),
+            h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px' } },
+              programs.map(function (p, i) {
+                return h('div', { key: i, style: { background: '#fff', borderRadius: '12px', padding: '28px' } },
+                  h('div', { style: { fontSize: '40px', marginBottom: '16px' } }, p.emoji || ''),
+                  h('h3', { style: { fontFamily: DISPLAY, fontSize: '18px', textTransform: 'uppercase', color: NAVY, marginBottom: '10px' } }, p.title || ''),
+                  h('p', { style: { fontFamily: BODY, fontSize: '14px', color: '#4b5563', lineHeight: '1.7' } }, p.body || '')
+                );
+              })
+            )
+          )
+        ),
+
+        /* Partners */
+        partners.length > 0 && wrap('#fff', '72px 24px',
+          h('div', null,
+            h('div', { style: { textAlign: 'center', marginBottom: '40px' } },
+              pill('Who We Work With'),
+              h2Anton('Community Partners', NAVY)
+            ),
+            h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px' } },
+              partners.map(function (p, i) {
+                return h('div', { key: i, style: { background: '#f9fafb', borderRadius: '12px', padding: '24px' } },
+                  h('h3', { style: { fontFamily: BODY, fontWeight: '700', fontSize: '15px', color: NAVY, marginBottom: '10px' } }, p.name || ''),
+                  h('p', { style: { fontFamily: BODY, fontSize: '14px', color: '#4b5563', lineHeight: '1.7' } }, p.description || '')
+                );
+              })
+            )
+          )
+        ),
+
+        /* Testimonials */
+        tests.length > 0 && wrap(NAVY, '72px 24px',
+          h('div', null,
+            h('div', { style: { textAlign: 'center', marginBottom: '40px' } },
+              pill('Community Voices'),
+              h2Anton('What the Community Says', '#fff')
+            ),
+            h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(' + Math.min(tests.length, 2) + ',1fr)', gap: '20px' } },
+              tests.map(function (t, i) {
+                return h('div', { key: i, style: { background: '#fff', borderRadius: '16px', padding: '28px' } },
+                  h('p', { style: { fontFamily: BODY, fontSize: '32px', fontWeight: '900', color: ORANGE, lineHeight: '1', marginBottom: '10px' } }, '“'),
+                  h('p', { style: { fontFamily: BODY, fontSize: '15px', color: '#374151', lineHeight: '1.7', fontStyle: 'italic', marginBottom: '16px' } }, t.quote || ''),
+                  h('p', { style: { fontFamily: BODY, fontWeight: '700', fontSize: '12px', color: ORANGE } }, '— ' + (t.attribution || ''))
+                );
+              })
+            )
+          )
+        ),
+
+        /* Pantry highlight */
+        (pantry.body1 || pantry.body2 || pantry.body3) && wrap(ORANGE, '72px 24px',
+          h('div', { style: { maxWidth: '760px', margin: '0 auto', textAlign: 'center' } },
+            pill('Food Pantry'),
+            h2Anton('Open Every Thursday', '#fff'),
+            h('p', { style: { fontFamily: BODY, color: '#fff', fontSize: '17px', lineHeight: '1.8', marginBottom: '16px' } }, pantry.body1 || ''),
+            h('p', { style: { fontFamily: BODY, color: 'rgba(255,255,255,0.9)', fontSize: '17px', lineHeight: '1.8', marginBottom: '16px' } }, pantry.body2 || ''),
+            h('p', { style: { fontFamily: BODY, color: 'rgba(255,255,255,0.9)', fontSize: '17px', lineHeight: '1.8' } }, pantry.body3 || '')
+          )
+        ),
+
+        /* Goals */
+        goals.length > 0 && wrap('#fff', '72px 24px',
+          h('div', null,
+            h('div', { style: { textAlign: 'center', marginBottom: '40px' } },
+              pill('Looking Forward'),
+              h2Anton('Our Goals', NAVY)
+            ),
+            h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px' } },
+              goals.map(function (g, i) {
+                return h('div', { key: i, style: { background: '#f9fafb', borderRadius: '12px', padding: '28px' } },
+                  h('div', { style: { fontSize: '40px', marginBottom: '16px' } }, g.emoji || ''),
+                  h('h3', { style: { fontFamily: DISPLAY, fontSize: '18px', textTransform: 'uppercase', color: NAVY, marginBottom: '10px' } }, g.title || ''),
+                  h('p', { style: { fontFamily: BODY, fontSize: '14px', color: '#4b5563', lineHeight: '1.7' } }, g.body || '')
+                );
+              })
+            )
+          )
+        ),
+
+        /* Volunteer */
+        (data.volunteer_intro1 || data.volunteer_intro2) && wrap(NAVY, '64px 24px',
+          h('div', { style: { maxWidth: '760px', margin: '0 auto', textAlign: 'center' } },
+            pill('Get Involved'),
+            h2Anton('Volunteer With Us', '#fff'),
+            h('p', { style: { fontFamily: BODY, color: '#d1d5db', fontSize: '17px', lineHeight: '1.8', marginBottom: '16px' } }, data.volunteer_intro1 || ''),
+            h('p', { style: { fontFamily: BODY, color: '#d1d5db', fontSize: '17px', lineHeight: '1.8' } }, data.volunteer_intro2 || '')
+          )
+        )
+      );
+    } catch (err) {
+      return h('div', { style: { padding: '32px', fontFamily: 'monospace', fontSize: '13px', color: '#c00', background: '#fff1f1' } }, 'Preview error: ' + err.message);
+    }
+  }
+  window.CMS.registerPreviewTemplate('community-impact', CommunityImpactPreview);
+
 }());
