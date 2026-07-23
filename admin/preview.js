@@ -1870,8 +1870,12 @@
   }
   window.CMS.registerPreviewTemplate('mercy-kidz', MercyKidzPreview);
 
-  /* Fallback: register at collection level in case Decap CMS looks up
-     ministries-pages entries by collection name instead of entry name. */
+  /* Decap CMS 3.x looks up preview templates by COLLECTION name for files
+     collections, not individual entry name. Both collections need a dispatch
+     function registered under the collection name so Decap can find it.
+     (Individual entry-name registrations above are kept for belt-and-suspenders
+     in case a future Decap version changes lookup order.)                    */
+
   function MinistriesDispatch(props) {
     try {
       var path = (props.entry && props.entry.get('path')) || '';
@@ -1883,5 +1887,20 @@
     }
   }
   window.CMS.registerPreviewTemplate('ministries-pages', MinistriesDispatch);
+
+  function MainPagesDispatch(props) {
+    try {
+      var path = (props.entry && props.entry.get('path')) || '';
+      if (path.indexOf('index') !== -1)           return HomePreview(props);
+      if (path.indexOf('about-us') !== -1)        return AboutPreview(props);
+      if (path.indexOf('contact') !== -1)         return ContactPreview(props);
+      if (path.indexOf('plan-your-visit') !== -1) return PlanYourVisitPreview(props);
+      if (path.indexOf('community-impact') !== -1) return CommunityImpactPreview(props);
+      return HomePreview(props);
+    } catch (e) {
+      return HomePreview(props);
+    }
+  }
+  window.CMS.registerPreviewTemplate('main-pages', MainPagesDispatch);
 
 }());
