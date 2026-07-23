@@ -445,15 +445,30 @@ All sections except hero are optional — leave `heading:` blank (or omit the ke
 
 | Section key | Required | Notes |
 |-------------|----------|-------|
-| `hero` | ✅ | image, badge, headline, subheadline, primary_cta, secondary_cta_text/url |
-| `testimonials` | optional | heading, subheading, video_url, quotes list; adaptive 1/2/3-col grid — **renders 2nd, immediately after hero** |
+| `hero` | ✅ | image, image_alt, badge, headline, subheadline, primary_cta, secondary_cta_text/url |
+| `countdown_target` + `countdown_heading` | optional | top-level fields (not an object). Non-blank `countdown_target` renders live JS countdown (days/hrs/mins/secs) directly below hero |
+| `testimonials` | optional | heading, subheading, video_url, quotes list; adaptive 1/2/3-col grid |
 | `welcome` | optional | badge, heading, body (list of paragraphs) |
+| `schedule` | optional | badge, heading, items list (day/time/label) — 4-col card grid; hidden when items empty |
+| `speaker` + top-level `host_name` | optional | full_name (**not** `name` — standing rule), title, bio, photo, photo_alt; "Hosted by {host_name}" credit; hidden when full_name blank; centers text when no photo |
 | `features` | optional | badge, heading, cards list (emoji/title/body) — 2-col grid |
-| `logistics` | optional | heading, custom_note; address + service times from `site.*` |
+| `logistics` | optional | heading, custom_note, + optional middle-column override: middle_icon/middle_label/middle_line1/middle_line2 (defaults to Sunday Service from `site.*` when middle_label blank) |
 | `cta_final` | optional | heading, body (list of paragraphs), button_text |
 | `giving` | optional | heading, body, button_text, url |
 
+**Render order (live + preview + config field order, all synced):** Hero → Countdown → Testimonials → Welcome → Schedule → Speaker → Features → Logistics → Giving → Final CTA.
+
 Testimonials video: empty `video_url` → styled placeholder. Non-empty → `<iframe>` embed.
+
+### 12th Anniversary page + new sections (2026-07-23)
+
+`events/12th-anniversary.html` created — theme "Better Things", Aug 14–16 2026. New optional layout sections added to `event-page.njk` for it (countdown, schedule, speaker, logistics middle-column override — all listed in the table above). Details:
+
+- **Countdown**: `countdown_target` stored as ISO string with offset (`"2026-08-14T19:00:00-04:00"` = Tehillah Album Launch, Fri 7 PM ET). Decap datetime widget uses `format: "YYYY-MM-DDTHH:mm:ssZ"` so it saves a string, not a YAML date. Template handles both: `countdown_target.toISOString() if countdown_target.toISOString else countdown_target`. Inline script ticks every second; clamps to zeros after the target passes.
+- **Speaker photo**: left blank in front matter — editor will upload Rev. George Adegboye's photo via CMS (photo_alt already populated per alt-text standing rule). Section renders centered-text-only until photo is added.
+- **Preview sync (standing rule followed)**: `CountdownSection`, `ScheduleSection`, `SpeakerSection` + logistics middle-column override added to `admin/preview.js` in the same commit, same render order. Preview countdown computes remaining time at render (static snapshot, labeled "counts down live on the published page") — no setInterval in the preview iframe.
+- **One-bring-one regression-checked**: builds byte-identical behavior — none of the new sections render (all keys absent), logistics middle column falls back to Sunday Service default.
+- **Pending (user-gated)**: after user verifies the page in `/admin/`, change the Events nav item across source files into a dropdown: "12th Anniversary" (`/events/12th-anniversary.html`) + "One Bring One" (`/events/one-bring-one.html`). NOT done yet — do not start until user confirms.
 
 **Section order change (commits `a3bcdfc`, `ac59976` — 2026-07-23):** Testimonials section (containing the video) moved from position 4 (after Welcome and Features) to position 2 (immediately after the hero) in both `event-page.njk` and `admin/config.yml`. Rationale: video is high-value social proof that should be visible on the first scroll without requiring visitors to scroll past two other sections. CMS field order updated to match so the admin editor reflects the live page structure.
 

@@ -352,6 +352,9 @@ collections:
           - { label: "Secondary CTA Text", name: "secondary_cta_text", widget: "string", default: "WATCH ONLINE", required: false, hint: "Leave blank to hide the secondary button" }
           - { label: "Secondary CTA URL", name: "secondary_cta_url", widget: "string", default: "/watch-live.html", required: false }
 
+      - { label: "Countdown Heading", name: "countdown_heading", widget: "string", required: false, hint: "Heading above the countdown timer, e.g. The Celebration Begins In. Only shown when a Countdown Target is set." }
+      - { label: "Countdown Target", name: "countdown_target", widget: "datetime", required: false, format: "YYYY-MM-DDTHH:mm:ssZ", hint: "Date and time the countdown ends (event start). Leave blank to hide the countdown section." }
+
       - label: "Testimonials / Social Proof Section"
         name: "testimonials"
         widget: "object"
@@ -384,6 +387,38 @@ collections:
             required: false
             field: { label: "Paragraph", name: "paragraph", widget: "text" }
 
+      - label: "Event Schedule Section"
+        name: "schedule"
+        widget: "object"
+        collapsed: true
+        required: false
+        fields:
+          - { label: "Badge Pill Text", name: "badge", widget: "string", required: false, hint: "e.g. MARK YOUR CALENDAR" }
+          - { label: "Heading", name: "heading", widget: "string", required: false, hint: "e.g. Three Days of Celebration" }
+          - label: "Schedule Items"
+            name: "items"
+            widget: "list"
+            required: false
+            summary: "{{fields.day}} — {{fields.label}}"
+            hint: "Leave empty to hide this entire section"
+            fields:
+              - { label: "Day", name: "day", widget: "string", hint: "e.g. Friday, Aug 14" }
+              - { label: "Time", name: "time", widget: "string", hint: "e.g. 7:00 PM or 11:00 AM – 1:00 PM" }
+              - { label: "Event Name", name: "label", widget: "string", hint: "e.g. Tehillah Album Launch" }
+
+      - label: "Guest Speaker Spotlight"
+        name: "speaker"
+        widget: "object"
+        collapsed: true
+        required: false
+        fields:
+          - { label: "Speaker Name", name: "full_name", widget: "string", required: false, hint: "Leave blank to hide this entire section" }
+          - { label: "Title / Role", name: "title", widget: "string", required: false, hint: "e.g. President & Founder, Rhema Chapel International Churches" }
+          - { label: "Bio", name: "bio", widget: "text", required: false }
+          - { label: "Photo", name: "photo", widget: "image", required: false, hint: "Keep under 300KB. Compress at squoosh.app or tinypng.com before uploading." }
+          - { label: "Photo Alt Text", name: "photo_alt", widget: "string", required: false, hint: "Describe the photo for screen readers — e.g. 'Portrait of Rev. George Adegboye'" }
+      - { label: "Host Name", name: "host_name", widget: "string", required: false, hint: "Shown as 'Hosted by …' in the speaker section, e.g. Pastor John Itakpe" }
+
       - label: "Feature Cards Section"
         name: "features"
         widget: "object"
@@ -409,6 +444,10 @@ collections:
         required: false
         fields:
           - { label: "Section Heading", name: "heading", widget: "string", required: false, default: "Join Us This Sunday", hint: "Leave blank to hide this entire section" }
+          - { label: "Middle Column Icon", name: "middle_icon", widget: "string", required: false, hint: "Emoji for the middle column when overridden, e.g. 🗓️. Defaults to 🗓️ when a Middle Column Label is set." }
+          - { label: "Middle Column Label", name: "middle_label", widget: "string", required: false, hint: "Overrides the default Sunday Service middle column, e.g. Dates. Leave blank to keep the Sunday Service default." }
+          - { label: "Middle Column Line 1", name: "middle_line1", widget: "string", required: false, hint: "e.g. August 14–16, 2026" }
+          - { label: "Middle Column Line 2", name: "middle_line2", widget: "string", required: false, hint: "e.g. Friday • Saturday • Sunday" }
           - { label: "Custom Note", name: "custom_note", widget: "string", required: false, hint: "Optional extra line, e.g. Doors open at 9:30 AM. Leave blank to hide." }
 
       - label: "Final CTA Section"

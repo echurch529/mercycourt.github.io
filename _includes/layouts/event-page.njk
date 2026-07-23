@@ -211,6 +211,68 @@
         </div>
     </section>
 
+    <!-- Countdown Timer Section (optional: hidden when countdown_target blank) -->
+    {% if countdown_target %}
+    <section class="py-20 px-6 text-center" style="background: #0A0A0A;">
+        <div class="container mx-auto max-w-4xl">
+            {% if countdown_heading %}
+            <h2 class="font-anton text-3xl md:text-4xl uppercase text-white tracking-tight mb-12">{{ countdown_heading }}</h2>
+            {% endif %}
+            <div id="event-countdown" data-target="{{ countdown_target.toISOString() if countdown_target.toISOString else countdown_target }}" class="grid grid-cols-4 gap-4 md:gap-8 max-w-3xl mx-auto">
+                <div>
+                    <div class="font-anton text-4xl md:text-6xl leading-none" style="color: #E8541A;" data-unit="days">&ndash;</div>
+                    <div class="text-white/70 uppercase text-xs md:text-sm tracking-widest mt-3">Days</div>
+                </div>
+                <div>
+                    <div class="font-anton text-4xl md:text-6xl leading-none" style="color: #E8541A;" data-unit="hours">&ndash;</div>
+                    <div class="text-white/70 uppercase text-xs md:text-sm tracking-widest mt-3">Hours</div>
+                </div>
+                <div>
+                    <div class="font-anton text-4xl md:text-6xl leading-none" style="color: #E8541A;" data-unit="minutes">&ndash;</div>
+                    <div class="text-white/70 uppercase text-xs md:text-sm tracking-widest mt-3">Minutes</div>
+                </div>
+                <div>
+                    <div class="font-anton text-4xl md:text-6xl leading-none" style="color: #E8541A;" data-unit="seconds">&ndash;</div>
+                    <div class="text-white/70 uppercase text-xs md:text-sm tracking-widest mt-3">Seconds</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        (function () {
+            var el = document.getElementById('event-countdown');
+            if (!el) return;
+            var target = new Date(el.getAttribute('data-target')).getTime();
+            if (isNaN(target)) return;
+            var units = {
+                days: el.querySelector('[data-unit="days"]'),
+                hours: el.querySelector('[data-unit="hours"]'),
+                minutes: el.querySelector('[data-unit="minutes"]'),
+                seconds: el.querySelector('[data-unit="seconds"]')
+            };
+            function pad(n) { return n < 10 ? '0' + n : '' + n; }
+            var timer;
+            function tick() {
+                var diff = target - Date.now();
+                if (diff <= 0) {
+                    units.days.textContent = '0';
+                    units.hours.textContent = '00';
+                    units.minutes.textContent = '00';
+                    units.seconds.textContent = '00';
+                    if (timer) clearInterval(timer);
+                    return;
+                }
+                units.days.textContent = Math.floor(diff / 86400000);
+                units.hours.textContent = pad(Math.floor(diff / 3600000) % 24);
+                units.minutes.textContent = pad(Math.floor(diff / 60000) % 60);
+                units.seconds.textContent = pad(Math.floor(diff / 1000) % 60);
+            }
+            tick();
+            timer = setInterval(tick, 1000);
+        })();
+    </script>
+    {% endif %}
+
     <!-- Testimonials / Social Proof Section (optional) -->
     {% if testimonials and testimonials.heading %}
     <section class="py-24 px-6" style="background: #1B2A4A;">
@@ -270,6 +332,59 @@
     </section>
     {% endif %}
 
+    <!-- Event Schedule Section (optional: hidden when no schedule items) -->
+    {% if schedule and schedule.items and schedule.items.length %}
+    <section class="py-24 px-6" style="background: #F5F5F5;">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                {% if schedule.badge %}
+                <span class="inline-block text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8" style="background: #E8541A;">{{ schedule.badge }}</span>
+                {% endif %}
+                {% if schedule.heading %}
+                <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-tight" style="color: #1B2A4A;">{{ schedule.heading }}</h2>
+                {% endif %}
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {% for item in schedule.items %}
+                <div class="feature-card bg-white rounded-2xl p-8 shadow-sm text-center flex flex-col">
+                    <p class="font-bold text-xs uppercase tracking-widest mb-3" style="color: #E8541A;">{{ item.day }}</p>
+                    <h3 class="font-anton text-2xl uppercase leading-tight mb-4" style="color: #1B2A4A;">{{ item.label }}</h3>
+                    <p class="text-gray-600 mt-auto">{{ item.time }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Guest Speaker Spotlight Section (optional: hidden when speaker name blank) -->
+    {% if speaker and speaker.full_name %}
+    <section class="bg-white py-24 px-6">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-16">
+                <span class="inline-block text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest" style="background: #E8541A;">GUEST MINISTER</span>
+            </div>
+            <div class="grid {% if speaker.photo %}md:grid-cols-2{% endif %} gap-12 items-center">
+                {% if speaker.photo %}
+                <img loading="lazy" src="{{ speaker.photo }}" alt="{{ speaker.photo_alt | default(speaker.full_name) }}" class="rounded-2xl w-full object-cover shadow-lg">
+                {% endif %}
+                <div class="{% if not speaker.photo %}text-center max-w-2xl mx-auto{% endif %}">
+                    <h2 class="font-anton text-3xl md:text-4xl uppercase tracking-tight mb-3" style="color: #1B2A4A;">{{ speaker.full_name }}</h2>
+                    {% if speaker.title %}
+                    <p class="font-bold text-sm uppercase tracking-wide mb-6" style="color: #E8541A;">{{ speaker.title }}</p>
+                    {% endif %}
+                    {% if speaker.bio %}
+                    <p class="text-gray-600 text-lg leading-relaxed">{{ speaker.bio }}</p>
+                    {% endif %}
+                    {% if host_name %}
+                    <p class="text-gray-500 text-sm mt-8">Hosted by <span class="font-bold" style="color: #1B2A4A;">{{ host_name }}</span></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
     <!-- Feature Cards Section (optional) -->
     {% if features and features.cards and features.cards.length %}
     <section class="py-24 px-6" style="background: #F5F5F5;">
@@ -307,9 +422,15 @@
                     <p class="text-white/90 leading-relaxed">{{ site.address_street }}<br>{{ site.address_city_state }}</p>
                 </div>
                 <div>
+                    {% if logistics.middle_label %}
+                    <div class="text-5xl mb-5">{{ logistics.middle_icon if logistics.middle_icon else "🗓️" }}</div>
+                    <h3 class="font-bold text-white text-lg uppercase tracking-wide mb-3">{{ logistics.middle_label }}</h3>
+                    <p class="text-white/90 leading-relaxed">{{ logistics.middle_line1 }}{% if logistics.middle_line2 %}<br>{{ logistics.middle_line2 }}{% endif %}</p>
+                    {% else %}
                     <div class="text-5xl mb-5">🕙</div>
                     <h3 class="font-bold text-white text-lg uppercase tracking-wide mb-3">{{ site.service_times.sunday.label }}</h3>
                     <p class="text-white/90 leading-relaxed">{{ site.service_times.sunday.time }}<br>Every Sunday</p>
+                    {% endif %}
                 </div>
                 <div>
                     <div class="text-5xl mb-5">🅿️</div>

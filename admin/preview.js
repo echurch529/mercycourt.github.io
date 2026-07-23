@@ -283,6 +283,148 @@
     );
   }
 
+  /* ── Countdown Timer (optional: hidden when countdown_target blank) ──
+     Mirrors the countdown section in event-page.njk. The preview shows the
+     remaining time computed at render (it does not tick every second —
+     the live page does).                                                  */
+  function CountdownSection(props, data) {
+    if (!data.countdown_target) return null;
+    var target = new Date(data.countdown_target).getTime();
+    var diff = isNaN(target) ? 0 : Math.max(0, target - Date.now());
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    var vals = [
+      ['' + Math.floor(diff / 86400000), 'Days'],
+      [pad(Math.floor(diff / 3600000) % 24), 'Hours'],
+      [pad(Math.floor(diff / 60000) % 60), 'Minutes'],
+      [pad(Math.floor(diff / 1000) % 60), 'Seconds']
+    ];
+    return h('section', { style: { background: '#0A0A0A', padding: '80px 24px', textAlign: 'center' } },
+      h('div', { style: { maxWidth: '900px', margin: '0 auto' } },
+        data.countdown_heading && h('h2', {
+          style: {
+            fontFamily: DISPLAY,
+            fontSize: 'clamp(28px, 4vw, 40px)',
+            textTransform: 'uppercase',
+            color: '#fff',
+            letterSpacing: '-0.01em',
+            marginBottom: '48px'
+          }
+        }, data.countdown_heading),
+        h('div', {
+          style: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', maxWidth: '720px', margin: '0 auto' }
+        },
+          vals.map(function (v, i) {
+            return h('div', { key: i },
+              h('div', {
+                style: { fontFamily: DISPLAY, fontSize: 'clamp(36px, 6vw, 60px)', lineHeight: '1', color: ORANGE }
+              }, v[0]),
+              h('div', {
+                style: { fontFamily: BODY, color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', fontSize: '12px', letterSpacing: '0.15em', marginTop: '12px' }
+              }, v[1])
+            );
+          })
+        ),
+        h('p', {
+          style: { fontFamily: BODY, color: 'rgba(255,255,255,0.35)', fontSize: '11px', marginTop: '32px', textTransform: 'uppercase', letterSpacing: '0.08em' }
+        }, 'Counts down live on the published page')
+      )
+    );
+  }
+
+  /* ── Event Schedule (optional: hidden when no schedule items) ── */
+  function ScheduleSection(props, schedule) {
+    if (!schedule || !schedule.items || !schedule.items.length) return null;
+    return h('section', { style: { background: '#F5F5F5', padding: '96px 24px' } },
+      h('div', { style: { maxWidth: '1100px', margin: '0 auto' } },
+        h('div', { style: { textAlign: 'center', marginBottom: '56px' } },
+          Badge(schedule.badge),
+          schedule.heading && h('h2', {
+            style: {
+              fontFamily: DISPLAY,
+              fontSize: 'clamp(32px, 5vw, 48px)',
+              textTransform: 'uppercase',
+              color: NAVY,
+              letterSpacing: '-0.01em',
+              margin: 0
+            }
+          }, schedule.heading)
+        ),
+        h('div', {
+          style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '20px' }
+        },
+          schedule.items.map(function (item, i) {
+            return h('div', {
+              key: i,
+              style: {
+                background: '#fff',
+                borderRadius: '16px',
+                padding: '32px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+                textAlign: 'center',
+                display: 'flex',
+                flexDirection: 'column'
+              }
+            },
+              h('p', {
+                style: { fontFamily: BODY, fontWeight: '700', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.15em', color: ORANGE, marginBottom: '12px' }
+              }, item.day),
+              h('h3', {
+                style: { fontFamily: DISPLAY, fontSize: '22px', textTransform: 'uppercase', color: NAVY, lineHeight: '1.2', marginBottom: '16px' }
+              }, item.label),
+              h('p', {
+                style: { fontFamily: BODY, color: '#4b5563', fontSize: '15px', marginTop: 'auto' }
+              }, item.time)
+            );
+          })
+        )
+      )
+    );
+  }
+
+  /* ── Guest Speaker Spotlight (optional: hidden when full_name blank) ── */
+  function SpeakerSection(props, speaker, hostName) {
+    if (!speaker || !speaker.full_name) return null;
+    var photoSrc = speaker.photo ? resolveImage(props, speaker.photo) : '';
+    var textBlock = h('div', { style: photoSrc ? {} : { textAlign: 'center', maxWidth: '640px', margin: '0 auto' } },
+      h('h2', {
+        style: {
+          fontFamily: DISPLAY,
+          fontSize: 'clamp(28px, 4vw, 40px)',
+          textTransform: 'uppercase',
+          color: NAVY,
+          letterSpacing: '-0.01em',
+          marginBottom: '10px'
+        }
+      }, speaker.full_name),
+      speaker.title && h('p', {
+        style: { fontFamily: BODY, fontWeight: '700', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em', color: ORANGE, marginBottom: '24px' }
+      }, speaker.title),
+      speaker.bio && h('p', {
+        style: { fontFamily: BODY, fontSize: '17px', color: '#4b5563', lineHeight: '1.8' }
+      }, speaker.bio),
+      hostName && h('p', {
+        style: { fontFamily: BODY, fontSize: '13px', color: '#6b7280', marginTop: '32px' }
+      }, 'Hosted by ', h('span', { style: { fontWeight: '700', color: NAVY } }, hostName))
+    );
+    return h('section', { style: { background: '#fff', padding: '96px 24px' } },
+      h('div', { style: { maxWidth: '1000px', margin: '0 auto' } },
+        h('div', { style: { textAlign: 'center', marginBottom: '56px' } }, Badge('GUEST MINISTER')),
+        photoSrc
+          ? h('div', {
+              style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '48px', alignItems: 'center' }
+            },
+              h('img', {
+                src: photoSrc,
+                alt: speaker.photo_alt || speaker.full_name,
+                style: { width: '100%', borderRadius: '16px', objectFit: 'cover', boxShadow: '0 10px 30px rgba(0,0,0,0.15)' }
+              }),
+              textBlock
+            )
+          : textBlock
+      )
+    );
+  }
+
   /* ── Testimonials / Social Proof (optional: hidden when heading blank) ── */
   function TestimonialsSection(props, testimonials) {
     if (!testimonials || !testimonials.heading) return null;
@@ -446,11 +588,17 @@
             h('h3', { style: labelStyle }, 'Location'),
             h('p', { style: valueStyle }, '529 Walker Avenue', h('br'), 'Baltimore, MD 21212')
           ),
-          h('div', { style: col },
-            h('div', { style: iconStyle }, '🕙'),
-            h('h3', { style: labelStyle }, 'Sunday Service'),
-            h('p', { style: valueStyle }, '10:00 AM', h('br'), 'Every Sunday')
-          ),
+          logistics.middle_label
+            ? h('div', { style: col },
+                h('div', { style: iconStyle }, logistics.middle_icon || '🗓️'),
+                h('h3', { style: labelStyle }, logistics.middle_label),
+                h('p', { style: valueStyle }, logistics.middle_line1 || '', logistics.middle_line2 ? h('br') : null, logistics.middle_line2 || '')
+              )
+            : h('div', { style: col },
+                h('div', { style: iconStyle }, '🕙'),
+                h('h3', { style: labelStyle }, 'Sunday Service'),
+                h('p', { style: valueStyle }, '10:00 AM', h('br'), 'Every Sunday')
+              ),
           h('div', { style: col },
             h('div', { style: iconStyle }, '🅿️'),
             h('h3', { style: labelStyle }, 'Parking'),
@@ -573,6 +721,8 @@
       var welcome      = data.welcome     || {};
       var features     = data.features    || {};
       var testimonials = data.testimonials || {};
+      var schedule     = data.schedule    || {};
+      var speaker      = data.speaker     || {};
       var logistics    = data.logistics   || {};
       var giving       = data.giving      || {};
       var ctaFinal     = data.cta_final   || {};
@@ -593,8 +743,11 @@
         }, 'Preview — nav, footer, and modal not shown'),
 
         HeroSection(props, hero),
+        CountdownSection(props, data),
         TestimonialsSection(props, testimonials),
         WelcomeSection(props, welcome),
+        ScheduleSection(props, schedule),
+        SpeakerSection(props, speaker, data.host_name),
         FeaturesSection(props, features),
         LogisticsSection(props, logistics),
         GivingSection(props, giving),
