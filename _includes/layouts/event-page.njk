@@ -211,6 +211,47 @@
         </div>
     </section>
 
+    <!-- Testimonials / Social Proof Section (optional) -->
+    {% if testimonials and testimonials.heading %}
+    <section class="py-24 px-6" style="background: #1B2A4A;">
+        <div class="container mx-auto max-w-5xl text-center">
+            <span class="inline-block text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8" style="background: #E8541A;">STORIES</span>
+            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-tight text-white mb-4">{{ testimonials.heading }}</h2>
+            {% if testimonials.subheading %}
+            <p class="text-white/70 text-lg mb-16">{{ testimonials.subheading }}</p>
+            {% endif %}
+            <div class="mx-auto mb-16" style="max-width: 700px;">
+                {% if testimonials.video_url %}
+                <div class="relative rounded-2xl overflow-hidden" style="aspect-ratio: 16/9;">
+                    <iframe src="{{ testimonials.video_url }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
+                </div>
+                {% else %}
+                <div class="relative rounded-2xl overflow-hidden flex items-center justify-center" style="background: #0F1E35; aspect-ratio: 16/9;">
+                    <div class="flex flex-col items-center gap-4">
+                        <div class="w-20 h-20 rounded-full flex items-center justify-center" style="background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.25);">
+                            <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-500 italic text-sm mt-4">Video testimonial coming soon</p>
+                {% endif %}
+            </div>
+            {% if testimonials.quotes and testimonials.quotes.length %}
+            {% set quoteCount = testimonials.quotes | length %}
+            <div class="grid {% if quoteCount == 1 %}max-w-md mx-auto{% elif quoteCount == 2 %}md:grid-cols-2{% else %}md:grid-cols-3{% endif %} gap-6 text-left">
+                {% for q in testimonials.quotes %}
+                <div class="quote-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="text-4xl font-black mb-4 leading-none" style="color: #E8541A;">"</div>
+                    <p class="text-gray-700 leading-relaxed mb-8 italic">{{ q.quote }}</p>
+                    <p class="font-bold text-sm" style="color: #E8541A;">— {{ q.attribution }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    {% endif %}
+
     <!-- Welcome / Message Section (optional) -->
     {% if welcome and welcome.heading %}
     <section class="bg-white py-24 px-6">
@@ -250,47 +291,6 @@
                 </div>
                 {% endfor %}
             </div>
-        </div>
-    </section>
-    {% endif %}
-
-    <!-- Testimonials / Social Proof Section (optional) -->
-    {% if testimonials and testimonials.heading %}
-    <section class="py-24 px-6" style="background: #1B2A4A;">
-        <div class="container mx-auto max-w-5xl text-center">
-            <span class="inline-block text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8" style="background: #E8541A;">STORIES</span>
-            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-tight text-white mb-4">{{ testimonials.heading }}</h2>
-            {% if testimonials.subheading %}
-            <p class="text-white/70 text-lg mb-16">{{ testimonials.subheading }}</p>
-            {% endif %}
-            <div class="mx-auto mb-16" style="max-width: 700px;">
-                {% if testimonials.video_url %}
-                <div class="relative rounded-2xl overflow-hidden" style="aspect-ratio: 16/9;">
-                    <iframe src="{{ testimonials.video_url }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
-                </div>
-                {% else %}
-                <div class="relative rounded-2xl overflow-hidden flex items-center justify-center" style="background: #0F1E35; aspect-ratio: 16/9;">
-                    <div class="flex flex-col items-center gap-4">
-                        <div class="w-20 h-20 rounded-full flex items-center justify-center" style="background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.25);">
-                            <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-gray-500 italic text-sm mt-4">Video testimonial coming soon</p>
-                {% endif %}
-            </div>
-            {% if testimonials.quotes and testimonials.quotes.length %}
-            {% set quoteCount = testimonials.quotes | length %}
-            <div class="grid {% if quoteCount == 1 %}max-w-md mx-auto{% elif quoteCount == 2 %}md:grid-cols-2{% else %}md:grid-cols-3{% endif %} gap-6 text-left">
-                {% for q in testimonials.quotes %}
-                <div class="quote-card bg-white rounded-2xl p-8 shadow-lg">
-                    <div class="text-4xl font-black mb-4 leading-none" style="color: #E8541A;">"</div>
-                    <p class="text-gray-700 leading-relaxed mb-8 italic">{{ q.quote }}</p>
-                    <p class="font-bold text-sm" style="color: #E8541A;">— {{ q.attribution }}</p>
-                </div>
-                {% endfor %}
-            </div>
-            {% endif %}
         </div>
     </section>
     {% endif %}
