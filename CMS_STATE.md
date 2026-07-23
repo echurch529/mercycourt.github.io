@@ -17,6 +17,7 @@
 | 6 — Delete old HTML blog posts | ✅ Done | All four files deleted via PR #2; live URLs verified post-deploy; /blog clean (0 .html in DOM) |
 | 7 — Static pages CMS | ✅ Done | ministries ✅, tehillah-voices ✅, mercy-kidz ✅, about-us ✅, index ✅, community-impact ✅, contact ✅, plan-your-visit ✅; the-new-mc removed |
 | 8 — Event landing pages | ✅ Done | Folder collection `events/` + `event-page.njk` layout; one-bring-one migrated; redirect stub at root; editable slugs on events + posts |
+| 9 — CMS live preview templates | 🔄 In progress | `admin/preview.js` created; Event Pages template built + pushed (commit `9c15a77`); awaiting editor verification before building remaining 9 templates |
 
 ---
 
@@ -89,8 +90,10 @@ Clean URL fix verified 2026-07-18 via DevTools Elements panel search: 0 `.html` 
   <title>Content Manager — RCCG Mercy Court</title>
 </head><body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script src="/admin/preview.js"></script>
 </body></html>
 ```
+`/admin/preview.js` script tag added in Phase 9 (commit `9c15a77`). The file registers `registerPreviewTemplate` components for each collection.
 
 ### `admin/config.yml` key settings
 ```yaml
@@ -432,6 +435,63 @@ Note: Decap CMS has no computed/dynamic field defaults — the slug field starts
 - Test event created with long title + manually shortened slug `test-12th-anniversary` → live URL matched typed slug exactly ✅
 - Optional sections (Testimonials, Giving) correctly hide when left blank ✅
 - Test entry deleted ✅
+
+---
+
+## Phase 9 — CMS Live Preview Templates (🔄 In progress)
+
+### Approach
+
+`admin/preview.js` — a single IIFE file loaded after the Decap CMS bundle — registers `window.CMS.registerPreviewTemplate(name, component)` for each collection. Each component is a plain ES6 class extending `window.React.Component` (no build step, no JSX). Styles are delivered two ways:
+
+1. **`registerPreviewStyle(url)`** — injects Google Fonts CSS link into the preview iframe
+2. **`document.createElement('script')` in `componentDidMount`** — appends Tailwind CDN to the iframe's `document.head` (the only way to inject a JS-based CDN into the iframe document)
+
+All critical visual properties use **inline `style` props** so the preview renders correctly on first paint without waiting for Tailwind to load. Tailwind CDN is progressive enhancement for responsive grid utilities.
+
+### Key implementation patterns
+
+- `entry.get('data').toJS()` — converts Immutable.js entry data to plain JS; avoids `.getIn()` chains
+- `resolveImage(props, path)` — returns path directly if root-relative (`/`), otherwise calls `props.getAsset()` to resolve CMS-managed uploads
+- `injectTailwind()` — idempotent guard (`document.getElementById('mc-tw-cdn')`); sets `window.tailwind = { config: {...} }` synchronously before CDN script creation so theme extensions are picked up on first scan
+- `window.tailwind.config` extends: `brand-red: '#D95A2B'`, `brand-dark: '#0A0A0A'`, `brand-footer: '#1a1a1a'`; font families `anton`, `lato`
+- Brand constants: `ORANGE = '#E8541A'`, `NAVY = '#1B2A4A'`; font stacks with fallbacks: `"'Anton', Impact, 'Arial Narrow', sans-serif"`, `"'Lato', 'Helvetica Neue', Arial, sans-serif"`
+- Optional section guard: `if (!section || !section.heading) return null;` — mirrors the `{% if section and section.heading %}` guards in the Nunjucks template
+- Error boundary: `render()` wrapped in try/catch; renders `'Preview error: ' + err.message` on failure
+
+### Status per collection
+
+| Collection | Template name | Status |
+|------------|--------------|--------|
+| Event Pages | `'events'` | ✅ Built + pushed (commit `9c15a77`) — awaiting verification |
+| Blog Posts | `'posts'` | ⏳ Pending (build after events verified) |
+| Main Pages — Homepage | `'home'` | ⏳ Pending |
+| Main Pages — About Us | `'about'` | ⏳ Pending |
+| Main Pages — Contact | `'contact'` | ⏳ Pending |
+| Main Pages — Plan Your Visit | `'plan-your-visit'` | ⏳ Pending |
+| Main Pages — Community Impact | `'community-impact'` | ⏳ Pending |
+| Ministries — Overview | `'ministries'` | ⏳ Pending |
+| Ministries — Tehillah Voices | `'tehillah'` | ⏳ Pending |
+| Ministries — Mercy Kidz | `'mercy-kidz'` | ⏳ Pending |
+
+### Event Pages preview sections (built)
+
+`Badge`, `HeroSection`, `WelcomeSection`, `FeaturesSection`, `TestimonialsSection`, `LogisticsSection`, `GivingSection`, `CTAFinalSection` — 609 lines total. Each section helper uses inline styles for immediate correct rendering; optional sections return `null` when heading is blank, matching the Nunjucks template guards exactly.
+
+Preview notice bar ("Preview — nav, footer, and modal not shown") shown as a thin black bar at the top so editors know what is omitted from the preview.
+
+### Verification checklist — Event Pages (user to complete)
+
+- [ ] Open One Bring One entry in `/admin/` — preview pane shows dark hero, orange "WELCOME HOME" badge, Anton headline, subheadline, two CTA buttons
+- [ ] All sections visible: Welcome, 4 Feature cards (2-col grid), dark-navy Testimonials with 3 quotes, orange Logistics band, Final CTA
+- [ ] Edit a headline field live — preview pane updates in real time
+- [ ] Unstyled flash: first paint renders correctly (inline styles); only fonts may briefly show fallback before Google Fonts loads
+
+### Next steps (after verification)
+
+1. Build remaining 9 templates in one pass (Blog Posts + 5 Main Pages + 3 Ministries) — append to `admin/preview.js`
+2. Field label review commit — pass over all `admin/config.yml` fields and consolidate plain-language fixes
+3. Update this section: mark all 10 templates ✅ Done
 
 ---
 
