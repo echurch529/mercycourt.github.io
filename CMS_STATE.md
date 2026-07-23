@@ -6,6 +6,37 @@
 
 ## Standing Rules
 
+### ⚠️ Image fields — alt text and file size (standing requirement)
+
+Every `image` widget in `admin/config.yml` must follow this pattern:
+
+**Where the image renders as an `<img>` tag in the template:**
+1. Add the `image` widget field with a file size hint: `hint: "Keep under 300KB (hero/banner: 500KB). Compress at squoosh.app or tinypng.com before uploading."`
+2. Add a sibling `string` widget immediately after for alt text: `{ label: "Image Alt Text", name: "image_alt", widget: "string", hint: "Describe the image for screen readers and image search — e.g. '...'" }`
+3. Update the template to use `alt="{{ field.image_alt }}"` (or `| default(fallback)` if graceful degradation is needed)
+4. Populate the alt field in the page's frontmatter YAML
+
+**Where the image renders as a CSS `background-image` (no `<img>` tag):**
+- Add the file size hint only. Do NOT add an alt field — CSS backgrounds have no `alt` attribute in HTML, so the field would not map to any rendered output (misleading to editors).
+
+**Decap CMS 3.x limitation:** The `image` widget returns a plain string path. There is no native alt text property on the widget itself — the sibling field pattern is the only correct approach for structured image fields. (The markdown rich-text editor does support alt text natively for inline images in `body` fields, but that is separate.)
+
+**File size:** Decap CMS does not natively support file size restrictions or warnings. The size hint on every image field is the best achievable within Decap's current architecture. Do not implement custom widget workarounds for this.
+
+**Implemented (commit `fb6be67` — 2026-07-23):**
+| Field | Alt field | Template |
+|---|---|---|
+| `events` → `hero.image` | `hero.image_alt` ✅ | `event-page.njk` — `alt="{{ hero.image_alt \| default(title) }}"` |
+| `plan-your-visit` → `hero.image` | `hero.image_alt` ✅ | `plan-your-visit.html` — `alt="{{ hero.image_alt }}"` |
+| `about` → `pastor.photo` | `pastor.photo_alt` ✅ | `about-us.html` — `alt="{{ pastor.photo_alt }}"` |
+| `home` → `ministries[].image` | `image_alt` ✅ | `index.html` — `alt="{{ ministry.image_alt \| default(ministry.title) }}"` |
+| `ministries` → ministry cards `image` | `image_alt` ✅ (pre-existing) | `ministries.html` — `alt="{{ ministry.image_alt }}"` |
+| `tehillah` → `gallery[].image` | `alt` ✅ (pre-existing) | `tehillah-voices.html` — `alt="{{ gallery[i].alt }}"` |
+| Blog posts `hero_image` | `hero_image_alt` ✅ (pre-existing) | `post.njk`, `post-wide.njk` |
+| All hero images rendered as CSS bg | hint only, no alt field | — |
+
+---
+
 ### ⚠️ Preview template sync — mandatory on every structural change
 
 Whenever a structural change is made to any live page — section reordering, new/removed sections, layout changes, field additions/removals — you must:
