@@ -195,7 +195,7 @@
          shows the image itself as the centerpiece — used when the artwork
          already carries the theme, dates, and schedule. -->
     {% if hero.badge or hero.headline or hero.subheadline %}
-    <section class="relative overflow-hidden" style="height: 100vh;">
+    <section class="relative overflow-hidden" style="height: 100vh; padding-top: 72px;">
         <div class="absolute inset-0">
             <img loading="lazy" src="{{ hero.image }}" alt="{{ hero.image_alt | default(title) }}" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20"></div>
