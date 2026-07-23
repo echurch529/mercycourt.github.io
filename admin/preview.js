@@ -593,9 +593,9 @@
         }, 'Preview — nav, footer, and modal not shown'),
 
         HeroSection(props, hero),
+        TestimonialsSection(props, testimonials),
         WelcomeSection(props, welcome),
         FeaturesSection(props, features),
-        TestimonialsSection(props, testimonials),
         LogisticsSection(props, logistics),
         GivingSection(props, giving),
         CTAFinalSection(props, ctaFinal)
