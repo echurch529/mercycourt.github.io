@@ -399,14 +399,16 @@ All sections except hero are optional — leave `heading:` blank (or omit the ke
 | Section key | Required | Notes |
 |-------------|----------|-------|
 | `hero` | ✅ | image, badge, headline, subheadline, primary_cta, secondary_cta_text/url |
+| `testimonials` | optional | heading, subheading, video_url, quotes list; adaptive 1/2/3-col grid — **renders 2nd, immediately after hero** |
 | `welcome` | optional | badge, heading, body (list of paragraphs) |
 | `features` | optional | badge, heading, cards list (emoji/title/body) — 2-col grid |
-| `testimonials` | optional | heading, subheading, video_url, quotes list; adaptive 1/2/3-col grid |
 | `logistics` | optional | heading, custom_note; address + service times from `site.*` |
 | `cta_final` | optional | heading, body (list of paragraphs), button_text |
 | `giving` | optional | heading, body, button_text, url |
 
 Testimonials video: empty `video_url` → styled placeholder. Non-empty → `<iframe>` embed.
+
+**Section order change (commits `a3bcdfc`, `ac59976` — 2026-07-23):** Testimonials section (containing the video) moved from position 4 (after Welcome and Features) to position 2 (immediately after the hero) in both `event-page.njk` and `admin/config.yml`. Rationale: video is high-value social proof that should be visible on the first scroll without requiring visitors to scroll past two other sections. CMS field order updated to match so the admin editor reflects the live page structure.
 
 ### Decap `events` collection fields
 
@@ -435,6 +437,7 @@ Note: Decap CMS has no computed/dynamic field defaults — the slug field starts
 - Test event created with long title + manually shortened slug `test-12th-anniversary` → live URL matched typed slug exactly ✅
 - Optional sections (Testimonials, Giving) correctly hide when left blank ✅
 - Test entry deleted ✅
+- `one-bring-one` `video_url` populated with `https://www.youtube.com/embed/_VBaOUKJBpg` (commit `436ef46` — 2026-07-23); was previously blank/placeholder
 
 ---
 
