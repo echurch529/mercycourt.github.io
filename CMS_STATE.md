@@ -17,7 +17,7 @@
 | 6 — Delete old HTML blog posts | ✅ Done | All four files deleted via PR #2; live URLs verified post-deploy; /blog clean (0 .html in DOM) |
 | 7 — Static pages CMS | ✅ Done | ministries ✅, tehillah-voices ✅, mercy-kidz ✅, about-us ✅, index ✅, community-impact ✅, contact ✅, plan-your-visit ✅; the-new-mc removed |
 | 8 — Event landing pages | ✅ Done | Folder collection `events/` + `event-page.njk` layout; one-bring-one migrated; redirect stub at root; editable slugs on events + posts |
-| 9 — CMS live preview templates | 🔄 In progress | `admin/preview.js` created; Event Pages template built + pushed (commit `9c15a77`); awaiting editor verification before building remaining 9 templates |
+| 9 — CMS live preview templates | ✅ Done | `admin/preview.js` — all 10 templates built, pushed, and verified by editor |
 
 ---
 
@@ -438,60 +438,47 @@ Note: Decap CMS has no computed/dynamic field defaults — the slug field starts
 
 ---
 
-## Phase 9 — CMS Live Preview Templates (🔄 In progress)
+## Phase 9 — CMS Live Preview Templates (✅ DONE)
 
 ### Approach
 
-`admin/preview.js` — a single IIFE file loaded after the Decap CMS bundle — registers `window.CMS.registerPreviewTemplate(name, component)` for each collection. Each component is a plain ES6 class extending `window.React.Component` (no build step, no JSX). Styles are delivered two ways:
+`admin/preview.js` — a single IIFE loaded after the Decap CMS bundle — registers `window.CMS.registerPreviewTemplate(name, component)` for all 10 collections. All components are **plain functions** (no ES6 class, no JSX, no build step). Styles delivered two ways:
 
-1. **`registerPreviewStyle(url)`** — injects Google Fonts CSS link into the preview iframe
-2. **`document.createElement('script')` in `componentDidMount`** — appends Tailwind CDN to the iframe's `document.head` (the only way to inject a JS-based CDN into the iframe document)
+1. **`registerPreviewStyle(url)`** — injects Google Fonts CSS into the preview iframe
+2. **`injectTailwind()`** — idempotent guard appends Tailwind CDN script to `document.head`
 
-All critical visual properties use **inline `style` props** so the preview renders correctly on first paint without waiting for Tailwind to load. Tailwind CDN is progressive enhancement for responsive grid utilities.
+All critical visual properties use **inline `style` props** so the preview renders correctly on first paint.
 
 ### Key implementation patterns
 
-- `entry.get('data').toJS()` — converts Immutable.js entry data to plain JS; avoids `.getIn()` chains
-- `resolveImage(props, path)` — returns path directly if root-relative (`/`), otherwise calls `props.getAsset()` to resolve CMS-managed uploads
-- `injectTailwind()` — idempotent guard (`document.getElementById('mc-tw-cdn')`); sets `window.tailwind = { config: {...} }` synchronously before CDN script creation so theme extensions are picked up on first scan
-- `window.tailwind.config` extends: `brand-red: '#D95A2B'`, `brand-dark: '#0A0A0A'`, `brand-footer: '#1a1a1a'`; font families `anton`, `lato`
-- Brand constants: `ORANGE = '#E8541A'`, `NAVY = '#1B2A4A'`; font stacks with fallbacks: `"'Anton', Impact, 'Arial Narrow', sans-serif"`, `"'Lato', 'Helvetica Neue', Arial, sans-serif"`
-- Optional section guard: `if (!section || !section.heading) return null;` — mirrors the `{% if section and section.heading %}` guards in the Nunjucks template
-- Error boundary: `render()` wrapped in try/catch; renders `'Preview error: ' + err.message` on failure
+- **`var h = (React && React.createElement) || window.h`** — defensive detection; bail-out with `console.error` if neither exists. `window.React` is not reliably exported by all Decap CMS 3.x UMD builds; `window.h` is the safe primary.
+- **Functional components** — avoids `extends React.Component` / `window.React.Component` dependency entirely.
+- **`getData(props)`** — `var raw = props.entry.get('data'); return (raw && raw.toJS) ? raw.toJS() : {};` — converts Immutable.js entry to plain JS.
+- **`props.widgetFor('body')`** — used in BlogPostPreview for native markdown rendering; avoids custom parsing.
+- **`resolveImage(props, path)`** — direct return for `/`-prefixed paths; `props.getAsset(path)` fallback for CMS-managed uploads.
+- **Shared helpers** — `noticeBar`, `pageHero`, `wrap`, `splitHeadline`, `pill`, `ctaBtn`, `h2Anton`, `para` — defined once in the IIFE, reused across all preview components.
+- **Brand constants** — `ORANGE = '#E8541A'`, `NAVY = '#1B2A4A'`; font stacks with fallbacks.
+- **`registerPreviewTemplate` naming** — for folder collections use the collection `name`; for files collections use the individual file entry's `name` (e.g. `'home'`, `'about'`), NOT the collection name.
+- **Error boundary** — each component wrapped in try/catch; renders `'Preview error: ' + err.message` on failure.
 
-### Status per collection
+### Status per collection (all ✅ verified by editor)
 
 | Collection | Template name | Status |
 |------------|--------------|--------|
-| Event Pages | `'events'` | ✅ Built + pushed (commit `9c15a77`) — awaiting verification |
-| Blog Posts | `'posts'` | ⏳ Pending (build after events verified) |
-| Main Pages — Homepage | `'home'` | ⏳ Pending |
-| Main Pages — About Us | `'about'` | ⏳ Pending |
-| Main Pages — Contact | `'contact'` | ⏳ Pending |
-| Main Pages — Plan Your Visit | `'plan-your-visit'` | ⏳ Pending |
-| Main Pages — Community Impact | `'community-impact'` | ⏳ Pending |
-| Ministries — Overview | `'ministries'` | ⏳ Pending |
-| Ministries — Tehillah Voices | `'tehillah'` | ⏳ Pending |
-| Ministries — Mercy Kidz | `'mercy-kidz'` | ⏳ Pending |
+| Event Pages | `'events'` | ✅ Done |
+| Blog Posts | `'posts'` | ✅ Done |
+| Main Pages — Homepage | `'home'` | ✅ Done |
+| Main Pages — About Us | `'about'` | ✅ Done |
+| Main Pages — Contact | `'contact'` | ✅ Done |
+| Main Pages — Plan Your Visit | `'plan-your-visit'` | ✅ Done |
+| Main Pages — Community Impact | `'community-impact'` | ✅ Done |
+| Ministries — Overview | `'ministries'` | ✅ Done |
+| Ministries — Tehillah Voices | `'tehillah'` | ✅ Done |
+| Ministries — Mercy Kidz | `'mercy-kidz'` | ✅ Done |
 
-### Event Pages preview sections (built)
+### Critical bug fixed — `window.React` undefined in Decap CMS 3.x
 
-`Badge`, `HeroSection`, `WelcomeSection`, `FeaturesSection`, `TestimonialsSection`, `LogisticsSection`, `GivingSection`, `CTAFinalSection` — 609 lines total. Each section helper uses inline styles for immediate correct rendering; optional sections return `null` when heading is blank, matching the Nunjucks template guards exactly.
-
-Preview notice bar ("Preview — nav, footer, and modal not shown") shown as a thin black bar at the top so editors know what is omitted from the preview.
-
-### Verification checklist — Event Pages (user to complete)
-
-- [ ] Open One Bring One entry in `/admin/` — preview pane shows dark hero, orange "WELCOME HOME" badge, Anton headline, subheadline, two CTA buttons
-- [ ] All sections visible: Welcome, 4 Feature cards (2-col grid), dark-navy Testimonials with 3 quotes, orange Logistics band, Final CTA
-- [ ] Edit a headline field live — preview pane updates in real time
-- [ ] Unstyled flash: first paint renders correctly (inline styles); only fonts may briefly show fallback before Google Fonts loads
-
-### Next steps (after verification)
-
-1. Build remaining 9 templates in one pass (Blog Posts + 5 Main Pages + 3 Ministries) — append to `admin/preview.js`
-2. Field label review commit — pass over all `admin/config.yml` fields and consolidate plain-language fixes
-3. Update this section: mark all 10 templates ✅ Done
+Initial Event Pages template used `var h = React.createElement` which crashed the IIFE immediately when `window.React` was not exported (Decap 3.x UMD variant). Decap silently fell back to its built-in label+value preview with no console error visible in the UI. Fix: defensive detection line + convert class to functional component. All remaining templates built with functional pattern from the start — no class components anywhere in `preview.js`.
 
 ---
 
