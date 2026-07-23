@@ -4,6 +4,7 @@ templateEngineOverride: njk
 permalink: plan-your-visit.html
 hero:
   image: "/assets/images/2026/congregation/congregation-worship-service-02.jpg"
+  image_alt: "Mercy Court congregation gathered in worship during Sunday service"
 welcome_body1: "We believe church is more than a building you walk into. It is a family you can belong to, a place where you can grow, serve, worship, and discover the life God has called you to live."
 welcome_body2: "At Mercy Court, you will find people from different walks of life coming together with one heart: to experience God's mercy, grow in faith, and become Christlike pacesetters in our world. Whether you are new to church, returning after a long time, searching for community, or looking for a place where your family can grow spiritually, we would love to welcome you."
 welcome_body3: "Come as you are. There is a place for you here."
@@ -248,7 +249,7 @@ faq:
     <!-- SECTION 1: Hero Banner -->
     <section class="relative overflow-hidden" style="height: 60vh;">
         <div class="absolute inset-0">
-            <img loading="lazy" src="{{ hero.image }}" alt="Mercy Court congregation worship" class="w-full h-full object-cover" style="object-position: center center;">
+            <img loading="lazy" src="{{ hero.image }}" alt="{{ hero.image_alt }}" class="w-full h-full object-cover" style="object-position: center center;">
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80"></div>
         </div>
         <div class="relative z-10 h-full flex items-center justify-center px-6">

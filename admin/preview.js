@@ -105,7 +105,7 @@
     },
       h('img', {
         src: resolveImage(props, hero.image),
-        alt: '',
+        alt: hero.image_alt || '',
         style: {
           position: 'absolute',
           top: 0, right: 0, bottom: 0, left: 0,

@@ -23,7 +23,7 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
               - { label: "Headline (first line)", name: "headline", widget: "string", hint: "e.g. IT'S OUR YEAR OF" }
               - { label: "Headline Highlight (red, 2nd line)", name: "headline_highlight", widget: "string", hint: "e.g. BETTER THINGS" }
               - { label: "Tagline", name: "tagline", widget: "string" }
@@ -45,7 +45,8 @@ collections:
             widget: "list"
             summary: "{{fields.title}}"
             fields:
-              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Image", name: "image", widget: "image", hint: "Keep under 300KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string", hint: "Describe the image for screen readers and image search — e.g. 'Worship team leading Sunday service at Mercy Court'" }
               - { label: "Card Title", name: "title", widget: "string" }
               - { label: "Card Subtitle", name: "subtitle", widget: "string" }
               - { label: "Description", name: "body", widget: "text" }
@@ -61,7 +62,7 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
               - { label: "Headline (first line)", name: "headline", widget: "string", hint: "e.g. IN CHRIST, FOR CHRIST," }
               - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string", hint: "e.g. WITH JOY!" }
           - { label: "We Serve God — Paragraph 1", name: "serve_body1", widget: "text" }
@@ -70,7 +71,8 @@ collections:
             name: "pastor"
             widget: "object"
             fields:
-              - { label: "Photo", name: "photo", widget: "image" }
+              - { label: "Photo", name: "photo", widget: "image", hint: "Keep under 300KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Photo Alt Text", name: "photo_alt", widget: "string", hint: "Describe the photo for screen readers — e.g. 'Pastor John and Pastor Rosemary Itakpe'" }
               - { label: "Bio Paragraph 1", name: "bio1", widget: "text" }
               - { label: "Bio Paragraph 2", name: "bio2", widget: "text" }
               - { label: "Bio Paragraph 3", name: "bio3", widget: "text" }
@@ -94,7 +96,7 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
 
       - name: "plan-your-visit"
         label: "Plan Your Visit"
@@ -105,7 +107,8 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Hero Image Alt Text", name: "image_alt", widget: "string", hint: "Describe the image for screen readers and image search — e.g. 'Mercy Court congregation during Sunday worship'" }
           - { label: "Welcome Paragraph 1", name: "welcome_body1", widget: "text" }
           - { label: "Welcome Paragraph 2", name: "welcome_body2", widget: "text" }
           - { label: "Welcome Paragraph 3", name: "welcome_body3", widget: "text" }
@@ -127,7 +130,7 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
               - { label: "Subtitle", name: "subtitle", widget: "string" }
           - label: "Mission Section"
             name: "mission"
@@ -199,7 +202,7 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
               - { label: "Subtitle", name: "subtitle", widget: "string" }
           - { label: "Intro Eyebrow", name: "intro_eyebrow", widget: "string" }
           - { label: "Intro Body", name: "intro_body", widget: "text" }
@@ -208,8 +211,8 @@ collections:
             widget: "list"
             summary: "{{fields.title}}"
             fields:
-              - { label: "Image", name: "image", widget: "image" }
-              - { label: "Image Alt Text", name: "image_alt", widget: "string" }
+              - { label: "Image", name: "image", widget: "image", hint: "Keep under 300KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string", hint: "Describe the image for screen readers and image search — e.g. 'Worship team leading Sunday service at Mercy Court'" }
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
               - { label: "Link URL", name: "link", widget: "string", hint: "Relative path, e.g. mercy-kidz.html" }
@@ -223,7 +226,7 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
               - { label: "Badge Text", name: "badge", widget: "string" }
               - { label: "Tagline", name: "tagline", widget: "string" }
           - label: "Vision Section"
@@ -237,8 +240,8 @@ collections:
             widget: "list"
             max: 3
             fields:
-              - { label: "Image", name: "image", widget: "image" }
-              - { label: "Alt Text", name: "alt", widget: "string" }
+              - { label: "Image", name: "image", widget: "image", hint: "Keep under 300KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Alt Text", name: "alt", widget: "string", hint: "Describe the photo for screen readers and image search — e.g. 'Tehillah Voices worship team during Sunday service'" }
           - label: "About Section"
             name: "about"
             widget: "object"
@@ -269,7 +272,7 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
               - { label: "Tagline", name: "tagline", widget: "string" }
           - { label: "About Section Body", name: "about_body", widget: "text" }
           - { label: "Mission Heading (first part)", name: "mission_heading_prefix", widget: "string" }
@@ -328,7 +331,7 @@ collections:
       - { label: "Page Title", name: "title", widget: "string", hint: "Used in browser tab and SEO — e.g. One Bring One — Invite a Friend | Mercy Court" }
       - { label: "URL Slug", name: "slug", widget: "string", hint: "Slug (target: 50–60 characters) — sets the page URL: /events/{slug}. Use lowercase letters and hyphens only, e.g. 12th-anniversary or one-bring-one." }
       - { label: "SEO Description", name: "seo_description", widget: "text", hint: "Description (target: 120–160 characters)" }
-      - { label: "OG / Share Image", name: "og_image", widget: "image" }
+      - { label: "OG / Share Image", name: "og_image", widget: "image", hint: "Keep under 500KB. This image appears when the page is shared on social media." }
       - label: "Publish Date"
         name: "date"
         widget: "datetime"
@@ -340,7 +343,8 @@ collections:
         widget: "object"
         collapsed: true
         fields:
-          - { label: "Background Image", name: "image", widget: "image" }
+          - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+          - { label: "Hero Image Alt Text", name: "image_alt", widget: "string", hint: "Describe the image for screen readers and image search — e.g. 'Mercy Court congregation during Sunday worship service'" }
           - { label: "Badge Pill Text", name: "badge", widget: "string", required: false, hint: "Small orange pill above the headline, e.g. WELCOME HOME. Leave blank to hide." }
           - { label: "Headline", name: "headline", widget: "string" }
           - { label: "Subheadline", name: "subheadline", widget: "text" }
@@ -457,8 +461,8 @@ collections:
           - { label: "Events", value: "events" }
           - { label: "Inspiration", value: "inspiration" }
       - { label: "Featured Post", name: "featured", widget: "boolean", default: false }
-      - { label: "Hero Image", name: "hero_image", widget: "image" }
-      - { label: "Hero Image Alt Text", name: "hero_image_alt", widget: "string" }
+      - { label: "Hero Image", name: "hero_image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+      - { label: "Hero Image Alt Text", name: "hero_image_alt", widget: "string", hint: "Describe the image for screen readers and image search — e.g. 'Open Bible on wooden table with morning light'" }
       - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Read Time (minutes)", name: "read_time", widget: "number", value_type: "int", default: 5 }
       - { label: "Body", name: "body", widget: "markdown" }
