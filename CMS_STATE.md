@@ -4,6 +4,22 @@
 
 ---
 
+## Standing Rules
+
+### ⚠️ Preview template sync — mandatory on every structural change
+
+Whenever a structural change is made to any live page — section reordering, new/removed sections, layout changes, field additions/removals — you must:
+
+1. **Immediately check** whether the corresponding `registerPreviewTemplate` component in `admin/preview.js` still matches the updated live page structure.
+2. **Fix it in the same commit** if it doesn't match. Do not wait for the mismatch to be reported separately.
+3. **Update CMS_STATE.md** in that same commit, logging what structural change was made and explicitly confirming the preview template was checked and synced.
+
+The CMS preview must never be allowed to drift out of sync with the live page. This applies to every collection: Ministries, Main Pages, Event Pages, and Blog Posts.
+
+**Why this rule exists:** After the event page section reorder (testimonials moved from position 4 to position 2), the preview template was not synced in the same commit — the mismatch had to be reported and fixed separately (commits `a3bcdfc` → `68ef8f7`). This rule prevents that from recurring.
+
+---
+
 ## Phases
 
 | Phase | Status | Notes |
