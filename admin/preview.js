@@ -609,4 +609,159 @@
 
   window.CMS.registerPreviewTemplate('events', EventPagePreview);
 
+  /* ══════════════════════════════════════════════════════════════════
+     Blog Posts Preview Component
+     Registered for the 'posts' folder collection.
+     Body rendered via props.widgetFor('body') — Decap's own markdown
+     renderer; no custom markdown parsing needed.
+     ══════════════════════════════════════════════════════════════════ */
+  function BlogPostPreview(props) {
+    injectTailwind();
+
+    try {
+      var entry   = props.entry;
+      var rawData = entry.get('data');
+      if (!rawData) return h('div', { style: { padding: '40px', fontFamily: BODY, color: '#888' } }, 'Loading preview…');
+
+      var data        = rawData.toJS ? rawData.toJS() : {};
+      var title       = data.title    || '';
+      var category    = data.category || '';
+      var author      = data.author   || '';
+      var readTime    = data.read_time;
+      var heroImage   = resolveImage(props, data.hero_image);
+      var scriptureRefs = data.scripture_references || [];
+
+      var dateStr = '';
+      if (data.date) {
+        try {
+          dateStr = new Date(data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        } catch (e) { dateStr = String(data.date); }
+      }
+
+      var catLabel = category ? (category.charAt(0).toUpperCase() + category.slice(1)) : '';
+
+      /* Article body styles — mirrors post.njk <style> block */
+      var articleBodyStyle = [
+        'article h2 { font-family: Anton, sans-serif; font-size: clamp(1.4rem,3vw,1.875rem); text-transform: uppercase; color: #111827; letter-spacing: -0.025em; margin-top: 2.5rem; margin-bottom: 1rem; line-height: 1.2; }',
+        'article p { color: #4B5563; font-size: 1.125rem; line-height: 1.75rem; margin-bottom: 1.5rem; }',
+        'article a { color: #D95A2B; text-decoration: none; }',
+        'article a:hover { text-decoration: underline; }',
+        'article ul, article ol { color: #4B5563; font-size: 1.125rem; line-height: 1.75rem; margin-bottom: 1.5rem; padding-left: 1.5rem; }',
+        'article ul { list-style-type: disc; }',
+        'article ol { list-style-type: decimal; }',
+        'article li { margin-bottom: 0.5rem; }',
+        'article blockquote { border-left: 4px solid #D95A2B; padding: 1rem 1.5rem; margin: 1.5rem 0; background: #FFF8F5; color: #374151; font-style: italic; font-size: 1.125rem; line-height: 1.75rem; }',
+        'article strong { color: #111827; font-weight: 700; }'
+      ].join('\n');
+
+      return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
+
+        /* Inject article body styles once */
+        h('style', null, articleBodyStyle),
+
+        /* Preview notice bar */
+        h('div', {
+          style: {
+            background: '#111', color: '#666', fontSize: '11px',
+            fontFamily: BODY, padding: '7px 16px',
+            textAlign: 'center', letterSpacing: '0.08em', textTransform: 'uppercase'
+          }
+        }, 'Preview — nav, footer, and modal not shown'),
+
+        /* Hero */
+        h('section', {
+          style: { position: 'relative', overflow: 'hidden', height: '60vh', minHeight: '360px' }
+        },
+          h('img', {
+            src: heroImage, alt: '',
+            style: { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }
+          }),
+          h('div', {
+            style: { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.60), rgba(0,0,0,0.50), rgba(0,0,0,0.80))' }
+          }),
+          h('div', {
+            style: {
+              position: 'relative', zIndex: 10, height: '100%',
+              display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
+              paddingBottom: '48px', padding: '0 24px 48px'
+            }
+          },
+            h('div', { style: { maxWidth: '768px', textAlign: 'center' } },
+              catLabel && h('span', {
+                style: {
+                  display: 'inline-block', background: ORANGE, color: '#fff',
+                  padding: '4px 16px', borderRadius: '999px', fontSize: '11px',
+                  fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px'
+                }
+              }, catLabel),
+              h('h1', {
+                style: {
+                  fontFamily: DISPLAY,
+                  fontSize: 'clamp(32px, 6vw, 56px)',
+                  textTransform: 'uppercase', color: '#fff',
+                  lineHeight: '1', letterSpacing: '-0.01em', margin: 0
+                }
+              }, title)
+            )
+          )
+        ),
+
+        /* Meta bar */
+        h('section', { style: { background: '#fff', padding: '40px 24px 16px' } },
+          h('div', {
+            style: {
+              maxWidth: '768px', margin: '0 auto',
+              display: 'flex', flexWrap: 'wrap', gap: '24px',
+              alignItems: 'center', color: '#6b7280', fontSize: '14px',
+              borderBottom: '1px solid #f3f4f6', paddingBottom: '32px'
+            }
+          },
+            dateStr  && h('span', null, '📅 ' + dateStr),
+            author   && h('span', null, '👤 ' + author),
+            readTime && h('span', null, '⏱ ' + readTime + ' min read')
+          )
+        ),
+
+        /* Article body — Decap renders markdown natively via widgetFor */
+        h('article', { style: { background: '#fff', padding: '40px 24px' } },
+          h('div', { style: { maxWidth: '768px', margin: '0 auto' } },
+            props.widgetFor('body'),
+
+            /* Scripture references */
+            scriptureRefs.length > 0 && h('div', {
+              style: {
+                marginTop: '48px', background: '#f9fafb',
+                borderLeft: '4px solid #D95A2B', borderRadius: '0 8px 8px 0', padding: '32px'
+              }
+            },
+              h('h3', {
+                style: {
+                  fontFamily: DISPLAY, fontSize: '18px', textTransform: 'uppercase',
+                  color: '#111827', letterSpacing: '-0.01em', marginBottom: '16px', marginTop: 0
+                }
+              }, 'Read Further'),
+              h('ul', { style: { listStyle: 'none', padding: 0, margin: 0 } },
+                scriptureRefs.map(function (ref, i) {
+                  return h('li', {
+                    key: i,
+                    style: { display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '8px' }
+                  },
+                    h('span', { style: { color: ORANGE, fontWeight: '700', flexShrink: 0 } }, '●'),
+                    h('span', { style: { color: '#4b5563', fontSize: '18px', lineHeight: '1.75' } }, ref)
+                  );
+                })
+              )
+            )
+          )
+        )
+      );
+    } catch (err) {
+      return h('div', {
+        style: { padding: '32px', fontFamily: 'monospace', fontSize: '13px', color: '#c00', background: '#fff1f1' }
+      }, 'Preview error: ' + err.message);
+    }
+  }
+
+  window.CMS.registerPreviewTemplate('posts', BlogPostPreview);
+
 }());
