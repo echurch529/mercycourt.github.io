@@ -332,8 +332,8 @@ Commits: `5091c42` (paths fix), `fa006ac` (delete legacy file), `87851b0` (renam
 ### Decap `files` collections — field summary per page
 
 - **ministries** ✅: `hero` (object: image, subtitle), `intro_eyebrow`, `intro_body`, `ministries` (list: image/image_alt/title/description/link)
-- **tehillah** ✅: `hero` (object: image, badge, tagline), `vision` (object: heading/body), `gallery` (list max 3), `about` (object: heading/body1/body2/instagram_url), `youtube_url`, `youtube_playlist_url`, `join_url`, `scripture_quote`, `scripture_ref`
-- **mercy-kidz** ✅: `hero` (object: image, tagline), `about_body`, `mission_heading_prefix`, `mission_heading_highlight`, `mission_body`, `connect` (object: instagram_url/instagram_handle/youtube_url/youtube_handle), `faq` (list: question/answer). Static: 5S values, age groups, curriculum, farmers section, what-to-expect steps, yearly programs
+- **tehillah** ✅: `hero` (object: image, badge, tagline), `vision` (object: heading/body), `gallery` (list max 3), `about` (object: heading/body1/body2/instagram_url), `youtube_url`, `youtube_playlist_url`, `join_url`, `join` (object: body1/body2 — "Join the Worship Team" recruitment paragraphs), `scripture_quote`, `scripture_ref`
+- **mercy-kidz** ✅: `hero` (object: image, tagline), `about_body`, `mission_heading_prefix`, `mission_heading_highlight`, `mission_body`, `who_we_serve_intro`, `age_groups` (list: name/age_range/description — Seeds, Seedlings, Sprouts, Vines), `farmers` (object: body1/body2/body3), `yearly_programs` (list: name — 4 annual events), `connect` (object: instagram_url/instagram_handle/youtube_url/youtube_handle), `faq` (list: question/answer). Static: 5S values, curriculum categories/bullets, farmers role-trait cards, What to Expect steps, age group card colors/SVGs (text dynamic via age_groups[i])
 - **about** ✅: `hero` (object: image, headline, headline_highlight), `serve_body1`, `serve_body2`, `pastor` (object: photo/bio1/bio2/bio3), `vision_body1`, `vision_body2`, `testimonials` (list: title/quote/attribution). Static: approach pillars, pastor quote, service times, community grid
 - **home** ✅: `hero` (image/headline/headline_highlight/tagline), `about` (body1/body2), `mission_body`, `leadership` (bio/blockquote), `ministries` (list: image/title/subtitle/body/link), `cta_body`
 - **community-impact** ✅: `hero`, `mission` (body1/2/3), `stats` (list), `pantry_hours`, `programs` (list with emoji), `partners` (list), `testimonials` (list), `pantry_highlight` (body1/2/3), `goals` (list with emoji), `volunteer_intro1/2`, `volunteer_form_endpoint`, `grant_body`
@@ -475,6 +475,20 @@ All critical visual properties use **inline `style` props** so the preview rende
 | Ministries — Overview | `'ministries'` | ✅ Done |
 | Ministries — Tehillah Voices | `'tehillah'` | ✅ Done |
 | Ministries — Mercy Kidz | `'mercy-kidz'` | ✅ Done |
+
+### Ministries preview dispatch fix (commit `43284ab`)
+
+All three Ministries pages were showing Decap's generic label+value fallback instead of custom branded layouts. Root cause: Decap CMS was looking up the preview template by the **collection name** (`'ministries-pages'`) rather than the individual file entry names (`'ministries'`, `'tehillah'`, `'mercy-kidz'`). Fix: added a `MinistriesDispatch` function registered under `'ministries-pages'` that routes to the correct component by inspecting `props.entry.get('path')`. Individual registrations kept as belt-and-suspenders.
+
+```javascript
+function MinistriesDispatch(props) {
+  var path = (props.entry && props.entry.get('path')) || '';
+  if (path.indexOf('tehillah') !== -1) return TehillahPreview(props);
+  if (path.indexOf('mercy-kidz') !== -1) return MercyKidzPreview(props);
+  return MinistriesPreview(props);
+}
+window.CMS.registerPreviewTemplate('ministries-pages', MinistriesDispatch);
+```
 
 ### Critical bug fixed — `window.React` undefined in Decap CMS 3.x
 
