@@ -1664,4 +1664,18 @@
   }
   window.CMS.registerPreviewTemplate('mercy-kidz', MercyKidzPreview);
 
+  /* Fallback: register at collection level in case Decap CMS looks up
+     ministries-pages entries by collection name instead of entry name. */
+  function MinistriesDispatch(props) {
+    try {
+      var path = (props.entry && props.entry.get('path')) || '';
+      if (path.indexOf('tehillah') !== -1) return TehillahPreview(props);
+      if (path.indexOf('mercy-kidz') !== -1) return MercyKidzPreview(props);
+      return MinistriesPreview(props);
+    } catch (e) {
+      return MinistriesPreview(props);
+    }
+  }
+  window.CMS.registerPreviewTemplate('ministries-pages', MinistriesDispatch);
+
 }());
