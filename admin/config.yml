@@ -27,6 +27,7 @@ collections:
               - { label: "Headline (first line)", name: "headline", widget: "string", hint: "e.g. IT'S OUR YEAR OF" }
               - { label: "Headline Highlight (red, 2nd line)", name: "headline_highlight", widget: "string", hint: "e.g. BETTER THINGS" }
               - { label: "Tagline", name: "tagline", widget: "string" }
+              - { label: "Show Hero Text Overlay", name: "show_hero_text", widget: "boolean", default: true, hint: "Turn OFF if the hero image already contains all the needed text and details — e.g. a seasonal flyer or announcement graphic. When off, the image fills the hero at natural size with no headline, tagline, or buttons overlaid." }
           - label: "About Section"
             name: "about"
             widget: "object"

@@ -382,7 +382,7 @@ Commits: `5091c42` (paths fix), `fa006ac` (delete legacy file), `87851b0` (renam
 - **tehillah** ✅: `hero` (object: image, badge, tagline), `vision` (object: heading/body), `gallery` (list max 3), `about` (object: heading/body1/body2/instagram_url), `youtube_url`, `youtube_playlist_url`, `join_url`, `join` (object: body1/body2 — "Join the Worship Team" recruitment paragraphs), `scripture_quote`, `scripture_ref`
 - **mercy-kidz** ✅: `hero` (object: image, tagline), `about_body`, `mission_heading_prefix`, `mission_heading_highlight`, `mission_body`, `who_we_serve_intro`, `age_groups` (list: class_name/age_range/description — Seeds, Seedlings, Sprouts, Vines), `farmers` (object: body1/body2/body3), `yearly_programs` (list: program_name — 4 annual events), `connect` (object: instagram_url/instagram_handle/youtube_url/youtube_handle), `faq` (list: question/answer). Static: 5S values, curriculum categories/bullets, farmers role-trait cards, What to Expect steps, age group card colors/SVGs (text dynamic via age_groups[i]). ⚠️ Do NOT use `name` as a subfield name in list widgets — Decap CMS silently drops the widget; use descriptive keys (class_name, program_name, etc.)
 - **about** ✅: `hero` (object: image, headline, headline_highlight), `serve_body1`, `serve_body2`, `pastor` (object: photo/bio1/bio2/bio3), `vision_body1`, `vision_body2`, `testimonials` (list: title/quote/attribution). Static: approach pillars, pastor quote, service times, community grid
-- **home** ✅: `hero` (image/headline/headline_highlight/tagline), `about` (body1/body2), `mission_body`, `leadership` (bio/blockquote), `ministries` (list: image/title/subtitle/body/link), `cta_body`
+- **home** ✅: `hero` (image/headline/headline_highlight/tagline/show_hero_text), `about` (body1/body2), `mission_body`, `leadership` (bio/blockquote), `ministries` (list: image/title/subtitle/body/link), `cta_body`
 - **community-impact** ✅: `hero`, `mission` (body1/2/3), `stats` (list), `pantry_hours`, `programs` (list with emoji), `partners` (list), `testimonials` (list), `pantry_highlight` (body1/2/3), `goals` (list with emoji), `volunteer_intro1/2`, `volunteer_form_endpoint`, `grant_body`
 - **contact** ✅: `hero` (image only — all contact info from site.*)
 - **plan-your-visit** ✅: `hero`, `welcome_body1/2/3`, `video_url`, `faq` (list: question/answer; rendered with loop.index IDs)
@@ -575,6 +575,20 @@ window.CMS.registerPreviewTemplate('ministries-pages', MinistriesDispatch);
 ### Critical bug fixed — `window.React` undefined in Decap CMS 3.x
 
 Initial Event Pages template used `var h = React.createElement` which crashed the IIFE immediately when `window.React` was not exported (Decap 3.x UMD variant). Decap silently fell back to its built-in label+value preview with no console error visible in the UI. Fix: defensive detection line + convert class to functional component. All remaining templates built with functional pattern from the start — no class components anywhere in `preview.js`.
+
+---
+
+### Hero text-overlay toggle — reusable pattern (added 2026-07-23)
+
+**Field:** `hero.show_hero_text` — boolean, default `true`.
+
+**Homepage:** `index.html` hero section wraps the headline/tagline/CTA block in `{% if hero.show_hero_text == false %}` / `{% else %}`. When `false`, the hero renders as a plain `<img>` at natural aspect ratio (max 100vh, object-fit cover) on a black section — identical clean pattern to the Event Page flyer mode. When `true` (or unset), full text overlay renders as before.
+
+**CMS config:** `boolean` widget inside the home `hero` object, hint explains the use case (flyer or announcement graphic). Default `true` ensures existing editors see no change.
+
+**Preview sync (mandatory rule followed):** `admin/preview.js` `HomePreview` reads `hero.show_hero_text !== false` → `showHeroText`. When false, renders `<section style="background:#000"><img width:100% height:auto maxHeight:100vh></section>` instead of calling `pageHero(...)`. Both branches update on every CMS field change so the toggle is live in preview.
+
+**Extensibility note:** The same `show_hero_text` boolean pattern can be added to other hero-bearing collections later if needed — Event Pages (`event-page.njk` already has its own badge/headline/subheadline blank-check for flyer mode, so no change needed there), Ministries pages, or any future page with a full-bleed hero image. The template pattern is always `{% if hero.show_hero_text == false %}` (not `!= true`) so undefined (field not yet added) defaults to text-on.
 
 ---
 

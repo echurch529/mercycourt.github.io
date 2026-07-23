@@ -1077,20 +1077,29 @@
       var about      = data.about       || {};
       var leadership = data.leadership  || {};
       var mins       = data.ministries  || [];
+      var showHeroText = hero.show_hero_text !== false;
 
       return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
         noticeBar(),
 
-        /* Hero */
-        pageHero(resolveImage(props, hero.image), '100vh',
-          h('div', null,
-            splitHeadline(hero.headline || '', hero.headline_highlight || '', 'clamp(48px,10vw,96px)'),
-            h('p', { style: { fontFamily: BODY, color: 'rgba(255,255,255,0.9)', fontSize: '20px', fontWeight: '300', maxWidth: '700px', margin: '0 auto 40px', lineHeight: '1.6' } }, hero.tagline || ''),
-            h('div', { style: { display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' } },
-              ctaBtn('Plan Your Visit', true), ctaBtn('Watch Online', false)
+        /* Hero — text-overlay mode (default) or image-only mode */
+        showHeroText
+          ? pageHero(resolveImage(props, hero.image), '100vh',
+              h('div', null,
+                splitHeadline(hero.headline || '', hero.headline_highlight || '', 'clamp(48px,10vw,96px)'),
+                h('p', { style: { fontFamily: BODY, color: 'rgba(255,255,255,0.9)', fontSize: '20px', fontWeight: '300', maxWidth: '700px', margin: '0 auto 40px', lineHeight: '1.6' } }, hero.tagline || ''),
+                h('div', { style: { display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' } },
+                  ctaBtn('Plan Your Visit', true), ctaBtn('Watch Online', false)
+                )
+              )
             )
-          )
-        ),
+          : h('section', { style: { background: '#000', overflow: 'hidden' } },
+              h('img', {
+                src: resolveImage(props, hero.image),
+                alt: '',
+                style: { width: '100%', height: 'auto', display: 'block', maxHeight: '100vh', objectFit: 'cover' }
+              })
+            ),
 
         /* About */
         h('section', { style: { background: '#fff', padding: '96px 24px 48px' } },

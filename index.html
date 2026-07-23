@@ -12,6 +12,7 @@ hero:
   headline: IT'S OUR YEAR OF
   headline_highlight: BETTER THINGS
   tagline: The home of pacesetters, where we experience God and enjoy life
+  show_hero_text: true
 about:
   body1: We are dedicated to raising Christ-like pacesetters who through God's
     mercy maximize their potentials and enjoy life. Our mission centers on
@@ -214,6 +215,11 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
     </nav>
 
     <!-- Hero Section -->
+    {% if hero.show_hero_text == false %}
+    <section class="relative overflow-hidden">
+        <img src="{{ hero.image }}" alt="{{ hero.image_alt | default('') }}" class="w-full block" style="max-height:100vh; object-fit:cover;">
+    </section>
+    {% else %}
     <section class="relative h-[100vh] flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ hero.image }}');">
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
@@ -236,6 +242,7 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
             </div>
         </div>
     </section>
+    {% endif %}
 
     <!-- About Section -->
     <section id="about" class="bg-white pt-24 pb-10 px-6">
