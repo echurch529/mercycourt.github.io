@@ -129,41 +129,13 @@
     );
 
     if (!hero.badge && !hero.headline && !hero.subheadline) {
-      return h('section', {
-        style: {
-          position: 'relative',
-          overflow: 'hidden',
-          minHeight: '100vh',
-          background: '#0A0A0A',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '104px 24px 88px'
-        }
-      },
+      return h('section', { style: { background: '#0A0A0A' } },
         h('img', {
           src: imgSrc,
-          alt: '',
-          'aria-hidden': true,
-          style: {
-            position: 'absolute',
-            top: 0, right: 0, bottom: 0, left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            filter: 'blur(28px) brightness(0.4)',
-            transform: 'scale(1.1)'
-          }
+          alt: hero.image_alt || '',
+          style: { width: '100%', height: 'auto', display: 'block' }
         }),
-        h('div', { style: { position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center' } },
-          h('img', {
-            src: imgSrc,
-            alt: hero.image_alt || '',
-            style: { maxHeight: '72vh', maxWidth: '100%', width: 'auto', borderRadius: '16px', boxShadow: '0 25px 50px rgba(0,0,0,0.5)' }
-          }),
-          ctaRow
-        )
+        h('div', { style: { padding: '0 24px 40px', display: 'flex', flexDirection: 'column', alignItems: 'center' } }, ctaRow)
       );
     }
 

@@ -136,7 +136,6 @@
                     </a>
                     <div class="absolute top-full left-0 mt-2 bg-black/95 backdrop-blur-sm rounded-lg py-2 min-w-[160px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                         <a href="/contact.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">Contact</a>
-                        <a href="/events/one-bring-one.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">Events</a>
                     </div>
                 </div>
                 <div class="relative group">
@@ -147,6 +146,16 @@
                     <div class="absolute top-full left-0 mt-2 bg-black/95 backdrop-blur-sm rounded-lg py-2 min-w-[180px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                         <a href="/tehillah-voices.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">Tehillah Voices</a>
                         <a href="/mercy-kidz.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">God's Heritage</a>
+                    </div>
+                </div>
+                <div class="relative group">
+                    <a href="/events/12th-anniversary.html" class="hover:text-brand-red transition cursor-pointer flex items-center gap-1">
+                        Events
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="absolute top-full left-0 mt-2 bg-black/95 backdrop-blur-sm rounded-lg py-2 min-w-[180px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <a href="/events/12th-anniversary.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">12th Anniversary</a>
+                        <a href="/events/one-bring-one.html" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">One Bring One</a>
                     </div>
                 </div>
                 <a href="/community-impact.html" class="hover:text-brand-red transition">Community Impact</a>
@@ -164,12 +173,16 @@
             <div>
                 <a href="/about-us.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">About Us</a>
                 <a href="/contact.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">Contact</a>
-                <a href="/events/one-bring-one.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">Events</a>
             </div>
             <div>
                 <a href="/ministries.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Ministries</a>
                 <a href="/tehillah-voices.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">Tehillah Voices</a>
                 <a href="/mercy-kidz.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">God's Heritage</a>
+            </div>
+            <div>
+                <a href="/events/12th-anniversary.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Events</a>
+                <a href="/events/12th-anniversary.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">12th Anniversary</a>
+                <a href="/events/one-bring-one.html" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">One Bring One</a>
             </div>
             <a href="/community-impact.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Community Impact</a>
             <a href="/watch-live.html" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Watch Live</a>
@@ -215,27 +228,17 @@
         </div>
     </section>
     {% else %}
-    <section class="relative overflow-hidden flex flex-col items-center justify-center px-6" style="min-height: 100vh; background: #0A0A0A;">
-        <div class="absolute inset-0" aria-hidden="true">
-            <img src="{{ hero.image }}" alt="" class="w-full h-full object-cover" style="filter: blur(28px) brightness(0.4); transform: scale(1.1);">
-        </div>
-        <div class="relative z-10 flex flex-col items-center w-full" style="padding-top: 104px; padding-bottom: 88px;">
-            <img src="{{ hero.image }}" alt="{{ hero.image_alt | default(title) }}" class="w-auto max-w-full rounded-2xl shadow-2xl" style="max-height: 72vh;">
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-10">
-                <button onclick="openVisitModal()" class="text-white px-10 py-4 rounded-full font-bold uppercase text-sm tracking-wide cursor-pointer border-0 transition-all" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
-                    {{ hero.primary_cta if hero.primary_cta else "PLAN MY VISIT" }}
-                </button>
-                {% if hero.secondary_cta_text %}
-                <a href="{{ hero.secondary_cta_url }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
-                    {{ hero.secondary_cta_text }}
-                </a>
-                {% endif %}
-            </div>
-        </div>
-        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 scroll-bounce">
-            <svg class="w-8 h-8 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
+    <section style="background: #0A0A0A; padding-top: 72px;">
+        <img src="{{ hero.image }}" alt="{{ hero.image_alt | default(title) }}" class="w-full h-auto block">
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center px-6 py-10">
+            <button onclick="openVisitModal()" class="text-white px-10 py-4 rounded-full font-bold uppercase text-sm tracking-wide cursor-pointer border-0 transition-all" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
+                {{ hero.primary_cta if hero.primary_cta else "PLAN MY VISIT" }}
+            </button>
+            {% if hero.secondary_cta_text %}
+            <a href="{{ hero.secondary_cta_url }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
+                {{ hero.secondary_cta_text }}
+            </a>
+            {% endif %}
         </div>
     </section>
     {% endif %}
