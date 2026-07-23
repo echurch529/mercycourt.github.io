@@ -1371,4 +1371,297 @@
   }
   window.CMS.registerPreviewTemplate('community-impact', CommunityImpactPreview);
 
+  /* ══════════════════════════════════════════════════════════════════
+     Ministries Overview Preview  (file entry name: 'ministries')
+     ══════════════════════════════════════════════════════════════════ */
+  function MinistriesPreview(props) {
+    injectTailwind();
+    try {
+      var data = getData(props);
+      var hero = data.hero || {};
+      var mins = data.ministries || [];
+
+      return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
+        noticeBar(),
+
+        /* Hero */
+        pageHero(resolveImage(props, hero.image), '65vh',
+          h('div', null,
+            h('h1', { style: { fontFamily: DISPLAY, fontSize: 'clamp(40px,8vw,80px)', textTransform: 'uppercase', color: '#fff', lineHeight: '1.1', letterSpacing: '-0.01em', margin: '0 0 16px' } }, 'OUR MINISTRIES'),
+            hero.subtitle && h('p', { style: { fontFamily: BODY, color: 'rgba(255,255,255,0.8)', fontSize: '18px', lineHeight: '1.7', maxWidth: '560px', margin: '0 auto' } }, hero.subtitle)
+          )
+        ),
+
+        /* Dark intro */
+        h('section', { style: { background: '#0A0A0A', padding: '80px 24px', textAlign: 'center' } },
+          h('div', { style: { maxWidth: '760px', margin: '0 auto' } },
+            data.intro_eyebrow && h('p', { style: { fontFamily: BODY, color: '#9ca3af', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.2em', fontWeight: '700', marginBottom: '12px' } }, data.intro_eyebrow),
+            h('h2', { style: { fontFamily: DISPLAY, fontSize: 'clamp(32px,5vw,48px)', textTransform: 'uppercase', color: '#fff', lineHeight: '1.1', marginBottom: '24px' } },
+              'AT ', h('span', { style: { color: '#D95A2B' } }, 'MERCY COURT')
+            ),
+            data.intro_body && h('p', { style: { fontFamily: BODY, color: '#9ca3af', fontSize: '17px', lineHeight: '1.8' } }, data.intro_body)
+          )
+        ),
+
+        /* Ministry cards */
+        mins.length > 0 && h('section', { style: { background: '#fff', padding: '80px 24px' } },
+          h('div', { style: { maxWidth: '1040px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '28px' } },
+            mins.map(function (m, i) {
+              return h('div', { key: i, style: { borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', border: '1px solid #f3f4f6' } },
+                h('div', { style: { position: 'relative', height: '200px', overflow: 'hidden' } },
+                  h('img', { src: resolveImage(props, m.image), alt: m.image_alt || m.title || '', style: { width: '100%', height: '100%', objectFit: 'cover' } }),
+                  h('div', { style: { position: 'absolute', bottom: 0, left: 0, right: 0, height: '60%', background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent)' } })
+                ),
+                h('div', { style: { padding: '20px 24px' } },
+                  h('h3', { style: { fontFamily: DISPLAY, fontSize: '20px', textTransform: 'uppercase', color: NAVY, marginBottom: '10px' } }, m.title || ''),
+                  h('p', { style: { fontFamily: BODY, fontSize: '13px', color: '#4b5563', lineHeight: '1.7', marginBottom: '14px' } }, m.description || ''),
+                  h('span', { style: { fontFamily: BODY, fontWeight: '700', fontSize: '12px', color: ORANGE, textTransform: 'uppercase', letterSpacing: '0.05em' } }, 'Learn More →')
+                )
+              );
+            })
+          )
+        ),
+
+        /* Get Involved CTA */
+        h('section', { style: { background: ORANGE, padding: '80px 24px', textAlign: 'center' } },
+          h('div', { style: { maxWidth: '700px', margin: '0 auto' } },
+            h('h2', { style: { fontFamily: DISPLAY, fontSize: 'clamp(32px,5vw,48px)', textTransform: 'uppercase', color: '#fff', lineHeight: '1', marginBottom: '20px' } }, 'GET INVOLVED'),
+            h('p', { style: { fontFamily: BODY, color: 'rgba(255,255,255,0.9)', fontSize: '17px', lineHeight: '1.8', marginBottom: '32px', maxWidth: '520px', margin: '0 auto 32px' } }, "There's a place for you at Mercy Court. Whether you're a seasoned leader or just beginning your journey, we have a ministry where you can serve and grow."),
+            h('div', { style: { display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' } },
+              h('span', { style: { background: '#fff', color: ORANGE, padding: '12px 32px', borderRadius: '999px', fontFamily: BODY, fontWeight: '700', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' } }, 'Contact Us'),
+              h('span', { style: { border: '2px solid #fff', color: '#fff', padding: '12px 32px', borderRadius: '999px', fontFamily: BODY, fontWeight: '700', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' } }, 'Volunteer')
+            )
+          )
+        )
+      );
+    } catch (err) {
+      return h('div', { style: { padding: '32px', fontFamily: 'monospace', fontSize: '13px', color: '#c00', background: '#fff1f1' } }, 'Preview error: ' + err.message);
+    }
+  }
+  window.CMS.registerPreviewTemplate('ministries', MinistriesPreview);
+
+  /* ══════════════════════════════════════════════════════════════════
+     Tehillah Voices Preview  (file entry name: 'tehillah')
+     ══════════════════════════════════════════════════════════════════ */
+  function TehillahPreview(props) {
+    injectTailwind();
+    try {
+      var data    = getData(props);
+      var hero    = data.hero    || {};
+      var vision  = data.vision  || {};
+      var gallery = data.gallery || [];
+      var about   = data.about   || {};
+
+      var g0 = gallery[0] || {};
+      var g1 = gallery[1] || {};
+      var g2 = gallery[2] || {};
+
+      return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
+        noticeBar(),
+
+        /* Hero */
+        pageHero(resolveImage(props, hero.image), '100vh',
+          h('div', null,
+            hero.badge && h('p', { style: { fontFamily: BODY, color: '#D95A2B', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.3em', fontWeight: '700', marginBottom: '16px' } }, hero.badge),
+            h('h1', { style: { fontFamily: DISPLAY, fontSize: 'clamp(56px,11vw,108px)', textTransform: 'uppercase', color: '#fff', lineHeight: '1', letterSpacing: '-0.01em', margin: '0 0 20px' } },
+              'TEHILLAH', h('br'), h('span', { style: { color: '#D95A2B' } }, 'VOICES')
+            ),
+            hero.tagline && h('p', { style: { fontFamily: BODY, color: 'rgba(255,255,255,0.8)', fontSize: '18px', lineHeight: '1.7', maxWidth: '520px', margin: '0 auto' } }, hero.tagline)
+          )
+        ),
+
+        /* Vision */
+        h('section', { style: { background: '#0A0A0A', padding: '80px 24px', textAlign: 'center' } },
+          h('div', { style: { maxWidth: '760px', margin: '0 auto' } },
+            h('p', { style: { fontFamily: BODY, color: '#D95A2B', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.25em', fontWeight: '700', marginBottom: '20px' } }, 'Our Heart'),
+            vision.heading && h('h2', { style: { fontFamily: DISPLAY, fontSize: 'clamp(28px,4vw,44px)', textTransform: 'uppercase', color: '#fff', lineHeight: '1.1', marginBottom: '28px' } }, vision.heading),
+            vision.body && h('p', { style: { fontFamily: BODY, color: '#9ca3af', fontSize: '17px', lineHeight: '1.8' } }, vision.body)
+          )
+        ),
+
+        /* Gallery + About */
+        h('section', { style: { background: '#fff', padding: '80px 24px' } },
+          h('div', { style: { maxWidth: '1040px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '56px', alignItems: 'center' } },
+
+            /* Gallery */
+            h('div', null,
+              h('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' } },
+                h('div', { style: { borderRadius: '8px', overflow: 'hidden', height: '220px' } },
+                  g0.image ? h('img', { src: resolveImage(props, g0.image), alt: g0.alt || '', style: { width: '100%', height: '100%', objectFit: 'cover' } })
+                  : h('div', { style: { width: '100%', height: '100%', background: '#f3f4f6' } })
+                ),
+                h('div', { style: { borderRadius: '8px', overflow: 'hidden', height: '220px', marginTop: '24px' } },
+                  g1.image ? h('img', { src: resolveImage(props, g1.image), alt: g1.alt || '', style: { width: '100%', height: '100%', objectFit: 'cover' } })
+                  : h('div', { style: { width: '100%', height: '100%', background: '#f3f4f6' } })
+                )
+              ),
+              h('div', { style: { borderRadius: '8px', overflow: 'hidden', height: '180px' } },
+                g2.image ? h('img', { src: resolveImage(props, g2.image), alt: g2.alt || '', style: { width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' } })
+                : h('div', { style: { width: '100%', height: '100%', background: '#f3f4f6' } })
+              )
+            ),
+
+            /* About */
+            h('div', null,
+              pill('Who We Are'),
+              about.heading && h('h2', { style: { fontFamily: DISPLAY, fontSize: 'clamp(24px,3vw,36px)', textTransform: 'uppercase', color: NAVY, lineHeight: '1.1', marginBottom: '20px' } }, about.heading),
+              about.body1 && h('p', { style: { fontFamily: BODY, fontSize: '16px', color: '#4b5563', lineHeight: '1.8', marginBottom: '16px' } }, about.body1),
+              about.body2 && h('p', { style: { fontFamily: BODY, fontSize: '16px', color: '#4b5563', lineHeight: '1.8', marginBottom: '24px' } }, about.body2),
+              about.instagram_url && h('span', { style: { display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#0A0A0A', color: '#fff', padding: '10px 20px', borderRadius: '999px', fontFamily: BODY, fontWeight: '700', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' } }, '📸 Follow on Instagram')
+            )
+          )
+        ),
+
+        /* Music / YouTube */
+        h('section', { style: { background: '#0A0A0A', padding: '80px 24px', textAlign: 'center' } },
+          h('div', { style: { maxWidth: '900px', margin: '0 auto' } },
+            h('p', { style: { fontFamily: BODY, color: '#D95A2B', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.25em', fontWeight: '700', marginBottom: '12px' } }, 'Listen to'),
+            h('h2', { style: { fontFamily: DISPLAY, fontSize: '40px', textTransform: 'uppercase', color: '#fff', marginBottom: '4px' } }, 'OUR MUSIC'),
+            h('div', { style: { width: '64px', height: '4px', background: '#D95A2B', margin: '0 auto 40px' } }),
+            h('div', { style: { position: 'relative', width: '100%', borderRadius: '12px', overflow: 'hidden', paddingTop: '56.25%', background: '#111', marginBottom: '32px' } },
+              data.youtube_url
+                ? h('iframe', { src: data.youtube_url, frameBorder: '0', allowFullScreen: true, style: { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' } })
+                : h('div', { style: { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px' } },
+                    h('div', { style: { width: '64px', height: '64px', borderRadius: '50%', background: 'rgba(255,255,255,0.12)', border: '2px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+                      h('svg', { fill: 'currentColor', viewBox: '0 0 24 24', style: { width: '28px', height: '28px', color: '#fff', marginLeft: '4px' } }, h('path', { d: 'M8 5v14l11-7z' }))
+                    ),
+                    h('p', { style: { fontFamily: BODY, color: 'rgba(255,255,255,0.4)', fontSize: '13px' } }, 'Add YouTube URL to embed video')
+                  )
+            ),
+            h('div', { style: { display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' } },
+              h('span', { style: { display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF0000', color: '#fff', padding: '10px 24px', borderRadius: '999px', fontFamily: BODY, fontWeight: '700', fontSize: '12px', textTransform: 'uppercase' } }, '▶ Watch on YouTube'),
+              h('span', { style: { display: 'inline-flex', alignItems: 'center', gap: '8px', border: '2px solid rgba(255,255,255,0.3)', color: '#fff', padding: '10px 24px', borderRadius: '999px', fontFamily: BODY, fontWeight: '700', fontSize: '12px', textTransform: 'uppercase' } }, '📸 Follow on Instagram')
+            )
+          )
+        ),
+
+        /* Join team */
+        h('section', { style: { background: '#fff', padding: '80px 24px', textAlign: 'center' } },
+          h('div', { style: { maxWidth: '600px', margin: '0 auto' } },
+            pill('Get Involved'),
+            h('h2', { style: { fontFamily: DISPLAY, fontSize: 'clamp(28px,4vw,44px)', textTransform: 'uppercase', color: NAVY, lineHeight: '1.1', marginBottom: '20px' } },
+              'JOIN THE', h('br'), h('span', { style: { color: '#D95A2B' } }, 'WORSHIP TEAM')
+            ),
+            h('p', { style: { fontFamily: BODY, fontSize: '16px', color: '#4b5563', lineHeight: '1.8', marginBottom: '28px' } }, 'Whether you sing, play an instrument, or serve behind the scenes — there is a place for you in Tehillah Voices.'),
+            h('span', { style: { display: 'inline-block', background: ORANGE, color: '#fff', padding: '14px 40px', borderRadius: '999px', fontFamily: BODY, fontWeight: '700', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' } }, 'Apply to Join')
+          )
+        ),
+
+        /* Scripture */
+        data.scripture_quote && h('section', { style: { background: '#0A0A0A', padding: '56px 24px', textAlign: 'center' } },
+          h('div', { style: { maxWidth: '600px', margin: '0 auto' } },
+            h('p', { style: { fontFamily: BODY, color: '#9ca3af', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.2em', fontWeight: '700', marginBottom: '16px' } }, 'Scripture'),
+            h('p', { style: { fontFamily: DISPLAY, fontSize: 'clamp(20px,3vw,28px)', textTransform: 'uppercase', color: '#fff', lineHeight: '1.4', marginBottom: '12px' } }, '"' + data.scripture_quote + '"'),
+            data.scripture_ref && h('p', { style: { fontFamily: BODY, fontWeight: '700', color: '#D95A2B', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.1em' } }, '— ' + data.scripture_ref)
+          )
+        )
+      );
+    } catch (err) {
+      return h('div', { style: { padding: '32px', fontFamily: 'monospace', fontSize: '13px', color: '#c00', background: '#fff1f1' } }, 'Preview error: ' + err.message);
+    }
+  }
+  window.CMS.registerPreviewTemplate('tehillah', TehillahPreview);
+
+  /* ══════════════════════════════════════════════════════════════════
+     Mercy Kidz (God's Heritage) Preview  (file entry name: 'mercy-kidz')
+     ══════════════════════════════════════════════════════════════════ */
+  function MercyKidzPreview(props) {
+    injectTailwind();
+    try {
+      var data    = getData(props);
+      var hero    = data.hero    || {};
+      var connect = data.connect || {};
+      var faq     = data.faq    || [];
+
+      var sValues = [
+        { label: 'Seen',     sub: 'Every child is seen & known',     bg: '#D95A2B', textColor: '#fff'      },
+        { label: 'Smiling',  sub: 'Fun is a priority',                bg: '#facc15', textColor: '#713f12'  },
+        { label: 'Safe',     sub: 'A secure environment',             bg: '#22c55e', textColor: '#fff'      },
+        { label: 'Social',   sub: 'Building lasting friendships',     bg: '#3b82f6', textColor: '#fff'      },
+        { label: 'Salvation',sub: 'Leading kids to know Jesus',       bg: '#a855f7', textColor: '#fff'      }
+      ];
+
+      return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
+        noticeBar(),
+
+        /* Hero */
+        pageHero(resolveImage(props, hero.image), '100vh',
+          h('div', null,
+            h('h1', { style: { fontFamily: DISPLAY, fontSize: 'clamp(48px,9vw,88px)', textTransform: 'uppercase', color: '#fff', lineHeight: '1', letterSpacing: '-0.01em', margin: '0 0 20px' } },
+              "GOD'S", h('br'), h('span', { style: { color: '#D95A2B' } }, 'HERITAGE')
+            ),
+            hero.tagline && h('p', { style: { fontFamily: BODY, color: 'rgba(255,255,255,0.8)', fontSize: '18px', lineHeight: '1.7', maxWidth: '520px', margin: '0 auto 28px' } }, hero.tagline),
+            h('span', { style: { display: 'inline-block', background: ORANGE, color: '#fff', padding: '12px 32px', borderRadius: '999px', fontFamily: BODY, fontWeight: '700', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' } }, 'Learn More')
+          )
+        ),
+
+        /* About + Mission */
+        wrap('#fff', '80px 24px',
+          h('div', { style: { maxWidth: '760px', margin: '0 auto', textAlign: 'center' } },
+            pill('About Us'),
+            data.about_body && h('p', { style: { fontFamily: BODY, fontSize: '18px', color: '#4b5563', lineHeight: '1.8', marginBottom: '48px' } }, data.about_body),
+            h('hr', { style: { border: 'none', borderTop: '1px solid #f3f4f6', marginBottom: '48px' } }),
+            pill('Our Mission'),
+            h('h2', { style: { fontFamily: DISPLAY, fontSize: 'clamp(22px,3vw,32px)', textTransform: 'uppercase', color: NAVY, lineHeight: '1.2', marginBottom: '20px' } },
+              (data.mission_heading_prefix || '') + ' ',
+              h('span', { style: { color: '#D95A2B' } }, data.mission_heading_highlight || '')
+            ),
+            data.mission_body && h('p', { style: { fontFamily: BODY, fontSize: '16px', color: '#4b5563', lineHeight: '1.8' } }, data.mission_body)
+          )
+        ),
+
+        /* 5 S Values */
+        h('section', { style: { background: '#0A0A0A', padding: '80px 24px' } },
+          h('div', { style: { maxWidth: '1000px', margin: '0 auto' } },
+            h('div', { style: { textAlign: 'center', marginBottom: '48px' } },
+              h('p', { style: { fontFamily: BODY, color: '#D95A2B', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.25em', fontWeight: '700', marginBottom: '10px' } }, 'What We Stand For'),
+              h('h2', { style: { fontFamily: DISPLAY, fontSize: '36px', textTransform: 'uppercase', color: '#fff' } }, 'Our 5 S Values')
+            ),
+            h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: '14px' } },
+              sValues.map(function (s, i) {
+                return h('div', { key: i, style: { background: s.bg, borderRadius: '16px', padding: '24px 16px', textAlign: 'center' } },
+                  h('h3', { style: { fontFamily: DISPLAY, fontSize: '20px', textTransform: 'uppercase', color: s.textColor, marginBottom: '6px' } }, s.label),
+                  h('p', { style: { fontFamily: BODY, color: s.textColor, fontSize: '11px', lineHeight: '1.5', opacity: '0.85' } }, s.sub)
+                );
+              })
+            )
+          )
+        ),
+
+        /* FAQ */
+        faq.length > 0 && wrap('#f9fafb', '80px 24px',
+          h('div', null,
+            h('div', { style: { textAlign: 'center', marginBottom: '40px' } },
+              pill('Common Questions'),
+              h2Anton("Parents' FAQ", NAVY)
+            ),
+            h('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' } },
+              faq.map(function (item, i) {
+                return h('div', { key: i, style: { background: '#fff', borderRadius: '12px', padding: '24px', boxShadow: '0 1px 6px rgba(0,0,0,0.06)' } },
+                  h('p', { style: { fontFamily: BODY, fontWeight: '700', fontSize: '15px', color: NAVY, marginBottom: '10px' } }, item.question || ''),
+                  h('p', { style: { fontFamily: BODY, fontSize: '14px', color: '#4b5563', lineHeight: '1.7' } }, item.answer || '')
+                );
+              })
+            )
+          )
+        ),
+
+        /* Connect */
+        (connect.instagram_handle || connect.youtube_handle) && h('section', { style: { background: '#0A0A0A', padding: '64px 24px', textAlign: 'center' } },
+          h('div', { style: { maxWidth: '500px', margin: '0 auto' } },
+            pill('Follow Us'),
+            h2Anton("Stay Connected", '#fff'),
+            h('div', { style: { display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '8px' } },
+              connect.instagram_handle && h('span', { style: { display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#fff', color: '#0A0A0A', padding: '10px 20px', borderRadius: '999px', fontFamily: BODY, fontWeight: '700', fontSize: '12px' } }, '📸 ' + connect.instagram_handle),
+              connect.youtube_handle  && h('span', { style: { display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF0000', color: '#fff', padding: '10px 20px', borderRadius: '999px', fontFamily: BODY, fontWeight: '700', fontSize: '12px' } }, '▶ ' + connect.youtube_handle)
+            )
+          )
+        )
+      );
+    } catch (err) {
+      return h('div', { style: { padding: '32px', fontFamily: 'monospace', fontSize: '13px', color: '#c00', background: '#fff1f1' } }, 'Preview error: ' + err.message);
+    }
+  }
+  window.CMS.registerPreviewTemplate('mercy-kidz', MercyKidzPreview);
+
 }());
