@@ -177,7 +177,11 @@
         </div>
     </nav>
 
-    <!-- Hero -->
+    <!-- Hero: two modes. Text mode (badge/headline/subheadline present) overlays
+         text on a full-bleed background photo. Flyer mode (all hero text blank)
+         shows the image itself as the centerpiece — used when the artwork
+         already carries the theme, dates, and schedule. -->
+    {% if hero.badge or hero.headline or hero.subheadline %}
     <section class="relative overflow-hidden" style="height: 100vh;">
         <div class="absolute inset-0">
             <img loading="lazy" src="{{ hero.image }}" alt="{{ hero.image_alt | default(title) }}" class="w-full h-full object-cover">
@@ -210,6 +214,31 @@
             </svg>
         </div>
     </section>
+    {% else %}
+    <section class="relative overflow-hidden flex flex-col items-center justify-center px-6" style="min-height: 100vh; background: #0A0A0A;">
+        <div class="absolute inset-0" aria-hidden="true">
+            <img src="{{ hero.image }}" alt="" class="w-full h-full object-cover" style="filter: blur(28px) brightness(0.4); transform: scale(1.1);">
+        </div>
+        <div class="relative z-10 flex flex-col items-center w-full" style="padding-top: 104px; padding-bottom: 88px;">
+            <img src="{{ hero.image }}" alt="{{ hero.image_alt | default(title) }}" class="w-auto max-w-full rounded-2xl shadow-2xl" style="max-height: 72vh;">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-10">
+                <button onclick="openVisitModal()" class="text-white px-10 py-4 rounded-full font-bold uppercase text-sm tracking-wide cursor-pointer border-0 transition-all" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
+                    {{ hero.primary_cta if hero.primary_cta else "PLAN MY VISIT" }}
+                </button>
+                {% if hero.secondary_cta_text %}
+                <a href="{{ hero.secondary_cta_url }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
+                    {{ hero.secondary_cta_text }}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 scroll-bounce">
+            <svg class="w-8 h-8 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </div>
+    </section>
+    {% endif %}
 
     <!-- Countdown Timer Section (optional: hidden when countdown_target blank) -->
     {% if countdown_target %}

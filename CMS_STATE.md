@@ -470,6 +470,12 @@ Testimonials video: empty `video_url` → styled placeholder. Non-empty → `<if
 - **One-bring-one regression-checked**: builds byte-identical behavior — none of the new sections render (all keys absent), logistics middle column falls back to Sunday Service default.
 - **Pending (user-gated)**: after user verifies the page in `/admin/`, change the Events nav item across source files into a dropdown: "12th Anniversary" (`/events/12th-anniversary.html`) + "One Bring One" (`/events/one-bring-one.html`). NOT done yet — do not start until user confirms.
 
+### Hero flyer mode + preview image bug fix (2026-07-23)
+
+**Hero flyer mode** (`event-page.njk` + preview): when `hero.badge`, `hero.headline`, AND `hero.subheadline` are ALL blank, the hero switches to flyer mode — the image renders as the visual centerpiece (max-height 72vh, rounded, shadowed) over a blurred/darkened copy of itself as backdrop, with the CTA buttons kept below it. Text mode (any of the three set) is unchanged. `headline`/`subheadline` are now `required: false` in config.yml so editors can blank them; the headline hint explains flyer mode. 12th-anniversary uses flyer mode with `better-things-final.jpeg` (portrait flyer) — all event info lives in the artwork, and the full flyer text is mirrored into `image_alt` for accessibility. `og_image` uses `betterthings-lndscape.jpeg` (landscape is closer to the 1.91:1 social-card ratio).
+
+**Preview image refresh bug (root cause + fix)**: `resolveImage()` in `admin/preview.js` skipped `getAsset()` for paths starting with `/` and returned the raw path. Freshly uploaded media (`/assets/images/cms-uploads/...`) then 404'd against the deployed site until the upload commit finished deploying — making the preview appear not to refresh after selecting a new image. Fix: always call `getAsset()` first (returns a local blob URL for pending uploads; resolves to the public path for deployed media), fall back to the raw path on failure. Affects every collection's preview, not just events.
+
 **Section order change (commits `a3bcdfc`, `ac59976` — 2026-07-23):** Testimonials section (containing the video) moved from position 4 (after Welcome and Features) to position 2 (immediately after the hero) in both `event-page.njk` and `admin/config.yml`. Rationale: video is high-value social proof that should be visible on the first scroll without requiring visitors to scroll past two other sections. CMS field order updated to match so the admin editor reflects the live page structure.
 
 ### Decap `events` collection fields

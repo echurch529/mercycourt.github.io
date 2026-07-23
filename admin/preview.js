@@ -52,18 +52,21 @@
   }
 
   /* ── Image helper ──
-     Absolute repo paths (/assets/...) resolve against mercycourt.org
-     in the preview iframe and load directly without getAsset.
-     For CMS-uploaded images that haven't been persisted yet,
-     getAsset returns a blob URL — handle both cases.                   */
+     Always ask getAsset first: for media that was just uploaded in this
+     CMS session it returns a local blob URL, which is the ONLY way the
+     image can render before the upload commit is deployed. (Skipping
+     getAsset for absolute /assets/... paths made freshly uploaded images
+     404 against the live site until the next deploy — the preview looked
+     like it wasn't refreshing.) For already-deployed media, getAsset
+     resolves back to the public path, so behavior there is unchanged.   */
   function resolveImage(props, path) {
     if (!path) return '';
-    if (path.charAt(0) === '/') return path;
     try {
       var a = props.getAsset(path);
       var url = a && a.toString ? a.toString() : '';
-      return url || path;
-    } catch (e) { return path; }
+      if (url) return url;
+    } catch (e) { /* fall through to raw path */ }
+    return path;
   }
 
   /* ══════════════════════════════════════════════════════════════════
@@ -90,8 +93,80 @@
     }, text);
   }
 
-  /* ── Hero (always rendered) ── */
+  /* ── Hero (always rendered) ──
+     Two modes, mirroring event-page.njk: text mode when badge/headline/
+     subheadline present; flyer mode (image as centerpiece over a blurred
+     backdrop) when all three are blank.                                  */
   function HeroSection(props, hero) {
+    var imgSrc = resolveImage(props, hero.image);
+    var ctaRow = h('div', { style: { display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '40px' } },
+      h('span', {
+        style: {
+          background: ORANGE,
+          color: '#fff',
+          padding: '14px 40px',
+          borderRadius: '999px',
+          fontFamily: BODY,
+          fontWeight: '700',
+          fontSize: '13px',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em'
+        }
+      }, hero.primary_cta || 'PLAN MY VISIT'),
+      hero.secondary_cta_text && h('span', {
+        style: {
+          border: '2px solid #fff',
+          color: '#fff',
+          padding: '14px 40px',
+          borderRadius: '999px',
+          fontFamily: BODY,
+          fontWeight: '700',
+          fontSize: '13px',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em'
+        }
+      }, hero.secondary_cta_text)
+    );
+
+    if (!hero.badge && !hero.headline && !hero.subheadline) {
+      return h('section', {
+        style: {
+          position: 'relative',
+          overflow: 'hidden',
+          minHeight: '100vh',
+          background: '#0A0A0A',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '104px 24px 88px'
+        }
+      },
+        h('img', {
+          src: imgSrc,
+          alt: '',
+          'aria-hidden': true,
+          style: {
+            position: 'absolute',
+            top: 0, right: 0, bottom: 0, left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            filter: 'blur(28px) brightness(0.4)',
+            transform: 'scale(1.1)'
+          }
+        }),
+        h('div', { style: { position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center' } },
+          h('img', {
+            src: imgSrc,
+            alt: hero.image_alt || '',
+            style: { maxHeight: '72vh', maxWidth: '100%', width: 'auto', borderRadius: '16px', boxShadow: '0 25px 50px rgba(0,0,0,0.5)' }
+          }),
+          ctaRow
+        )
+      );
+    }
+
     return h('section', {
       style: {
         position: 'relative',
