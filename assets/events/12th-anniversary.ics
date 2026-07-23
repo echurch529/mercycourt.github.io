@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//RCCG Mercy Court//12th Anniversary//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:RCCG Mercy Court 12th Anniversary
+BEGIN:VEVENT
+DTSTART:20260814T230000Z
+DTEND:20260816T170000Z
+SUMMARY:RCCG Mercy Court 12th Anniversary — Better Things
+DESCRIPTION:Three days of celebration with Pastor John Itakpe and Rev. George Adegboye.\n\nFri Aug 14 · 7 PM — Tehillah Album Launch\nSat Aug 15 · 11 AM–1 PM — Community Outreach\nSat Aug 15 · 7 PM — Word and Prayers\nSun Aug 16 · 9:30 AM — Grand Finale\n\nhttps://mercycourt.org/events/12th-anniversary.html
+LOCATION:529 Walker Ave\, Baltimore\, MD 21212
+URL:https://mercycourt.org/events/12th-anniversary.html
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

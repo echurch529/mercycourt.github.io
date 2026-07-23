@@ -211,13 +211,25 @@
                 {{ hero.subheadline }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                {% if hero.primary_cta_url %}
+                <a href="{{ hero.primary_cta_url }}" download class="text-white px-10 py-4 rounded-full font-bold uppercase text-sm tracking-wide inline-block transition-all" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
+                    {{ hero.primary_cta if hero.primary_cta else "SAVE THE DATE" }}
+                </a>
+                {% else %}
                 <button onclick="openVisitModal()" class="text-white px-10 py-4 rounded-full font-bold uppercase text-sm tracking-wide cursor-pointer border-0 transition-all" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
                     {{ hero.primary_cta if hero.primary_cta else "PLAN MY VISIT" }}
                 </button>
+                {% endif %}
                 {% if hero.secondary_cta_text %}
-                <a href="{{ hero.secondary_cta_url }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
-                    {{ hero.secondary_cta_text }}
-                </a>
+                    {% if hero.secondary_cta_url == "#visit-modal" %}
+                    <button onclick="openVisitModal()" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide cursor-pointer bg-transparent">
+                        {{ hero.secondary_cta_text }}
+                    </button>
+                    {% else %}
+                    <a href="{{ hero.secondary_cta_url }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
+                        {{ hero.secondary_cta_text }}
+                    </a>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>
@@ -231,13 +243,25 @@
     <section style="background: #0A0A0A; padding-top: 72px;">
         <img src="{{ hero.image }}" alt="{{ hero.image_alt | default(title) }}" class="w-full h-auto block">
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center px-6 py-10">
+            {% if hero.primary_cta_url %}
+            <a href="{{ hero.primary_cta_url }}" download class="text-white px-10 py-4 rounded-full font-bold uppercase text-sm tracking-wide inline-block transition-all" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
+                {{ hero.primary_cta if hero.primary_cta else "SAVE THE DATE" }}
+            </a>
+            {% else %}
             <button onclick="openVisitModal()" class="text-white px-10 py-4 rounded-full font-bold uppercase text-sm tracking-wide cursor-pointer border-0 transition-all" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
                 {{ hero.primary_cta if hero.primary_cta else "PLAN MY VISIT" }}
             </button>
+            {% endif %}
             {% if hero.secondary_cta_text %}
-            <a href="{{ hero.secondary_cta_url }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
-                {{ hero.secondary_cta_text }}
-            </a>
+                {% if hero.secondary_cta_url == "#visit-modal" %}
+                <button onclick="openVisitModal()" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide cursor-pointer bg-transparent">
+                    {{ hero.secondary_cta_text }}
+                </button>
+                {% else %}
+                <a href="{{ hero.secondary_cta_url }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
+                    {{ hero.secondary_cta_text }}
+                </a>
+                {% endif %}
             {% endif %}
         </div>
     </section>

@@ -99,33 +99,39 @@
      backdrop) when all three are blank.                                  */
   function HeroSection(props, hero) {
     var imgSrc = resolveImage(props, hero.image);
+    var primaryBtnStyle = {
+      background: ORANGE,
+      color: '#fff',
+      padding: '14px 40px',
+      borderRadius: '999px',
+      fontFamily: BODY,
+      fontWeight: '700',
+      fontSize: '13px',
+      textTransform: 'uppercase',
+      letterSpacing: '0.05em',
+      display: 'inline-block',
+      textDecoration: 'none'
+    };
+    var secondaryBtnStyle = {
+      border: '2px solid #fff',
+      color: '#fff',
+      padding: '14px 40px',
+      borderRadius: '999px',
+      fontFamily: BODY,
+      fontWeight: '700',
+      fontSize: '13px',
+      textTransform: 'uppercase',
+      letterSpacing: '0.05em'
+    };
+    var primaryBtn = hero.primary_cta_url
+      ? h('a', { href: hero.primary_cta_url, download: true, style: primaryBtnStyle }, hero.primary_cta || 'SAVE THE DATE')
+      : h('span', { style: primaryBtnStyle }, hero.primary_cta || 'PLAN MY VISIT');
+    var secondaryBtn = hero.secondary_cta_text
+      ? h('span', { style: secondaryBtnStyle }, hero.secondary_cta_text)
+      : null;
     var ctaRow = h('div', { style: { display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '40px' } },
-      h('span', {
-        style: {
-          background: ORANGE,
-          color: '#fff',
-          padding: '14px 40px',
-          borderRadius: '999px',
-          fontFamily: BODY,
-          fontWeight: '700',
-          fontSize: '13px',
-          textTransform: 'uppercase',
-          letterSpacing: '0.05em'
-        }
-      }, hero.primary_cta || 'PLAN MY VISIT'),
-      hero.secondary_cta_text && h('span', {
-        style: {
-          border: '2px solid #fff',
-          color: '#fff',
-          padding: '14px 40px',
-          borderRadius: '999px',
-          fontFamily: BODY,
-          fontWeight: '700',
-          fontSize: '13px',
-          textTransform: 'uppercase',
-          letterSpacing: '0.05em'
-        }
-      }, hero.secondary_cta_text)
+      primaryBtn,
+      secondaryBtn
     );
 
     if (!hero.badge && !hero.headline && !hero.subheadline) {

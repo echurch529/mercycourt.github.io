@@ -348,9 +348,10 @@ collections:
           - { label: "Badge Pill Text", name: "badge", widget: "string", required: false, hint: "Small orange pill above the headline, e.g. WELCOME HOME. Leave blank to hide." }
           - { label: "Headline", name: "headline", widget: "string", required: false, hint: "Leave badge, headline, AND subheadline all blank for flyer mode: the image itself becomes the hero centerpiece (use when the artwork already shows the event info)." }
           - { label: "Subheadline", name: "subheadline", widget: "text", required: false }
-          - { label: "Primary CTA Button Text", name: "primary_cta", widget: "string", default: "PLAN MY VISIT", hint: "Always opens the Plan My Visit modal" }
+          - { label: "Primary CTA Button Text", name: "primary_cta", widget: "string", default: "PLAN MY VISIT", hint: "Opens the Plan My Visit modal by default. Set a Primary CTA URL below to turn it into a link instead (e.g. a calendar download)." }
+          - { label: "Primary CTA URL", name: "primary_cta_url", widget: "string", required: false, hint: "Optional. When set, the primary button links here (downloads when pointing to a .ics file). Leave blank to keep modal behaviour." }
           - { label: "Secondary CTA Text", name: "secondary_cta_text", widget: "string", default: "WATCH ONLINE", required: false, hint: "Leave blank to hide the secondary button" }
-          - { label: "Secondary CTA URL", name: "secondary_cta_url", widget: "string", default: "/watch-live.html", required: false }
+          - { label: "Secondary CTA URL", name: "secondary_cta_url", widget: "string", default: "/watch-live.html", required: false, hint: "Use #visit-modal to open the Plan My Visit modal instead of navigating away." }
 
       - { label: "Countdown Heading", name: "countdown_heading", widget: "string", required: false, hint: "Heading above the countdown timer, e.g. The Celebration Begins In. Only shown when a Countdown Target is set." }
       - { label: "Countdown Target", name: "countdown_target", widget: "datetime", required: false, format: "YYYY-MM-DDTHH:mm:ssZ", hint: "Date and time the countdown ends (event start). Leave blank to hide the countdown section." }
