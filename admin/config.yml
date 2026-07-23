@@ -249,6 +249,13 @@ collections:
               - { label: "Instagram URL", name: "instagram_url", widget: "string", hint: "Full URL e.g. https://www.instagram.com/tehillahvoices/" }
           - { label: "YouTube Embed URL", name: "youtube_url", widget: "string", hint: "Full embed URL e.g. https://www.youtube.com/embed/..." }
           - { label: "YouTube Playlist URL", name: "youtube_playlist_url", widget: "string", hint: "Full playlist URL for the Watch on YouTube button" }
+          - label: "Join the Worship Team Section"
+            name: "join"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Paragraph 1", name: "body1", widget: "text" }
+              - { label: "Paragraph 2", name: "body2", widget: "text" }
           - { label: "Join the Team Form URL", name: "join_url", widget: "string", hint: "Microsoft Forms URL" }
           - { label: "Scripture Quote", name: "scripture_quote", widget: "string" }
           - { label: "Scripture Reference", name: "scripture_ref", widget: "string", hint: "e.g. Psalm 100:4" }
@@ -268,6 +275,29 @@ collections:
           - { label: "Mission Heading (first part)", name: "mission_heading_prefix", widget: "string" }
           - { label: "Mission Heading (highlighted in red)", name: "mission_heading_highlight", widget: "string" }
           - { label: "Mission Body", name: "mission_body", widget: "text" }
+          - { label: "Who We Serve — Intro Text", name: "who_we_serve_intro", widget: "text" }
+          - label: "Age Groups"
+            name: "age_groups"
+            widget: "list"
+            summary: "{{fields.name}} ({{fields.age_range}})"
+            fields:
+              - { label: "Class Name", name: "name", widget: "string", hint: "e.g. Seeds, Seedlings, Sprouts, Vines" }
+              - { label: "Age Range", name: "age_range", widget: "string", hint: "e.g. Infant – 3 years" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Our Farmers (Teachers) Section"
+            name: "farmers"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Paragraph 1", name: "body1", widget: "text" }
+              - { label: "Paragraph 2", name: "body2", widget: "text" }
+              - { label: "Paragraph 3", name: "body3", widget: "text" }
+          - label: "Yearly Programs"
+            name: "yearly_programs"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Program Name", name: "name", widget: "string" }
           - label: "Social Media Links"
             name: "connect"
             widget: "object"

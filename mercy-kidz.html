@@ -7,6 +7,29 @@ about_body: "God's Heritage is the children's ministry of Mercy Court where we w
 mission_heading_prefix: "RAISING CHRISTLIKE CHILDREN PACESETTERS WHO THROUGH GOD'S MERCIES"
 mission_heading_highlight: "MAXIMIZE THEIR POTENTIAL AND ENJOY LIFE"
 mission_body: "Our dedicated teachers and helpers undergo annual training to ensure the well-being of the children entrusted to us. They are equipped through regular training to teach your children about God through various engaging activities such as Worship, Bible Lesson, Arts & Crafts, Games, and Themed Programs."
+who_we_serve_intro: "It all begins with a seed. Once a child is planted at God's Heritage, the journey of growth and development into a pacesetter begins."
+age_groups:
+  - name: "Seeds"
+    age_range: "Infant – 3 years"
+    description: "In Seeds class, we focus on the elementary concepts of the Christian faith using play-methods. We learn through fun activities like singing and dancing, playing make-believe, acting out scriptures, and lots of buddy movements, games, and of course, snacks!"
+  - name: "Seedlings"
+    age_range: "4 – 6 years"
+    description: "The Seedlings are a vibrant, excited, and eager-to-learn bunch, committed to having maximum fun while learning about God and being a Christian. Seedlings engage in fun activities, arts and crafts, Bible reading, and storytelling."
+  - name: "Sprouts"
+    age_range: "7 – 9 years"
+    description: "Sprouts are confident, inquisitive, smart, and hardworking. They have fun while learning advanced curriculum topics including discovering and developing their potential as Christian children, in addition to foundational topics."
+  - name: "Vines"
+    age_range: "10 – 12 years"
+    description: "The Vines are independent in their thinking, self-aware, curious and inquisitive about moral issues. In addition to foundational and more advanced Biblical concepts, their curriculum covers more complex topics such as how to develop their gifts into the community."
+farmers:
+  body1: "Our Teachers — popularly known as Farmers — are born again, Spirit-filled Christians with a heart for children. We welcome the children during Sunday services and help them activate their faith and grow in God's love."
+  body2: "We dedicate our time and resources to ensure the children in our care maximize their potential and model excellent living in service to God and humanity."
+  body3: "Our Farmers are also fun to be with — they love to laugh, and give lots of hugs too."
+yearly_programs:
+  - name: "Easter Fest"
+  - name: "Children's Summer Blast"
+  - name: "Children's Takeover Service"
+  - name: "End of Year Christmas Party"
 connect:
   instagram_url: "https://www.instagram.com/gods.heritage.kids"
   instagram_handle: "@gods.heritage.kids"
@@ -261,7 +284,7 @@ faq:
                 <h2 class="font-anton text-4xl md:text-4xl uppercase tracking-tight">Who We Serve</h2>
                 <div class="w-16 h-1 bg-brand-red mx-auto mt-4 mb-8"></div>
                 <p class="text-gray-600 text-lg leading-relaxed max-w-2xl mx-auto">
-                    It all begins with a seed. Once a child is planted at God's Heritage, the journey of growth and development into a pacesetter begins.
+                    {{ who_we_serve_intro }}
                 </p>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
@@ -271,11 +294,11 @@ faq:
                         <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-white/30 flex items-center justify-center">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
                         </div>
-                        <h3 class="font-anton text-2xl text-white uppercase mb-2">Seeds</h3>
-                        <span class="inline-block bg-white/25 text-white text-xs font-bold px-3 py-1 rounded-full">Infant – 3 years</span>
+                        <h3 class="font-anton text-2xl text-white uppercase mb-2">{{ age_groups[0].name }}</h3>
+                        <span class="inline-block bg-white/25 text-white text-xs font-bold px-3 py-1 rounded-full">{{ age_groups[0].age_range }}</span>
                     </div>
                     <div class="p-6 bg-green-50">
-                        <p class="text-gray-600 text-sm leading-relaxed">In Seeds class, we focus on the elementary concepts of the Christian faith using play-methods. We learn through fun activities like singing and dancing, playing make-believe, acting out scriptures, and lots of buddy movements, games, and of course, snacks!</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">{{ age_groups[0].description }}</p>
                     </div>
                 </div>
                 <!-- Seedlings -->
@@ -284,11 +307,11 @@ faq:
                         <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-white/30 flex items-center justify-center">
                             <svg class="w-7 h-7 text-yellow-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         </div>
-                        <h3 class="font-anton text-2xl text-yellow-900 uppercase mb-2">Seedlings</h3>
-                        <span class="inline-block bg-white/40 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full">4 – 6 years</span>
+                        <h3 class="font-anton text-2xl text-yellow-900 uppercase mb-2">{{ age_groups[1].name }}</h3>
+                        <span class="inline-block bg-white/40 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full">{{ age_groups[1].age_range }}</span>
                     </div>
                     <div class="p-6 bg-yellow-50">
-                        <p class="text-gray-600 text-sm leading-relaxed">The Seedlings are a vibrant, excited, and eager-to-learn bunch, committed to having maximum fun while learning about God and being a Christian. Seedlings engage in fun activities, arts and crafts, Bible reading, and storytelling.</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">{{ age_groups[1].description }}</p>
                     </div>
                 </div>
                 <!-- Sprouts -->
@@ -297,11 +320,11 @@ faq:
                         <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-white/30 flex items-center justify-center">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
                         </div>
-                        <h3 class="font-anton text-2xl text-white uppercase mb-2">Sprouts</h3>
-                        <span class="inline-block bg-white/25 text-white text-xs font-bold px-3 py-1 rounded-full">7 – 9 years</span>
+                        <h3 class="font-anton text-2xl text-white uppercase mb-2">{{ age_groups[2].name }}</h3>
+                        <span class="inline-block bg-white/25 text-white text-xs font-bold px-3 py-1 rounded-full">{{ age_groups[2].age_range }}</span>
                     </div>
                     <div class="p-6 bg-blue-50">
-                        <p class="text-gray-600 text-sm leading-relaxed">Sprouts are confident, inquisitive, smart, and hardworking. They have fun while learning advanced curriculum topics including discovering and developing their potential as Christian children, in addition to foundational topics.</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">{{ age_groups[2].description }}</p>
                     </div>
                 </div>
                 <!-- Vines -->
@@ -310,11 +333,11 @@ faq:
                         <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-white/30 flex items-center justify-center">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
                         </div>
-                        <h3 class="font-anton text-2xl text-white uppercase mb-2">Vines</h3>
-                        <span class="inline-block bg-white/25 text-white text-xs font-bold px-3 py-1 rounded-full">10 – 12 years</span>
+                        <h3 class="font-anton text-2xl text-white uppercase mb-2">{{ age_groups[3].name }}</h3>
+                        <span class="inline-block bg-white/25 text-white text-xs font-bold px-3 py-1 rounded-full">{{ age_groups[3].age_range }}</span>
                     </div>
                     <div class="p-6 bg-purple-50">
-                        <p class="text-gray-600 text-sm leading-relaxed">The Vines are independent in their thinking, self-aware, curious and inquisitive about moral issues. In addition to foundational and more advanced Biblical concepts, their curriculum covers more complex topics such as how to develop their gifts into the community.</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">{{ age_groups[3].description }}</p>
                     </div>
                 </div>
             </div>
@@ -348,15 +371,9 @@ faq:
                 <div>
                     <p class="text-brand-red text-xs uppercase tracking-[0.25em] font-bold mb-3">Meet the Team</p>
                     <h2 class="font-anton text-4xl md:text-4xl uppercase text-white tracking-tight mb-6">Our Farmers</h2>
-                    <p class="text-gray-400 leading-relaxed mb-4">
-                        Our Teachers — popularly known as <strong class="text-white">Farmers</strong> — are born again, Spirit-filled Christians with a heart for children. We welcome the children during Sunday services and help them activate their faith and grow in God's love.
-                    </p>
-                    <p class="text-gray-400 leading-relaxed mb-4">
-                        We dedicate our time and resources to ensure the children in our care maximize their potential and model excellent living in service to God and humanity.
-                    </p>
-                    <p class="text-gray-400 leading-relaxed">
-                        Our Farmers are also fun to be with — they love to laugh, and give lots of hugs too.
-                    </p>
+                    <p class="text-gray-400 leading-relaxed mb-4">{{ farmers.body1 }}</p>
+                    <p class="text-gray-400 leading-relaxed mb-4">{{ farmers.body2 }}</p>
+                    <p class="text-gray-400 leading-relaxed">{{ farmers.body3 }}</p>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
@@ -568,25 +585,25 @@ faq:
                     <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-brand-red/20 flex items-center justify-center">
                         <svg class="w-6 h-6 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/></svg>
                     </div>
-                    <h4 class="font-bold text-brand-red uppercase text-sm tracking-wide">Easter Fest</h4>
+                    <h4 class="font-bold text-brand-red uppercase text-sm tracking-wide">{{ yearly_programs[0].name }}</h4>
                 </div>
                 <div class="rounded-2xl bg-yellow-50 border border-yellow-200 p-6 text-center">
                     <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-yellow-200 flex items-center justify-center">
                         <svg class="w-6 h-6 text-yellow-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
                     </div>
-                    <h4 class="font-bold text-yellow-700 uppercase text-sm tracking-wide">Children's Summer Blast</h4>
+                    <h4 class="font-bold text-yellow-700 uppercase text-sm tracking-wide">{{ yearly_programs[1].name }}</h4>
                 </div>
                 <div class="rounded-2xl bg-blue-50 border border-blue-200 p-6 text-center">
                     <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-blue-200 flex items-center justify-center">
                         <svg class="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
                     </div>
-                    <h4 class="font-bold text-blue-700 uppercase text-sm tracking-wide">Children's Takeover Service</h4>
+                    <h4 class="font-bold text-blue-700 uppercase text-sm tracking-wide">{{ yearly_programs[2].name }}</h4>
                 </div>
                 <div class="rounded-2xl bg-green-50 border border-green-200 p-6 text-center">
                     <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-green-200 flex items-center justify-center">
                         <svg class="w-6 h-6 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
                     </div>
-                    <h4 class="font-bold text-green-700 uppercase text-sm tracking-wide">End of Year Christmas Party</h4>
+                    <h4 class="font-bold text-green-700 uppercase text-sm tracking-wide">{{ yearly_programs[3].name }}</h4>
                 </div>
             </div>
         </div>
