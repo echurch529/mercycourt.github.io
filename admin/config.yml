@@ -279,9 +279,9 @@ collections:
           - label: "Age Groups"
             name: "age_groups"
             widget: "list"
-            summary: "{{fields.name}} ({{fields.age_range}})"
+            summary: "{{fields.class_name}} ({{fields.age_range}})"
             fields:
-              - { label: "Class Name", name: "name", widget: "string", hint: "e.g. Seeds, Seedlings, Sprouts, Vines" }
+              - { label: "Class Name", name: "class_name", widget: "string", hint: "e.g. Seeds, Seedlings, Sprouts, Vines" }
               - { label: "Age Range", name: "age_range", widget: "string", hint: "e.g. Infant – 3 years" }
               - { label: "Description", name: "description", widget: "text" }
           - label: "Our Farmers (Teachers) Section"
@@ -295,9 +295,9 @@ collections:
           - label: "Yearly Programs"
             name: "yearly_programs"
             widget: "list"
-            summary: "{{fields.name}}"
+            summary: "{{fields.program_name}}"
             fields:
-              - { label: "Program Name", name: "name", widget: "string" }
+              - { label: "Program Name", name: "program_name", widget: "string" }
           - label: "Social Media Links"
             name: "connect"
             widget: "object"
