@@ -1,8 +1,16 @@
 (function () {
   'use strict';
 
+  /* Decap CMS 3.x exports window.h directly; window.React may or may not
+     be present depending on the build. Use whichever is available.        */
   var React = window.React;
-  var h = React.createElement;
+  var h = (React && React.createElement) || window.h;
+
+  if (!h) {
+    console.error('[MC Preview] Neither window.React nor window.h found. ' +
+      'Check that preview.js loads after decap-cms.js and that the CMS bundle is intact.');
+    return;
+  }
 
   /* ── Brand tokens (match event-page.njk inline values exactly) ── */
   var ORANGE  = '#E8541A';
@@ -549,57 +557,53 @@
   /* ══════════════════════════════════════════════════════════════════
      Event Pages Preview Component
      Registered for the 'events' folder collection.
+     Functional component — no React.Component dependency.
      ══════════════════════════════════════════════════════════════════ */
-  class EventPagePreview extends React.Component {
-    componentDidMount() {
-      injectTailwind();
-    }
+  function EventPagePreview(props) {
+    injectTailwind();
 
-    render() {
-      try {
-        var entry = this.props.entry;
-        var rawData = entry.get('data');
-        if (!rawData) return h('div', { style: { padding: '40px', fontFamily: BODY, color: '#888' } }, 'Loading preview…');
+    try {
+      var entry = props.entry;
+      var rawData = entry.get('data');
+      if (!rawData) return h('div', { style: { padding: '40px', fontFamily: BODY, color: '#888' } }, 'Loading preview…');
 
-        var data = rawData.toJS ? rawData.toJS() : {};
-        var p    = this.props;
+      var data = rawData.toJS ? rawData.toJS() : {};
 
-        var hero         = data.hero        || {};
-        var welcome      = data.welcome     || {};
-        var features     = data.features    || {};
-        var testimonials = data.testimonials || {};
-        var logistics    = data.logistics   || {};
-        var giving       = data.giving      || {};
-        var ctaFinal     = data.cta_final   || {};
+      var hero         = data.hero        || {};
+      var welcome      = data.welcome     || {};
+      var features     = data.features    || {};
+      var testimonials = data.testimonials || {};
+      var logistics    = data.logistics   || {};
+      var giving       = data.giving      || {};
+      var ctaFinal     = data.cta_final   || {};
 
-        return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
-          /* Preview notice bar */
-          h('div', {
-            style: {
-              background: '#111',
-              color: '#666',
-              fontSize: '11px',
-              fontFamily: BODY,
-              padding: '7px 16px',
-              textAlign: 'center',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase'
-            }
-          }, 'Preview — nav, footer, and modal not shown'),
+      return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
+        /* Preview notice bar */
+        h('div', {
+          style: {
+            background: '#111',
+            color: '#666',
+            fontSize: '11px',
+            fontFamily: BODY,
+            padding: '7px 16px',
+            textAlign: 'center',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase'
+          }
+        }, 'Preview — nav, footer, and modal not shown'),
 
-          HeroSection(p, hero),
-          WelcomeSection(p, welcome),
-          FeaturesSection(p, features),
-          TestimonialsSection(p, testimonials),
-          LogisticsSection(p, logistics),
-          GivingSection(p, giving),
-          CTAFinalSection(p, ctaFinal)
-        );
-      } catch (err) {
-        return h('div', {
-          style: { padding: '32px', fontFamily: 'monospace', fontSize: '13px', color: '#c00', background: '#fff1f1' }
-        }, 'Preview error: ' + err.message);
-      }
+        HeroSection(props, hero),
+        WelcomeSection(props, welcome),
+        FeaturesSection(props, features),
+        TestimonialsSection(props, testimonials),
+        LogisticsSection(props, logistics),
+        GivingSection(props, giving),
+        CTAFinalSection(props, ctaFinal)
+      );
+    } catch (err) {
+      return h('div', {
+        style: { padding: '32px', fontFamily: 'monospace', fontSize: '13px', color: '#c00', background: '#fff1f1' }
+      }, 'Preview error: ' + err.message);
     }
   }
 
