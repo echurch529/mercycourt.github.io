@@ -333,7 +333,7 @@ Commits: `5091c42` (paths fix), `fa006ac` (delete legacy file), `87851b0` (renam
 
 - **ministries** ✅: `hero` (object: image, subtitle), `intro_eyebrow`, `intro_body`, `ministries` (list: image/image_alt/title/description/link)
 - **tehillah** ✅: `hero` (object: image, badge, tagline), `vision` (object: heading/body), `gallery` (list max 3), `about` (object: heading/body1/body2/instagram_url), `youtube_url`, `youtube_playlist_url`, `join_url`, `join` (object: body1/body2 — "Join the Worship Team" recruitment paragraphs), `scripture_quote`, `scripture_ref`
-- **mercy-kidz** ✅: `hero` (object: image, tagline), `about_body`, `mission_heading_prefix`, `mission_heading_highlight`, `mission_body`, `who_we_serve_intro`, `age_groups` (list: name/age_range/description — Seeds, Seedlings, Sprouts, Vines), `farmers` (object: body1/body2/body3), `yearly_programs` (list: name — 4 annual events), `connect` (object: instagram_url/instagram_handle/youtube_url/youtube_handle), `faq` (list: question/answer). Static: 5S values, curriculum categories/bullets, farmers role-trait cards, What to Expect steps, age group card colors/SVGs (text dynamic via age_groups[i])
+- **mercy-kidz** ✅: `hero` (object: image, tagline), `about_body`, `mission_heading_prefix`, `mission_heading_highlight`, `mission_body`, `who_we_serve_intro`, `age_groups` (list: class_name/age_range/description — Seeds, Seedlings, Sprouts, Vines), `farmers` (object: body1/body2/body3), `yearly_programs` (list: program_name — 4 annual events), `connect` (object: instagram_url/instagram_handle/youtube_url/youtube_handle), `faq` (list: question/answer). Static: 5S values, curriculum categories/bullets, farmers role-trait cards, What to Expect steps, age group card colors/SVGs (text dynamic via age_groups[i]). ⚠️ Do NOT use `name` as a subfield name in list widgets — Decap CMS silently drops the widget; use descriptive keys (class_name, program_name, etc.)
 - **about** ✅: `hero` (object: image, headline, headline_highlight), `serve_body1`, `serve_body2`, `pastor` (object: photo/bio1/bio2/bio3), `vision_body1`, `vision_body2`, `testimonials` (list: title/quote/attribution). Static: approach pillars, pastor quote, service times, community grid
 - **home** ✅: `hero` (image/headline/headline_highlight/tagline), `about` (body1/body2), `mission_body`, `leadership` (bio/blockquote), `ministries` (list: image/title/subtitle/body/link), `cta_body`
 - **community-impact** ✅: `hero`, `mission` (body1/2/3), `stats` (list), `pantry_hours`, `programs` (list with emoji), `partners` (list), `testimonials` (list), `pantry_highlight` (body1/2/3), `goals` (list with emoji), `volunteer_intro1/2`, `volunteer_form_endpoint`, `grant_body`
@@ -475,6 +475,16 @@ All critical visual properties use **inline `style` props** so the preview rende
 | Ministries — Overview | `'ministries'` | ✅ Done |
 | Ministries — Tehillah Voices | `'tehillah'` | ✅ Done |
 | Ministries — Mercy Kidz | `'mercy-kidz'` | ✅ Done |
+
+### CMS field visibility fixes (commits `8d55f61`, branch deletion)
+
+**Tehillah Voices — stale editorial workflow draft:**
+The `cms/pages/tehillah` branch on GitHub was created by Decap's editorial workflow before the `join` field was added. Decap 3.x loads the draft branch version of a file (not `main`) when a draft exists, and only renders form fields whose keys are present in that file's frontmatter. Because the draft predated `join`, the field never appeared. Fix: deleted the stale draft branch — Decap falls back to `main` which has `join` with values.
+
+**Mercy Kidz — `name` as a list subfield key:**
+`age_groups` and `yearly_programs` both had a subfield named `name`. Decap CMS uses `name` internally as the identifier for every field definition object in its registry. Using it as a data key inside a list widget creates an ambiguity that causes Decap to silently drop those widgets (and sometimes adjacent ones). Fix: renamed to `class_name` (age_groups) and `program_name` (yearly_programs) in config.yml, frontmatter, and Nunjucks template. Build verified — rendered output correct.
+
+**Standing rule:** Never use `name` as a subfield key inside a Decap CMS `list` or `object` widget field definition. Use descriptive alternatives (`class_name`, `program_name`, `item_label`, etc.).
 
 ### Ministries preview dispatch fix (commit `43284ab`)
 
