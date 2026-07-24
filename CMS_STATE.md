@@ -592,6 +592,22 @@ Initial Event Pages template used `var h = React.createElement` which crashed th
 
 ---
 
+## Site-wide Hero Nav Overlap Fix (2026-07-24)
+
+**Problem:** All hero `<section>` elements started at y:0 in the page. With the nav at `position: fixed; top: 0` (height 72px — `py-4` padding × 2 + `h-10` logo), the fixed nav overlaid the top 72px of every hero across the entire site.
+
+**Affected page types:** All — Main Pages, Ministries pages, Event Pages (text mode), Blog Posts, Plan Your Visit.
+
+**First pass (commit `e55d5cc`):** Added `padding-top: 72px` using Tailwind arbitrary-value class `pt-[72px]` on sections that used class-based styling; inline `style=` on sections that already had inline styles. Build clean.
+
+**Second pass (commit `588b850`):** After user confirmed 5 pages (Give, Ministries, Tehillah Voices, Mercy Kidz, Watch Live) still showed content under the nav on the live site — root cause: Tailwind Play CDN (`cdn.tailwindcss.com`) does not reliably generate CSS for arbitrary-value classes like `pt-[72px]` across all pages. Fix: replaced every `pt-[72px]` instance with `style="padding-top: 72px"` across all 10 affected files. Inline styles apply unconditionally, bypassing CDN scan/generation timing.
+
+**Files patched:** `index.html`, `about-us.html`, `contact.html`, `community-impact.html`, `ministries.html`, `tehillah-voices.html`, `mercy-kidz.html`, `give.html`, `watch-live.html`, `blog.njk`, `plan-your-visit.html`, `_includes/layouts/event-page.njk`, `_includes/layouts/post.njk`, `_includes/layouts/post-wide.njk`.
+
+**Standing rule:** Never rely on Tailwind Play CDN arbitrary-value classes (bracket syntax `pt-[72px]`, `h-[65vh]`, etc.) for layout-critical properties. Use inline `style=` for any value that isn't a named Tailwind utility or confirmed to generate reliably. The CDN is useful for named utilities; bracket values are JIT-only and the CDN's scan coverage is not guaranteed.
+
+---
+
 ## Tracking IDs
 - GA4: `G-JWGVNRLKJL`
 - Meta Pixel: `1027268596866855`
