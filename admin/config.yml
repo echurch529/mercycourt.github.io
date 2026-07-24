@@ -10,8 +10,8 @@ media_folder: "assets/images/cms-uploads"
 public_folder: "/assets/images/cms-uploads"
 
 logo_url: /assets/images/MC LOGO 1080PX black.png
-site_url: https://mercycourt.github.io
-display_url: https://mercycourt.github.io
+site_url: https://mercycourt.org
+display_url: https://mercycourt.org
 
 collections:
   - name: "main-pages"

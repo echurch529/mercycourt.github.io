@@ -7,9 +7,73 @@
   <link rel="icon" type="image/png" href="/assets/images/MC LOGO 1080PX black.png" />
   <style>
     body { background: #f8fafc; margin: 0; }
+
+    #mc-watermark {
+      position: fixed;
+      right: -110px;
+      bottom: -110px;
+      width: 560px;
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 0;
+      user-select: none;
+    }
+    #mc-watermark img { width: 100%; display: block; }
+
+    #mc-theme-toggle {
+      position: fixed;
+      top: 12px;
+      right: 16px;
+      z-index: 99999;
+      background: #0a1628;
+      color: #ffffff;
+      border: none;
+      border-radius: 20px;
+      padding: 5px 14px;
+      cursor: pointer;
+      font-size: 12px;
+      font-family: system-ui, -apple-system, sans-serif;
+      letter-spacing: 0.3px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+      transition: opacity 0.15s;
+    }
+    #mc-theme-toggle:hover { opacity: 0.85; }
   </style>
 </head>
 <body>
+  <!-- Watermark: decorative, behind all Decap content -->
+  <div id="mc-watermark" aria-hidden="true">
+    <img src="/assets/images/MC LOGO 1080PX black.png" alt="" />
+  </div>
+
+  <!-- Dark mode toggle: counter-inverts itself so it always looks normal -->
+  <button id="mc-theme-toggle">🌙 Dark</button>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('mc-theme-toggle');
+
+      function setTheme(dark) {
+        // Invert the full page; counter-invert the button so it stays readable
+        document.body.style.filter = dark ? 'invert(1) hue-rotate(180deg)' : '';
+        btn.style.filter = dark ? 'invert(1) hue-rotate(180deg)' : '';
+        btn.textContent = dark ? '☀️ Light' : '🌙 Dark';
+        try { localStorage.setItem('mc-cms-theme', dark ? 'dark' : 'light'); } catch (e) {}
+      }
+
+      btn.addEventListener('click', function () {
+        var isDark = false;
+        try { isDark = localStorage.getItem('mc-cms-theme') === 'dark'; } catch (e) {}
+        setTheme(!isDark);
+      });
+
+      // Apply saved preference on load before Decap renders
+      try {
+        if (localStorage.getItem('mc-cms-theme') === 'dark') setTheme(true);
+      } catch (e) {}
+    })();
+  </script>
+
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script src="/admin/preview.js"></script>
 </body>
