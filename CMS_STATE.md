@@ -592,6 +592,38 @@ Initial Event Pages template used `var h = React.createElement` which crashed th
 
 ---
 
+## Comprehensive CMS Audit (2026-07-24) — commit `5e8e744`
+
+### Bugs fixed
+
+**Community Impact — `name` subfield collision in partners list (same class as Mercy Kidz):**
+`admin/config.yml` partners list used `{ name: "name", widget: "string" }` as the Decap field key. Decap silently dropped the "Partner Name" widget — editors could not update partner names through the CMS. Live page was unaffected (YAML `name:` keys and `{{ partner.name }}` both resolved correctly in Nunjucks). Fix: renamed to `partner_name` in config.yml (field key + summary template), all three partner entries in `community-impact.html` front matter, the Nunjucks template (`{{ partner.partner_name }}`), and the preview (`p.partner_name`).
+
+**Community Impact preview — missing `grant_body` section:**
+`CommunityImpactPreview` in `admin/preview.js` ended after the Volunteer section. The "Trusted Anchor in Baltimore" section (`{{ grant_body }}` at line 644 of `community-impact.html`) rendered on the live page but was absent from the preview. Added the grant_body section at the end of `CommunityImpactPreview`.
+
+**Tehillah Voices preview — "Join the Worship Team" used hardcoded text:**
+`TehillahPreview` showed a hardcoded paragraph ("Whether you sing, play an instrument…"). The live page uses `{{ join.body1 }}` and `{{ join.body2 }}` (CMS-managed fields at lines 311–314 of `tehillah-voices.html`). Editing those fields in the CMS produced no change in the preview pane. Fixed: replaced hardcoded text with `data.join.body1` / `data.join.body2`.
+
+### Confirmed clean (no action needed)
+
+- Hero nav overlap fix: verified present on all 17 hero sections across all page types ✅
+- All 10 preview templates registered; MinistriesDispatch + MainPagesDispatch both functional ✅
+- Event page section order identical in live template and preview ✅
+- Analytics.js: no `the-new-mc` reference remaining ✅
+- Blog post `repositioned-for-greatness.md` hero_image: YAML multi-line path resolves correctly to `adventurous-...utc (1).jpg` — image loads correctly ✅
+- Alt text fields present and populated across all required image widgets ✅
+- No `{#` CSS conflicts in built output ✅
+
+### Pending cleanup (user decision required)
+
+- **Stale git branches:** `remove-legacy-blog-html` (local + remote), `origin/cms/posts/repositioned-for-greatness` (orphaned Decap editorial workflow branch)
+- **Orphaned assets:** `assets/images/2026/the-new-mc/` (4 images; page deleted), `assets/images/2026/flyers/anniversary/better-things-final.jpeg` + `better-things-final-long.jpeg` (portrait flyer copies; landscape version in cms-uploads is what's referenced), `assets/images/2026/leadership/Speaker-George-Adegboye.jpg` (original; `cms-uploads/speaker-george-adegboye.jpg` is referenced), `assets/images/2026/flyers/anniversary/betterthings-lndscape.jpeg` (duplicate; `cms-uploads/betterthings-lndscape.jpeg` is referenced), `assets/blog/*.docx` (3 source documents, not web assets)
+- **README.md:** Still references `the-new-mc.html` in 3 places (documentation only; not served to users)
+- **Alt text quality:** Tehillah gallery all 3 images have identical `alt: Tehillah Voices`; Ministries card `image_alt` values are card titles rather than image descriptions — content decisions
+
+---
+
 ## Site-wide Hero Nav Overlap Fix (2026-07-24)
 
 **Problem:** All hero `<section>` elements started at y:0 in the page. With the nav at `position: fixed; top: 0` (height 72px — `py-4` padding × 2 + `h-10` logo), the fixed nav overlaid the top 72px of every hero across the entire site.
