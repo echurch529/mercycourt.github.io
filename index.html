@@ -220,7 +220,7 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
         <img src="{{ hero.image }}" alt="{{ hero.image_alt | default('') }}" class="w-full block" style="max-height:100vh; object-fit:cover;">
     </section>
     {% else %}
-    <section class="relative h-[100vh] flex items-center justify-center overflow-hidden pt-[72px]">
+    <section class="relative h-[100vh] flex items-center justify-center overflow-hidden" style="padding-top: 72px;">
         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ hero.image }}');">
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
         </div>
