@@ -1513,7 +1513,7 @@
             h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px' } },
               partners.map(function (p, i) {
                 return h('div', { key: i, style: { background: '#f9fafb', borderRadius: '12px', padding: '24px' } },
-                  h('h3', { style: { fontFamily: BODY, fontWeight: '700', fontSize: '15px', color: NAVY, marginBottom: '10px' } }, p.name || ''),
+                  h('h3', { style: { fontFamily: BODY, fontWeight: '700', fontSize: '15px', color: NAVY, marginBottom: '10px' } }, p.partner_name || ''),
                   h('p', { style: { fontFamily: BODY, fontSize: '14px', color: '#4b5563', lineHeight: '1.7' } }, p.description || '')
                 );
               })
@@ -1577,6 +1577,15 @@
             h2Anton('Volunteer With Us', '#fff'),
             h('p', { style: { fontFamily: BODY, color: '#d1d5db', fontSize: '17px', lineHeight: '1.8', marginBottom: '16px' } }, data.volunteer_intro1 || ''),
             h('p', { style: { fontFamily: BODY, color: '#d1d5db', fontSize: '17px', lineHeight: '1.8' } }, data.volunteer_intro2 || '')
+          )
+        ),
+
+        /* Grant / Trusted Anchor */
+        data.grant_body && wrap('#f5f5f5', '64px 24px',
+          h('div', { style: { maxWidth: '760px', margin: '0 auto', textAlign: 'center' } },
+            pill('Our Impact'),
+            h2Anton('A Trusted Anchor in Baltimore', NAVY),
+            h('p', { style: { fontFamily: BODY, fontSize: '17px', color: '#4b5563', lineHeight: '1.8' } }, data.grant_body)
           )
         )
       );
@@ -1757,7 +1766,8 @@
             h('h2', { style: { fontFamily: DISPLAY, fontSize: 'clamp(28px,4vw,44px)', textTransform: 'uppercase', color: NAVY, lineHeight: '1.1', marginBottom: '20px' } },
               'JOIN THE', h('br'), h('span', { style: { color: '#D95A2B' } }, 'WORSHIP TEAM')
             ),
-            h('p', { style: { fontFamily: BODY, fontSize: '16px', color: '#4b5563', lineHeight: '1.8', marginBottom: '28px' } }, 'Whether you sing, play an instrument, or serve behind the scenes — there is a place for you in Tehillah Voices.'),
+            data.join && data.join.body1 && h('p', { style: { fontFamily: BODY, fontSize: '16px', color: '#4b5563', lineHeight: '1.8', marginBottom: '16px' } }, data.join.body1),
+            data.join && data.join.body2 && h('p', { style: { fontFamily: BODY, fontSize: '16px', color: '#4b5563', lineHeight: '1.8', marginBottom: '28px' } }, data.join.body2),
             h('span', { style: { display: 'inline-block', background: ORANGE, color: '#fff', padding: '14px 40px', borderRadius: '999px', fontFamily: BODY, fontWeight: '700', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' } }, 'Apply to Join')
           )
         ),

@@ -159,9 +159,9 @@ collections:
           - label: "Community Partners"
             name: "partners"
             widget: "list"
-            summary: "{{fields.name}}"
+            summary: "{{fields.partner_name}}"
             fields:
-              - { label: "Partner Name", name: "name", widget: "string" }
+              - { label: "Partner Name", name: "partner_name", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
           - label: "Testimonials"
             name: "testimonials"

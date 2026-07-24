@@ -30,11 +30,11 @@ programs:
     title: "Elderly Care Support"
     body: "We are committed to honoring and supporting the elderly in our community. Through visits, provisions, and ongoing care, we ensure our seniors feel seen, valued, and supported."
 partners:
-  - name: "Maryland Food Bank"
+  - partner_name: "Maryland Food Bank"
     description: "Our primary food sourcing partner — connecting us to thousands of pounds of groceries every month."
-  - name: "Operation Warm"
+  - partner_name: "Operation Warm"
     description: "Partnering to provide warmth and essentials to children and families in need across Baltimore."
-  - name: "Hope for You"
+  - partner_name: "Hope for You"
     description: "Working together to extend hope and practical support to individuals navigating hardship in our community."
 testimonials:
   - quote: "For over fifteen years that I have lived here, no organization has shared so much household items like this."
@@ -323,7 +323,7 @@ grant_body: "Mercy Court stands as a trusted anchor in Baltimore, addressing foo
             <div class="grid md:grid-cols-3 gap-8">
                 {% for partner in partners %}
                 <div class="rounded-2xl p-8 shadow-md hover:shadow-xl transition duration-300 reveal" style="background-color: #F5F5F5;">
-                    <h3 class="font-anton text-2xl uppercase tracking-tight mb-3" style="color: #1B2A4A;">{{ partner.name }}</h3>
+                    <h3 class="font-anton text-2xl uppercase tracking-tight mb-3" style="color: #1B2A4A;">{{ partner.partner_name }}</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">
                         {{ partner.description }}
                     </p>
