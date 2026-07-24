@@ -9,6 +9,10 @@ publish_mode: editorial_workflow
 media_folder: "assets/images/cms-uploads"
 public_folder: "/assets/images/cms-uploads"
 
+logo_url: /assets/images/MC LOGO 1080PX black.png
+site_url: https://mercycourt.github.io
+display_url: https://mercycourt.github.io
+
 collections:
   - name: "main-pages"
     label: "Main Pages"
