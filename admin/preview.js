@@ -815,11 +815,81 @@
 
   window.CMS.registerPreviewTemplate('events', EventPagePreview);
 
+  /* ── Inline markdown → HTML converter for BlogPostPreview ──────────
+     props.widgetFor('body') returns null for new entries in Decap 3.x,
+     so we parse the raw markdown from entry data directly.             */
+  function mdInline(text) {
+    return text
+      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%">')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+      .replace(/\*\*\*([^*]+)\*\*\*/g, '<strong><em>$1</em></strong>')
+      .replace(/___([^_]+)___/g, '<strong><em>$1</em></strong>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/__([^_]+)__/g, '<strong>$1</strong>')
+      .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
+      .replace(/_([^_\n]+)_/g, '<em>$1</em>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>');
+  }
+
+  function mdToHtml(md) {
+    if (!md) return '';
+    var lines = md.split('\n');
+    var out = [];
+    var i = 0;
+    while (i < lines.length) {
+      var line = lines[i];
+      var trim = line.trim();
+      if (!trim) { i++; continue; }
+      var hm = trim.match(/^(#{1,6})\s+(.*)/);
+      if (hm) {
+        var lvl = hm[1].length;
+        out.push('<h' + lvl + '>' + mdInline(hm[2]) + '</h' + lvl + '>');
+        i++; continue;
+      }
+      if (/^(-{3,}|\*{3,}|_{3,})$/.test(trim)) { out.push('<hr>'); i++; continue; }
+      if (/^>/.test(trim)) {
+        var qlines = [];
+        while (i < lines.length && /^>/.test(lines[i].trim())) {
+          qlines.push(lines[i].replace(/^>\s?/, '').trim());
+          i++;
+        }
+        out.push('<blockquote><p>' + qlines.map(mdInline).join('</p><p>') + '</p></blockquote>');
+        continue;
+      }
+      if (/^[\*\-\+]\s/.test(trim)) {
+        var uis = [];
+        while (i < lines.length && /^[\*\-\+]\s/.test(lines[i].trim())) {
+          uis.push('<li>' + mdInline(lines[i].replace(/^[\*\-\+]\s/, '').trim()) + '</li>');
+          i++;
+        }
+        out.push('<ul>' + uis.join('') + '</ul>');
+        continue;
+      }
+      if (/^\d+[.)]\s/.test(trim)) {
+        var ois = [];
+        while (i < lines.length && /^\d+[.)]\s/.test(lines[i].trim())) {
+          ois.push('<li>' + mdInline(lines[i].replace(/^\d+[.)]\s/, '').trim()) + '</li>');
+          i++;
+        }
+        out.push('<ol>' + ois.join('') + '</ol>');
+        continue;
+      }
+      var pls = [];
+      while (i < lines.length) {
+        var pt = lines[i].trim();
+        if (!pt) break;
+        if (/^#{1,6}\s|^[\*\-\+]\s|^\d+[.)]\s|^>|^(-{3,}|\*{3,}|_{3,})$/.test(pt)) break;
+        pls.push(pt);
+        i++;
+      }
+      if (pls.length) out.push('<p>' + pls.map(mdInline).join(' ') + '</p>');
+    }
+    return out.join('');
+  }
+
   /* ══════════════════════════════════════════════════════════════════
      Blog Posts Preview Component
      Registered for the 'posts' folder collection.
-     Body rendered via props.widgetFor('body') — Decap's own markdown
-     renderer; no custom markdown parsing needed.
      ══════════════════════════════════════════════════════════════════ */
   function BlogPostPreview(props) {
     injectTailwind();
@@ -830,6 +900,7 @@
       if (!rawData) return h('div', { style: { padding: '40px', fontFamily: BODY, color: '#888' } }, 'Loading preview…');
 
       var data        = rawData.toJS ? rawData.toJS() : {};
+      var bodyHtml    = mdToHtml(data.body || '');
       var title       = data.title    || '';
       var category    = data.category || '';
       var author      = data.author   || '';
@@ -928,10 +999,10 @@
           )
         ),
 
-        /* Article body — Decap renders markdown natively via widgetFor */
+        /* Article body */
         h('article', { style: { background: '#fff', padding: '40px 24px' } },
           h('div', { style: { maxWidth: '768px', margin: '0 auto' } },
-            props.widgetFor('body'),
+            h('div', { dangerouslySetInnerHTML: { __html: bodyHtml } }),
 
             /* Scripture references */
             scriptureRefs.length > 0 && h('div', {
