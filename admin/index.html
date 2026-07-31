@@ -38,6 +38,21 @@
       transition: opacity 0.15s;
     }
     #mc-theme-toggle:hover { opacity: 0.85; }
+
+    /* Editor mode toggle: active button = navy filled, inactive = muted */
+    button[data-mc-mode="active"] {
+      background: #0a1628 !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      border-radius: 4px !important;
+      padding: 2px 10px !important;
+      box-shadow: 0 1px 3px rgba(10,22,40,0.35) !important;
+      opacity: 1 !important;
+    }
+    button[data-mc-mode=""] {
+      opacity: 0.4 !important;
+      font-weight: 400 !important;
+    }
   </style>
 </head>
 <body>
@@ -76,5 +91,107 @@
 
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script src="/admin/preview.js"></script>
+  <script>
+    /* ── Editor mode toggle patch ────────────────────────────────────────
+       1. Rename "Markdown" → "Source Code" on all markdown widget toggles
+       2. Set data-mc-mode="active"|"" so CSS can show which mode is live
+       3. Apply monospace font to the raw editor when Source Code is active  */
+    (function () {
+      function findEditorArea(startEl) {
+        /* Traverse up from the toggle button, searching for the textarea or
+           contenteditable that Decap renders for the current mode.           */
+        var el = startEl;
+        for (var depth = 0; depth < 12 && el && el.parentElement; depth++) {
+          el = el.parentElement;
+          var ta = el.querySelector('textarea');
+          if (ta) return ta;
+          var cm = el.querySelector('.CodeMirror-code, .cm-content');
+          if (cm) return cm;
+        }
+        return null;
+      }
+
+      function applySourceCodeStyle(editorEl, on) {
+        if (!editorEl) return;
+        editorEl.style.fontFamily = on
+          ? '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace'
+          : '';
+        editorEl.style.fontSize  = on ? '13px' : '';
+        editorEl.style.lineHeight = on ? '1.65' : '';
+      }
+
+      function patchPair(rtBtn, mdBtn) {
+        rtBtn._mcModePatch = true;
+        mdBtn._mcModePatch = true;
+
+        /* Rename: replace the text node to preserve any icon siblings */
+        var renamed = false;
+        mdBtn.childNodes.forEach(function (node) {
+          if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === 'Markdown') {
+            node.textContent = 'Source Code';
+            renamed = true;
+          }
+        });
+        if (!renamed) mdBtn.textContent = 'Source Code';
+
+        /* Rich Text is Decap's default active mode on load */
+        rtBtn.setAttribute('data-mc-mode', 'active');
+        mdBtn.setAttribute('data-mc-mode', '');
+
+        function activate(activeBtn, inactiveBtn, isSourceCode) {
+          setTimeout(function () {
+            activeBtn.setAttribute('data-mc-mode', 'active');
+            inactiveBtn.setAttribute('data-mc-mode', '');
+            if (isSourceCode) {
+              /* Give Decap a tick to render the textarea before styling it */
+              setTimeout(function () {
+                applySourceCodeStyle(findEditorArea(mdBtn), true);
+              }, 120);
+            } else {
+              applySourceCodeStyle(findEditorArea(rtBtn), false);
+            }
+          }, 0);
+        }
+
+        /* Click listeners in capture phase so they fire before Decap's own */
+        rtBtn.addEventListener('click', function () { activate(rtBtn, mdBtn, false); }, true);
+        mdBtn.addEventListener('click', function () { activate(mdBtn, rtBtn, true);  }, true);
+
+        /* Also watch aria-pressed in case Decap manages state that way */
+        var attrObs = new MutationObserver(function () {
+          if (rtBtn.getAttribute('aria-pressed') === 'true') {
+            rtBtn.setAttribute('data-mc-mode', 'active');
+            mdBtn.setAttribute('data-mc-mode', '');
+          } else if (mdBtn.getAttribute('aria-pressed') === 'true') {
+            mdBtn.setAttribute('data-mc-mode', 'active');
+            rtBtn.setAttribute('data-mc-mode', '');
+          }
+        });
+        attrObs.observe(rtBtn, { attributes: true, attributeFilter: ['aria-pressed'] });
+        attrObs.observe(mdBtn, { attributes: true, attributeFilter: ['aria-pressed'] });
+      }
+
+      function scanForTogglePairs() {
+        var allBtns = Array.from(document.querySelectorAll('button, [role="button"]'));
+        allBtns.forEach(function (btn) {
+          if (btn._mcModePatch) return;
+          if ((btn.textContent || '').trim() !== 'Rich Text') return;
+
+          /* Find the Markdown sibling in the same parent container */
+          var parent = btn.parentElement;
+          if (!parent) return;
+          var mdBtn = Array.from(parent.querySelectorAll('button, [role="button"]'))
+            .find(function (b) {
+              return (b.textContent || '').trim() === 'Markdown' && !b._mcModePatch;
+            });
+          if (mdBtn) patchPair(btn, mdBtn);
+        });
+      }
+
+      var obs = new MutationObserver(scanForTogglePairs);
+      obs.observe(document.body, { childList: true, subtree: true });
+      scanForTogglePairs();
+    })();
+  </script>
 </body>
 </html>
