@@ -526,7 +526,7 @@ All critical visual properties use **inline `style` props** so the preview rende
 - **`var h = (React && React.createElement) || window.h`** — defensive detection; bail-out with `console.error` if neither exists. `window.React` is not reliably exported by all Decap CMS 3.x UMD builds; `window.h` is the safe primary.
 - **Functional components** — avoids `extends React.Component` / `window.React.Component` dependency entirely.
 - **`getData(props)`** — `var raw = props.entry.get('data'); return (raw && raw.toJS) ? raw.toJS() : {};` — converts Immutable.js entry to plain JS.
-- **`props.widgetFor('body')`** — used in BlogPostPreview for native markdown rendering; avoids custom parsing.
+- **`mdToHtml(md)` + `mdInline(text)`** — inline markdown converter used in BlogPostPreview; replaced `props.widgetFor('body')` which returned null in Decap 3.x (commit `0875ecb`, 2026-07-31).
 - **`resolveImage(props, path)`** — direct return for `/`-prefixed paths; `props.getAsset(path)` fallback for CMS-managed uploads.
 - **Shared helpers** — `noticeBar`, `pageHero`, `wrap`, `splitHeadline`, `pill`, `ctaBtn`, `h2Anton`, `para` — defined once in the IIFE, reused across all preview components.
 - **Brand constants** — `ORANGE = '#E8541A'`, `NAVY = '#1B2A4A'`; font stacks with fallbacks.
@@ -637,6 +637,84 @@ Initial Event Pages template used `var h = React.createElement` which crashed th
 **Files patched:** `index.html`, `about-us.html`, `contact.html`, `community-impact.html`, `ministries.html`, `tehillah-voices.html`, `mercy-kidz.html`, `give.html`, `watch-live.html`, `blog.njk`, `plan-your-visit.html`, `_includes/layouts/event-page.njk`, `_includes/layouts/post.njk`, `_includes/layouts/post-wide.njk`.
 
 **Standing rule:** Never rely on Tailwind Play CDN arbitrary-value classes (bracket syntax `pt-[72px]`, `h-[65vh]`, etc.) for layout-critical properties. Use inline `style=` for any value that isn't a named Tailwind utility or confirmed to generate reliably. The CDN is useful for named utilities; bracket values are JIT-only and the CDN's scan coverage is not guaranteed.
+
+---
+
+## CMS Admin Branding (2026-07-24 / 2026-07-31)
+
+### Commits
+- `b02e7f4` — initial branding: logo, favicon, site URL
+- `2e736d8` — bug fix + dark mode toggle + watermark
+
+### Changes to `admin/config.yml`
+
+Three top-level keys added (after `public_folder`, before `collections`):
+
+```yaml
+logo_url: /assets/images/MC LOGO 1080PX black.png
+site_url: https://mercycourt.org
+display_url: https://mercycourt.org
+```
+
+- `logo_url` — church logo shown on the Decap login screen and CMS header bar
+- `site_url` / `display_url` — "View site" link in the CMS toolbar; corrected from `.github.io` (404d) to `mercycourt.org`
+
+### Changes to `admin/index.html`
+
+Added favicon, minimal body style, watermark div, and dark mode toggle:
+
+- **Favicon:** `<link rel="icon" type="image/png" href="/assets/images/MC LOGO 1080PX black.png" />`
+- **Body style:** `body { background: #f8fafc; margin: 0; }` — page chrome only, no Decap internals targeted
+- **Watermark:** `<div id="mc-watermark">` — 560px MC logo fixed to bottom-right, `opacity: 0.06`, `pointer-events: none`, `z-index: 0`. Visible in the background of the login screen; partially visible in the editor margins. In dark mode, the black logo automatically inverts to white — correct for a dark background.
+- **Dark mode toggle:** `<button id="mc-theme-toggle">` — pill button fixed top-right (`z-index: 99999`). Applies `filter: invert(1) hue-rotate(180deg)` to `body`; counter-inverts itself with the same filter so it always looks normal regardless of mode. Preference saved to `localStorage` (`mc-cms-theme: 'dark' | 'light'`). Applied on page load before Decap renders — no flash. Implementation avoids all Decap internal selectors.
+
+### Logo assets available
+| File | Use |
+|---|---|
+| `/assets/images/MC LOGO 1080PX black.png` | Used for favicon, logo_url, watermark (inverts correctly in dark mode) |
+| `/assets/images/MC LOGO 1080PX white.png` | Available — not currently used |
+| `/assets/images/MC LOGO 1080PX yellow.png` | Available — not currently used |
+
+### Design decision: no internal Decap CSS targeting
+Decap CMS's internal component class names are not part of its public API and change across minor/patch versions. All branding uses page-level CSS and official config keys only. This keeps the implementation resilient to Decap version bumps via the `@^3.0.0` CDN range.
+
+---
+
+## Blog Post Preview — Body Rendering Fix (2026-07-31) — commit `0875ecb`
+
+### Problem
+`props.widgetFor('body')` — the Decap CMS API for delegating markdown body rendering to the widget's internal preview component — returns `null` silently for new entries and before the first keystroke in Decap 3.x. This caused the preview pane's article body area to be permanently blank for new blog posts being edited in the CMS. Existing published posts were unaffected on the live site (`post.njk` uses `{{ content | safe }}` which is correct and unchanged).
+
+### Root cause
+`widgetFor('body')` in Decap CMS 3.x's functional-component preview API does not reliably initialize for the markdown widget on new/empty entries. It is not a public, stable API.
+
+### Fix (in `admin/preview.js`)
+
+1. **Added `mdInline(text)` function** — converts inline markdown (bold, italic, links, images, code spans) to HTML strings.
+
+2. **Added `mdToHtml(md)` function** — line-by-line markdown parser covering all elements that appear in Mercy Court blog posts:
+   - H1–H6 headings
+   - Blockquotes (consecutive `>` lines)
+   - Unordered lists (`*`/`-`/`+`) and ordered lists (`1.`/`2.`)
+   - Horizontal rules
+   - Paragraphs (consecutive non-special lines)
+   - Delegates inline elements to `mdInline()`
+
+3. **In `BlogPostPreview`**: replaced `props.widgetFor('body')` with:
+   ```javascript
+   var bodyHtml = mdToHtml(data.body || '');
+   // ...
+   h('div', { dangerouslySetInnerHTML: { __html: bodyHtml } })
+   ```
+   `data.body` comes from `rawData.toJS()` — Decap stores the file body content under `data.body` for folder collections with a `widget: "markdown"` field named `body`.
+
+### What is NOT changed
+- `post.njk` template: still uses `{{ content | safe }}` (Eleventy's rendered markdown body). No change.
+- `blog-posts.json`, `.eleventy.js`, `admin/config.yml` posts collection: all unchanged.
+- The fix affects only the CMS preview pane, not the live site.
+
+### Known limitation: `markdownTemplateEngine: "njk"`
+Because `.md` files are processed through Nunjucks before markdown parsing (`.eleventy.js` line 54), any blog post body containing Nunjucks-special characters (`{{`, `}}`, `{%`, `%}`) will be evaluated as Nunjucks at build time. This would cause silent content drops or build errors for posts with code examples using curly braces. This is a pre-existing Eleventy config issue — not introduced by this fix.
 
 ---
 
