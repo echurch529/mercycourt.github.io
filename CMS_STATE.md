@@ -718,6 +718,34 @@ Because `.md` files are processed through Nunjucks before markdown parsing (`.el
 
 ---
 
+## Zelle Giving Option — Site-Wide Addition (2026-08-05)
+
+### Summary
+Zelle added as the primary/first giving method across all pages. Existing Zeffy-based giving (General Giving, Building Project) is fully intact and unchanged. Zelle details: **RCCG Mercy Court · (410) 900-9111**.
+
+### Changes per location
+
+| File | What changed |
+|------|-------------|
+| `give.html` | (1) Intro CTA section: "Give via Zelle" replaces "Give Now" as primary button; Zelle phone/name box added above buttons. (2) "WAYS TO GIVE" grid: Zelle added as first card (brand-red, "Most Popular" badge); grid changed from `md:grid-cols-3` to `sm:grid-cols-2 xl:grid-cols-4`. (3) New `#give-zelle` section added between "Ways to Give" and "Online Giving Form" — white card with full step-by-step Zelle instructions. |
+| `index.html` | `#give` section: Zelle phone/name info box added between paragraph and buttons. Giving modal: Zelle strip added at top of scrollable area above Zeffy iframe. |
+| `about-us.html`, `community-impact.html`, `contact.html`, `ministries.html`, `plan-your-visit.html`, `watch-live.html`, `mercy-kidz.html`, `blog.html` | Give section: Zelle inline chip (`Via Zelle: (410) 900-9111 — RCCG Mercy Court · No fees · Instant`) added between paragraph and buttons. Giving modal: same Zelle strip as above. |
+| `_includes/layouts/post.njk`, `_includes/layouts/post-wide.njk` | Same give section + modal changes as static pages above. |
+| `admin/preview.js` | **No changes needed.** `GivingSection` is only used for the event-page CMS-driven optional giving block (fields: heading/body/url/button_text). Zelle is hardcoded into static sections, not a new CMS field. Standing sync rule satisfied by review (no structural change to any CMS-driven field). |
+
+### Not changed
+- `tehillah-voices.html` — has no give section or modal; only nav "Give" button and footer "Give Online" link pointing to `/give.html`. Visitors reach the updated give page naturally.
+- `_includes/layouts/event-page.njk` — the optional `{% if giving %}` block is CMS-editor-controlled per event. No hardcoded Zelle added; the event-specific giving URL (usually `/give.html`) routes visitors to the primary give page which now shows Zelle first.
+- `admin/config.yml` — no new CMS fields added.
+- Both Zeffy embeds (`general-giving-25`, `building-project-3`) — completely unchanged.
+
+### Zelle details (hardcoded, not CMS-managed)
+- **Recipient:** RCCG Mercy Court
+- **Phone:** (410) 900-9111
+- Note: Zelle has no embeddable form; instructions-based approach is the correct pattern.
+
+---
+
 ## Tracking IDs
 - GA4: `G-JWGVNRLKJL`
 - Meta Pixel: `1027268596866855`
