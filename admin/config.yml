@@ -498,7 +498,7 @@ collections:
           IMAGE — Rename the file descriptively before uploading (e.g. total-commitment-hero.jpg, not IMG_1234.jpg). |
           FAQ SCHEMA — If the post has a FAQ section, populate the FAQ field at the bottom to auto-generate SEO structured data.
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "URL Slug", name: "slug", widget: "string", hint: "Slug (target: 50–60 characters) — derive from the title but shorten if needed. Lowercase and hyphens only, e.g. 5-ways-grow-faith not the-five-most-powerful-ways-to-grow-your-faith-as-a-christian." }
+      - { label: "URL Slug", name: "slug", widget: "string", hint: "Slug — derive from the title, shortened if needed. Lowercase letters and hyphens only, no leading slash. e.g. baltimore-food-pantry-outreach not /baltimore-food-pantry-outreach." }
       - { label: "SEO Title", name: "seo_title", widget: "string", hint: "Search-engine title. Must end with | Mercy Court — e.g. 'Total Commitment to God: 5 Keys | Mercy Court'. Target 50–60 characters." }
       - { label: "SEO Description", name: "seo_description", widget: "text", hint: "Description (target: 120–160 characters)" }
       - label: "Publish Date"
@@ -529,7 +529,7 @@ collections:
         name: "faq"
         widget: "list"
         required: false
-        hint: "Optional FAQ entries — adds FAQPage structured data for search engines. Questions and answers also appear at the bottom of the post body."
+        hint: "Optional FAQ entries — renders a visible FAQ section at the bottom of the post AND adds FAQPage structured data for search engines (helps Google show FAQ rich results)."
         fields:
           - { label: "Question", name: "question", widget: "string" }
           - { label: "Answer", name: "answer", widget: "text" }

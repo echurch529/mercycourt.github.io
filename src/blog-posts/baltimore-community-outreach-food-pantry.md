@@ -1,7 +1,7 @@
 ---
 title: "FREE FOOD, NO STIGMA: INSIDE MERCY COURT'S YEAR-ROUND COMMUNITY OUTREACH"
-slug: /baltimore-community-outreach-food-pantry
-seo_title: Free Food Pantry & Community Outreach | RCCG Mercy Court
+slug: baltimore-community-outreach-food-pantry
+seo_title: Free Food Pantry & Community Outreach in Baltimore | Mercy Court
 seo_description: Need free food in Baltimore? See Mercy Court's full weekly
   outreach schedule, from food pantry to senior meal delivery, serving the
   community 5 days a week.
@@ -10,9 +10,10 @@ author: Bukola Daramola
 category: news
 featured: true
 hero_image: /assets/images/cms-uploads/outreach-team-food-distribution-05.jpg
-hero_image_alt: Landscape photo people under a tent with items
-excerpt: A News article for mercycourt.org, based on an interview with Bukola
-  Daramola, Director of Community Engagement
+hero_image_alt: Mercy Court volunteers distributing free groceries to community members under a tent in Baltimore
+excerpt: Every week, five days a week, RCCG Mercy Court's outreach team serves
+  free food to Baltimore's Walker Avenue neighborhood — no sign-up, no questions
+  asked. Here's how it works.
 read_time: 5
 faq:
   - question: Where can I get free food in Baltimore?
@@ -24,12 +25,12 @@ faq:
     answer: Yes. The food pantry is open every Thursday from 2:00 PM to 5:00 PM at
       the church, in addition to the church's regular food-sharing hours earlier
       that same day.
-  - answer: No. All of Mercy Court's food-sharing programs are open to the entire
+  - question: Is RCCG Mercy Court's community outreach only for church members?
+    answer: No. All of Mercy Court's food-sharing programs are open to the entire
       community, regardless of membership or church attendance.
-    question: Is RCCG Mercy Court's community outreach only for church members?
-  - answer: Visit their Court's Community Impact page, to learn about current
-      volunteer opportunities.
-    question: How can I volunteer with RCCG Mercy Court's community outreach?
+  - question: How can I volunteer with RCCG Mercy Court's community outreach?
+    answer: Visit Mercy Court's Community Impact page at mercycourt.org/community-impact
+      to learn about current volunteer opportunities.
 ---
 This Saturday, August 15th, the Redeemed Christian Church of God (RCCG) Mercy Court's 12th Anniversary weekend includes a dedicated Community Outreach Day, and if you've never experienced it, here's what you should know: this isn't a once-a-year gesture. It's a small taste of something the church does every single week, all year long. We sat down with Bukola Daramola, Director of Community Engagement at RCCG Mercy Court, to learn what her team does, and why it matters, ahead of an anniversary weekend the whole community is invited to.
 
@@ -77,17 +78,17 @@ That philosophy extends to the **Saturday, August 15th Community Outreach Day**,
 
 ## JOIN US FOR THE FULL ANNIVERSARY WEEKEND
 
-Community Outreach Day is just one part of a [bigger celebration of the anniversary event](https://mercycourt.org/events/12th-anniversary). Here's the full lineup:
+Community Outreach Day is just one part of a [bigger celebration of the anniversary event](/events/12th-anniversary). Here's the full lineup:
 
 * Friday, August 14, 7:00 PM: "Better Things" Concert, a Tehillah Worship album launch featuring Tehillah Worship, Prospa Ochimana, and Ejay Harold. Doors open 6:30 PM.
 * Saturday, August 15, 11:00 AM to 1:00 PM: Community Outreach Day
 * Saturday, August 15, 7:00 PM: Word and Prayer
 * Sunday, August 16, 9:30 AM: Grand Finale service
 
-Everything is free and open to everyone, no ticket, no RSVP, no church membership required. See the full schedule and directions at mercycourt.org/events/12th-anniversary (link with UTM tracking, see below).
+Everything is free and open to everyone, no ticket, no RSVP, no church membership required. [See the full schedule and directions](/events/12th-anniversary).
 
 ## GET INVOLVED OR GET HELP
 
 If you or someone you know could use free groceries this week, there's no application, no eligibility check, and no appointment needed. Just show up during any of the windows above.
 
-For questions, volunteering, or partnership inquiries, [visit their dedicated community impact page](https://mercycourt.org/community-impact).
+For questions, volunteering, or partnership inquiries, [visit our Community Impact page](/community-impact).
