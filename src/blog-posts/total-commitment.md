@@ -1,6 +1,6 @@
 ---
 title: "TOTAL COMMITMENT TO GOD: 5 BIBLICAL KEYS FROM ABRAHAM AND ISAAC"
-slug: /blog-posts/total-commitment
+slug: total-commitment
 seo_title: "Total Commitment to God: 5 Biblical Keys"
 seo_description: What does total commitment to God really cost? Discover 5
   biblical keys to full surrender from Abraham and Isaac's test in Genesis 22,
