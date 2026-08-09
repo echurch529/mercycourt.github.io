@@ -1,6 +1,6 @@
 ---
 title: "FREE FOOD, NO STIGMA: INSIDE MERCY COURT'S YEAR-ROUND COMMUNITY OUTREACH"
-slug: /blog-posts/baltimore-community-outreach-food-pantry
+slug: /baltimore-community-outreach-food-pantry
 seo_title: Free Food Pantry & Community Outreach | RCCG Mercy Court
 seo_description: Need free food in Baltimore? See Mercy Court's full weekly
   outreach schedule, from food pantry to senior meal delivery, serving the
