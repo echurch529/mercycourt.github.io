@@ -746,6 +746,247 @@ Zelle added as the primary/first giving method across all pages. Existing Zeffy-
 
 ---
 
+## CMS Editor Mode Toggle Patch (2026-08-09) — commit `99d2ea2`
+
+### Problem
+Two issues with the markdown body field's Rich Text / Markdown mode toggle:
+1. **UX clarity**: No visual indication of which mode is currently active; toggle buttons look identical regardless of state.
+2. **Naming**: "Markdown" mode label doesn't communicate that it's a raw-source view. User wanted "Source Code" instead.
+
+The root WYSIWYG issue (markdown symbols visible in Rich Text mode) was assessed as a Decap 3.x Slate.js internal behavior — not patchable from `admin/index.html`. Most likely cause was visual confusion about which mode was active. The clarity fix addresses the underlying confusion.
+
+### Fix — `admin/index.html`
+
+**CSS added** (inside existing `<style>` block):
+```css
+button[data-mc-mode="active"] {
+  background: #0a1628 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border-radius: 4px !important;
+  padding: 2px 10px !important;
+  box-shadow: 0 1px 3px rgba(10,22,40,0.35) !important;
+  opacity: 1 !important;
+}
+button[data-mc-mode=""] {
+  opacity: 0.4 !important;
+  font-weight: 400 !important;
+}
+```
+
+**Script added** (new `<script>` block after `preview.js`):
+
+A `MutationObserver` IIFE that:
+1. Scans for "Rich Text" / "Markdown" button pairs by text-content matching (version-resilient — does not target Decap internal class names)
+2. Renames the Markdown button to "Source Code" by replacing its text node (preserves any icon/SVG siblings)
+3. Sets `data-mc-mode="active"` on the active button and `data-mc-mode=""` on the inactive button — CSS targets these attributes
+4. Applies monospace font to the editor textarea when Source Code mode is active (120ms delay to let Decap render the textarea after the switch)
+5. Uses click capture phase + `aria-pressed` observer as two independent signals to keep the attribute accurate across Decap re-renders
+
+**`_mcModePatch` flag**: Set on button DOM nodes to prevent double-patching when MutationObserver fires repeatedly.
+
+**`findEditorArea(startEl)`**: Traverses up to 12 DOM levels from the toggle button searching for `textarea`, `.CodeMirror-code`, or `.cm-content` to locate the editor element for monospace styling.
+
+### Design decision
+Never targets Decap internal class names — uses text-content matching + custom `data-mc-mode` attributes only. Resilient to Decap version bumps via `@^3.0.0` CDN range.
+
+---
+
+## Total Commitment Blog Post — Fixes (2026-08-09) — commit `70374b9`
+
+### Post
+Title: "TOTAL COMMITMENT TO GOD: 5 BIBLICAL KEYS FROM ABRAHAM AND ISAAC"
+File: `src/blog-posts/total-commitment.md`
+Hero image: `/assets/images/cms-uploads/sunrise-mountain-hike-stockcake.jpg`
+Date: 2026-08-09 | Author: Dr. John Itakpe | Category: inspiration | `featured: true`
+
+### Bug 1 — Mangled filename/URL (fixed)
+
+**Root cause:** CMS `slug` field was set to `/blog-posts/total-commitment` (with collection path prefix). Decap's `slug: "{{fields.slug}}"` template converts slashes to hyphens when creating the filename → produced `blog-posts-total-commitment.md`.
+
+**Effect:** Live URL was `/blog-posts/blog-posts-total-commitment.html` instead of `/blog-posts/total-commitment.html`.
+
+**Fix:**
+```bash
+git mv src/blog-posts/blog-posts-total-commitment.md src/blog-posts/total-commitment.md
+```
+Frontmatter `slug` corrected: `/blog-posts/total-commitment` → `total-commitment`.
+
+**Standing rule:** When creating blog posts via CMS, enter only the bare slug (e.g. `total-commitment`), never a path-prefixed value. The `blog-posts.json` permalink template handles the path.
+
+### Bug 2 — Post absent from blog listing (fixed)
+
+**Root cause:** `blog.html` is in `eleventyConfig.ignores` — it's a static file, not an Eleventy template. New posts never appear there automatically.
+
+**Fix:** Article card manually added at the top of `#blog-grid` in `blog.html`, with correct image path (`assets/images/cms-uploads/sunrise-mountain-hike-stockcake.jpg`) and link (`blog-posts/total-commitment.html`).
+
+**Standing rule:** Every new blog post requires a manual card added to `blog.html`. This is a permanent architectural constraint — `blog.html` is excluded from Eleventy processing by design.
+
+### Bug 3 — Hero image broken in CMS editor and preview (not a code bug)
+
+**Root cause:** GitHub Pages deployment timing. The image file was committed in the same session. Decap's image widget loads images from the deployed live site URL; the preview iframe similarly loads from the live origin. Until GitHub Pages finishes rebuilding (~2–10 min), neither can serve the file.
+
+**Resolution:** Image file and frontmatter reference are both correct. Will display automatically after Pages builds and the editor refreshes `/admin/`.
+
+### Note on `featured: true`
+The post has `featured: true` in frontmatter. The Featured Post section at the top of `blog.html` still shows the Bible study app article — it is hardcoded (static file). Update `blog.html`'s featured section if this post should be promoted.
+
+---
+
+## Three-Layer Blog Post Quality Prevention (2026-08-09) — commits `26cd103`, `d4fb46f`
+
+### Context
+Seven issues found on the "Total Commitment to God" post at publish time (broken placeholder links, numbered list items used as headings, missing SEO title suffix, FAQ heading inconsistency, wrong image filename, no structured data, duplicate bullet). All were content-authoring or template gaps that would recur on every future post without systematic guardrails.
+
+### Layer 1 — Template auto-fixes (`_includes/layouts/post.njk`, `_includes/layouts/post-wide.njk`)
+
+**Auto-append "| Mercy Court" title suffix:**
+Template computes `_seoTitle` via `{% set %}` block: appends suffix only if missing (idempotent — existing posts with the suffix are unchanged). Applied to `<title>`, `og:title`, and `twitter:title`.
+
+```nunjucks
+{% set _seoTitle %}{% if " | Mercy Court" in seo_title %}{{ seo_title }}{% else %}{{ seo_title }} | Mercy Court{% endif %}{% endset %}
+```
+
+**`article h3` and `article h4` CSS added** (immediately after `article h2` rule):
+```css
+article h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+    text-transform: uppercase;
+    color: #111827;
+    letter-spacing: -0.015em;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.25;
+}
+article h4 {
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111827;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+```
+Without these rules, FAQ `###` sub-headings rendered as browser-default text (no Anton font, no brand styling).
+
+**Meta Pixel noscript `<img>` fixed in both templates:** added `alt=""` (correct for tracking pixels per HTML spec; was triggering the new linter).
+
+### Layer 2 — CMS authoring guidance (`admin/config.yml`)
+
+**`note` widget added** as the first field in the posts collection fields list — always visible when an editor opens a blog post:
+```yaml
+- widget: note
+  name: writing_guide
+  label: "📝 Writing Guide"
+  hint: |
+    HEADINGS — Use ## for major sections, ### for sub-headings (FAQ questions). No numbered lists as section headers.
+    LINKS — Use [link text](url) syntax. Never leave placeholder text like (link to mercycourt.org/...).
+    SEO TITLE — Must end with | Mercy Court.
+    IMAGE — Rename file descriptively before uploading (e.g. total-commitment-hero.jpg).
+    FAQ SCHEMA — Populate the FAQ field below to auto-generate structured data.
+```
+
+**Improved hints on:**
+- `seo_title`: format + "| Mercy Court" requirement explicitly stated
+- `body`: `##` heading convention + `[text](url)` link syntax
+- `hero_image`: file-naming convention added to existing size hint
+
+### Layer 3 — Eleventy build-time linter (`.eleventy.js`)
+
+`addTransform("blog-post-lint", ...)` runs on every `blog-posts/*.html` built file. Warnings only — never fails the build or modifies output.
+
+Checks:
+1. `(link to ` — placeholder link text left in post body
+2. `<img>` tags missing `alt=` attribute
+3. `<title>` not containing `| Mercy Court`
+
+Warnings appear in the `npm run build` console output before the deploy. Current baseline: zero warnings across all 5 posts.
+
+### Standing rules (standing since this session)
+- Never write numbered lists (`1. **Bold:**`) for section headers — use `## Section Title` headings.
+- All FAQ questions must be `###` under a `##` parent heading.
+- `seo_title` must end with `| Mercy Court` (template enforces it regardless, but keep frontmatter correct).
+- Image filenames must be descriptive before upload — no stock photo names, no `IMG_` prefixes.
+
+---
+
+## Baltimore Community Outreach Post — Fixes (2026-08-09) — commit `81394c7`
+
+### Post
+Title: "FREE FOOD, NO STIGMA: INSIDE MERCY COURT'S YEAR-ROUND COMMUNITY OUTREACH"
+File: `src/blog-posts/baltimore-community-outreach-food-pantry.md`
+Hero: `/assets/images/cms-uploads/outreach-team-food-distribution-05.jpg`
+Date: 2026-08-09 | Author: Bukola Daramola | Category: events | `featured: true` | `community_impact: true`
+
+### 7 issues fixed
+
+1. **Duplicate URL** — CMS created filename `blog-posts-baltimore-community-outreach-food-pantry.md` (slug field had a leading `/`). URL was `/blog-posts/blog-posts-...`. Fixed: `git mv` → `baltimore-community-outreach-food-pantry.md`; slug field corrected to bare slug (no slash).
+2. **SEO title double-append** — `seo_title` ended with `| RCCG Mercy Court`, which doesn't match the `" | Mercy Court"` check → template would append again. Fixed: title updated to `| Mercy Court`; template check widened to `"| Mercy Court" in seo_title or "| RCCG Mercy Court" in seo_title`.
+3. **Author note in body** — `(link with UTM tracking, see below)` leaked into article body. Removed; plain-text URL converted to markdown link.
+4. **Weak hero alt text** — `"Landscape photo people under a tent with items"` → descriptive text referencing Mercy Court volunteers.
+5. **excerpt was editorial meta** — `"A News article for mercycourt.org…"` replaced with reader-facing preview sentence.
+6. **FAQ answer 3** — `"their Court's"` → `"Mercy Court's"`.
+7. **Absolute URLs in body** — `https://mercycourt.org/events/...` and `https://mercycourt.org/community-impact` → relative paths.
+
+### Template fixes (same commit)
+
+- **FAQPage JSON-LD + visual FAQ rendering:** Template previously emitted only JSON-LD. Added a visible FAQ section (`<div class="mt-12 bg-gray-50 rounded-lg p-8">`) rendered after `{{ content | safe }}` for all posts with `faq` frontmatter. The CMS `faq` field hint was updated to correctly state that FAQ now renders both visually and as JSON-LD.
+- **`&` double-encoding fix:** The `_seoTitle` set-block encodes `&` → `&amp;` on first pass; `{{ _seoTitle }}` was encoding again to `&amp;amp;`. Fixed: `{{ _seoTitle | safe }}` on all three output locations (title, og:title, twitter:title). Result: `&amp;` in HTML → browser renders `&` correctly.
+
+### CMS guidance fixes (same commit)
+
+- **Slug field hint** updated: explicitly says "no leading slash" with a negative example (`/baltimore-...` is wrong).
+- **FAQ field hint** corrected: "renders a visible FAQ section... AND adds FAQPage structured data".
+
+---
+
+## Dynamic Community Impact News Section (2026-08-09) — commit `49ec1de`
+
+### Problem
+The "Latest News — From the Community Impact Team" section in `community-impact.html` (Section 11) was 100% static HTML with a single placeholder card ("Stay Tuned"). No mechanism existed to feature community-impact articles there without manual HTML edits.
+
+### Solution — `community_impact` boolean frontmatter flag
+
+A new `community_impact: true` field on any blog post opt-ins it to the community-impact news section. The section is now a Nunjucks loop:
+
+```nunjucks
+{% set communityPosts = collections.posts | where("data.community_impact", true) | limit(3) %}
+```
+
+Uses the existing `where` and `limit` filters — no new Eleventy config needed. `community-impact.html` already had `templateEngineOverride: njk`, so `collections.posts` was accessible with zero config changes.
+
+**Fallback:** `{% if communityPosts.length %}` → posts loop; `{% else %}` → original "Stay Tuned" placeholder. The section never shows an empty grid.
+
+**Cap:** 3 most-recent posts (newest-first, inherited from collection sort order).
+
+### CMS widget added (`admin/config.yml`)
+
+```yaml
+- { label: "Community Impact Feature", name: "community_impact", widget: "boolean", default: false,
+    hint: "Turn ON to feature this post in the 'Latest News' section on the Community Impact page." }
+```
+
+Added after the `featured` field. Default `false` — opt-in only; no existing posts affected.
+
+Writing guide note widget also updated with a `COMMUNITY IMPACT` line explaining the toggle.
+
+### Baltimore outreach post flagged
+
+`community_impact: true` set on `src/blog-posts/baltimore-community-outreach-food-pantry.md` — it appears immediately in the community-impact page news section post-deploy.
+
+### Blog post frontmatter schema (updated)
+
+```yaml
+title, seo_title, seo_description, date, author, category (news|events|inspiration),
+featured (bool), community_impact (bool, default false),
+hero_image, hero_image_alt, excerpt, read_time,
+faq (optional list: question/answer — renders visually + FAQPage JSON-LD),
+scripture_references (optional list)
+```
+
+---
+
 ## Tracking IDs
 - GA4: `G-JWGVNRLKJL`
 - Meta Pixel: `1027268596866855`
