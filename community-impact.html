@@ -522,7 +522,26 @@ grant_body: "Mercy Court stands as a trusted anchor in Baltimore, addressing foo
                     Stay updated on our latest outreach efforts, food drives, and community programs.
                 </p>
             </div>
+            {% set communityPosts = collections.posts | where("data.community_impact", true) | limit(3) %}
             <div class="grid md:grid-cols-3 gap-8">
+                {% if communityPosts.length %}
+                {% for post in communityPosts %}
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img loading="lazy" src="{{ post.data.hero_image }}" alt="{{ post.data.hero_image_alt }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="bg-brand-red text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">Community</span>
+                            <span class="text-gray-400 text-xs">{{ post.date | postDate }}</span>
+                        </div>
+                        <h3 class="font-anton text-xl uppercase tracking-tight mb-2">{{ post.data.title }}</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">{{ post.data.excerpt }}</p>
+                        <a href="{{ post.url | cleanUrl }}" class="text-brand-red font-bold text-sm uppercase hover:underline">Read More &rarr;</a>
+                    </div>
+                </article>
+                {% endfor %}
+                {% else %}
                 <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
                     <div class="relative h-48 overflow-hidden">
                         <img loading="lazy" src="/assets/images/2026/community-outreach/outreach-community-event-02.jpg" alt="Community outreach" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
@@ -536,9 +555,10 @@ grant_body: "Mercy Court stands as a trusted anchor in Baltimore, addressing foo
                         <p class="text-gray-600 text-sm leading-relaxed mb-4">
                             Our latest community news and updates will be published here. Check back soon.
                         </p>
-                        <a href="/blog.html" class="text-brand-red font-bold text-sm uppercase hover:underline">Visit Blog &rarr;</a>
+                        <a href="/blog" class="text-brand-red font-bold text-sm uppercase hover:underline">Visit Blog &rarr;</a>
                     </div>
                 </article>
+                {% endif %}
             </div>
         </div>
     </section>

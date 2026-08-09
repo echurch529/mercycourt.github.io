@@ -496,7 +496,8 @@ collections:
           LINKS — Use [link text](url) syntax. Never leave placeholder text like (link to mercycourt.org/...). |
           SEO TITLE — Must end with | Mercy Court, e.g. Your Post Title | Mercy Court. |
           IMAGE — Rename the file descriptively before uploading (e.g. total-commitment-hero.jpg, not IMG_1234.jpg). |
-          FAQ SCHEMA — If the post has a FAQ section, populate the FAQ field at the bottom to auto-generate SEO structured data.
+          FAQ SCHEMA — If the post has a FAQ section, populate the FAQ field at the bottom to auto-generate SEO structured data. |
+          COMMUNITY IMPACT — Turn on "Community Impact Feature" to feature this post in the news section on the Community Impact page.
       - { label: "Title", name: "title", widget: "string" }
       - { label: "URL Slug", name: "slug", widget: "string", hint: "Slug — derive from the title, shortened if needed. Lowercase letters and hyphens only, no leading slash. e.g. baltimore-food-pantry-outreach not /baltimore-food-pantry-outreach." }
       - { label: "SEO Title", name: "seo_title", widget: "string", hint: "Search-engine title. Must end with | Mercy Court — e.g. 'Total Commitment to God: 5 Keys | Mercy Court'. Target 50–60 characters." }
@@ -515,6 +516,7 @@ collections:
           - { label: "Events", value: "events" }
           - { label: "Inspiration", value: "inspiration" }
       - { label: "Featured Post", name: "featured", widget: "boolean", default: false }
+      - { label: "Community Impact Feature", name: "community_impact", widget: "boolean", default: false, hint: "Turn ON to feature this post in the 'Latest News' section on the Community Impact page." }
       - { label: "Hero Image", name: "hero_image", widget: "image", hint: "Rename the file descriptively before uploading (e.g. total-commitment-hero.jpg, not IMG_1234.jpg or stockphoto.jpg). Keep under 500KB — compress at squoosh.app or tinypng.com." }
       - { label: "Hero Image Alt Text", name: "hero_image_alt", widget: "string", hint: "Describe the image for screen readers and image search — e.g. 'Open Bible on wooden table with morning light'" }
       - { label: "Excerpt", name: "excerpt", widget: "text" }

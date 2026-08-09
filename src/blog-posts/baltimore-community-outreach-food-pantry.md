@@ -9,6 +9,7 @@ date: 2026-08-09
 author: Bukola Daramola
 category: events
 featured: true
+community_impact: true
 hero_image: /assets/images/cms-uploads/outreach-team-food-distribution-05.jpg
 hero_image_alt: Mercy Court volunteers distributing free groceries to community
   members under a tent in Baltimore
