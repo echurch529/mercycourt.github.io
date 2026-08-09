@@ -516,3 +516,11 @@ collections:
         widget: "list"
         required: false
         field: { label: "Reference", name: "reference", widget: "string" }
+      - label: "FAQ"
+        name: "faq"
+        widget: "list"
+        required: false
+        hint: "Optional FAQ entries — adds FAQPage structured data for search engines. Questions and answers also appear at the bottom of the post body."
+        fields:
+          - { label: "Question", name: "question", widget: "string" }
+          - { label: "Answer", name: "answer", widget: "text" }
