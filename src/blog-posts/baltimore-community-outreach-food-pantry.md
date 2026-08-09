@@ -7,10 +7,11 @@ seo_description: Need free food in Baltimore? See Mercy Court's full weekly
   community 5 days a week.
 date: 2026-08-09
 author: Bukola Daramola
-category: news
+category: events
 featured: true
 hero_image: /assets/images/cms-uploads/outreach-team-food-distribution-05.jpg
-hero_image_alt: Mercy Court volunteers distributing free groceries to community members under a tent in Baltimore
+hero_image_alt: Mercy Court volunteers distributing free groceries to community
+  members under a tent in Baltimore
 excerpt: Every week, five days a week, RCCG Mercy Court's outreach team serves
   free food to Baltimore's Walker Avenue neighborhood — no sign-up, no questions
   asked. Here's how it works.
@@ -29,8 +30,9 @@ faq:
     answer: No. All of Mercy Court's food-sharing programs are open to the entire
       community, regardless of membership or church attendance.
   - question: How can I volunteer with RCCG Mercy Court's community outreach?
-    answer: Visit Mercy Court's Community Impact page at mercycourt.org/community-impact
-      to learn about current volunteer opportunities.
+    answer: Visit Mercy Court's Community Impact page at
+      mercycourt.org/community-impact to learn about current volunteer
+      opportunities.
 ---
 This Saturday, August 15th, the Redeemed Christian Church of God (RCCG) Mercy Court's 12th Anniversary weekend includes a dedicated Community Outreach Day, and if you've never experienced it, here's what you should know: this isn't a once-a-year gesture. It's a small taste of something the church does every single week, all year long. We sat down with Bukola Daramola, Director of Community Engagement at RCCG Mercy Court, to learn what her team does, and why it matters, ahead of an anniversary weekend the whole community is invited to.
 
