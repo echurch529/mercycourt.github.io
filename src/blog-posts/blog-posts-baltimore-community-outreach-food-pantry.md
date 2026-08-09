@@ -20,16 +20,16 @@ faq:
       free food five days a week: Monday, Wednesday, Thursday, and Sunday at the
       church, and Tuesday at Woodland Garden senior residence. No sign-up or
       eligibility check is required."
-  - question: Does Mercy Court have a food pantry?
+  - question: Does RCCG Mercy Court have a food pantry?
     answer: Yes. The food pantry is open every Thursday from 2:00 PM to 5:00 PM at
       the church, in addition to the church's regular food-sharing hours earlier
       that same day.
   - answer: No. All of Mercy Court's food-sharing programs are open to the entire
       community, regardless of membership or church attendance.
-    question: Is Mercy Court's community outreach only for church members?
+    question: Is RCCG Mercy Court's community outreach only for church members?
   - answer: Visit their Court's Community Impact page, to learn about current
       volunteer opportunities.
-    question: How can I volunteer with Mercy Court's community outreach?
+    question: How can I volunteer with RCCG Mercy Court's community outreach?
 ---
 This Saturday, August 15th, the Redeemed Christian Church of God (RCCG) Mercy Court's 12th Anniversary weekend includes a dedicated Community Outreach Day, and if you've never experienced it, here's what you should know: this isn't a once-a-year gesture. It's a small taste of something the church does every single week, all year long. We sat down with Bukola Daramola, Director of Community Engagement at RCCG Mercy Court, to learn what her team does, and why it matters, ahead of an anniversary weekend the whole community is invited to.
 
