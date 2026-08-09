@@ -49,6 +49,37 @@ module.exports = function(eleventyConfig) {
     (url || "").replace(/\.html$/, "") || "/"
   );
 
+  // Build-time linter: warns on common blog post authoring mistakes.
+  // Warnings only — never fails the build or modifies output.
+  eleventyConfig.addTransform("blog-post-lint", function(content, outputPath) {
+    if (!outputPath || !outputPath.includes("/blog-posts/") || !outputPath.endsWith(".html")) {
+      return content;
+    }
+    const warnings = [];
+
+    if (content.includes("(link to ")) {
+      warnings.push('placeholder link text "(link to ...)" found — replace with [text](url) syntax');
+    }
+
+    const imgNoAlt = content.match(/<img(?![^>]*\balt\s*=)[^>]*/gi) || [];
+    if (imgNoAlt.length > 0) {
+      warnings.push(`${imgNoAlt.length} <img> tag(s) missing alt attribute`);
+    }
+
+    const titleMatch = content.match(/<title>([^<]+)<\/title>/);
+    if (titleMatch && !titleMatch[1].includes("| Mercy Court")) {
+      warnings.push(`<title> missing "| Mercy Court": "${titleMatch[1]}"`);
+    }
+
+    if (warnings.length > 0) {
+      const short = outputPath.replace(/^.*\/_site\//, "");
+      console.warn(`\n⚠️  Blog post lint — ${short}:`);
+      warnings.forEach((w) => console.warn(`   · ${w}`));
+      console.warn("");
+    }
+    return content;
+  });
+
   return {
     dir: { input: ".", output: "_site", includes: "_includes", data: "_data" },
     templateFormats: ["html", "njk", "md"],

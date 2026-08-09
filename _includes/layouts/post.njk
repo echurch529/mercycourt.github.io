@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ seo_title }}</title>
+    {% set _seoTitle %}{% if " | Mercy Court" in seo_title %}{{ seo_title }}{% else %}{{ seo_title }} | Mercy Court{% endif %}{% endset %}
+    <title>{{ _seoTitle }}</title>
     <meta name="description" content="{{ seo_description }}">
     <link rel="canonical" href="https://mercycourt.org{{ page.url | cleanUrl }}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="RCCG Mercy Court">
-    <meta property="og:title" content="{{ seo_title }}">
+    <meta property="og:title" content="{{ _seoTitle }}">
     <meta property="og:description" content="{{ seo_description }}">
     <meta property="og:url" content="https://mercycourt.org{{ page.url | cleanUrl }}">
     <meta property="og:image" content="https://mercycourt.org{{ hero_image }}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ seo_title }}">
+    <meta name="twitter:title" content="{{ _seoTitle }}">
     <meta name="twitter:description" content="{{ seo_description }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -106,6 +107,24 @@ article h2 {
     margin-bottom: 1rem;
     line-height: 1.2;
 }
+article h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+    text-transform: uppercase;
+    color: #111827;
+    letter-spacing: -0.015em;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.25;
+}
+article h4 {
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111827;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
 article p {
     color: #4B5563;
     font-size: 1.125rem;
@@ -143,7 +162,7 @@ article strong { color: #111827; font-weight: 700; }
     </style>
     <!-- Meta Pixel Code -->
     <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1027268596866855'); fbq('track', 'PageView');</script>
-    <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=1027268596866855&ev=PageView&noscript=1"/></noscript>
+    <noscript><img height="1" width="1" alt="" src="https://www.facebook.com/tr?id=1027268596866855&ev=PageView&noscript=1"/></noscript>
     <!-- End Meta Pixel Code -->
 </head>
 <body class="font-lato bg-white text-gray-900">

@@ -488,9 +488,18 @@ collections:
     create: true
     slug: "{{fields.slug}}"
     fields:
+      - widget: note
+        name: writing_guide
+        label: "📝 Writing Guide"
+        hint: |
+          HEADINGS — Use ## for major sections (e.g. ## Key One), ### for sub-headings (e.g. FAQ questions). Do NOT write numbered lists (1. **Bold:**) as section headers — they render as a plain list, not headings. |
+          LINKS — Use [link text](url) syntax. Never leave placeholder text like (link to mercycourt.org/...). |
+          SEO TITLE — Must end with | Mercy Court, e.g. Your Post Title | Mercy Court. |
+          IMAGE — Rename the file descriptively before uploading (e.g. total-commitment-hero.jpg, not IMG_1234.jpg). |
+          FAQ SCHEMA — If the post has a FAQ section, populate the FAQ field at the bottom to auto-generate SEO structured data.
       - { label: "Title", name: "title", widget: "string" }
       - { label: "URL Slug", name: "slug", widget: "string", hint: "Slug (target: 50–60 characters) — derive from the title but shorten if needed. Lowercase and hyphens only, e.g. 5-ways-grow-faith not the-five-most-powerful-ways-to-grow-your-faith-as-a-christian." }
-      - { label: "SEO Title", name: "seo_title", widget: "string" }
+      - { label: "SEO Title", name: "seo_title", widget: "string", hint: "Search-engine title. Must end with | Mercy Court — e.g. 'Total Commitment to God: 5 Keys | Mercy Court'. Target 50–60 characters." }
       - { label: "SEO Description", name: "seo_description", widget: "text", hint: "Description (target: 120–160 characters)" }
       - label: "Publish Date"
         name: "date"
@@ -506,11 +515,11 @@ collections:
           - { label: "Events", value: "events" }
           - { label: "Inspiration", value: "inspiration" }
       - { label: "Featured Post", name: "featured", widget: "boolean", default: false }
-      - { label: "Hero Image", name: "hero_image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+      - { label: "Hero Image", name: "hero_image", widget: "image", hint: "Rename the file descriptively before uploading (e.g. total-commitment-hero.jpg, not IMG_1234.jpg or stockphoto.jpg). Keep under 500KB — compress at squoosh.app or tinypng.com." }
       - { label: "Hero Image Alt Text", name: "hero_image_alt", widget: "string", hint: "Describe the image for screen readers and image search — e.g. 'Open Bible on wooden table with morning light'" }
       - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Read Time (minutes)", name: "read_time", widget: "number", value_type: "int", default: 5 }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Body", name: "body", widget: "markdown", hint: "Use ## for major sections, ### for FAQ sub-headings. Links: [link text](url) — never leave placeholder text. Numbered lists are for actual lists, not section headings." }
       - label: "Scripture References"
         name: "scripture_references"
         widget: "list"
