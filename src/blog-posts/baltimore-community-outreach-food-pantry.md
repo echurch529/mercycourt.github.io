@@ -10,7 +10,7 @@ author: Bukola Daramola
 category: events
 featured: true
 community_impact: true
-hero_image: /assets/images/cms-uploads/outreach-team-food-distribution-05.jpg
+hero_image: /assets/images/cms-uploads/whatsapp-image-2026-08-09-at-21.05.12.jpeg
 hero_image_alt: Mercy Court volunteers distributing free groceries to community
   members under a tent in Baltimore
 excerpt: Every week, five days a week, RCCG Mercy Court's outreach team serves
@@ -49,9 +49,9 @@ That simple idea, that knowing where your next meal is coming from shouldn't be 
 
 Nothing is pre-packaged. "You come, you pick what you want, and you go with what you want," Daramola explained, describing a choice-based approach designed so people can get exactly what they need, without the discomfort of a fixed handout bag.
 
-### Tuesday: Senior Outreach at Woodland Garden
+### Tuesday: Senior Outreach at Woodland Gardens II
 
-12:00 PM to 2:00 PM, at Woodland Garden senior residence, 506 Woodburn Avenue, Baltimore, MD, 21212.
+12:00 PM to 2:00 PM, at Woodland Gardens II, 4701 Park Heights Ave, Baltimore, MD 21215.
 
 Every Tuesday, the team leaves the church building entirely to meet seniors where they are, delivering food directly to residents of this senior living community and the surrounding area.
 
