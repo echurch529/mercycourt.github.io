@@ -312,7 +312,7 @@ Editable fields extracted to front matter YAML; HTML body unchanged except hardc
 8. `contact.html` — ✅ **converted** (commit b8a152c) — hero image only; all contact/footer info via site.*; social icon mismatch fixed
 9. `plan-your-visit.html` — ✅ **converted** (commit df62aa6) — hero, welcome_body (×3), video_url, faq list (10 items as loop with loop.index IDs)
 
-**Deferred (no conversion planned):** `give.html` (Zeffy iframes, minimal copy), `watch-live.html` (YouTube API JS, minimal copy), `blog.njk` (already .njk, posts auto-render).
+**Deferred (no conversion planned):** `give.html` (Zeffy iframes, minimal copy), `watch-live.html` (YouTube API JS, minimal copy).
 
 **Shared site data:** `_data/site.json` — ✅ **created** (address, phone, email, social URLs, service times, Zeffy URLs, Mailchimp action).
 
@@ -386,6 +386,7 @@ Commits: `5091c42` (paths fix), `fa006ac` (delete legacy file), `87851b0` (renam
 - **community-impact** ✅: `hero`, `mission` (body1/2/3), `stats` (list), `pantry_hours`, `programs` (list with emoji), `partners` (list), `testimonials` (list), `pantry_highlight` (body1/2/3), `goals` (list with emoji), `volunteer_intro1/2`, `volunteer_form_endpoint`, `grant_body`
 - **contact** ✅: `hero` (image only — all contact info from site.*)
 - **plan-your-visit** ✅: `hero`, `welcome_body1/2/3`, `video_url`, `faq` (list: question/answer; rendered with loop.index IDs)
+- **blog** ✅: `hero` (image/image_alt/headline/headline_highlight/tagline), `section` (heading/heading_highlight/description). Featured post and blog grid are auto-populated from `collections.posts` — no CMS fields needed. See "Blog Page CMS Integration (2026-08-09)".
 
 ### Post-conversion fixes (commit bb336d6 — 2026-07-19)
 
@@ -403,7 +404,7 @@ Two bugs found on all 4 Phase 7 pages after independent verification:
 
 `admin/config.yml` has four top-level collections (sidebar order):
 
-1. **Main Pages** (`name: "main-pages"`) — Homepage, About Us, Contact, Plan Your Visit, Community Impact
+1. **Main Pages** (`name: "main-pages"`) — Homepage, About Us, Contact, Plan Your Visit, Community Impact, Blog
 2. **Ministries** (`name: "ministries-pages"`) — Ministries Overview, Tehillah Voices, Mercy Kidz
 3. **Event Pages** (`name: "events"`) — folder collection, `events/*.html`, create: true, `slug: "{{fields.slug}}"`
 4. **Blog Posts** (`name: "posts"`) — folder collection, `src/blog-posts/*.md`, create: true, `slug: "{{fields.slug}}"`
@@ -816,11 +817,11 @@ Frontmatter `slug` corrected: `/blog-posts/total-commitment` → `total-commitme
 
 ### Bug 2 — Post absent from blog listing (fixed)
 
-**Root cause:** `blog.html` is in `eleventyConfig.ignores` — it's a static file, not an Eleventy template. New posts never appear there automatically.
+**Root cause at the time:** `blog.html` is in `eleventyConfig.ignores` — it's a static file, not an Eleventy template. New posts weren't appearing there automatically.
 
-**Fix:** Article card manually added at the top of `#blog-grid` in `blog.html`, with correct image path (`assets/images/cms-uploads/sunrise-mountain-hike-stockcake.jpg`) and link (`blog-posts/total-commitment.html`).
+**Fix at the time:** Article card manually added to `#blog-grid` in `blog.html`.
 
-**Standing rule:** Every new blog post requires a manual card added to `blog.html`. This is a permanent architectural constraint — `blog.html` is excluded from Eleventy processing by design.
+**⚠️ Standing rule SUPERSEDED (2026-08-09):** `blog.njk` is the actual live Eleventy template that generates `_site/blog.html`. It already dynamically loops over `collections.posts` for both the featured post and the full grid — new posts appear automatically with no manual HTML edits. The old `blog.html` static file is Eleventy-ignored and is NOT the live page. Manual card additions to `blog.html` are no longer needed or effective. See "Blog Page CMS Integration (2026-08-09)".
 
 ### Bug 3 — Hero image broken in CMS editor and preview (not a code bug)
 
@@ -938,6 +939,56 @@ Date: 2026-08-09 | Author: Bukola Daramola | Category: events | `featured: true`
 
 - **Slug field hint** updated: explicitly says "no leading slash" with a negative example (`/baltimore-...` is wrong).
 - **FAQ field hint** corrected: "renders a visible FAQ section... AND adds FAQPage structured data".
+
+---
+
+## Blog Page CMS Integration (2026-08-09) — commit `d5e687e`
+
+### Context — two blog files exist; only one is live
+
+| File | Role | Eleventy |
+|------|------|----------|
+| `blog.njk` | **Live template** — generates `_site/blog.html`; dynamically loops over `collections.posts` for featured post and full grid | Processed (permalink: `/blog.html`) |
+| `blog.html` | **Ignored static file** — old pre-Eleventy version kept for historical reference | In `eleventyConfig.ignores` — NOT served to users |
+
+`blog.html` was previously (incorrectly) assumed to be the live page. All changes to the blog listing must be made in `blog.njk`.
+
+### What was already dynamic in `blog.njk` (no changes needed)
+
+- **Featured post:** `{%- set featuredPost = collections.posts | where("data.featured", true) | first %}` — auto-picks the newest post with `featured: true`. Falls back to `collections.posts | first` if none is flagged.
+- **Blog grid:** `{%- set gridPosts = collections.posts | except(featuredPost.url) %}` → loops over all remaining posts, rendering cards with image, category badge, date, title, excerpt, and "Read More" link.
+
+### What was added (hero and section intro editable via CMS)
+
+**`blog.njk` frontmatter added:**
+```yaml
+hero:
+  image: /assets/images/2026/community-outreach/outreach-community-event-02.jpg
+  image_alt: Mercy Court Community
+  headline: Welcome to
+  headline_highlight: Mercy Court Blog
+  tagline: We continue to make an impact in Baltimore through outreach, food drives, and neighborhood partnerships.
+section:
+  heading: "News &"
+  heading_highlight: Updates
+  description: Stay connected with the latest from Mercy Court — stories, announcements, and articles that impact our community.
+```
+
+Hero `src`, `alt`, headline parts, and tagline; section heading parts and description — all replaced with `{{ hero.* }}` / `{{ section.* }}` variables. `{{ section.heading | safe }}` used to prevent `&` double-encoding.
+
+**`admin/config.yml` — Blog entry added under `main-pages`:**
+- `file: "blog.njk"`
+- `note` widget at top explaining: how to swap the featured post (toggle "Featured Post" ON in Blog Posts), that the grid is automatic
+- `hero` object: image, image_alt, headline, headline_highlight, tagline
+- `section` object (collapsed): heading, heading_highlight, description
+
+### Nunjucks `{#` gotcha — relevant to blog.njk
+
+`blog.njk` already had `{ #giving-modal` (with space) in the giving-modal media query, avoiding the Nunjucks comment-parse conflict. Any future CSS edits to this file must maintain that space.
+
+### Standing rule update
+
+**Manually adding cards to `blog.html` is no longer needed.** New blog posts appear automatically in the live blog grid because `blog.njk` loops over `collections.posts`. To feature a specific post at the top: toggle `featured: true` on that post in the Blog Posts CMS collection (and turn it off on the previous featured post).
 
 ---
 
