@@ -81,6 +81,8 @@ That philosophy extends to the **Saturday, August 15th Community Outreach Day**,
 
 ## JOIN US FOR THE FULL ANNIVERSARY WEEKEND
 
+![Flyer of RCCG Mercy Court's 12th anniversary program](/assets/images/cms-uploads/betterthings-lndscape.jpeg "RCCG Mercy Court 12th Anniversary")
+
 Community Outreach Day is just one part of a [bigger celebration of the anniversary event](/events/12th-anniversary). Here's the full lineup:
 
 * Friday, August 14, 7:00 PM: "Better Things" Concert, a Tehillah Worship album launch featuring Tehillah Worship, Prospa Ochimana, and Ejay Harold. Doors open 6:30 PM.
