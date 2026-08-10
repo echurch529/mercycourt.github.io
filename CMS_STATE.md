@@ -1038,6 +1038,71 @@ scripture_references (optional list)
 
 ---
 
+## God's Heritage (Mercy Kidz) — HOD Content Update
+
+### Commits `c4443b9`, `4ca97a6`
+
+Full content refresh based on recommendations from the Head of Department of the children's ministry. All changes are to `mercy-kidz.html` (CMS-driven via existing mercy-kidz collection).
+
+**Five sections updated:**
+
+1. **Welcome / About Us & Mission** — Official "About Us" description; mission statement replaced with: *"Raising Christlike Children Pacesetters who through God's Mercies Maximize Their Potential and Enjoy Life"*; teachers/training paragraph added.
+
+2. **Who We Serve** — Old 2-card (Early Childhood / Elementary) layout replaced with 4 plant-metaphor class cards: Seeds (Infant–3, green), Seedlings (4–6, yellow), Sprouts (7–9, blue), Vines (10–12, purple). Intro paragraph: *"It all begins with a seed."* Each card: colored header with age badge + HOD-supplied description (matched verbatim — no paraphrasing).
+
+3. **Our Farmers** (new section, after photo strip) — Dark background, two-column layout. Left: teachers copy. Right: 4 attribute cards (Born Again & Spirit-Filled, Annually Trained, Fun & Caring, Child Safety Focused).
+
+4. **Content & Resources** — Expert-consultant curriculum description; 4 colored category cards (About God / About Salvation / About The Kingdom / About Living The Christian Life) each listing all sub-topics and sub-tracks. 4 Yearly Program cards (Easter Fest, Children's Summer Blast, Children's Takeover Service, End of Year Christmas Party).
+
+5. **Connect with God's Heritage** (new section, before FAQ) — Instagram (`gods.heritage.kids`) and YouTube (`@godsheritagekids`) social cards.
+
+**Second commit (`4ca97a6`) fixes from review pass:** Class descriptions restored to exact HOD wording (Seeds "lots of buddy movements", Seedlings "eager-to-learn bunch", Vines "independent in their thinking, curious and inquisitive"). Curriculum IV fully restored: Individual sub-track (4 missing items including "Spirit-filled life"), The Church sub-track (entire sub-track was missing: Gifts of the Spirit, Laying on of hands, Service to God), Community sub-track (3 missing items).
+
+---
+
+## Quick Links Page Removal — commit `96b752c`
+
+`quick-links.html` removed from the repository and from all navigation (desktop nav, mobile nav, footer link) across all 17 pages and 4 blog-post pages. Decision: leadership moved quick links to the church Intranet; the page should not exist on the public site.
+
+- Footer column heading "Quick Links" (used as a footer-nav label on most pages) was intentionally kept — it is a generic navigation label, not a link to the removed page.
+- `pages/quick-links.html` was also present in the `pages/` directory and was similarly affected.
+
+---
+
+## Meta Pixel — Installation and ID Update
+
+### Install — commit `acab0d8`
+
+Meta Pixel base code installed in `<head>` (immediately before `</head>`) across all 28 HTML files using a Python `os.walk` script. Applied to: 13 root pages, 4 blog-posts, 11 pages/ files.
+
+### ID correction — commit `fb3c8ef`
+
+Old Pixel ID `1354194816811356` replaced with correct ID `1027268596866855` across all 28 files via `sed`. Zero files remaining with old ID confirmed by grep.
+
+Current Pixel ID: **`1027268596866855`** (reflected in Tracking IDs section below).
+
+---
+
+## Homepage Mobile UX Improvements — commit `c96e9e2`
+
+Five issues found in mobile review of homepage screenshot:
+
+| Issue | Fix applied |
+|---|---|
+| Flyer not tappable on mobile | `<img>` wrapped in `<a href="{{ hero.event_url }}">` when `event_url` is set |
+| No event CTA visible on mobile | Dark strip added below flyer: headline text + red "Learn More" button |
+| 96px top-padding gap below flyer | `pt-24` → `pt-12 md:pt-24` on About section |
+| Worship photo 500px tall on mobile | `h-[500px]` → `h-64 md:h-[500px]` on About section image |
+| "WHO WE ARE" text hidden below image on mobile | `order-last md:order-first` / `order-first md:order-last` on About grid children |
+
+**New `event_url` field** added to homepage hero CMS config (`admin/config.yml`) — optional string; hint explains it enables the flyer link + CTA strip in flyer mode. Current value: `/events/12th-anniversary.html`.
+
+**Preview sync:** `HomePreview` in `admin/preview.js` already reads `hero.show_hero_text !== false` for the hero branch — the new `event_url` is a link attribute only, no structural change to the preview needed.
+
+**Updated home field summary:** `hero` object now includes: `image`, `headline`, `headline_highlight`, `tagline`, `show_hero_text`, **`event_url`** (new, optional).
+
+---
+
 ## Tracking IDs
 - GA4: `G-JWGVNRLKJL`
 - Meta Pixel: `1027268596866855`
