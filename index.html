@@ -13,6 +13,7 @@ hero:
   headline_highlight: BETTER THINGS
   tagline: The home of pacesetters, where we experience God and enjoy life
   show_hero_text: false
+  event_url: /events/12th-anniversary.html
 about:
   body1: We are dedicated to raising Christ-like pacesetters who through God's
     mercy maximize their potentials and enjoy life. Our mission centers on
@@ -217,7 +218,17 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
     <!-- Hero Section -->
     {% if hero.show_hero_text == false %}
     <section class="relative overflow-hidden" style="padding-top: 72px;">
+        {% if hero.event_url %}
+        <a href="{{ hero.event_url }}" aria-label="Learn more about this event">
+            <img src="{{ hero.image }}" alt="{{ hero.image_alt | default('') }}" class="w-full block" style="max-height:100vh; object-fit:cover;">
+        </a>
+        <div class="bg-brand-dark text-white text-center py-4 px-6">
+            <p class="text-sm uppercase tracking-widest font-bold mb-2">{{ hero.headline }} <span class="text-brand-red">{{ hero.headline_highlight }}</span></p>
+            <a href="{{ hero.event_url }}" class="inline-block bg-brand-red text-white px-8 py-2.5 rounded-full text-xs font-bold uppercase tracking-wide hover:bg-[#C04E25] transition">Learn More</a>
+        </div>
+        {% else %}
         <img src="{{ hero.image }}" alt="{{ hero.image_alt | default('') }}" class="w-full block" style="max-height:100vh; object-fit:cover;">
+        {% endif %}
     </section>
     {% else %}
     <section class="relative h-[100vh] flex items-center justify-center overflow-hidden" style="padding-top: 72px;">
@@ -245,13 +256,13 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
     {% endif %}
 
     <!-- About Section -->
-    <section id="about" class="bg-white pt-24 pb-10 px-6">
+    <section id="about" class="bg-white pt-12 md:pt-24 pb-10 px-6">
         <div class="container mx-auto max-w-7xl">
             <div class="grid md:grid-cols-2 gap-16 items-center reveal">
-                <div>
-                    <img loading="lazy" src="/assets/images/2026/congregation/congregation-worship-service-02.jpg" alt="Mercy Court Community" class="w-full rounded-lg shadow-xl object-cover h-[500px]">
+                <div class="order-last md:order-first">
+                    <img loading="lazy" src="/assets/images/2026/congregation/congregation-worship-service-02.jpg" alt="Mercy Court Community" class="w-full rounded-lg shadow-xl object-cover h-64 md:h-[500px]">
                 </div>
-                <div>
+                <div class="order-first md:order-last">
                     <span class="inline-block bg-brand-red text-white px-6 py-2 rounded-full text-xs font-bold uppercase mb-6">
                         Who We Are
                     </span>

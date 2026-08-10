@@ -32,6 +32,7 @@ collections:
               - { label: "Headline Highlight (red, 2nd line)", name: "headline_highlight", widget: "string", hint: "e.g. BETTER THINGS" }
               - { label: "Tagline", name: "tagline", widget: "string" }
               - { label: "Show Hero Text Overlay", name: "show_hero_text", widget: "boolean", default: true, hint: "Turn OFF if the hero image already contains all the needed text and details — e.g. a seasonal flyer or announcement graphic. When off, the image fills the hero at natural size with no headline, tagline, or buttons overlaid." }
+              - { label: "Event Link URL", name: "event_url", widget: "string", required: false, hint: "Optional. When Show Hero Text is OFF (flyer mode), this links the flyer to the event page and shows a 'Learn More' button below it. Leave blank for a non-event hero. Example: /events/12th-anniversary.html" }
           - label: "About Section"
             name: "about"
             widget: "object"
