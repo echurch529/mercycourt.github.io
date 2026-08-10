@@ -1,5 +1,15 @@
 ---
 permalink: "/blog.html"
+hero:
+  image: /assets/images/2026/community-outreach/outreach-community-event-02.jpg
+  image_alt: Mercy Court Community
+  headline: Welcome to
+  headline_highlight: Mercy Court Blog
+  tagline: We continue to make an impact in Baltimore through outreach, food drives, and neighborhood partnerships.
+section:
+  heading: "News &"
+  heading_highlight: Updates
+  description: Stay connected with the latest from Mercy Court — stories, announcements, and articles that impact our community.
 ---
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -158,16 +168,16 @@ permalink: "/blog.html"
     <!-- Hero Banner -->
     <section class="relative h-[65vh] overflow-hidden" style="padding-top: 72px;">
         <div class="absolute inset-0">
-            <img loading="lazy" src="/assets/images/2026/community-outreach/outreach-community-event-02.jpg" alt="Mercy Court Community" class="w-full h-full object-cover" style="object-position: center 20%;">
+            <img loading="lazy" src="{{ hero.image }}" alt="{{ hero.image_alt }}" class="w-full h-full object-cover" style="object-position: center 20%;">
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
         </div>
         <div class="relative z-10 h-full flex items-center justify-center text-center px-6">
             <div class="max-w-4xl">
                 <h2 class="font-anton text-4xl md:text-5xl lg:text-7xl uppercase text-white tracking-tight leading-none mb-4">
-                    Welcome to<br><span class="text-brand-red">Mercy Court Blog</span>
+                    {{ hero.headline }}<br><span class="text-brand-red">{{ hero.headline_highlight }}</span>
                 </h2>
                 <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto">
-                    We continue to make an impact in Baltimore through outreach, food drives, and neighborhood partnerships.
+                    {{ hero.tagline }}
                 </p>
             </div>
         </div>
@@ -183,10 +193,10 @@ permalink: "/blog.html"
                     <span class="w-8 h-[2px] bg-brand-red"></span>
                 </div>
                 <h2 class="font-anton text-4xl md:text-4xl uppercase tracking-tight">
-                    News & <span class="text-brand-red">Updates</span>
+                    {{ section.heading | safe }} <span class="text-brand-red">{{ section.heading_highlight }}</span>
                 </h2>
                 <p class="text-gray-500 text-lg mt-3 max-w-xl mx-auto">
-                    Stay connected with the latest from Mercy Court — stories, announcements, and articles that impact our community.
+                    {{ section.description }}
                 </p>
             </div>
         </div>

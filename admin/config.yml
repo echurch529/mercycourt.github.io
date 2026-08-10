@@ -194,6 +194,36 @@ collections:
           - { label: "Volunteer Form Endpoint", name: "volunteer_form_endpoint", widget: "string", hint: "Formspree URL e.g. https://formspree.io/f/xxxxxxx" }
           - { label: "Grant/Anchor Section Body", name: "grant_body", widget: "text" }
 
+      - name: "blog"
+        label: "Blog"
+        file: "blog.njk"
+        fields:
+          - widget: note
+            name: "blog_guide"
+            label: "ℹ️ How the Blog Page Works"
+            hint: |
+              HERO — Edit the background image, headline, and tagline below. |
+              FEATURED POST — Automatically pulls the most recent post with "Featured Post" turned ON in the Blog Posts section. To change the featured article, go to Blog Posts, open the article you want to feature, and toggle "Featured Post" on (and turn it off on the old one). |
+              BLOG GRID — All published posts appear automatically in the grid — no manual editing required.
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Background Image Alt Text", name: "image_alt", widget: "string", hint: "Describe the image for screen readers — e.g. 'Mercy Court community outreach volunteers'" }
+              - { label: "Headline (first line)", name: "headline", widget: "string", hint: "e.g. Welcome to" }
+              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string", hint: "e.g. Mercy Court Blog" }
+              - { label: "Tagline", name: "tagline", widget: "string" }
+          - label: "Section Intro"
+            name: "section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading (first part)", name: "heading", widget: "string", hint: "The non-red part of the section heading, e.g. 'News &'" }
+              - { label: "Heading Highlight (red word)", name: "heading_highlight", widget: "string", hint: "e.g. Updates" }
+              - { label: "Description", name: "description", widget: "text" }
+
   - name: "ministries-pages"
     label: "Ministries"
     files:
