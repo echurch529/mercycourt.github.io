@@ -1,1 +1,19 @@
 https://www.mercycourt.org/* https://mercycourt.org/:splat 301
+
+# Redirect .html → clean URL (canonical enforcement)
+/contact.html /contact 301
+/about-us.html /about-us 301
+/blog.html /blog 301
+/plan-your-visit.html /plan-your-visit 301
+/give.html /give 301
+/watch-live.html /watch-live 301
+/community-impact.html /community-impact 301
+/mercy-kidz.html /mercy-kidz 301
+/ministries.html /ministries 301
+/tehillah-voices.html /tehillah-voices 301
+/events/12th-anniversary.html /events/12th-anniversary 301
+/events/one-bring-one.html /events/one-bring-one 301
+/mercy-kidz-registration.html /mercy-kidz-registration 301
+/one-bring-one.html /events/one-bring-one 301
+/one-bring-one /events/one-bring-one 301
+/pages/*.html /pages/:splat 301
