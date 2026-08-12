@@ -73,7 +73,7 @@ So take an honest inventory. What's the thing you'd struggle to let go of if you
 
 Abraham's obedience was followed by blessing. God reaffirmed His covenant and made good on every promise He had given, but the blessing came after the test of the heart, not before. The invitation is the same for us: reassess where your commitment actually stands, and let it be total.
 
-At Mercy Court, we believe families grow stronger when they grow committed together. [Join us for our next Family Weekend gathering](/events/12th-anniversary.html) or [visit us in Baltimore](/plan-your-visit) to take your next step.
+At Mercy Court, we believe families grow stronger when they grow committed together. [Join us for our next Family Weekend gathering](/events/12th-anniversary) or [visit us in Baltimore](/plan-your-visit) to take your next step.
 
 ## FREQUENTLY ASKED QUESTIONS (FAQ)
 
