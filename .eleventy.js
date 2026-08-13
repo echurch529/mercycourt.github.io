@@ -8,6 +8,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("admin");
 
   eleventyConfig.ignores.add("blog.html");
+  eleventyConfig.ignores.add("functions");
   eleventyConfig.ignores.add("sitemap.xml");
   eleventyConfig.ignores.add("blog-posts");
   eleventyConfig.ignores.add("node_modules");

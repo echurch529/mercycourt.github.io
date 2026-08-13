@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | RCCG Mercy Court</title>
+    <meta name="robots" content="noindex">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-red': '#D95A2B',
+                        'brand-dark': '#0A0A0A',
+                    },
+                    fontFamily: {
+                        'anton': ['Anton', 'sans-serif'],
+                        'lato': ['Lato', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-lato bg-brand-dark text-white min-h-screen flex flex-col">
+
+    <nav class="py-6 px-8">
+        <a href="/">
+            <img src="/assets/images/2026/branding/mercy-court-logo-white.png"
+                 alt="RCCG Mercy Court" class="h-10 w-auto">
+        </a>
+    </nav>
+
+    <main class="flex-1 flex flex-col items-center justify-center text-center px-6 py-20">
+        <p class="text-brand-red font-bold text-xs uppercase tracking-widest mb-6">404 — Page Not Found</p>
+        <h1 class="font-anton text-5xl md:text-7xl uppercase tracking-tight leading-none mb-6">
+            This Page<br>Doesn't Exist
+        </h1>
+        <p class="text-gray-400 text-lg max-w-md leading-relaxed mb-10">
+            It may have been moved, removed, or you followed an old link.<br>Let's get you back on track.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/"
+               class="bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm tracking-wide hover:bg-[#C04E25] transition">
+                Go to Homepage
+            </a>
+            <a href="/blog"
+               class="border border-white/30 text-white px-8 py-3 rounded-full font-bold uppercase text-sm tracking-wide hover:border-white transition">
+                Visit Blog
+            </a>
+        </div>
+    </main>
+
+    <footer class="py-6 text-center text-gray-600 text-xs">
+        &copy; RCCG Mercy Court &bull; 529 Walker Ave, Baltimore, MD
+    </footer>
+
+</body>
+</html>
