@@ -3,7 +3,7 @@ const { DateTime } = require("luxon");
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("CNAME");
-  eleventyConfig.addPassthroughCopy("_redirects");
+
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("admin");
 
@@ -23,12 +23,21 @@ module.exports = function(eleventyConfig) {
     api.getFilteredByGlob("src/blog-posts/*.md").sort((a, b) => b.date - a.date)
   );
 
+  eleventyConfig.addCollection("eventPages", (api) =>
+    api.getFilteredByGlob("events/*.html")
+      .sort((a, b) => new Date(b.data.date) - new Date(a.data.date))
+  );
+
   eleventyConfig.addFilter("postDate", (dateObj) =>
     DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("LLLL d, yyyy")
   );
 
   eleventyConfig.addFilter("isoDate", (dateObj) =>
     DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-MM-dd")
+  );
+
+  eleventyConfig.addFilter("whereData", (array, key, value) =>
+    (array || []).filter((item) => item.data[key] === value)
   );
 
   eleventyConfig.addFilter("where", (array, key, value) => {
