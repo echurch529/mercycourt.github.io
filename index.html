@@ -171,16 +171,16 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
                         <a href="/mercy-kidz" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">God's Heritage</a>
                     </div>
                 </div>
-                {%- set visibleEvents = eventsNav | where("visible", true) -%}
+                {%- set visibleEvents = collections.eventPages | whereData("visible", true) -%}
                 {% if visibleEvents | length %}
                 <div class="relative group">
-                    <a href="/events/{{ visibleEvents[0].slug }}" class="hover:text-brand-red transition cursor-pointer flex items-center gap-1">
+                    <a href="/events/{{ visibleEvents[0].data.slug }}" class="hover:text-brand-red transition cursor-pointer flex items-center gap-1">
                         Events
                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </a>
                     <div class="absolute top-full left-0 mt-2 bg-black/95 backdrop-blur-sm rounded-lg py-2 min-w-[180px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                         {% for event in visibleEvents %}
-                        <a href="/events/{{ event.slug }}" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">{{ event.label }}</a>
+                        <a href="/events/{{ event.data.slug }}" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">{{ event.data.nav_label }}</a>
                         {% endfor %}
                     </div>
                 </div>
@@ -210,9 +210,9 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
             </div>
             {% if visibleEvents | length %}
             <div>
-                <a href="/events/{{ visibleEvents[0].slug }}" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Events</a>
+                <a href="/events/{{ visibleEvents[0].data.slug }}" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Events</a>
                 {% for event in visibleEvents %}
-                <a href="/events/{{ event.slug }}" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">{{ event.label }}</a>
+                <a href="/events/{{ event.data.slug }}" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">{{ event.data.nav_label }}</a>
                 {% endfor %}
             </div>
             {% endif %}
