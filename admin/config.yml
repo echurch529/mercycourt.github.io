@@ -555,6 +555,9 @@ collections:
       - { label: "Hero Image Alt Text", name: "hero_image_alt", widget: "string", hint: "Describe the image for screen readers and image search — e.g. 'Open Bible on wooden table with morning light'" }
       - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Read Time (minutes)", name: "read_time", widget: "number", value_type: "int", default: 5 }
+      - { label: "Show Article Image", name: "show_article_image", widget: "boolean", default: false, hint: "Turn ON to show an article image. Alt text is required for the image to appear on the site." }
+      - { label: "Article Image", name: "article_image", widget: "image", required: false, hint: "Rename the file descriptively before uploading. Keep under 500KB — compress at squoosh.app. At 1024px+, floats right beside the text. Below 1024px, stacks above the article." }
+      - { label: "Article Image Alt Text", name: "article_image_alt", widget: "string", required: false, hint: "Required for the image to appear. Describe the image for screen readers — e.g. 'Pastor John praying with congregation'." }
       - { label: "Body", name: "body", widget: "markdown", hint: "Use ## for major sections, ### for FAQ sub-headings. Links: [link text](url) — never leave placeholder text. Numbered lists are for actual lists, not section headings." }
       - label: "Scripture References"
         name: "scripture_references"

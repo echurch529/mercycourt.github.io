@@ -907,6 +907,9 @@
       var readTime    = data.read_time;
       var heroImage   = resolveImage(props, data.hero_image);
       var scriptureRefs = data.scripture_references || [];
+      var showArticleImage = data.show_article_image;
+      var articleImage     = resolveImage(props, data.article_image);
+      var articleImageAlt  = data.article_image_alt || '';
 
       var dateStr = '';
       if (data.date) {
@@ -983,6 +986,23 @@
           )
         ),
 
+        /* Breadcrumb */
+        h('nav', { style: { background: '#fff', borderBottom: '1px solid #F3F4F6', padding: '10px 24px' } },
+          h('span', { style: { fontSize: '13px', color: '#9CA3AF' } }, 'Home'),
+          h('span', { style: { margin: '0 6px', color: '#D1D5DB' } }, '/'),
+          h('span', { style: { fontSize: '13px', color: '#9CA3AF' } }, 'Blog'),
+          h('span', { style: { margin: '0 6px', color: '#D1D5DB' } }, '/'),
+          h('span', { style: { fontSize: '13px', color: '#374151', fontWeight: 500 } }, title)
+        ),
+
+        /* Share row (preview only) */
+        h('div', { style: { background: '#fff', borderBottom: '1px solid #F3F4F6', padding: '8px 24px', display: 'flex', alignItems: 'center', gap: '12px' } },
+          h('span', { style: { fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.1em', color: '#9CA3AF' } }, 'Share'),
+          ['F','L','X','@','⎙'].map(function(s, i) {
+            return h('span', { key: i, style: { width: 36, height: 36, borderRadius: '50%', background: '#F9FAFB', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', color: '#9CA3AF' } }, s);
+          })
+        ),
+
         /* Meta bar */
         h('section', { style: { background: '#fff', padding: '40px 24px 16px' } },
           h('div', {
@@ -1002,6 +1022,10 @@
         /* Article body */
         h('article', { style: { background: '#fff', padding: '40px 24px' } },
           h('div', { style: { maxWidth: '768px', margin: '0 auto' } },
+            showArticleImage && articleImage && articleImageAlt && h('img', {
+              src: articleImage, alt: articleImageAlt,
+              style: { width: '100%', height: 'auto', borderRadius: '12px', marginBottom: '24px', boxShadow: '0 4px 16px rgba(0,0,0,.12)' }
+            }),
             h('div', { dangerouslySetInnerHTML: { __html: bodyHtml } }),
 
             /* Scripture references */
