@@ -1,7 +1,53 @@
 const { DateTime } = require("luxon");
+const markdownIt = require("markdown-it");
+
+const md = markdownIt({ html: true });
+
+function _escHtml(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function _escAttr(s){return String(s).replace(/"/g,"&quot;").replace(/'/g,"&#39;");}
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets");
+
+  // Pin markdown-it with html:true (Eleventy 2.0 default — explicit to guard future upgrades)
+  eleventyConfig.setLibrary("md", md);
+
+  // mc-components: replace <!--mc-*--> comment blocks with styled HTML
+  // Must run before any minification transform
+  eleventyConfig.addTransform("mc-components", function(content, outputPath) {
+    if (!outputPath || !outputPath.endsWith(".html")) return content;
+    if (!content.includes("<!--mc-")) return content;
+    content = content.replace(/<!--mc-callout\n({[^\n]+})\n-->/g, function(full, raw) {
+      try {
+        var f = JSON.parse(raw);
+        var style = /^(highlight|tip|important)$/.test(f.style) ? f.style : "highlight";
+        var label = f.title ? '<span class="mc-callout__label">' + _escHtml(f.title) + "</span>" : "";
+        var body = md.render(f.text || "");
+        return '<aside class="mc-callout mc-callout--' + style + '">' + label + body + "</aside>";
+      } catch(e) { return full; }
+    });
+    content = content.replace(/<!--mc-quote\n({[^\n]+})\n-->/g, function(full, raw) {
+      try {
+        var f = JSON.parse(raw);
+        var parts = [];
+        if (f.attribution) parts.push(_escHtml(f.attribution));
+        if (f.source) parts.push("<cite>" + _escHtml(f.source) + "</cite>");
+        var caption = parts.length ? "<figcaption>\u2014 " + parts.join(", ") + "</figcaption>" : "";
+        return '<figure class="mc-quote"><blockquote><p>' + _escHtml(f.text || "") + "</p></blockquote>" + caption + "</figure>";
+      } catch(e) { return full; }
+    });
+    content = content.replace(/<!--mc-ctabox\n({[^\n]+})\n-->/g, function(full, raw) {
+      try {
+        var f = JSON.parse(raw);
+        var target = (f.new_tab === true || f.new_tab === "true") ? ' target="_blank" rel="noopener noreferrer"' : "";
+        var body = md.render(f.text || "");
+        var btn = '<a href="' + _escAttr(f.button_url || "#") + '" class="mc-cta__btn"' + target + ">" + _escHtml(f.button_label || "") + "</a>";
+        return '<div class="mc-cta"><h3>' + _escHtml(f.heading || "") + "</h3>" + body + btn + "</div>";
+      } catch(e) { return full; }
+    });
+    return content;
+  });
+
   eleventyConfig.addPassthroughCopy("CNAME");
 
   eleventyConfig.addPassthroughCopy("robots.txt");

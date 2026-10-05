@@ -1,0 +1,96 @@
+/* ── Mercy Court custom editor components ─────────────────────────────────── */
+
+/* Contrast audit (WCAG AA, small text ≥ 4.5:1):
+   #B84A20 on #FFF8F5 ≈ 5.2:1 ✓   #15803D on #F0FDF4 ≈ 5.0:1 ✓
+   #2563EB on #EFF6FF ≈ 4.7:1 ✓   #fff on #B84A20 (CTA btn) ≈ 5.2:1 ✓ */
+
+/* Callout ------------------------------------------------------------------ */
+.mc-callout {
+  border-radius: .5rem;
+  padding: 1.25rem 1.5rem;
+  margin: 1.75rem 0;
+  border-left-width: 4px;
+  border-left-style: solid;
+}
+.mc-callout--highlight { background: #FFF8F5; border-left-color: #D95A2B; }
+.mc-callout--tip       { background: #F0FDF4; border-left-color: #16A34A; }
+.mc-callout--important { background: #EFF6FF; border-left-color: #2563EB; }
+.mc-callout__label {
+  display: block;
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  margin-bottom: .5rem;
+}
+.mc-callout--highlight .mc-callout__label { color: #B84A20; }
+.mc-callout--tip       .mc-callout__label { color: #15803D; }
+.mc-callout--important .mc-callout__label { color: #2563EB; }
+.mc-callout p          { color: #374151; font-size: 1rem; margin-bottom: .75rem; }
+.mc-callout p:last-child { margin-bottom: 0; }
+.mc-callout a          { color: inherit; text-decoration: underline; }
+.mc-callout strong     { color: #111827; }
+
+/* Quote -------------------------------------------------------------------- */
+.mc-quote {
+  margin: 2rem 0;
+  padding: 0;
+  border: none;
+}
+.mc-quote blockquote {
+  border-left: 4px solid #D95A2B;
+  padding: 1rem 1.5rem;
+  margin: 0;
+  background: #FFF8F5;
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.75rem;
+  color: #374151;
+  border-radius: 0 .5rem .5rem 0;
+}
+.mc-quote blockquote p { color: #374151; font-style: italic; margin-bottom: 0; font-size: 1.2rem; }
+.mc-quote figcaption {
+  font-size: .9rem;
+  color: #6B7280;
+  text-align: right;
+  margin-top: .5rem;
+  padding-right: .5rem;
+}
+
+/* CTA Box ------------------------------------------------------------------ */
+.mc-cta {
+  background: #0A0A0A;
+  border-radius: .75rem;
+  padding: 2rem;
+  margin: 2rem 0;
+  text-align: center;
+}
+.mc-cta h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: -.01em;
+  margin-top: 0;
+  margin-bottom: .75rem;
+  line-height: 1.2;
+}
+.mc-cta p { color: rgba(255,255,255,.85); font-size: 1rem; margin-bottom: 1.5rem; }
+.mc-cta p:last-of-type { margin-bottom: 1.5rem; }
+.mc-cta a  { color: #fff; }
+.mc-cta__btn {
+  display: inline-block;
+  background: #B84A20;
+  color: #fff !important;
+  padding: .75rem 2rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: .875rem;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  text-decoration: none !important;
+  transition: background .2s;
+}
+.mc-cta__btn:hover { background: #9D3D15; }
+.mc-cta__btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+@media print { .mc-cta__btn { display: none !important; } }

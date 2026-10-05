@@ -813,6 +813,147 @@
     }
   }
 
+
+  /* ── Custom editor components ─────────────────────────────────────────────
+     Three components available in the Body "+" menu:
+       mc-callout  — tinted aside with left-border accent
+       mc-quote    — styled blockquote with attribution
+       mc-ctabox   — dark branded call-to-action box
+     Storage: <!--mc-<type>\n{JSON}\n-->  (HTML comment, JSON-encoded fields)
+     Rendering: Eleventy mc-components transform in .eleventy.js
+     ────────────────────────────────────────────────────────────────────── */
+
+  window.CMS.registerPreviewStyle('.mc-callout{border-radius:.5rem;padding:1.25rem 1.5rem;margin:1.75rem 0;border-left-width:4px;border-left-style:solid}\n.mc-callout--highlight{background:#FFF8F5;border-left-color:#D95A2B}\n.mc-callout--tip{background:#F0FDF4;border-left-color:#16A34A}\n.mc-callout--important{background:#EFF6FF;border-left-color:#2563EB}\n.mc-callout__label{display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.5rem}\n.mc-callout--highlight .mc-callout__label{color:#B84A20}\n.mc-callout--tip .mc-callout__label{color:#15803D}\n.mc-callout--important .mc-callout__label{color:#2563EB}\n.mc-callout p{color:#374151;font-size:1rem;margin-bottom:.75rem}\n.mc-callout p:last-child{margin-bottom:0}\n.mc-quote{margin:2rem 0;padding:0;border:none}\n.mc-quote blockquote{border-left:4px solid #D95A2B;padding:1rem 1.5rem;margin:0;background:#FFF8F5;font-style:italic;font-size:1.2rem;line-height:1.75rem;color:#374151;border-radius:0 .5rem .5rem 0}\n.mc-quote blockquote p{color:#374151;font-style:italic;margin-bottom:0;font-size:1.2rem}\n.mc-quote figcaption{font-size:.9rem;color:#6B7280;text-align:right;margin-top:.5rem;padding-right:.5rem}\n.mc-cta{background:#0A0A0A;border-radius:.75rem;padding:2rem;margin:2rem 0;text-align:center}\n.mc-cta h3{font-family:Anton,sans-serif;font-size:1.5rem;text-transform:uppercase;color:#fff;letter-spacing:-.01em;margin-top:0;margin-bottom:.75rem}\n.mc-cta p{color:rgba(255,255,255,.85);font-size:1rem;margin-bottom:1.5rem}\n.mc-cta__btn{display:inline-block;background:#B84A20;color:#fff!important;padding:.75rem 2rem;border-radius:9999px;font-weight:700;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;text-decoration:none!important;transition:background .2s}\n.mc-cta__btn:hover{background:#9D3D15}\n.mc-cta__btn:focus-visible{outline:3px solid #fff;outline-offset:3px}\n@media print{.mc-cta__btn{display:none!important}}');
+
+  /* ── helpers ── */
+  function _ph(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function _toBlock(type, fields) {
+    return "<!--mc-" + type + "\n" + JSON.stringify(fields) + "\n-->";
+  }
+  function _fromBlock(match) {
+    try { return JSON.parse(match[1]); } catch(e) { return {}; }
+  }
+
+  /* ── Callout ── */
+  window.CMS.registerEditorComponent({
+    id: "mc-callout",
+    label: "Callout",
+    hint: "A highlighted box for tips, notes or warnings. Appears inline in the article.",
+    fields: [
+      {
+        name: "style", label: "Style", widget: "select",
+        hint: "Highlight (orange), Tip (green), or Important (blue).",
+        options: [
+          { label: "Highlight", value: "highlight" },
+          { label: "Tip", value: "tip" },
+          { label: "Important", value: "important" }
+        ],
+        default: "highlight"
+      },
+      {
+        name: "title", label: "Title (optional)", widget: "string", required: false,
+        hint: "Short uppercase label shown above the text (e.g. \"Note\" or \"Did you know?\"). Leave blank for no label."
+      },
+      {
+        name: "text", label: "Text", widget: "text",
+        hint: "Supports **bold**, _italic_, and [links](/url). Use a blank line between paragraphs."
+      }
+    ],
+    pattern: /<!--mc-callout\n({[^\n]+})\n-->/,
+    fromBlock: function(m) { return _fromBlock(m); },
+    toBlock: function(f) {
+      return _toBlock("callout", { style: f.style || "highlight", title: f.title || "", text: f.text || "" });
+    },
+    toPreview: function(f) {
+      var style = f.style || "highlight";
+      var bgColors    = { highlight: "#FFF8F5", tip: "#F0FDF4", important: "#EFF6FF" };
+      var borderColors = { highlight: "#D95A2B", tip: "#16A34A", important: "#2563EB" };
+      var labelColors  = { highlight: "#B84A20", tip: "#15803D", important: "#2563EB" };
+      var label = f.title ? "<span style=\"display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.5rem;color:" + labelColors[style] + "\">" + _ph(f.title) + "</span>" : "";
+      var body = mdToHtml(f.text || "");
+      return "<aside style=\"border-radius:.5rem;padding:1.25rem 1.5rem;margin:1.75rem 0;border-left:4px solid " + borderColors[style] + ";background:" + bgColors[style] + "\">" + label + "<p style=\"color:#374151;margin:0;\">" + body + "</p></aside>";
+    }
+  });
+
+  /* ── Quote ── */
+  window.CMS.registerEditorComponent({
+    id: "mc-quote",
+    label: "Quote",
+    hint: "A styled pull-quote with optional attribution — for a pastor\u2019s words, a scripture, or any stand-out quote.",
+    fields: [
+      {
+        name: "text", label: "Quote text", widget: "text",
+        hint: "The quoted words, without surrounding quotation marks."
+      },
+      {
+        name: "attribution", label: "Attribution (optional)", widget: "string", required: false,
+        hint: "Name of the person quoted (e.g. \"Pastor John Itakpe\")."
+      },
+      {
+        name: "source", label: "Source (optional)", widget: "string", required: false,
+        hint: "Where or when (e.g. \"Sunday service, Oct 2026\")."
+      }
+    ],
+    pattern: /<!--mc-quote\n({[^\n]+})\n-->/,
+    fromBlock: function(m) { return _fromBlock(m); },
+    toBlock: function(f) {
+      return _toBlock("quote", { text: f.text || "", attribution: f.attribution || "", source: f.source || "" });
+    },
+    toPreview: function(f) {
+      var cap = "";
+      if (f.attribution || f.source) {
+        cap = "<figcaption style=\"font-size:.9rem;color:#6B7280;text-align:right;margin-top:.5rem;\">\u2014 " + _ph(f.attribution || "") + (f.source ? ", <cite>" + _ph(f.source) + "</cite>" : "") + "</figcaption>";
+      }
+      return "<figure style=\"margin:2rem 0;padding:0;border:none\"><blockquote style=\"border-left:4px solid #D95A2B;padding:1rem 1.5rem;margin:0;background:#FFF8F5;font-style:italic;font-size:1.2rem;line-height:1.75rem;color:#374151;border-radius:0 .5rem .5rem 0;\"><p style=\"color:#374151;font-style:italic;margin:0;\">" + _ph(f.text || "") + "</p></blockquote>" + cap + "</figure>";
+    }
+  });
+
+  /* ── CTA Box ── */
+  window.CMS.registerEditorComponent({
+    id: "mc-ctabox",
+    label: "CTA Box",
+    hint: "A dark branded call-to-action box with a button. Full width of the article column.",
+    fields: [
+      {
+        name: "heading", label: "Heading", widget: "string",
+        hint: "Short uppercase heading (e.g. \"Join Us This Sunday\")."
+      },
+      {
+        name: "text", label: "Body text", widget: "text",
+        hint: "Supporting text. Supports **bold**, _italic_, and [links](/url)."
+      },
+      {
+        name: "button_label", label: "Button label", widget: "string",
+        hint: "Text on the button (e.g. \"Plan Your Visit\")."
+      },
+      {
+        name: "button_url", label: "Button URL", widget: "string",
+        hint: "Where the button goes. Use /contact for internal links, or a full https:// URL for external ones."
+      },
+      {
+        name: "new_tab", label: "Open in new tab?", widget: "boolean",
+        default: false,
+        hint: "Turn on for external links. Leave off for links within mercycourt.org."
+      }
+    ],
+    pattern: /<!--mc-ctabox\n({[^\n]+})\n-->/,
+    fromBlock: function(m) { return _fromBlock(m); },
+    toBlock: function(f) {
+      return _toBlock("ctabox", {
+        heading: f.heading || "",
+        text: f.text || "",
+        button_label: f.button_label || "",
+        button_url: f.button_url || "",
+        new_tab: f.new_tab === true || f.new_tab === "true"
+      });
+    },
+    toPreview: function(f) {
+      var target = f.new_tab ? " target=\"_blank\" rel=\"noopener noreferrer\"" : "";
+      var body = mdToHtml(f.text || "");
+      return "<div style=\"background:#0A0A0A;border-radius:.75rem;padding:2rem;margin:2rem 0;text-align:center;\"><h3 style=\"font-family:Anton,sans-serif;font-size:1.5rem;text-transform:uppercase;color:#fff;margin-top:0;margin-bottom:.75rem;\">" + _ph(f.heading || "") + "</h3><p style=\"color:rgba(255,255,255,.85);margin-bottom:1.5rem;\">" + body + "</p><a href=\"" + _ph(f.button_url || "#") + "\" style=\"display:inline-block;background:#B84A20;color:#fff;padding:.75rem 2rem;border-radius:9999px;font-weight:700;font-size:.875rem;text-transform:uppercase;text-decoration:none;\"" + target + ">" + _ph(f.button_label || "") + "</a></div>";
+    }
+  });
+
   window.CMS.registerPreviewTemplate('events', EventPagePreview);
 
   /* ── Inline markdown → HTML converter for BlogPostPreview ──────────
