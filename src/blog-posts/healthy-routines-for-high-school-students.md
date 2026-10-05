@@ -18,6 +18,9 @@ excerpt: "Balancing a heavy course load, a job, and everything else isn't just a
   school senior David Arowolo shares what actually helps: protecting sleep,
   changing where you study, and seven habits that hold up under pressure."
 read_time: 5
+show_article_image: true
+article_image: /assets/images/cms-uploads/david-arowolo-headshot.jpeg
+article_image_alt: David Arowolo headshot
 scripture_references:
   - "Reference: Covey, S. (2014). The 7 Habits of Highly Effective Teens. Simon
     & Schuster."
