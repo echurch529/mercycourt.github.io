@@ -834,6 +834,50 @@
     try { return JSON.parse(match[1]); } catch(e) { return {}; }
   }
 
+  /* renderMcComponent — mirrors the Eleventy mc-components transform.
+     Used by toPreview (component widget) and renderBodyWithComponents (full post preview).
+     Any change here must also be made in .eleventy.js. */
+  function renderMcComponent(type, f) {
+    if (type === 'callout') {
+      var style = /^(highlight|tip|important)$/.test(f.style) ? f.style : 'highlight';
+      var label = f.title ? '<span class="mc-callout__label">' + _ph(f.title) + '</span>' : '';
+      var body = mdToHtml(f.text || '');
+      return '<aside class="mc-callout mc-callout--' + style + '">' + label + body + '</aside>';
+    }
+    if (type === 'quote') {
+      var parts = [];
+      if (f.attribution) parts.push(_ph(f.attribution));
+      if (f.source) parts.push('<cite>' + _ph(f.source) + '</cite>');
+      var cap = parts.length ? '<figcaption>— ' + parts.join(', ') + '</figcaption>' : '';
+      return '<figure class="mc-quote"><blockquote><p>' + _ph(f.text || '') + '</p></blockquote>' + cap + '</figure>';
+    }
+    if (type === 'ctabox') {
+      var target = (f.new_tab === true || f.new_tab === 'true') ? ' target="_blank" rel="noopener noreferrer"' : '';
+      var body = mdToHtml(f.text || '');
+      var btn = '<a href="' + _ph(f.button_url || '#') + '" class="mc-cta__btn"' + target + '>' + _ph(f.button_label || '') + '</a>';
+      return '<div class="mc-cta"><h3>' + _ph(f.heading || '') + '</h3>' + body + btn + '</div>';
+    }
+    return '';
+  }
+
+  /* renderBodyWithComponents — splits markdown at <!--mc-*--> block boundaries,
+     runs mdToHtml on prose sections and renderMcComponent on component blocks. */
+  function renderBodyWithComponents(md) {
+    if (!md) return '';
+    var MC_RE = /<!--mc-(callout|quote|ctabox)\n({[^\n]+})\n-->/g;
+    var parts = [], lastIndex = 0, m;
+    MC_RE.lastIndex = 0;
+    while ((m = MC_RE.exec(md)) !== null) {
+      if (m.index > lastIndex) parts.push({ k: 'md', t: md.slice(lastIndex, m.index) });
+      try { parts.push({ k: 'mc', type: m[1], fields: JSON.parse(m[2]) }); } catch(e) {}
+      lastIndex = m.index + m[0].length;
+    }
+    if (lastIndex < md.length) parts.push({ k: 'md', t: md.slice(lastIndex) });
+    return parts.map(function(p) {
+      return p.k === 'mc' ? renderMcComponent(p.type, p.fields) : mdToHtml(p.t);
+    }).join('');
+  }
+
   /* ── Callout ── */
   window.CMS.registerEditorComponent({
     id: "mc-callout",
@@ -851,12 +895,12 @@
         default: "highlight"
       },
       {
-        name: "title", label: "Title (optional)", widget: "string", required: false,
+        name: "title", label: "Title", widget: "string", required: false,
         hint: "Short uppercase label shown above the text (e.g. \"Note\" or \"Did you know?\"). Leave blank for no label."
       },
       {
         name: "text", label: "Text", widget: "text",
-        hint: "Supports **bold**, _italic_, and [links](/url). Use a blank line between paragraphs."
+        hint: "Type two asterisks around words for bold, underscores for italic, and [link text](/url) for links. Leave a blank line between paragraphs."
       }
     ],
     pattern: /<!--mc-callout\n({[^\n]+})\n-->/,
@@ -864,16 +908,9 @@
     toBlock: function(f) {
       return _toBlock("callout", { style: f.style || "highlight", title: f.title || "", text: f.text || "" });
     },
-    toPreview: function(f) {
-      var style = f.style || "highlight";
-      var bgColors    = { highlight: "#FFF8F5", tip: "#F0FDF4", important: "#EFF6FF" };
-      var borderColors = { highlight: "#D95A2B", tip: "#16A34A", important: "#2563EB" };
-      var labelColors  = { highlight: "#B84A20", tip: "#15803D", important: "#2563EB" };
-      var label = f.title ? "<span style=\"display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.5rem;color:" + labelColors[style] + "\">" + _ph(f.title) + "</span>" : "";
-      var body = mdToHtml(f.text || "");
-      return "<aside style=\"border-radius:.5rem;padding:1.25rem 1.5rem;margin:1.75rem 0;border-left:4px solid " + borderColors[style] + ";background:" + bgColors[style] + "\">" + label + "<p style=\"color:#374151;margin:0;\">" + body + "</p></aside>";
-    }
+    toPreview: function(f) { return renderMcComponent('callout', f); }
   });
+
 
   /* ── Quote ── */
   window.CMS.registerEditorComponent({
@@ -899,14 +936,9 @@
     toBlock: function(f) {
       return _toBlock("quote", { text: f.text || "", attribution: f.attribution || "", source: f.source || "" });
     },
-    toPreview: function(f) {
-      var cap = "";
-      if (f.attribution || f.source) {
-        cap = "<figcaption style=\"font-size:.9rem;color:#6B7280;text-align:right;margin-top:.5rem;\">\u2014 " + _ph(f.attribution || "") + (f.source ? ", <cite>" + _ph(f.source) + "</cite>" : "") + "</figcaption>";
-      }
-      return "<figure style=\"margin:2rem 0;padding:0;border:none\"><blockquote style=\"border-left:4px solid #D95A2B;padding:1rem 1.5rem;margin:0;background:#FFF8F5;font-style:italic;font-size:1.2rem;line-height:1.75rem;color:#374151;border-radius:0 .5rem .5rem 0;\"><p style=\"color:#374151;font-style:italic;margin:0;\">" + _ph(f.text || "") + "</p></blockquote>" + cap + "</figure>";
-    }
+    toPreview: function(f) { return renderMcComponent('quote', f); }
   });
+
 
   /* ── CTA Box ── */
   window.CMS.registerEditorComponent({
@@ -920,7 +952,7 @@
       },
       {
         name: "text", label: "Body text", widget: "text",
-        hint: "Supporting text. Supports **bold**, _italic_, and [links](/url)."
+        hint: "Type two asterisks around words for bold, underscores for italic, and [link text](/url) for links. Leave a blank line between paragraphs."
       },
       {
         name: "button_label", label: "Button label", widget: "string",
@@ -947,12 +979,9 @@
         new_tab: f.new_tab === true || f.new_tab === "true"
       });
     },
-    toPreview: function(f) {
-      var target = f.new_tab ? " target=\"_blank\" rel=\"noopener noreferrer\"" : "";
-      var body = mdToHtml(f.text || "");
-      return "<div style=\"background:#0A0A0A;border-radius:.75rem;padding:2rem;margin:2rem 0;text-align:center;\"><h3 style=\"font-family:Anton,sans-serif;font-size:1.5rem;text-transform:uppercase;color:#fff;margin-top:0;margin-bottom:.75rem;\">" + _ph(f.heading || "") + "</h3><p style=\"color:rgba(255,255,255,.85);margin-bottom:1.5rem;\">" + body + "</p><a href=\"" + _ph(f.button_url || "#") + "\" style=\"display:inline-block;background:#B84A20;color:#fff;padding:.75rem 2rem;border-radius:9999px;font-weight:700;font-size:.875rem;text-transform:uppercase;text-decoration:none;\"" + target + ">" + _ph(f.button_label || "") + "</a></div>";
-    }
+    toPreview: function(f) { return renderMcComponent('ctabox', f); }
   });
+
 
   window.CMS.registerPreviewTemplate('events', EventPagePreview);
 
@@ -1041,7 +1070,7 @@
       if (!rawData) return h('div', { style: { padding: '40px', fontFamily: BODY, color: '#888' } }, 'Loading preview…');
 
       var data        = rawData.toJS ? rawData.toJS() : {};
-      var bodyHtml    = mdToHtml(data.body || '');
+      var bodyHtml    = renderBodyWithComponents(data.body || '');
       var title       = data.title    || '';
       var category    = data.category || '';
       var author      = data.author   || '';

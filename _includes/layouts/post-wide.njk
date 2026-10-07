@@ -297,30 +297,24 @@ article .cta-box {
         </div>
     </nav>
 
-{%- set _shareUrl = "https://mercycourt.org" + (page.url | cleanUrl) -%}
-{%- set _shareFb = "https://www.facebook.com/sharer/sharer.php?u=" + (_shareUrl | urlencode) -%}
-{%- set _shareLi = "https://www.linkedin.com/sharing/share-offsite/?url=" + (_shareUrl | urlencode) -%}
-{%- set _shareX = "https://x.com/intent/post?text=" + (title | urlencode) + "%20" + (_shareUrl | urlencode) -%}
-{%- set _shareEmail = "mailto:?subject=" + (title | urlencode) + "&body=" + (_shareUrl | urlencode) -%}
-
-        <!-- Share Icons — Mobile (shown below breadcrumb on <768px) -->
+    <!-- Share Icons — Mobile (shown below breadcrumb on <768px) -->
     <div class="post-share-mobile md:hidden bg-white px-6 py-3 border-b border-gray-100">
         <div class="container mx-auto max-w-7xl flex items-center gap-3">
             <span class="text-xs font-bold uppercase tracking-widest text-gray-400 shrink-0">Share</span>
                     <!-- Facebook -->
-                    <a href="{{ _shareFb }}" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
+                    <a href="#" data-share="facebook" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                     </a>
                     <!-- LinkedIn -->
-                    <a href="{{ _shareLi }}" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
+                    <a href="#" data-share="linkedin" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                     </a>
                     <!-- X -->
-                    <a href="{{ _shareX }}" target="_blank" rel="noopener noreferrer" aria-label="Share on X" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
+                    <a href="#" data-share="x" target="_blank" rel="noopener noreferrer" aria-label="Share on X" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.741l7.73-8.835L1.254 2.25H8.08l4.261 5.632 5.903-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
                     <!-- Email -->
-                    <a href="{{ _shareEmail }}" aria-label="Share via Email" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
+                    <a href="#" data-share="email" aria-label="Share via Email" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     </a>
                     <!-- Print -->
@@ -339,19 +333,19 @@ article .cta-box {
                 <div class="post-share-col hidden md:flex flex-col items-center gap-3 pt-1" style="width:44px; position:sticky; top:96px; flex-shrink:0;">
                     <span class="text-xs font-bold uppercase tracking-widest text-gray-400" style="writing-mode:vertical-rl; transform:rotate(180deg); letter-spacing:.15em; margin-bottom:4px;">Share</span>
                     <!-- Facebook -->
-                    <a href="{{ _shareFb }}" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
+                    <a href="#" data-share="facebook" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                     </a>
                     <!-- LinkedIn -->
-                    <a href="{{ _shareLi }}" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
+                    <a href="#" data-share="linkedin" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                     </a>
                     <!-- X -->
-                    <a href="{{ _shareX }}" target="_blank" rel="noopener noreferrer" aria-label="Share on X" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
+                    <a href="#" data-share="x" target="_blank" rel="noopener noreferrer" aria-label="Share on X" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.741l7.73-8.835L1.254 2.25H8.08l4.261 5.632 5.903-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
                     <!-- Email -->
-                    <a href="{{ _shareEmail }}" aria-label="Share via Email" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
+                    <a href="#" data-share="email" aria-label="Share via Email" class="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-[#D95A2B] hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#D95A2B] focus:ring-offset-1">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     </a>
                     <!-- Print -->
@@ -406,7 +400,7 @@ article .cta-box {
 
                     {% if show_article_image and article_image and article_image_alt %}
                     <div class="rounded-xl overflow-hidden shadow-lg">
-                        <img loading="lazy" src="{{ article_image }}" alt="{{ article_image_alt }}" class="w-full h-auto">
+                        <img src="{{ article_image }}" alt="{{ article_image_alt }}" width="431" height="301" loading="eager" class="w-full" style="aspect-ratio:431/301;object-fit:cover;">
                     </div>
                     {% elif sidebar_image %}
                     <div class="rounded-xl overflow-hidden shadow-lg">
@@ -713,5 +707,7 @@ article .cta-box {
             if (e.key === 'Escape') closeGivingModal();
         });
     </script>
+    <script id="post-share-data" type="application/json">{"url":"https://mercycourt.org{{ page.url | cleanUrl }}","title":{{ title | dump | safe }}}</script>
+    <script>(function(){try{var d=JSON.parse(document.getElementById('post-share-data').textContent);var u=encodeURIComponent(d.url),t=encodeURIComponent(d.title);document.querySelectorAll('[data-share]').forEach(function(el){var s=el.getAttribute('data-share'),h;if(s==='facebook')h='https://www.facebook.com/sharer/sharer.php?u='+u;else if(s==='linkedin')h='https://www.linkedin.com/sharing/share-offsite/?url='+u;else if(s==='x')h='https://x.com/intent/post?text='+t+'%20'+u;else if(s==='email')h='mailto:?subject='+t+'&body='+u;if(h)el.setAttribute('href',h);});} catch(e){}})();</script>
 </body>
 </html>
