@@ -105,6 +105,8 @@ module.exports = function(eleventyConfig) {
     (url || "").replace(/\.html$/, "") || "/"
   );
 
+  eleventyConfig.addFilter("urlencode", s => encodeURIComponent(String(s)));
+
   // Build-time linter: warns on common blog post authoring mistakes.
   // Warnings only — never fails the build or modifies output.
   eleventyConfig.addTransform("blog-post-lint", function(content, outputPath) {
