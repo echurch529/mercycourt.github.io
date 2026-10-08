@@ -92,6 +92,14 @@ One thing that's worked consistently for me: when I need to actually focus, I do
 
 I want to be straightforward here: during my time as a Senate page, sleep was the first thing to go, and it cost me. I don't say that to sound impressive — I say it because it wasn't sustainable, and I don't think it's supposed to be. Whatever else you cut from your schedule, going to bed at a real time has to be close to the last thing you sacrifice. You cannot out-hustle a sleep deficit. Your brain, your mood, and honestly your ability to keep doing everything else you're trying to do all run on it.
 
+<!--mc-callout
+{"style":"highlight","title":"TIP:","text":"The CDC recommends teenagers get 8 to 10 hours a night. Most high schoolers I know — myself included during that stretch — are running on five or six. You feel it not in a dramatic way, but in the slow erosion of focus, patience, and the ability to care about anything."}
+-->
+
+<!--mc-ctabox
+{"heading":"Food pantry","text":"Managing a packed schedule is hard enough without worrying about where your next meal is coming from. If you're a student facing food insecurity, Mercy Court's food pantry is here for you — no questions asked.","button_label":"Food Pantry for You","button_url":"https://mercycourt.org/community-impact","new_tab":false}
+-->
+
 ## There Is No Perfect Formula for Managing a Heavy Schedule
 
 Here's the part I want to be honest about: there is no formula. Not from me, not from any list, not from any book. What worked for me might not work for you, and what works for your friend who has a completely different schedule, different responsibilities, and a different brain might not work for either of us. Take everything here with a grain of salt. The goal isn't to copy a system perfectly. It's to notice what's actually sustainable for your life and adjust as you go.
@@ -100,12 +108,16 @@ Here's the part I want to be honest about: there is no formula. Not from me, not
 
 Freshman year at Eastern Tech, every student was required to read *The 7 Habits of Highly Effective Teens* by Sean Covey. Most of us groaned about it at the time. But years later, pieces of it are still the framework a lot of us quietly fall back on when things get overwhelming. In that spirit, here are seven habits I've seen actually hold up under pressure, in students juggling far more than a "normal" high school workload:
 
-1. **Be proactive about your schedule:** don't just react to deadlines as they hit you; build the week in advance.
-2. **Start with the end in mind:** know why you're doing something before you're three hours deep in doing it.
-3. **Put first things first:** do the hard, important thing before the easy, distracting thing.
-4. **Think win-win:** in group work, leadership, and relationships, look for outcomes that don't require someone else to lose.
-5. **Seek to understand before being understood:** especially with teachers, parents, and teammates when things get stressful.
-6. **Synergize:** the people around you — mentors, peers, family — are a resource, not a distraction from your goals.
-7. **Sharpen the saw:** rest, sleep, and recovery aren't the reward for hard work; they're what makes the hard work possible.
+1. **Be proactive about your schedule:** don't just react to deadlines as they hit you; build the week in advance. Spending 10 minutes on Sunday mapping out the week ahead is the highest-return habit I've found — it turns a pile of stress into a list you can actually work through.
+2. **Start with the end in mind:** know why you're doing something before you're three hours deep in doing it. This is especially useful for long projects — if you can't state the goal in one sentence, you're not ready to start.
+3. **Put first things first:** do the hard, important thing before the easy, distracting thing. The email, the group chat, the easy assignment — they'll still be there after you've done the thing you've been avoiding.
+4. **Think win-win:** in group work, leadership, and relationships, look for outcomes that don't require someone else to lose. This one took me a while. Competition is real, but the people around you are more often allies than opponents.
+5. **Seek to understand before being understood:** especially with teachers, parents, and teammates when things get stressful. Most conflicts I've seen escalate because everyone's talking and nobody's actually listening.
+6. **Synergize:** the people around you — mentors, peers, family — are a resource, not a distraction from your goals. I would not have made it through the Senate page program without leaning on the 29 other students around me.
+7. **Sharpen the saw:** rest, sleep, and recovery aren't the reward for hard work; they're what makes the hard work possible. If you find yourself grinding harder and getting less done, this is almost always what's missing.
 
 None of this is a guarantee. I'm still figuring it out in real time, right alongside you. But if there's one thing I'd want a fellow student to take from this, it's that the exhaustion you might be feeling right now isn't a sign that something's wrong with you; it's a sign that the demands on our generation have genuinely shifted. Building even one or two honest routines, and giving yourself grace on the days they fall apart, is enough to start.
+
+<!--mc-ctabox
+{"heading":"JOIN A COMMUNITY THAT ROOTS FOR YOU","text":"At Mercy Court, we believe in equipping young people with the tools to thrive. If this resonated with you, explore more student resources and youth programming — and join our community at","button_label":"LET'S CONNECT WITH YOU","button_url":"https://mercycourt.org/contact","new_tab":false}
+-->
