@@ -462,7 +462,9 @@
                 PLAN MY VISIT
             </button>
             {% endif %}
+            {% if status != "past" %}
             <p class="text-white/80 text-sm mt-6">It takes less than a minute. Our team will make sure you are welcomed.</p>
+            {% endif %}
         </div>
     </section>
     {% endif %}
