@@ -84,7 +84,7 @@ eleventyExcludeFromCollections: true
                 <a href="/events/{{ event.data.slug }}" class="group flex flex-col rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow duration-300">
                     {% if cardImg %}
                     <div class="aspect-video overflow-hidden bg-gray-100">
-                        <img loading="lazy" src="{{ cardImg }}" alt="{{ event.data.hero.image_alt | default(event.data.nav_label) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img loading="lazy" src="{{ cardImg }}" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                     {% else %}
                     <div class="aspect-video bg-brand-dark flex items-center justify-center">
@@ -139,7 +139,7 @@ eleventyExcludeFromCollections: true
                 <a href="/events/{{ event.data.slug }}" class="group flex flex-col rounded-2xl overflow-hidden border border-gray-200 bg-white hover:shadow-lg transition-shadow duration-300">
                     {% if cardImg %}
                     <div class="aspect-video overflow-hidden bg-gray-100">
-                        <img loading="lazy" src="{{ cardImg }}" alt="{{ event.data.hero.image_alt | default(event.data.nav_label) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100 transition-opacity">
+                        <img loading="lazy" src="{{ cardImg }}" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100 transition-opacity">
                     </div>
                     {% else %}
                     <div class="aspect-video bg-gray-200 flex items-center justify-center">

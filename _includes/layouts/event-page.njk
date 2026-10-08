@@ -339,9 +339,11 @@
             {% for paragraph in welcome.body %}
             <p class="text-gray-600 text-lg leading-relaxed mb-6">{{ paragraph }}</p>
             {% endfor %}
+            {% if status != "past" %}
             <button onclick="openVisitModal()" class="text-white px-12 py-4 rounded-full font-bold uppercase text-sm tracking-wide cursor-pointer border-0 transition-all mt-8" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
                 PLAN MY VISIT
             </button>
+            {% endif %}
         </div>
     </section>
     {% endif %}
@@ -455,9 +457,11 @@
             {% if logistics.custom_note %}
             <p class="text-white/90 text-base mb-8">{{ logistics.custom_note }}</p>
             {% endif %}
+            {% if status != "past" %}
             <button onclick="openVisitModal()" class="bg-white font-bold uppercase text-sm px-14 py-5 rounded-full tracking-wide cursor-pointer transition hover:bg-gray-100 border-0" style="color: #E8541A;">
                 PLAN MY VISIT
             </button>
+            {% endif %}
             <p class="text-white/80 text-sm mt-6">It takes less than a minute. Our team will make sure you are welcomed.</p>
         </div>
     </section>
@@ -486,9 +490,11 @@
             {% for paragraph in cta_final.body %}
             <p class="text-gray-600 text-lg leading-relaxed mb-5">{{ paragraph }}</p>
             {% endfor %}
+            {% if status != "past" %}
             <button onclick="openVisitModal()" class="text-white px-14 py-5 rounded-full font-bold uppercase text-sm tracking-wide cursor-pointer border-0 transition-all mt-9" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
                 {{ cta_final.button_text if cta_final.button_text else "PLAN MY VISIT" }}
             </button>
+            {% endif %}
         </div>
     </section>
     {% endif %}
