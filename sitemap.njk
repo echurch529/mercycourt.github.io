@@ -61,24 +61,25 @@ permalink: "/sitemap.xml"
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <!-- Blog posts (auto-generated) -->
+  <!-- Blog posts (auto-generated; posts with draft: true are excluded) -->
   {%- for post in collections.posts %}
+  {%- if not post.data.draft %}
   <url>
     <loc>https://mercycourt.org{{ post.url | cleanUrl }}</loc>
     <lastmod>{{ post.date | isoDate }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  {%- endif %}
   {%- endfor %}
-  <!-- Events -->
+  <!-- Events (auto-generated; only pages with visible: true) -->
+  {%- set visibleEvents = collections.eventPages | whereData("visible", true) %}
+  {%- for event in visibleEvents %}
   <url>
-    <loc>https://mercycourt.org/events/12th-anniversary</loc>
+    <loc>https://mercycourt.org/events/{{ event.data.slug }}</loc>
+    <lastmod>{{ event.date | isoDate }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://mercycourt.org/events/one-bring-one</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
+  {%- endfor %}
 </urlset>
