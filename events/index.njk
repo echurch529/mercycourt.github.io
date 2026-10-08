@@ -3,21 +3,49 @@ templateEngineOverride: njk
 layout: false
 permalink: events/index.html
 eleventyExcludeFromCollections: true
+title: "Events | RCCG Mercy Court"
+seo_description: "Upcoming and past events at RCCG Mercy Court in Baltimore, MD. Join us for services, campaigns, outreach and celebrations."
+og_image: "https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-01.jpg"
+hero:
+  badge: "RCCG Mercy Court"
+  title: "Events"
+  subheading: "Upcoming campaigns, celebrations, and community gatherings."
+  image: ""
+  image_alt: ""
+  focal_x: "50%"
+  focal_y: "50%"
+current_events:
+  heading: "Current Events"
+  intro: ""
+fallback:
+  heading: "Join Us Every Sunday"
+  text: "9:30 AM \u2014 Morning Service\n529 Walker Avenue, Baltimore, MD 21212"
+  button_label: "Plan Your Visit"
+  button_url: "/plan-your-visit"
+past_events:
+  heading: "Past Events"
+  intro: ""
 ---
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events | RCCG Mercy Court</title>
-    <meta name="description" content="Upcoming and past events at RCCG Mercy Court in Baltimore, MD. Join us for services, campaigns, outreach and celebrations.">
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ seo_description }}">
     <link rel="canonical" href="https://mercycourt.org/events/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="RCCG Mercy Court">
-    <meta property="og:title" content="Events | RCCG Mercy Court">
-    <meta property="og:description" content="Upcoming and past events at RCCG Mercy Court in Baltimore, MD.">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ seo_description }}">
     <meta property="og:url" content="https://mercycourt.org/events/">
-    <meta property="og:image" content="https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-01.jpg">
+    {%- if og_image %}
+    {%- if 'https://' in og_image %}
+    <meta property="og:image" content="{{ og_image }}">
+    {%- else %}
+    <meta property="og:image" content="https://mercycourt.org{{ og_image }}">
+    {%- endif %}
+    {%- endif %}
     <meta name="twitter:card" content="summary_large_image">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,11 +88,12 @@ eleventyExcludeFromCollections: true
     {%- include "nav.njk" -%}
 
     <!-- Hero -->
-    <section class="relative overflow-hidden flex items-center justify-center text-white text-center" style="height: 55vh; min-height: 340px; background: #0A0A0A; padding-top: 72px;">
+    <section class="relative overflow-hidden flex items-center justify-center text-white text-center" style="height: 55vh; min-height: 340px; {% if hero.image %}background-image: url('{{ hero.image }}'); background-size: cover; background-position: {{ hero.focal_x | default('50%') }} {{ hero.focal_y | default('50%') }};{% else %}background: #0A0A0A;{% endif %} padding-top: 72px;">
+        {%- if hero.image %}<div class="absolute inset-0 bg-black/50"></div>{%- endif %}
         <div class="relative z-10 px-6">
-            <p class="text-brand-red text-xs font-bold uppercase tracking-widest mb-4">RCCG Mercy Court</p>
-            <h1 class="font-anton text-6xl md:text-8xl uppercase tracking-h1 leading-none mb-5">Events</h1>
-            <p class="text-white/60 text-lg max-w-xl mx-auto">Upcoming campaigns, celebrations, and community gatherings.</p>
+            {%- if hero.badge %}<p class="text-brand-red text-xs font-bold uppercase tracking-widest mb-4">{{ hero.badge }}</p>{%- endif %}
+            <h1 class="font-anton text-6xl md:text-8xl uppercase tracking-h1 leading-none mb-5">{{ hero.title if hero.title else "Events" }}</h1>
+            {%- if hero.subheading %}<p class="text-white/60 text-lg max-w-xl mx-auto">{{ hero.subheading }}</p>{%- endif %}
         </div>
     </section>
 
@@ -74,8 +103,9 @@ eleventyExcludeFromCollections: true
     <!-- Current Events -->
     <section class="py-20 px-6">
         <div class="container mx-auto max-w-6xl">
-            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2 text-gray-900 mb-3">Current Events</h2>
-            <div class="w-16 h-1 bg-brand-red mb-12"></div>
+            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2 text-gray-900 mb-3">{{ current_events.heading if current_events.heading else "Current Events" }}</h2>
+            <div class="w-16 h-1 bg-brand-red {% if current_events.intro %}mb-4{% else %}mb-12{% endif %}"></div>
+            {%- if current_events.intro %}<p class="text-gray-500 text-base leading-relaxed mb-12 max-w-2xl">{{ current_events.intro }}</p>{%- endif %}
 
             {% if activeEvents | length %}
             <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -109,10 +139,14 @@ eleventyExcludeFromCollections: true
             {% else %}
             <!-- No active events fallback -->
             <div class="max-w-2xl mx-auto text-center py-12 px-6 bg-gray-50 rounded-2xl">
-                <p class="font-anton text-2xl uppercase tracking-h3 text-gray-700 mb-4">Join Us Every Sunday</p>
+                <p class="font-anton text-2xl uppercase tracking-h3 text-gray-700 mb-4">{{ fallback.heading if fallback.heading else "Join Us Every Sunday" }}</p>
+                {%- if fallback.text %}
+                <p class="text-gray-500 text-base leading-relaxed mb-8">{{ fallback.text | replace("\n", "<br>") | safe }}</p>
+                {%- else %}
                 <p class="text-gray-500 text-base leading-relaxed mb-2">9:30 AM — Morning Service</p>
                 <p class="text-gray-500 text-base leading-relaxed mb-8">529 Walker Avenue, Baltimore, MD 21212</p>
-                <a href="/plan-your-visit" class="inline-block bg-brand-red text-white text-xs font-bold uppercase tracking-wide px-8 py-3 rounded-full hover:bg-[#C04E25] transition mb-8">Plan Your Visit</a>
+                {%- endif %}
+                <a href="{{ fallback.button_url if fallback.button_url else '/plan-your-visit' }}" class="inline-block bg-brand-red text-white text-xs font-bold uppercase tracking-wide px-8 py-3 rounded-full hover:bg-[#C04E25] transition mb-8">{{ fallback.button_label if fallback.button_label else "Plan Your Visit" }}</a>
                 <p class="text-gray-400 text-sm mb-4">Follow us for upcoming events</p>
                 <div class="flex gap-4 justify-center">
                     <a href="{{ site.social.instagram }}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-brand-red transition">
@@ -131,8 +165,9 @@ eleventyExcludeFromCollections: true
     {% if pastEvents | length %}
     <section class="py-20 px-6 bg-gray-50">
         <div class="container mx-auto max-w-6xl">
-            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2 text-gray-900 mb-3">Past Events</h2>
-            <div class="w-16 h-1 bg-brand-red mb-12"></div>
+            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2 text-gray-900 mb-3">{{ past_events.heading if past_events.heading else "Past Events" }}</h2>
+            <div class="w-16 h-1 bg-brand-red {% if past_events.intro %}mb-4{% else %}mb-12{% endif %}"></div>
+            {%- if past_events.intro %}<p class="text-gray-500 text-base leading-relaxed mb-12 max-w-2xl">{{ past_events.intro }}</p>{%- endif %}
             <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {% for event in pastEvents %}
                 {%- set cardImg = event.data.card_image if event.data.card_image else (event.data.hero.image if event.data.hero else "") -%}

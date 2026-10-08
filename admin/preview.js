@@ -2201,9 +2201,89 @@
   }
   window.CMS.registerPreviewTemplate('ministries-pages', MinistriesDispatch);
 
+
+  /* ══ EventsHubPreview ══ */
+  function EventsHubPreview(props) {
+    injectTailwind();
+    var entry = props.entry;
+    var data  = entry && entry.getIn ? entry.getIn(['data']).toJS() : {};
+    var hero  = data.hero  || {};
+    var cur   = data.current_events || {};
+    var fall  = data.fallback || {};
+    var past  = data.past_events || {};
+
+    var imgUrl = hero.image ? resolveImage(props, hero.image) : '';
+    var heroStyle = {
+      height: '55vh', minHeight: '340px',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      color: '#fff', textAlign: 'center', paddingTop: '72px',
+      position: 'relative', overflow: 'hidden',
+      background: imgUrl
+        ? 'url(' + imgUrl + ') ' + (hero.focal_x||'50%') + ' ' + (hero.focal_y||'50%') + ' / cover no-repeat'
+        : '#0A0A0A'
+    };
+    var secStyle  = { padding: '5rem 1.5rem' };
+    var innerStyle = { maxWidth: '72rem', margin: '0 auto' };
+    var h2Style = { fontFamily: DISPLAY, fontSize: '2.5rem', textTransform: 'uppercase',
+                    letterSpacing: '-0.01em', marginBottom: '0.75rem' };
+    var barStyle = { width: '4rem', height: '4px', background: '#D95A2B', marginBottom: '3rem' };
+    var noteStyle = { color: '#9ca3af', fontSize: '0.875rem', fontStyle: 'italic',
+                      padding: '1.5rem', background: '#f9fafb', borderRadius: '1rem', textAlign: 'center' };
+
+    return h('div', { style: { fontFamily: BODY } },
+      /* Hero */
+      h('section', { style: heroStyle },
+        imgUrl ? h('div', { style: { position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' } }) : null,
+        h('div', { style: { position: 'relative', zIndex: 1, padding: '0 1.5rem' } },
+          hero.badge ? h('p', { style: { color: '#D95A2B', fontSize: '0.75rem', fontWeight: 700,
+            textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' } }, hero.badge) : null,
+          h('h1', { style: { fontFamily: DISPLAY, fontSize: 'clamp(3rem,8vw,6rem)',
+            textTransform: 'uppercase', letterSpacing: '0.01em', lineHeight: 1, marginBottom: '1.25rem' } },
+            hero.title || 'Events'),
+          hero.subheading ? h('p', { style: { color: 'rgba(255,255,255,0.6)', fontSize: '1.125rem',
+            maxWidth: '36rem', margin: '0 auto' } }, hero.subheading) : null
+        )
+      ),
+      /* Current Events */
+      h('section', { style: secStyle },
+        h('div', { style: innerStyle },
+          h('h2', { style: h2Style }, cur.heading || 'Current Events'),
+          h('div', { style: barStyle }),
+          cur.intro ? h('p', { style: { color: '#6b7280', marginBottom: '3rem', maxWidth: '42rem' } }, cur.intro) : null,
+          h('p', { style: noteStyle }, 'Event cards are managed in Event Pages. Set an event’s Status to Active to show it here.')
+        )
+      ),
+      /* Fallback preview */
+      h('section', { style: { padding: '0 1.5rem 5rem 1.5rem' } },
+        h('div', { style: { maxWidth: '42rem', margin: '0 auto', textAlign: 'center',
+          padding: '3rem 1.5rem', background: '#f9fafb', borderRadius: '1rem' } },
+          h('p', { style: { fontFamily: DISPLAY, fontSize: '1.5rem', textTransform: 'uppercase',
+            letterSpacing: '-0.02em', color: '#374151', marginBottom: '1rem' } },
+            fall.heading || 'Join Us Every Sunday'),
+          fall.text ? h('p', { style: { color: '#6b7280', lineHeight: '1.6',
+            marginBottom: '2rem', whiteSpace: 'pre-line' } }, fall.text) : null,
+          h('span', { style: { display: 'inline-block', background: '#D95A2B', color: '#fff',
+            fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase',
+            letterSpacing: '0.05em', padding: '0.75rem 2rem', borderRadius: '9999px' } },
+            fall.button_label || 'Plan Your Visit')
+        )
+      ),
+      /* Past Events */
+      h('section', { style: { ...secStyle, background: '#f9fafb' } },
+        h('div', { style: innerStyle },
+          h('h2', { style: h2Style }, past.heading || 'Past Events'),
+          h('div', { style: barStyle }),
+          past.intro ? h('p', { style: { color: '#6b7280', marginBottom: '3rem', maxWidth: '42rem' } }, past.intro) : null,
+          h('p', { style: noteStyle }, 'Event cards are managed in Event Pages. Set an event’s Status to Past to show it here.')
+        )
+      )
+    );
+  }
+
   function MainPagesDispatch(props) {
     try {
       var path = (props.entry && props.entry.get('path')) || '';
+      if (path.indexOf('events/index') !== -1)  return EventsHubPreview(props);
       if (path.indexOf('index') !== -1)           return HomePreview(props);
       if (path.indexOf('about-us') !== -1)        return AboutPreview(props);
       if (path.indexOf('contact') !== -1)         return ContactPreview(props);

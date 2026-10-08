@@ -225,6 +225,61 @@ collections:
               - { label: "Heading Highlight (red word)", name: "heading_highlight", widget: "string", hint: "e.g. Updates" }
               - { label: "Description", name: "description", widget: "text" }
 
+      - name: "events-hub"
+        label: "Events"
+        file: "events/index.njk"
+        fields:
+          - widget: note
+            name: "events_hub_guide"
+            label: "\u2139\ufe0f How the Events Hub Works"
+            hint: |
+              HERO \u2014 Edit the badge, title, subheading, and optional background image below. Leave the image blank for the default dark background. |
+              CURRENT EVENTS \u2014 Cards appear automatically from Event Pages with Status = Active. |
+              NO CURRENT EVENTS \u2014 The fallback block shows when no active events exist. |
+              PAST EVENTS \u2014 Cards appear automatically from Event Pages with Status = Past. |
+              EVENT CARDS \u2014 To add, edit, or archive an event, go to Event Pages.
+          - { label: "SEO Title", name: "title", widget: "string", hint: "Browser-tab title and og:title, e.g. 'Events | RCCG Mercy Court'" }
+          - { label: "SEO Description", name: "seo_description", widget: "text", hint: "Description (target: 120\u2013160 characters)" }
+          - { label: "OG / Share Image", name: "og_image", widget: "image", required: false, hint: "Image shown when the page is shared on social media. Leave blank to keep the current default." }
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "Badge Text", name: "badge", widget: "string", required: false, hint: "Small text above the title, e.g. 'RCCG Mercy Court'. Leave blank to hide." }
+              - { label: "Title", name: "title", widget: "string", hint: "Large hero heading, e.g. 'Events'" }
+              - { label: "Subheading", name: "subheading", widget: "string", required: false, hint: "Smaller text below the title. Leave blank to hide." }
+              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Optional hero background image. Leave blank for the default dark background. Keep under 500KB." }
+              - { label: "Background Image Alt Text", name: "image_alt", widget: "string", required: false, hint: "Describe the image for screen readers \u2014 only needed when a background image is set." }
+              - { label: "Image \u2013 Horizontal position", name: "focal_x", widget: "select", default: "50%", required: false, hint: "Shift the focal point if the subject is cut off.", options: [{ label: "Left", value: "0%" }, { label: "Center-left", value: "25%" }, { label: "Center", value: "50%" }, { label: "Center-right", value: "75%" }, { label: "Right", value: "100%" }] }
+              - { label: "Image \u2013 Vertical position", name: "focal_y", widget: "select", default: "50%", required: false, options: [{ label: "Top", value: "0%" }, { label: "Upper", value: "25%" }, { label: "Center", value: "50%" }, { label: "Lower", value: "75%" }, { label: "Bottom", value: "100%" }] }
+          - label: "Current Events Section"
+            name: "current_events"
+            widget: "object"
+            collapsed: true
+            hint: "Event cards are managed in Event Pages. Set an event's Status to Active to show it here."
+            fields:
+              - { label: "Section Heading", name: "heading", widget: "string", default: "Current Events" }
+              - { label: "Intro Text", name: "intro", widget: "text", required: false, hint: "Optional paragraph below the heading. Leave blank to omit." }
+          - label: "No Current Events Fallback"
+            name: "fallback"
+            widget: "object"
+            collapsed: true
+            hint: "Shown when no events are active."
+            fields:
+              - { label: "Heading", name: "heading", widget: "string", default: "Join Us Every Sunday" }
+              - { label: "Text", name: "text", widget: "text", hint: "Service times and address. Use a new line for each line of text." }
+              - { label: "Button Label", name: "button_label", widget: "string", default: "Plan Your Visit" }
+              - { label: "Button URL", name: "button_url", widget: "string", default: "/plan-your-visit" }
+          - label: "Past Events Section"
+            name: "past_events"
+            widget: "object"
+            collapsed: true
+            hint: "Event cards are managed in Event Pages. Set an event's Status to Past to show it here."
+            fields:
+              - { label: "Section Heading", name: "heading", widget: "string", default: "Past Events" }
+              - { label: "Intro Text", name: "intro", widget: "text", required: false, hint: "Optional paragraph below the heading. Leave blank to omit." }
+
   - name: "ministries-pages"
     label: "Ministries"
     files:
