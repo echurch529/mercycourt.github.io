@@ -1,3 +1,8 @@
+---
+layout: false
+templateEngineOverride: njk
+permalink: 404.html
+---
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -28,12 +33,7 @@
 </head>
 <body class="font-lato bg-brand-dark text-white min-h-screen flex flex-col">
 
-    <nav class="py-6 px-8">
-        <a href="/">
-            <img src="/assets/images/2026/branding/mercy-court-logo-white.png"
-                 alt="RCCG Mercy Court" class="h-10 w-auto">
-        </a>
-    </nav>
+    {% include "nav.njk" %}
 
     <main class="flex-1 flex flex-col items-center justify-center text-center px-6 py-20">
         <p class="text-brand-red font-bold text-xs uppercase tracking-widest mb-6">404 — Page Not Found</p>
