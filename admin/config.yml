@@ -16,6 +16,7 @@ display_url: https://mercycourt.org
 collections:
   - name: "main-pages"
     label: "Main Pages"
+    format: frontmatter
     files:
 
       - name: "home"
@@ -234,8 +235,6 @@ collections:
       - name: "events-hub"
         label: "Events"
         file: "events/index.njk"
-        format: frontmatter
-        extension: njk
         fields:
           - widget: note
             name: "events_hub_guide"
