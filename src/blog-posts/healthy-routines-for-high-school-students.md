@@ -13,7 +13,7 @@ community_impact: true
 hero_image: /assets/images/cms-uploads/healthy-routines-students.jpg
 hero_image_alt: Group of young teenagers pose for a photo
 hero_focal_x: 50%
-hero_focal_y: 50%
+hero_focal_y: 0%
 excerpt: "Balancing a heavy course load, a job, and everything else isn't just a
   college problem anymore. Drawing on his year as a U.S. Senate page, high
   school senior David Arowolo shares what actually helps: protecting sleep,
