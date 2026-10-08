@@ -262,7 +262,7 @@ article .cta-box {
     <!-- Hero Section -->
     <section class="relative overflow-hidden" style="height: 60vh; padding-top: 72px;">
         <div class="absolute inset-0">
-            <img loading="lazy" src="{{ hero_image }}" alt="{{ hero_image_alt }}" class="w-full h-full object-cover" style="object-position: center;">
+            <img loading="lazy" src="{{ hero_image }}" alt="{{ hero_image_alt }}" class="w-full h-full object-cover" style="object-position: {{ hero_focal_x | default('50%', true) }} {{ hero_focal_y | default('50%', true) }};">
             <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/80"></div>
         </div>
         <div class="relative z-10 h-full flex items-end justify-center pb-12 px-6">
@@ -400,7 +400,7 @@ article .cta-box {
 
                     {% if show_article_image and article_image and article_image_alt %}
                     <div class="rounded-xl overflow-hidden shadow-lg">
-                        <img src="{{ article_image }}" alt="{{ article_image_alt }}" width="431" height="301" loading="eager" class="w-full" style="aspect-ratio:431/301;object-fit:cover;">
+                        <img src="{{ article_image }}" alt="{{ article_image_alt }}" width="431" height="301" loading="eager" class="w-full" style="aspect-ratio:431/301;object-fit:cover;object-position:{{ article_focal_x | default('50%', true) }} {{ article_focal_y | default('50%', true) }};">
                     </div>
                     {% elif sidebar_image %}
                     <div class="rounded-xl overflow-hidden shadow-lg">
@@ -506,7 +506,7 @@ article .cta-box {
                 {% for post in readNext %}
                 <a href="{{ post.url | cleanUrl }}" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
                     <div style="height: 160px; overflow: hidden;">
-                        <img loading="lazy" src="{{ post.data.hero_image }}" alt="{{ post.data.hero_image_alt }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img loading="lazy" src="{{ post.data.hero_image }}" alt="{{ post.data.hero_image_alt }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" style="object-position:{{ post.data.hero_focal_x | default('50%', true) }} {{ post.data.hero_focal_y | default('50%', true) }};">
                     </div>
                     <div class="p-5">
                         <span class="inline-block text-xs font-bold uppercase px-3 py-1 rounded-full mb-2" style="background-color: #FFF0EA; color: #E8541A;">{{ post.data.category | capitalize }}</span>

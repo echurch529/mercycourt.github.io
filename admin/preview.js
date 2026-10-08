@@ -1080,6 +1080,10 @@
       var showArticleImage = data.show_article_image;
       var articleImage     = resolveImage(props, data.article_image);
       var articleImageAlt  = data.article_image_alt || '';
+      var heroFocalX       = data.hero_focal_x    || '50%';
+      var heroFocalY       = data.hero_focal_y    || '50%';
+      var articleFocalX    = data.article_focal_x || '50%';
+      var articleFocalY    = data.article_focal_y || '50%';
 
       var dateStr = '';
       if (data.date) {
@@ -1124,7 +1128,7 @@
         },
           h('img', {
             src: heroImage, alt: '',
-            style: { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }
+            style: { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: heroFocalX + ' ' + heroFocalY }
           }),
           h('div', {
             style: { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.60), rgba(0,0,0,0.50), rgba(0,0,0,0.80))' }
@@ -1194,7 +1198,7 @@
           h('div', { style: { maxWidth: '768px', margin: '0 auto' } },
             showArticleImage && articleImage && articleImageAlt && h('img', {
               src: articleImage, alt: articleImageAlt,
-              style: { display: 'block', width: '100%', maxWidth: '431px', aspectRatio: '431/301', objectFit: 'cover', borderRadius: '12px', marginBottom: '24px', boxShadow: '0 4px 16px rgba(0,0,0,.12)' }
+              style: { display: 'block', width: '100%', maxWidth: '431px', aspectRatio: '431/301', objectFit: 'cover', objectPosition: articleFocalX + ' ' + articleFocalY, borderRadius: '12px', marginBottom: '24px', boxShadow: '0 4px 16px rgba(0,0,0,.12)' }
             }),
             h('div', { dangerouslySetInnerHTML: { __html: bodyHtml } }),
 

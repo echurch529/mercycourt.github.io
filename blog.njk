@@ -266,7 +266,7 @@ section:
                 {%- for post in gridPosts %}
                 <article data-category="{{ post.data.category }}" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group reveal">
                     <div class="relative overflow-hidden" style="height: 220px;">
-                        <img loading="lazy" src="{{ post.data.hero_image }}" alt="{{ post.data.hero_image_alt }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;" class="group-hover:scale-105 transition duration-500">
+                        <img loading="lazy" src="{{ post.data.hero_image }}" alt="{{ post.data.hero_image_alt }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position:{{ post.data.hero_focal_x | default('50%', true) }} {{ post.data.hero_focal_y | default('50%', true) }};" class="group-hover:scale-105 transition duration-500">
                         <div class="absolute top-4 left-4">
                             <span class="bg-brand-red text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase">{{ post.data.category | capitalize }}</span>
                         </div>
