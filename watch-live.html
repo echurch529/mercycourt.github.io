@@ -1,3 +1,8 @@
+---
+layout: false
+templateEngineOverride: njk
+permalink: watch-live.html
+---
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -77,6 +82,7 @@
     <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1027268596866855'); fbq('track', 'PageView');</script>
     <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=1027268596866855&ev=PageView&noscript=1"/></noscript>
     <!-- End Meta Pixel Code -->
+<style>{%- include "components/heading-tracking.njk" -%}</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
@@ -164,7 +170,7 @@
             <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
         </div>
         <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-            <h1 class="font-anton text-4xl md:text-7xl lg:text-8xl uppercase leading-[1.1] mb-4 text-white tracking-tight">
+            <h1 class="font-anton text-4xl md:text-7xl lg:text-8xl uppercase leading-[1.1] mb-4 text-white tracking-h1">
                 WATCH <span class="text-brand-red">LIVE</span>
             </h1>
             <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto">
@@ -210,7 +216,7 @@
     <section class="bg-white py-16 px-6">
         <div class="container mx-auto max-w-4xl">
             <div class="text-center mb-12">
-                <h2 class="font-anton text-4xl md:text-4xl uppercase tracking-tight mb-4">
+                <h2 class="font-anton text-4xl md:text-4xl uppercase tracking-h2 mb-4">
                     SERVICE <span class="text-brand-red">TIMES</span>
                 </h2>
                 <p class="text-gray-600 text-lg">
@@ -224,7 +230,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
                         </svg>
                     </div>
-                    <h3 class="font-anton text-xl uppercase mb-2">Sunday Service</h3>
+                    <h3 class="font-anton text-xl uppercase mb-2 tracking-h3">Sunday Service</h3>
                     <p class="text-brand-red font-bold text-2xl mb-1">10:00 AM</p>
                     <p class="text-gray-500 text-sm">Every Sunday</p>
                 </div>
@@ -234,7 +240,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                         </svg>
                     </div>
-                    <h3 class="font-anton text-xl uppercase mb-2">Bible Study</h3>
+                    <h3 class="font-anton text-xl uppercase mb-2 tracking-h3">Bible Study</h3>
                     <p class="text-brand-red font-bold text-2xl mb-1">7:00 PM</p>
                     <p class="text-gray-500 text-sm">Every Wednesday</p>
                 </div>
@@ -244,7 +250,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                         </svg>
                     </div>
-                    <h3 class="font-anton text-xl uppercase mb-2">Prayer Meeting</h3>
+                    <h3 class="font-anton text-xl uppercase mb-2 tracking-h3">Prayer Meeting</h3>
                     <p class="text-brand-red font-bold text-2xl mb-1">7:00 PM</p>
                     <p class="text-gray-500 text-sm">Every Friday</p>
                 </div>
@@ -256,7 +262,7 @@
     <section class="bg-gray-50 py-20 px-6">
         <div class="container mx-auto max-w-7xl">
             <div class="text-center mb-12">
-                <h2 class="font-anton text-4xl md:text-4xl uppercase tracking-tight mb-4">
+                <h2 class="font-anton text-4xl md:text-4xl uppercase tracking-h2 mb-4">
                     RECENT <span class="text-brand-red">SERMONS</span>
                 </h2>
                 <p class="text-gray-600 text-lg">
@@ -304,7 +310,7 @@
     <!-- Subscribe CTA -->
     <section class="bg-brand-dark py-16 px-6">
         <div class="container mx-auto max-w-4xl text-center">
-            <h2 class="font-anton text-3xl md:text-4xl uppercase text-white tracking-tight mb-4">
+            <h2 class="font-anton text-3xl md:text-4xl uppercase text-white tracking-h2 mb-4">
                 NEVER MISS A <span class="text-brand-red">SERVICE</span>
             </h2>
             <p class="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
@@ -332,7 +338,7 @@
         <div class="container mx-auto max-w-5xl">
             <div class="text-center mb-10">
                 <span class="inline-block text-xs font-bold uppercase tracking-widest mb-3" style="color: #E8541A;">From the Blog</span>
-                <h2 class="font-anton text-3xl md:text-4xl uppercase tracking-tight">Latest from Mercy Court</h2>
+                <h2 class="font-anton text-3xl md:text-4xl uppercase tracking-h2">Latest from Mercy Court</h2>
             </div>
             <div class="grid md:grid-cols-3 gap-6">
                 <a href="blog-posts/the-compound-effect.html" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 reveal">
@@ -376,7 +382,7 @@
     <section class="bg-white py-20 px-6">
         <div class="container mx-auto max-w-4xl">
             <div class="border-l-4 border-brand-red pl-8">
-                <h2 class="font-anton text-4xl md:text-4xl uppercase mb-4 tracking-tight">
+                <h2 class="font-anton text-4xl md:text-4xl uppercase mb-4 tracking-h2">
                     Give to Mercy Court
                 </h2>
                 <p class="text-gray-600 text-lg mb-4">
@@ -402,7 +408,7 @@
     <!-- Join Our Mailing List -->
     <section class="bg-brand-red py-16 px-6" style="padding-bottom: 60px;">
         <div class="container mx-auto max-w-2xl text-center">
-            <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-tight">
+            <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-h2">
                 JOIN OUR MAILING LIST
             </h2>
             <p class="text-white/80 text-sm mb-8">
@@ -540,7 +546,7 @@
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeGivingModal()"></div>
         <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 overflow-hidden" style="max-height: 90vh;">
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-                <h2 class="font-anton text-xl uppercase tracking-tight">Give to Mercy Court</h2>
+                <h2 class="font-anton text-xl uppercase tracking-h2">Give to Mercy Court</h2>
                 <button onclick="closeGivingModal()" class="text-gray-400 hover:text-gray-700 transition" aria-label="Close">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
