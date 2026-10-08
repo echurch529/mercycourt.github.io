@@ -11,7 +11,7 @@ author: "David Arowolo, Senior, Eastern Technical High School (ranked #1 in
 category: inspiration
 featured: true
 community_impact: true
-hero_image: /assets/images/cms-uploads/group-of-young-sutdents.jpg
+hero_image: /assets/images/cms-uploads/healthy-routines-students.jpg
 hero_image_alt: Group of young teenagers pose for a photo
 excerpt: "Balancing a heavy course load, a job, and everything else isn't just a
   college problem anymore. Drawing on his year as a U.S. Senate page, high
