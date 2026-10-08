@@ -1,7 +1,6 @@
 ---
-title: "Healthy Routines for a Successful School Year: A High Schooler's Honest
-  Guide | Mercy Court"
-slug: /healthy-routines-for-high-school-students
+title: "Healthy Routines for a Successful School Year: A High Schooler's Honest Guide"
+slug: healthy-routines-for-high-school-students
 seo_title: Healthy Routines for High School Students | Mercy Court
 seo_description: A U.S. Senate Page shares honest, tested tips on building
   healthy routines that actually hold up under a demanding high school schedule.
