@@ -51,6 +51,28 @@
     document.head.appendChild(s);
   }
 
+
+  /* ── Note widget — read-only helper text displayed in the CMS editor.
+     Registered here because Decap has no built-in 'note' widget.
+     Used by: Main Pages → Events, Blog, Blog Posts, Event Pages.      */
+  window.CMS.registerWidget('note', function NoteControl(props) {
+    var field = props.field;
+    var lbl   = field && field.get ? field.get('label') : '';
+    var hint  = field && field.get ? field.get('hint')  : '';
+    return h('div', {
+      style: {
+        background: '#fff8f1', border: '1px solid #f3d5c0', borderRadius: '6px',
+        padding: '12px 16px', marginBottom: '8px',
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+      }
+    },
+      lbl  ? h('strong', { style: { display: 'block', fontSize: '13px', fontWeight: '600',
+                marginBottom: hint ? '6px' : '0', color: '#1d2330' } }, lbl) : null,
+      hint ? h('p', { style: { fontSize: '13px', color: '#637381', margin: 0,
+                whiteSpace: 'pre-line', lineHeight: '1.5' } }, hint) : null
+    );
+  });
+
   /* ── Image helper ──
      Always ask getAsset first: for media that was just uploaded in this
      CMS session it returns a local blob URL, which is the ONLY way the
@@ -2205,8 +2227,9 @@
   /* ══ EventsHubPreview ══ */
   function EventsHubPreview(props) {
     injectTailwind();
-    var entry = props.entry;
-    var data  = entry && entry.getIn ? entry.getIn(['data']).toJS() : {};
+    var entry  = props.entry;
+    var dataMap = entry && entry.getIn ? entry.getIn(['data']) : null;
+    var data    = (dataMap && dataMap.toJS) ? dataMap.toJS() : {};
     var hero  = data.hero  || {};
     var cur   = data.current_events || {};
     var fall  = data.fallback || {};
