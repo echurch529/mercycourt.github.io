@@ -111,6 +111,7 @@ ministries:
     <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1027268596866855'); fbq('track', 'PageView');</script>
     <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=1027268596866855&ev=PageView&noscript=1"/></noscript>
     <!-- End Meta Pixel Code -->
+<style>{%- include "components/heading-tracking.njk" -%}</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
@@ -198,7 +199,7 @@ ministries:
             <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
         </div>
         <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-            <h1 class="font-anton text-4xl md:text-7xl lg:text-8xl uppercase leading-[1.1] mb-4 text-white tracking-tight">
+            <h1 class="font-anton text-4xl md:text-7xl lg:text-8xl uppercase leading-[1.1] mb-4 text-white tracking-h1">
                 OUR MINISTRIES
             </h1>
             <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto">
@@ -211,7 +212,7 @@ ministries:
     <section class="bg-brand-dark py-20 px-6">
         <div class="container mx-auto max-w-7xl text-center">
             <p class="text-gray-400 text-sm mb-2 uppercase tracking-widest">{{ intro_eyebrow }}</p>
-            <h2 class="font-anton text-4xl md:text-5xl uppercase text-white tracking-tight mb-6">
+            <h2 class="font-anton text-4xl md:text-5xl uppercase text-white tracking-h2 mb-6">
                 at <span class="text-brand-red">MERCY COURT</span>
             </h2>
             <p class="text-gray-400 text-lg max-w-3xl mx-auto">
@@ -232,7 +233,7 @@ ministries:
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     </div>
                     <div class="p-6">
-                        <h3 class="font-anton text-2xl uppercase mb-3 tracking-tight">{{ ministry.title }}</h3>
+                        <h3 class="font-anton text-2xl uppercase mb-3 tracking-h3">{{ ministry.title }}</h3>
                         <p class="text-gray-600 text-sm leading-relaxed mb-4">
                             {{ ministry.description }}
                         </p>
@@ -251,7 +252,7 @@ ministries:
     <!-- Get Involved CTA -->
     <section class="bg-brand-red py-20 px-6">
         <div class="container mx-auto max-w-4xl text-center">
-            <h2 class="font-anton text-4xl md:text-5xl uppercase text-white tracking-tight mb-6">
+            <h2 class="font-anton text-4xl md:text-5xl uppercase text-white tracking-h2 mb-6">
                 GET INVOLVED
             </h2>
             <p class="text-white/90 text-lg max-w-2xl mx-auto mb-8">
@@ -273,7 +274,7 @@ ministries:
     <section class="bg-white py-20 px-6">
         <div class="container mx-auto max-w-4xl">
             <div class="border-l-4 border-brand-red pl-8">
-                <h2 class="font-anton text-4xl md:text-4xl uppercase mb-4 tracking-tight">
+                <h2 class="font-anton text-4xl md:text-4xl uppercase mb-4 tracking-h2">
                     Give to Mercy Court
                 </h2>
                 <p class="text-gray-600 text-lg mb-4">
@@ -299,7 +300,7 @@ ministries:
     <!-- Join Our Mailing List -->
     <section class="bg-brand-red py-16 px-6" style="padding-bottom: 60px;">
         <div class="container mx-auto max-w-2xl text-center">
-            <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-tight">
+            <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-h2">
                 JOIN OUR MAILING LIST
             </h2>
             <p class="text-white/80 text-sm mb-8">
@@ -440,7 +441,7 @@ ministries:
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeGivingModal()"></div>
         <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 overflow-hidden" style="max-height: 90vh;">
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-                <h2 class="font-anton text-xl uppercase tracking-tight">Give to Mercy Court</h2>
+                <h2 class="font-anton text-xl uppercase tracking-h2">Give to Mercy Court</h2>
                 <button onclick="closeGivingModal()" class="text-gray-400 hover:text-gray-700 transition" aria-label="Close">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>

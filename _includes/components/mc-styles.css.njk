@@ -95,6 +95,5 @@
 .mc-cta__btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 @media print { .mc-cta__btn { display: none !important; } }
 
-/* ── Article heading letter-spacing (canonical — mirrors preview.js articleBodyStyle) ── */
-article h2 { letter-spacing: -0.01em; }
-article h3 { letter-spacing: -0.02em; }
+/* ── Heading letter-spacing — single source: heading-tracking.njk ── */
+{%- include "components/heading-tracking.njk" -%}

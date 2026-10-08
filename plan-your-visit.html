@@ -187,6 +187,7 @@ faq:
     <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1027268596866855'); fbq('track', 'PageView');</script>
     <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=1027268596866855&ev=PageView&noscript=1"/></noscript>
     <!-- End Meta Pixel Code -->
+<style>{%- include "components/heading-tracking.njk" -%}</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
@@ -275,7 +276,7 @@ faq:
         <div class="relative z-10 h-full flex items-center justify-center px-6">
             <div class="max-w-4xl text-center">
                 <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">First Time?</span>
-                <h1 class="font-anton text-4xl md:text-5xl lg:text-6xl uppercase text-white tracking-tight leading-tight">
+                <h1 class="font-anton text-4xl md:text-5xl lg:text-6xl uppercase text-white tracking-h1 leading-tight">
                     A Place to Grow, Belong,<br>and Enjoy Life in Christ
                 </h1>
             </div>
@@ -286,7 +287,7 @@ faq:
     <section class="bg-white py-20 px-6">
         <div class="container mx-auto max-w-3xl text-center">
             <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Welcome</span>
-            <h2 class="font-anton text-4xl uppercase mb-8 tracking-tight">We're Glad You're Here</h2>
+            <h2 class="font-anton text-4xl uppercase mb-8 tracking-h2">We're Glad You're Here</h2>
             <p class="text-gray-600 text-lg leading-relaxed mb-6">
                 {{ welcome_body1 }}
             </p>
@@ -306,7 +307,7 @@ faq:
     <section class="py-20 px-6" style="background: #F5F5F5;">
         <div class="container mx-auto max-w-4xl text-center">
             <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Get to Know Us</span>
-            <h2 class="font-anton text-4xl uppercase mb-6 tracking-tight">Get to Know Mercy Court</h2>
+            <h2 class="font-anton text-4xl uppercase mb-6 tracking-h2">Get to Know Mercy Court</h2>
             <p class="text-gray-600 text-lg leading-relaxed mb-12 max-w-2xl mx-auto">
                 Before you visit, we want you to get a glimpse of who we are. Mercy Court is a church family passionate about God, people, excellence, service, and helping every person maximize their God-given potential. Watch this short welcome video to learn what to expect, hear from our pastors, and see why so many people call Mercy Court home.
             </p>
@@ -323,7 +324,7 @@ faq:
         <div class="container mx-auto max-w-4xl">
             <div class="text-center mb-12">
                 <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Your First Visit</span>
-                <h2 class="font-anton text-4xl uppercase mb-8 tracking-tight">What to Expect When You Visit</h2>
+                <h2 class="font-anton text-4xl uppercase mb-8 tracking-h2">What to Expect When You Visit</h2>
                 <p class="text-gray-600 text-lg leading-relaxed mb-6">
                     Visiting a church for the first time can feel like a big step, so we want to make it simple and comfortable for you. From the moment you arrive, our goal is to make you feel welcomed, valued, and at home.
                 </p>
@@ -372,7 +373,7 @@ faq:
         <div class="container mx-auto max-w-5xl">
             <div class="text-center mb-12">
                 <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">FAQs</span>
-                <h2 class="font-anton text-4xl uppercase tracking-tight">Questions Before You Visit?</h2>
+                <h2 class="font-anton text-4xl uppercase tracking-h2">Questions Before You Visit?</h2>
             </div>
             <div class="grid md:grid-cols-2 gap-4">
                 {% for item in faq %}
@@ -400,7 +401,7 @@ faq:
                 </div>
                 <div>
                     <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Families</span>
-                    <h2 class="font-anton text-4xl uppercase mb-6 tracking-tight text-white">A Place for Families to Grow Together</h2>
+                    <h2 class="font-anton text-4xl uppercase mb-6 tracking-h2 text-white">A Place for Families to Grow Together</h2>
                     <p class="text-gray-300 text-lg leading-relaxed mb-6">
                         At Mercy Court, we believe families are important to God and central to a healthy church community. Whether you are raising young children, parenting teenagers, building a marriage, or seeking a stronger spiritual foundation for your home, we want to walk with you.
                     </p>
@@ -421,7 +422,7 @@ faq:
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div>
                     <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Children's Ministry</span>
-                    <h2 class="font-anton text-4xl uppercase mb-6 tracking-tight">A Joyful Place for Children to Know God</h2>
+                    <h2 class="font-anton text-4xl uppercase mb-6 tracking-h2">A Joyful Place for Children to Know God</h2>
                     <p class="text-gray-600 text-lg leading-relaxed mb-6">
                         We believe children are not just the future of the church. They are a vital part of the church today.
                     </p>
@@ -457,7 +458,7 @@ faq:
                 </div>
                 <div>
                     <span class="inline-block bg-brand-red text-white px-5 py-1.5 rounded-full text-xs font-bold uppercase mb-6 tracking-wide">Youth</span>
-                    <h2 class="font-anton text-4xl uppercase mb-6 tracking-tight text-white">A Place for Youth to Belong, Grow, and Lead</h2>
+                    <h2 class="font-anton text-4xl uppercase mb-6 tracking-h2 text-white">A Place for Youth to Belong, Grow, and Lead</h2>
                     <p class="text-gray-400 text-lg leading-relaxed mb-6">
                         We believe young people need more than activities. They need identity, guidance, friendship, purpose, and a safe place to ask real questions.
                     </p>
@@ -475,7 +476,7 @@ faq:
     <!-- SECTION 9: Plan Your Visit CTA -->
     <section class="py-20 px-6" style="background: #E8541A;">
         <div class="container mx-auto max-w-2xl text-center">
-            <h2 class="font-anton text-4xl md:text-5xl uppercase mb-6 text-white tracking-tight">Plan Your Visit</h2>
+            <h2 class="font-anton text-4xl md:text-5xl uppercase mb-6 text-white tracking-h2">Plan Your Visit</h2>
             <p class="text-white/90 text-lg leading-relaxed mb-10">
                 We would love to know you are coming. Fill out this short form and someone from our team will help you prepare for your visit.
             </p>
@@ -489,7 +490,7 @@ faq:
     <section class="bg-white py-20 px-6">
         <div class="container mx-auto max-w-4xl">
             <div class="border-l-4 border-brand-red pl-8">
-                <h2 class="font-anton text-4xl md:text-4xl uppercase mb-4 tracking-tight">
+                <h2 class="font-anton text-4xl md:text-4xl uppercase mb-4 tracking-h2">
                     Give to Mercy Court
                 </h2>
                 <p class="text-gray-600 text-lg mb-4">
@@ -515,7 +516,7 @@ faq:
     <!-- SECTION 11: Join Our Mailing List -->
     <section class="bg-brand-red py-16 px-6" style="padding-bottom: 60px;">
         <div class="container mx-auto max-w-2xl text-center">
-            <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-tight">
+            <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-h2">
                 JOIN OUR MAILING LIST
             </h2>
             <p class="text-white/80 text-sm mb-8">
@@ -650,7 +651,7 @@ faq:
     <div id="visit-modal-overlay" onclick="handleOverlayClick(event)">
         <div id="visit-modal-card">
             <button onclick="closeVisitModal()" style="position:absolute;top:16px;right:20px;font-size:28px;line-height:1;color:#9ca3af;background:none;border:none;cursor:pointer;padding:0;" aria-label="Close">&times;</button>
-            <h2 class="font-anton text-3xl uppercase tracking-tight mb-2" style="color:#1B2A4A;">Plan Your Visit</h2>
+            <h2 class="font-anton text-3xl uppercase tracking-h2 mb-2" style="color:#1B2A4A;">Plan Your Visit</h2>
             <p class="text-gray-500 text-sm mb-6 leading-relaxed">We would love to know you are coming. Fill out this short form and we will make sure you are welcomed when you arrive.</p>
 
             <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
@@ -810,7 +811,7 @@ faq:
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeGivingModal()"></div>
         <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 overflow-hidden" style="max-height: 90vh;">
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-                <h2 class="font-anton text-xl uppercase tracking-tight">Give to Mercy Court</h2>
+                <h2 class="font-anton text-xl uppercase tracking-h2">Give to Mercy Court</h2>
                 <button onclick="closeGivingModal()" class="text-gray-400 hover:text-gray-700 transition" aria-label="Close">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>

@@ -118,6 +118,7 @@
     <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1027268596866855'); fbq('track', 'PageView');</script>
     <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=1027268596866855&ev=PageView&noscript=1"/></noscript>
     <!-- End Meta Pixel Code -->
+<style>{%- include "components/heading-tracking.njk" -%}</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
@@ -211,7 +212,7 @@
             {% if hero.badge %}
             <span class="inline-block text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8" style="background: #E8541A;">{{ hero.badge }}</span>
             {% endif %}
-            <h1 class="font-anton text-5xl md:text-7xl lg:text-8xl uppercase text-white tracking-tight leading-tight mb-8">
+            <h1 class="font-anton text-5xl md:text-7xl lg:text-8xl uppercase text-white tracking-h1 leading-tight mb-8">
                 {{ hero.headline }}
             </h1>
             <p class="text-white/90 text-lg md:text-xl leading-relaxed mb-12" style="max-width: 600px;">
@@ -279,7 +280,7 @@
     <section class="py-20 px-6 text-center" style="background: #0A0A0A;">
         <div class="container mx-auto max-w-4xl">
             {% if countdown_heading %}
-            <h2 class="font-anton text-3xl md:text-4xl uppercase text-white tracking-tight mb-12">{{ countdown_heading }}</h2>
+            <h2 class="font-anton text-3xl md:text-4xl uppercase text-white tracking-h2 mb-12">{{ countdown_heading }}</h2>
             {% endif %}
             <div id="event-countdown" data-target="{{ countdown_target.toISOString() if countdown_target.toISOString else countdown_target }}" class="grid grid-cols-4 gap-4 md:gap-8 max-w-3xl mx-auto">
                 <div>
@@ -341,7 +342,7 @@
     <section class="py-24 px-6" style="background: #1B2A4A;">
         <div class="container mx-auto max-w-5xl text-center">
             <span class="inline-block text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8" style="background: #E8541A;">STORIES</span>
-            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-tight text-white mb-4">{{ testimonials.heading }}</h2>
+            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2 text-white mb-4">{{ testimonials.heading }}</h2>
             {% if testimonials.subheading %}
             <p class="text-white/70 text-lg mb-16">{{ testimonials.subheading }}</p>
             {% endif %}
@@ -384,7 +385,7 @@
             {% if welcome.badge %}
             <span class="inline-block text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8" style="background: #E8541A;">{{ welcome.badge }}</span>
             {% endif %}
-            <h2 class="font-anton text-4xl md:text-5xl uppercase mb-10 tracking-tight" style="color: #1B2A4A;">{{ welcome.heading }}</h2>
+            <h2 class="font-anton text-4xl md:text-5xl uppercase mb-10 tracking-h2" style="color: #1B2A4A;">{{ welcome.heading }}</h2>
             {% for paragraph in welcome.body %}
             <p class="text-gray-600 text-lg leading-relaxed mb-6">{{ paragraph }}</p>
             {% endfor %}
@@ -404,7 +405,7 @@
                 <span class="inline-block text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8" style="background: #E8541A;">{{ schedule.badge }}</span>
                 {% endif %}
                 {% if schedule.heading %}
-                <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-tight" style="color: #1B2A4A;">{{ schedule.heading }}</h2>
+                <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2" style="color: #1B2A4A;">{{ schedule.heading }}</h2>
                 {% endif %}
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -432,7 +433,7 @@
                 <img loading="lazy" src="{{ speaker.photo }}" alt="{{ speaker.photo_alt | default(speaker.full_name) }}" class="rounded-2xl w-full object-cover shadow-lg">
                 {% endif %}
                 <div class="{% if not speaker.photo %}text-center max-w-2xl mx-auto{% endif %}">
-                    <h2 class="font-anton text-3xl md:text-4xl uppercase tracking-tight mb-3" style="color: #1B2A4A;">{{ speaker.full_name }}</h2>
+                    <h2 class="font-anton text-3xl md:text-4xl uppercase tracking-h2 mb-3" style="color: #1B2A4A;">{{ speaker.full_name }}</h2>
                     {% if speaker.title %}
                     <p class="font-bold text-sm uppercase tracking-wide mb-6" style="color: #E8541A;">{{ speaker.title }}</p>
                     {% endif %}
@@ -457,7 +458,7 @@
                 <span class="inline-block text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8" style="background: #E8541A;">{{ features.badge }}</span>
                 {% endif %}
                 {% if features.heading %}
-                <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-tight" style="color: #1B2A4A;">{{ features.heading }}</h2>
+                <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2" style="color: #1B2A4A;">{{ features.heading }}</h2>
                 {% endif %}
             </div>
             <div class="grid md:grid-cols-2 gap-8">
@@ -477,7 +478,7 @@
     {% if logistics and logistics.heading %}
     <section class="py-24 px-6 text-center" style="background: #E8541A;">
         <div class="container mx-auto max-w-4xl">
-            <h2 class="font-anton text-4xl md:text-5xl uppercase text-white tracking-tight mb-16">{{ logistics.heading }}</h2>
+            <h2 class="font-anton text-4xl md:text-5xl uppercase text-white tracking-h2 mb-16">{{ logistics.heading }}</h2>
             <div class="grid md:grid-cols-3 gap-10 mb-16">
                 <div>
                     <div class="text-5xl mb-5">📍</div>
@@ -516,7 +517,7 @@
     {% if giving and giving.heading %}
     <section class="bg-white py-24 px-6 text-center">
         <div class="container mx-auto" style="max-width: 700px;">
-            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-tight mb-10" style="color: #1B2A4A;">{{ giving.heading }}</h2>
+            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2 mb-10" style="color: #1B2A4A;">{{ giving.heading }}</h2>
             {% if giving.body %}
             <p class="text-gray-600 text-lg leading-relaxed mb-14">{{ giving.body }}</p>
             {% endif %}
@@ -531,7 +532,7 @@
     {% if cta_final and cta_final.heading %}
     <section class="bg-white py-24 px-6 text-center">
         <div class="container mx-auto" style="max-width: 700px;">
-            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-tight mb-10" style="color: #1B2A4A;">{{ cta_final.heading }}</h2>
+            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2 mb-10" style="color: #1B2A4A;">{{ cta_final.heading }}</h2>
             {% for paragraph in cta_final.body %}
             <p class="text-gray-600 text-lg leading-relaxed mb-5">{{ paragraph }}</p>
             {% endfor %}
@@ -602,7 +603,7 @@
     <div id="visit-modal-overlay" onclick="handleOverlayClick(event)">
         <div id="visit-modal-card">
             <button onclick="closeVisitModal()" style="position:absolute;top:16px;right:20px;font-size:28px;line-height:1;color:#9ca3af;background:none;border:none;cursor:pointer;padding:0;" aria-label="Close">&times;</button>
-            <h2 class="font-anton text-3xl uppercase tracking-tight mb-2" style="color:#1B2A4A;">Plan Your Visit</h2>
+            <h2 class="font-anton text-3xl uppercase tracking-h2 mb-2" style="color:#1B2A4A;">Plan Your Visit</h2>
             <p class="text-gray-500 text-sm mb-6 leading-relaxed">We would love to know you are coming. Fill out this short form and we will make sure you are welcomed when you arrive.</p>
             <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
             <div id="mc_embed_visit">
