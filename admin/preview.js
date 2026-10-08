@@ -1096,7 +1096,8 @@
 
       /* Article body styles — mirrors post.njk <style> block */
       var articleBodyStyle = [
-        'article h2 { font-family: Anton, sans-serif; font-size: clamp(1.4rem,3vw,1.875rem); text-transform: uppercase; color: #111827; letter-spacing: -0.025em; margin-top: 2.5rem; margin-bottom: 1rem; line-height: 1.2; }',
+        'article h2 { font-family: Anton, sans-serif; font-size: clamp(1.4rem,3vw,1.875rem); text-transform: uppercase; color: #111827; letter-spacing: -0.01em; margin-top: 2.5rem; margin-bottom: 1rem; line-height: 1.2; }',
+        'article h3 { font-family: Anton, sans-serif; font-size: clamp(1.1rem,2.2vw,1.35rem); text-transform: uppercase; color: #111827; letter-spacing: -0.02em; margin-top: 2rem; margin-bottom: 0.75rem; line-height: 1.25; }',
         'article p { color: #4B5563; font-size: 1.125rem; line-height: 1.75rem; margin-bottom: 1.5rem; }',
         'article a { color: #D95A2B; text-decoration: none; }',
         'article a:hover { text-decoration: underline; }',
