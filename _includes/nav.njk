@@ -35,9 +35,10 @@
                         {% for event in visibleEvents %}
                         <a href="/events/{{ event.data.slug }}" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition">{{ event.data.nav_label }}</a>
                         {% endfor %}
-                        <a href="/events/" class="block px-4 py-2 text-xs uppercase text-white/80 hover:text-brand-red hover:bg-white/5 transition border-t border-white/10 mt-1 pt-2">All Events</a>
                     </div>
                 </div>
+                {% else %}
+                <a href="/events/" class="hover:text-brand-red transition">Events</a>
                 {% endif %}
                 <a href="/community-impact" class="hover:text-brand-red transition">Community Impact</a>
                 <a href="/watch-live" class="hover:text-brand-red transition">Watch Live</a>
@@ -68,8 +69,9 @@
                 {% for event in visibleEvents %}
                 <a href="/events/{{ event.data.slug }}" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">{{ event.data.nav_label }}</a>
                 {% endfor %}
-                <a href="/events/" class="block py-2 pl-4 text-xs uppercase font-medium text-white/70 hover:text-brand-red transition">All Events</a>
             </div>
+            {% else %}
+            <a href="/events/" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Events</a>
             {% endif %}
             <a href="/community-impact" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Community Impact</a>
             <a href="/watch-live" class="block py-2 text-xs uppercase font-medium text-white hover:text-brand-red transition">Watch Live</a>
