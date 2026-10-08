@@ -4,7 +4,7 @@ slug: healthy-routines-for-high-school-students
 seo_title: Healthy Routines for High School Students | Mercy Court
 seo_description: A U.S. Senate Page shares honest, tested tips on building
   healthy routines that actually hold up under a demanding high school schedule.
-date: 2026-10-04
+date: 2026-10-08
 author: "David Arowolo, Senior, Eastern Technical High School (ranked #1 in
   Maryland) — U.S. Senate Page; Student Staff, Kumon Learning Center"
 category: inspiration
