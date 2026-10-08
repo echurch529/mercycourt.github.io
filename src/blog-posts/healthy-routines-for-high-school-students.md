@@ -82,7 +82,7 @@ Nobody is going to walk you through every assignment, every deadline, or every g
 One thing that's worked consistently for me: when I need to actually focus, I don't study at home. I go somewhere further away, somewhere less comfortable — a library, a study room, anywhere that isn't my bed or my couch. Home is full of tiny permissions to be distracted. Removing yourself from that environment removes the negotiation with yourself. If you're serious about a study block or a work session, physically leave the place where "just five more minutes of scrolling" feels normal.
 
 <!--mc-callout
-{"style":"important","title":"Tip:","text":"**This works best for intentional study blocks** — not a quick homework check, but the sessions where you actually need to think. A coffee shop, a library study room, even a quiet corner at school after hours will do. The farther you are from your default distractions, the less energy you spend resisting them."}
+{"style":"highlight","title":"Tip:","text":"**This works best for intentional study blocks** — not a quick homework check, but the sessions where you actually need to think. A coffee shop, a library study room, even a quiet corner at school after hours will do. The farther you are from your default distractions, the less energy you spend resisting them."}
 -->
 
 ## Protect Your Sleep — It's Not Negotiable
