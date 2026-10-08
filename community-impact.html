@@ -535,7 +535,7 @@ grant_body: "Mercy Court stands as a trusted anchor in Baltimore, addressing foo
                 {% for post in communityPosts %}
                 <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
                     <div class="relative h-48 overflow-hidden">
-                        <img loading="lazy" src="{{ post.data.hero_image }}" alt="{{ post.data.hero_image_alt }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img loading="lazy" src="{{ post.data.hero_image }}" alt="{{ post.data.hero_image_alt }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" style="object-position:{{ post.data.hero_focal_x | default('50%', true) }} {{ post.data.hero_focal_y | default('50%', true) }};">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center gap-3 mb-3">
