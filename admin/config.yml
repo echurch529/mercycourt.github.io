@@ -58,6 +58,7 @@ collections:
               - { label: "Description", name: "body", widget: "text" }
               - { label: "Link URL", name: "link", widget: "string", hint: "e.g. tehillah-voices.html" }
           - { label: "CTA Section Body", name: "cta_body", widget: "text" }
+          - { label: "Body", name: "body", widget: "hidden" }
 
       - name: "about"
         label: "About Us"
@@ -92,6 +93,7 @@ collections:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Quote", name: "quote", widget: "text" }
               - { label: "Attribution", name: "attribution", widget: "string", hint: "e.g. A Mercy Court Member" }
+          - { label: "Body", name: "body", widget: "hidden" }
 
       - name: "contact"
         label: "Contact"
@@ -103,6 +105,7 @@ collections:
             collapsed: true
             fields:
               - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+          - { label: "Body", name: "body", widget: "hidden" }
 
       - name: "plan-your-visit"
         label: "Plan Your Visit"
@@ -126,6 +129,7 @@ collections:
             fields:
               - { label: "Question", name: "question", widget: "string" }
               - { label: "Answer", name: "answer", widget: "text" }
+          - { label: "Body", name: "body", widget: "hidden" }
 
       - name: "community-impact"
         label: "Community Impact"
@@ -194,6 +198,7 @@ collections:
           - { label: "Volunteer Section — Paragraph 2", name: "volunteer_intro2", widget: "text" }
           - { label: "Volunteer Form Endpoint", name: "volunteer_form_endpoint", widget: "string", hint: "Formspree URL e.g. https://formspree.io/f/xxxxxxx" }
           - { label: "Grant/Anchor Section Body", name: "grant_body", widget: "text" }
+          - { label: "Body", name: "body", widget: "hidden" }
 
       - name: "blog"
         label: "Blog"
@@ -224,6 +229,7 @@ collections:
               - { label: "Heading (first part)", name: "heading", widget: "string", hint: "The non-red part of the section heading, e.g. 'News &'" }
               - { label: "Heading Highlight (red word)", name: "heading_highlight", widget: "string", hint: "e.g. Updates" }
               - { label: "Description", name: "description", widget: "text" }
+          - { label: "Body", name: "body", widget: "hidden" }
 
       - name: "events-hub"
         label: "Events"
@@ -281,6 +287,7 @@ collections:
             fields:
               - { label: "Section Heading", name: "heading", widget: "string", default: "Past Events" }
               - { label: "Intro Text", name: "intro", widget: "text", required: false, hint: "Optional paragraph below the heading. Leave blank to omit." }
+          - { label: "Body", name: "body", widget: "hidden" }
 
   - name: "ministries-pages"
     label: "Ministries"
