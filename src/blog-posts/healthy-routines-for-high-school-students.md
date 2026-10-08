@@ -13,6 +13,8 @@ featured: true
 community_impact: true
 hero_image: /assets/images/cms-uploads/healthy-routines-students.jpg
 hero_image_alt: Group of young teenagers pose for a photo
+hero_focal_x: 50%
+hero_focal_y: 50%
 excerpt: "Balancing a heavy course load, a job, and everything else isn't just a
   college problem anymore. Drawing on his year as a U.S. Senate page, high
   school senior David Arowolo shares what actually helps: protecting sleep,
@@ -21,6 +23,8 @@ read_time: 5
 show_article_image: true
 article_image: /assets/images/cms-uploads/david-arowolo-headshot.jpeg
 article_image_alt: David Arowolo headshot
+article_focal_x: 50%
+article_focal_y: 25%
 scripture_references:
   - "Reference: Covey, S. (2014). The 7 Habits of Highly Effective Teens. Simon
     & Schuster."
