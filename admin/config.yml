@@ -374,8 +374,20 @@ collections:
         format: "YYYY-MM-DD"
         time_format: false
       - { label: "Nav Label", name: "nav_label", widget: "string", hint: "Short name shown in the Events dropdown (e.g. '12th Anniversary'). Keep under 30 characters." }
-      - { label: "Visible in Nav", name: "visible", widget: "boolean", default: true, hint: "When unchecked, this event is hidden from the site nav and visitors are redirected." }
-      - { label: "Redirect To", name: "redirect_to", widget: "string", default: "/events/", required: false, hint: "Where to send visitors when this page is hidden. Defaults to /events/." }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        default: "active"
+        hint: "Active = shown in nav and Current Events. Past = archive page with 'event has passed' banner, shown in Past Events. Hidden = not shown anywhere; URL redirects to Redirect To."
+        options:
+          - { label: "Active",  value: "active" }
+          - { label: "Past",    value: "past" }
+          - { label: "Hidden",  value: "hidden" }
+      - { label: "Redirect To", name: "redirect_to", widget: "string", default: "/events/", required: false, hint: "Only used when Status is Hidden. Where to send visitors." }
+      - { label: "Event Start Date", name: "event_start_date", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: false, hint: "The first day of the event. Used to sort Current Events (soonest first) and Past Events (newest first). Leave blank to sort by publish date." }
+      - { label: "Event Date (display)", name: "event_date", widget: "string", required: false, hint: "Free-text date label shown on hub cards, e.g. 'Every Sunday' or 'Aug 14–16, 2026'. Leave blank to omit." }
+      - { label: "Card Summary", name: "card_summary", widget: "text", required: false, hint: "2–3 sentences shown on the /events/ hub card. Leave blank to omit." }
+      - { label: "Card Image", name: "card_image", widget: "image", required: false, hint: "Optional thumbnail for the hub card. Falls back to the Hero image when blank." }
 
       - label: "Hero"
         name: "hero"

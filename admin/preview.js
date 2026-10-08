@@ -97,7 +97,7 @@
      Two modes, mirroring event-page.njk: text mode when badge/headline/
      subheadline present; flyer mode (image as centerpiece over a blurred
      backdrop) when all three are blank.                                  */
-  function HeroSection(props, hero) {
+  function HeroSection(props, hero, isPast) {
     var imgSrc = resolveImage(props, hero.image);
     var primaryBtnStyle = {
       background: ORANGE,
@@ -123,11 +123,13 @@
       textTransform: 'uppercase',
       letterSpacing: '0.05em'
     };
-    var primaryBtn = hero.primary_cta_url
-      ? h('a', { href: hero.primary_cta_url, download: true, style: primaryBtnStyle }, hero.primary_cta || 'SAVE THE DATE')
-      : h('span', { style: primaryBtnStyle }, hero.primary_cta || 'PLAN MY VISIT');
+    var primaryBtn = isPast ? null : (
+      hero.primary_cta_url
+        ? h('a', { href: hero.primary_cta_url, download: true, style: primaryBtnStyle }, hero.primary_cta || 'SAVE THE DATE')
+        : h('span', { style: primaryBtnStyle }, hero.primary_cta || 'PLAN MY VISIT')
+    );
     var secondaryBtn = hero.secondary_cta_text
-      ? h('span', { style: secondaryBtnStyle }, hero.secondary_cta_text)
+      ? ((isPast && hero.secondary_cta_url === '#visit-modal') ? null : h('span', { style: secondaryBtnStyle }, hero.secondary_cta_text))
       : null;
     var ctaRow = h('div', { style: { display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '40px' } },
       primaryBtn,
@@ -239,7 +241,7 @@
   }
 
   /* ── Welcome / Message (optional: hidden when heading blank) ── */
-  function WelcomeSection(props, welcome) {
+  function WelcomeSection(props, welcome, isPast) {
     if (!welcome || !welcome.heading) return null;
     return h('section', {
       style: { background: '#fff', padding: '96px 24px', textAlign: 'center' }
@@ -262,7 +264,7 @@
             style: { fontFamily: BODY, fontSize: '17px', color: '#4b5563', lineHeight: '1.8', marginBottom: '20px' }
           }, para);
         }),
-        h('span', {
+        isPast ? null : h('span', {
           style: {
             display: 'inline-block',
             marginTop: '32px',
@@ -755,6 +757,26 @@
     );
   }
 
+
+  /* ── Past Event Banner (shown when status === "past") ──
+     Mirrors the Nunjucks {% if status == "past" %} block in event-page.njk. */
+  function PastBanner(data) {
+    if (data.status !== 'past') return null;
+    return h('div', {
+      style: {
+        background: '#fffbeb',
+        borderBottom: '1px solid #fde68a',
+        textAlign: 'center',
+        padding: '14px 24px',
+        fontFamily: BODY,
+        fontSize: '13px',
+        fontWeight: '600',
+        color: '#92400e',
+        lineHeight: '1.6'
+      }
+    }, 'This event has passed. Visit /events/ to see current events.');
+  }
+
   /* ══════════════════════════════════════════════════════════════════
      Event Pages Preview Component
      Registered for the 'events' folder collection.
@@ -780,6 +802,7 @@
       var giving       = data.giving      || {};
       var ctaFinal     = data.cta_final   || {};
 
+      var isPast = data.status === 'past';
       return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
         /* Preview notice bar */
         h('div', {
@@ -795,10 +818,11 @@
           }
         }, 'Preview — nav, footer, and modal not shown'),
 
-        HeroSection(props, hero),
-        CountdownSection(props, data),
+        PastBanner(data),
+        HeroSection(props, hero, isPast),
+        isPast ? null : CountdownSection(props, data),
         TestimonialsSection(props, testimonials),
-        WelcomeSection(props, welcome),
+        WelcomeSection(props, welcome, isPast),
         ScheduleSection(props, schedule),
         SpeakerSection(props, speaker, data.host_name),
         FeaturesSection(props, features),
