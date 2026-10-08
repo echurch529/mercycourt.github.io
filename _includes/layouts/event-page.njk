@@ -125,6 +125,21 @@
     <!-- Navigation -->
     {% include "nav.njk" %}
 
+    {%- if status == "past" -%}
+    <div class="bg-amber-50 border-b border-amber-200 text-center px-6" style="padding-top: calc(72px + 1rem); padding-bottom: 1rem;">
+        <p class="text-amber-800 font-semibold text-sm leading-relaxed">
+            This event has passed.
+            {%- set activeEvents = collections.eventPages | whereData("status", "active") -%}
+            {%- if activeEvents | length %}
+            See our current event{% if activeEvents | length > 1 %}s{% endif %}:
+            {% for ev in activeEvents %}<a href="/events/{{ ev.data.slug }}" class="underline hover:text-amber-900 transition">{{ ev.data.nav_label }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.
+            {%- else %}
+            <a href="/events/" class="underline hover:text-amber-900 transition">See all events</a>.
+            {%- endif %}
+        </p>
+    </div>
+    {%- endif -%}
+
     <!-- Hero: two modes. Text mode (badge/headline/subheadline present) overlays
          text on a full-bleed background photo. Flyer mode (all hero text blank)
          shows the image itself as the centerpiece — used when the artwork
@@ -146,6 +161,7 @@
                 {{ hero.subheadline }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                {% if status != "past" %}
                 {% if hero.primary_cta_url %}
                 <a href="{{ hero.primary_cta_url }}" download class="text-white px-10 py-4 rounded-full font-bold uppercase text-sm tracking-wide inline-block transition-all" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
                     {{ hero.primary_cta if hero.primary_cta else "SAVE THE DATE" }}
@@ -155,11 +171,14 @@
                     {{ hero.primary_cta if hero.primary_cta else "PLAN MY VISIT" }}
                 </button>
                 {% endif %}
+                {% endif %}
                 {% if hero.secondary_cta_text %}
                     {% if hero.secondary_cta_url == "#visit-modal" %}
+                    {% if status != "past" %}
                     <button onclick="openVisitModal()" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide cursor-pointer bg-transparent">
                         {{ hero.secondary_cta_text }}
                     </button>
+                    {% endif %}
                     {% else %}
                     <a href="{{ hero.secondary_cta_url }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
                         {{ hero.secondary_cta_text }}
@@ -178,6 +197,7 @@
     <section style="background: #0A0A0A; padding-top: 72px;">
         <img src="{{ hero.image }}" alt="{{ hero.image_alt | default(title) }}" class="w-full h-auto block">
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center px-6 py-10">
+            {% if status != "past" %}
             {% if hero.primary_cta_url %}
             <a href="{{ hero.primary_cta_url }}" download class="text-white px-10 py-4 rounded-full font-bold uppercase text-sm tracking-wide inline-block transition-all" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
                 {{ hero.primary_cta if hero.primary_cta else "SAVE THE DATE" }}
@@ -187,11 +207,14 @@
                 {{ hero.primary_cta if hero.primary_cta else "PLAN MY VISIT" }}
             </button>
             {% endif %}
+            {% endif %}
             {% if hero.secondary_cta_text %}
                 {% if hero.secondary_cta_url == "#visit-modal" %}
+                {% if status != "past" %}
                 <button onclick="openVisitModal()" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide cursor-pointer bg-transparent">
                     {{ hero.secondary_cta_text }}
                 </button>
+                {% endif %}
                 {% else %}
                 <a href="{{ hero.secondary_cta_url }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
                     {{ hero.secondary_cta_text }}
@@ -203,7 +226,7 @@
     {% endif %}
 
     <!-- Countdown Timer Section (optional: hidden when countdown_target blank) -->
-    {% if countdown_target %}
+    {% if countdown_target and status != "past" %}
     <section class="py-20 px-6 text-center" style="background: #0A0A0A;">
         <div class="container mx-auto max-w-4xl">
             {% if countdown_heading %}

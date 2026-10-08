@@ -72,14 +72,21 @@ permalink: "/sitemap.xml"
   </url>
   {%- endif %}
   {%- endfor %}
-  <!-- Events (auto-generated; only pages with visible: true) -->
-  {%- set visibleEvents = collections.eventPages | whereData("visible", true) %}
-  {%- for event in visibleEvents %}
+  <!-- Events hub -->
+  <url>
+    <loc>https://mercycourt.org/events/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Event pages: active + past included; hidden excluded. lastmod uses the file's own date field. -->
+  {%- for event in collections.eventPages %}
+  {%- if event.data.status != "hidden" %}
   <url>
     <loc>https://mercycourt.org/events/{{ event.data.slug }}</loc>
-    <lastmod>{{ event.date | isoDate }}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>{{ event.data.event_start_date if event.data.event_start_date else (event.date | isoDate) }}</lastmod>
+    <changefreq>{% if event.data.status == "active" %}weekly{% else %}yearly{% endif %}</changefreq>
+    <priority>{% if event.data.status == "active" %}0.7{% else %}0.5{% endif %}</priority>
   </url>
+  {%- endif %}
   {%- endfor %}
 </urlset>

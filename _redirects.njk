@@ -21,6 +21,8 @@ https://www.mercycourt.org/* https://mercycourt.org/:splat 301
 /one-bring-one.html /events/one-bring-one 301
 /one-bring-one /events/one-bring-one 301
 /pages/*.html /pages/:splat 301
-{% for page in collections.eventPages %}{% if page.data.visible == false %}
-/events/{{ page.data.slug }} {{ page.data.redirect_to | default('/events/') }} 302
-{% endif %}{% endfor %}
+{%- for page in collections.eventPages %}
+{%- if page.data.status == "hidden" %}
+/events/{{ page.data.slug }} {{ page.data.redirect_to | default('/events/') }} 301
+{%- endif %}
+{%- endfor %}

@@ -71,7 +71,11 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addCollection("eventPages", (api) =>
     api.getFilteredByGlob("events/*.html")
-      .sort((a, b) => new Date(b.data.date) - new Date(a.data.date))
+      .sort((a, b) => {
+        const da = new Date(a.data.event_start_date || a.data.date || 0);
+        const db = new Date(b.data.event_start_date || b.data.date || 0);
+        return db - da;
+      })
   );
 
   eleventyConfig.addFilter("postDate", (dateObj) =>
@@ -85,6 +89,17 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter("whereData", (array, key, value) =>
     (array || []).filter((item) => item.data[key] === value)
   );
+
+  eleventyConfig.addFilter("sortByDataKey", (array, key, ascending) => {
+    const copy = [...(array || [])];
+    copy.sort((a, b) => {
+      const va = a.data[key] || "";
+      const vb = b.data[key] || "";
+      if (ascending) return va < vb ? -1 : va > vb ? 1 : 0;
+      return va > vb ? -1 : va < vb ? 1 : 0;
+    });
+    return copy;
+  });
 
   eleventyConfig.addFilter("where", (array, key, value) => {
     return (array || []).filter((item) => {
