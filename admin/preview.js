@@ -2303,10 +2303,188 @@
     );
   }
 
+  function GivePreview(props) {
+    injectTailwind();
+    var entry   = props.entry;
+    var dataMap = entry && entry.getIn ? entry.getIn(['data']) : null;
+    var data    = (dataMap && dataMap.toJS) ? dataMap.toJS() : {};
+    var hero    = data.hero    || {};
+    var intro   = data.intro   || {};
+    var why     = data.why     || {};
+    var ways    = data.ways    || {};
+    var zs      = data.zelle_section  || {};
+    var os      = data.online_section || {};
+    var building = data.building || {};
+
+    var imgUrl = hero.image ? resolveImage(props, hero.image) : '';
+    var heroStyle = {
+      height: '55vh', minHeight: '340px',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      color: '#fff', textAlign: 'center', paddingTop: '72px',
+      position: 'relative', overflow: 'hidden',
+      background: imgUrl
+        ? 'url(' + imgUrl + ') center / cover no-repeat'
+        : '#0A0A0A'
+    };
+    var secStyle   = { padding: '5rem 1.5rem' };
+    var innerStyle = { maxWidth: '72rem', margin: '0 auto' };
+    var darkSecStyle = { padding: '5rem 1.5rem', background: '#111827' };
+    var redSecStyle  = { padding: '4rem 1.5rem', background: '#D95A2B', textAlign: 'center' };
+    var h2Style    = { fontFamily: DISPLAY, fontSize: '2.5rem', textTransform: 'uppercase',
+                       letterSpacing: '-0.01em', marginBottom: '0.75rem' };
+
+    return h('div', { style: { fontFamily: BODY } },
+      h('section', { style: heroStyle },
+        imgUrl ? h('div', { style: { position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' } }) : null,
+        h('div', { style: { position: 'relative', zIndex: 1, padding: '0 1.5rem' } },
+          h('h1', { style: { fontFamily: DISPLAY, fontSize: 'clamp(3rem,8vw,6rem)',
+            textTransform: 'uppercase', lineHeight: 1, marginBottom: '1rem' } },
+            (hero.headline || 'GIVE TO') + ' ',
+            h('span', { style: { color: '#D95A2B' } }, hero.headline_highlight || 'MERCY COURT')
+          ),
+          hero.subheading ? h('p', { style: { color: 'rgba(255,255,255,0.7)', fontSize: '1.125rem',
+            maxWidth: '36rem', margin: '0 auto' } }, hero.subheading) : null
+        )
+      ),
+      h('section', { style: secStyle },
+        h('div', { style: { maxWidth: '42rem', margin: '0 auto' } },
+          h('h2', { style: { fontFamily: DISPLAY, fontSize: '2rem', textTransform: 'uppercase',
+            marginBottom: '1rem' } }, intro.heading || 'Give to Mercy Court'),
+          h('p', { style: { color: '#6b7280', lineHeight: '1.6' } }, intro.body || '')
+        )
+      ),
+      h('section', { style: { ...darkSecStyle } },
+        h('div', { style: innerStyle },
+          h('div', { style: { textAlign: 'center', marginBottom: '3rem' } },
+            h('h2', { style: { ...h2Style, color: '#fff' } },
+              (why.heading || 'WHY WE') + ' ',
+              h('span', { style: { color: '#D95A2B' } }, why.heading_highlight || 'GIVE')
+            ),
+            why.subheading ? h('p', { style: { color: '#9ca3af' } }, why.subheading) : null
+          ),
+          h('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '2rem' } },
+            (why.cards || []).map(function(c, i) {
+              return h('div', { key: i, style: { textAlign: 'center', padding: '2rem' } },
+                h('div', { style: { width: '4rem', height: '4rem', background: '#D95A2B',
+                  borderRadius: '50%', margin: '0 auto 1.5rem' } }),
+                h('h3', { style: { fontFamily: DISPLAY, textTransform: 'uppercase', color: '#fff',
+                  marginBottom: '0.75rem' } }, c.title || ''),
+                h('p', { style: { color: '#9ca3af', fontSize: '0.875rem', lineHeight: '1.6' } }, c.body || '')
+              );
+            })
+          )
+        )
+      ),
+      h('section', { style: secStyle },
+        h('div', { style: innerStyle },
+          h('div', { style: { textAlign: 'center', marginBottom: '3rem' } },
+            h('h2', { style: h2Style },
+              (ways.heading || 'WAYS TO') + ' ',
+              h('span', { style: { color: '#D95A2B' } }, ways.heading_highlight || 'GIVE')
+            )
+          ),
+          h('p', { style: { textAlign: 'center', color: '#6b7280', fontSize: '0.875rem' } },
+            'Zelle · Online · In Person · By Mail — cards driven by frontmatter')
+        )
+      ),
+      h('section', { style: { ...secStyle, background: '#f9fafb' } },
+        h('div', { style: { maxWidth: '42rem', margin: '0 auto', textAlign: 'center' } },
+          h('h2', { style: h2Style },
+            (zs.heading || 'GIVE VIA') + ' ',
+            h('span', { style: { color: '#D95A2B' } }, zs.heading_highlight || 'ZELLE')
+          ),
+          zs.intro ? h('p', { style: { color: '#6b7280' } }, zs.intro) : null
+        )
+      ),
+      h('section', { style: redSecStyle },
+        h('h2', { style: { fontFamily: DISPLAY, fontSize: '2rem', textTransform: 'uppercase',
+          color: '#fff', marginBottom: '1rem' } }, building.heading || 'BUILDING PROJECT'),
+        building.body ? h('p', { style: { color: 'rgba(255,255,255,0.85)', maxWidth: '42rem',
+          margin: '0 auto 2rem', lineHeight: '1.6' } }, building.body) : null
+      )
+    );
+  }
+
+  function WatchLivePreview(props) {
+    injectTailwind();
+    var entry   = props.entry;
+    var dataMap = entry && entry.getIn ? entry.getIn(['data']) : null;
+    var data    = (dataMap && dataMap.toJS) ? dataMap.toJS() : {};
+    var hero    = data.hero         || {};
+    var blog    = data.blog_section || {};
+    var give    = data.give_section || {};
+    var mail    = data.mailing_list || {};
+
+    var imgUrl = hero.image ? resolveImage(props, hero.image) : '';
+    var heroStyle = {
+      height: '55vh', minHeight: '340px',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      color: '#fff', textAlign: 'center', paddingTop: '72px',
+      position: 'relative', overflow: 'hidden',
+      background: imgUrl
+        ? 'url(' + imgUrl + ') center / cover no-repeat'
+        : '#0A0A0A'
+    };
+    var secStyle    = { padding: '5rem 1.5rem' };
+    var graySecStyle = { padding: '4rem 1.5rem', background: '#f9fafb' };
+    var redSecStyle  = { padding: '4rem 1.5rem', background: '#D95A2B', textAlign: 'center' };
+    var noteStyle    = { color: '#9ca3af', fontSize: '0.875rem', fontStyle: 'italic',
+                         padding: '1.5rem', background: '#f9fafb', borderRadius: '1rem', textAlign: 'center' };
+
+    return h('div', { style: { fontFamily: BODY } },
+      h('section', { style: heroStyle },
+        imgUrl ? h('div', { style: { position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' } }) : null,
+        h('div', { style: { position: 'relative', zIndex: 1, padding: '0 1.5rem' } },
+          h('h1', { style: { fontFamily: DISPLAY, fontSize: 'clamp(3rem,8vw,6rem)',
+            textTransform: 'uppercase', lineHeight: 1, marginBottom: '1rem' } },
+            (hero.headline || 'WATCH') + ' ',
+            h('span', { style: { color: '#D95A2B' } }, hero.headline_highlight || 'LIVE')
+          ),
+          hero.subheading ? h('p', { style: { color: 'rgba(255,255,255,0.7)', fontSize: '1.125rem',
+            maxWidth: '36rem', margin: '0 auto' } }, hero.subheading) : null
+        )
+      ),
+      h('section', { style: { padding: '4rem 1.5rem', background: '#0A0A0A' } },
+        h('div', { style: { maxWidth: '64rem', margin: '0 auto', background: '#1f2937',
+          borderRadius: '0.75rem', aspectRatio: '16/9', display: 'flex', alignItems: 'center',
+          justifyContent: 'center' } },
+          h('p', { style: { color: '#9ca3af', fontSize: '0.875rem' } }, 'Live stream embed (YouTube)')
+        )
+      ),
+      h('section', { style: graySecStyle },
+        h('div', { style: { maxWidth: '64rem', margin: '0 auto' } },
+          h('div', { style: { textAlign: 'center', marginBottom: '2.5rem' } },
+            h('p', { style: { color: '#D95A2B', fontSize: '0.75rem', fontWeight: 700,
+              textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem' } }, 'From the Blog'),
+            h('h2', { style: { fontFamily: DISPLAY, fontSize: '2rem', textTransform: 'uppercase' } },
+              blog.heading || 'Latest from Mercy Court')
+          ),
+          h('p', { style: noteStyle }, '3 most recent blog posts — shown automatically from collections.posts')
+        )
+      ),
+      h('section', { style: secStyle },
+        h('div', { style: { maxWidth: '56rem', margin: '0 auto' } },
+          h('h2', { style: { fontFamily: DISPLAY, fontSize: '2.5rem', textTransform: 'uppercase',
+            marginBottom: '1rem' } }, give.heading || 'Give to Mercy Court'),
+          give.body ? h('p', { style: { color: '#6b7280', fontSize: '1.125rem',
+            marginBottom: '1.5rem' } }, give.body) : null
+        )
+      ),
+      h('section', { style: redSecStyle },
+        h('h2', { style: { fontFamily: DISPLAY, fontSize: '2rem', textTransform: 'uppercase',
+          color: '#fff', marginBottom: '1rem' } }, mail.heading || 'JOIN OUR MAILING LIST'),
+        mail.body ? h('p', { style: { color: 'rgba(255,255,255,0.8)', fontSize: '0.875rem',
+          maxWidth: '28rem', margin: '0 auto' } }, mail.body) : null
+      )
+    );
+  }
+
   function MainPagesDispatch(props) {
     try {
       var path = (props.entry && props.entry.get('path')) || '';
       if (path.indexOf('events/index') !== -1)  return EventsHubPreview(props);
+      if (path.indexOf('give') !== -1)           return GivePreview(props);
+      if (path.indexOf('watch-live') !== -1)     return WatchLivePreview(props);
       if (path.indexOf('index') !== -1)           return HomePreview(props);
       if (path.indexOf('about-us') !== -1)        return AboutPreview(props);
       if (path.indexOf('contact') !== -1)         return ContactPreview(props);

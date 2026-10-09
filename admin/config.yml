@@ -288,6 +288,160 @@ collections:
               - { label: "Intro Text", name: "intro", widget: "text", required: false, hint: "Optional paragraph below the heading. Leave blank to omit." }
           - { label: "Body", name: "body", widget: "hidden" }
 
+      - name: "give"
+        label: "Give"
+        file: "give.html"
+        fields:
+          - { label: "SEO Title", name: "seo_title", widget: "string" }
+          - { label: "SEO Description", name: "seo_description", widget: "text" }
+          - { label: "OG Image", name: "og_image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB." }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string" }
+              - { label: "Headline (first line)", name: "headline", widget: "string" }
+              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string" }
+              - { label: "Subheading", name: "subheading", widget: "string" }
+          - label: "Intro"
+            name: "intro"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+          - label: "Why We Give"
+            name: "why"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Heading Highlight (red)", name: "heading_highlight", widget: "string" }
+              - { label: "Subheading", name: "subheading", widget: "string" }
+              - label: "Cards"
+                name: "cards"
+                widget: "list"
+                summary: "{{fields.title}}"
+                max: 3
+                min: 3
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+          - label: "Ways to Give"
+            name: "ways"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Heading Highlight (red)", name: "heading_highlight", widget: "string" }
+              - label: "Zelle Card"
+                name: "zelle"
+                widget: "object"
+                fields:
+                  - { label: "Badge Text", name: "badge", widget: "string" }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Body", name: "body", widget: "string" }
+                  - { label: "Button Text", name: "button_text", widget: "string" }
+                  - { label: "Button URL", name: "button_url", widget: "string" }
+              - label: "Online Card"
+                name: "online"
+                widget: "object"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - { label: "Button Text", name: "button_text", widget: "string" }
+                  - { label: "Button URL", name: "button_url", widget: "string" }
+              - label: "In Person Card"
+                name: "inperson"
+                widget: "object"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - { label: "Button Text", name: "button_text", widget: "string" }
+                  - { label: "Button URL", name: "button_url", widget: "string" }
+              - label: "By Mail Card"
+                name: "mail"
+                widget: "object"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - { label: "Button Text", name: "button_text", widget: "string" }
+                  - { label: "Button URL", name: "button_url", widget: "string" }
+          - label: "Give via Zelle Section"
+            name: "zelle_section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Heading Highlight (red)", name: "heading_highlight", widget: "string" }
+              - { label: "Intro Text", name: "intro", widget: "text" }
+          - label: "Online Giving Section"
+            name: "online_section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Heading Highlight (red)", name: "heading_highlight", widget: "string" }
+              - { label: "Body", name: "body", widget: "string" }
+          - label: "Building Project Section"
+            name: "building"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Button Text", name: "button_text", widget: "string" }
+          - { label: "Tax Info", name: "tax_info", widget: "text" }
+          - label: "Mailing List Section"
+            name: "mailing_list"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+          - { label: "Body", name: "body", widget: "hidden" }
+
+      - name: "watch-live"
+        label: "Watch Live"
+        file: "watch-live.html"
+        fields:
+          - { label: "SEO Title", name: "seo_title", widget: "string" }
+          - { label: "SEO Description", name: "seo_description", widget: "text" }
+          - { label: "OG Image", name: "og_image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB." }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string" }
+              - { label: "Headline (first line)", name: "headline", widget: "string" }
+              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string" }
+              - { label: "Subheading", name: "subheading", widget: "string" }
+          - label: "Blog Section"
+            name: "blog_section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Section Heading", name: "heading", widget: "string" }
+          - label: "Give Section"
+            name: "give_section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+          - label: "Mailing List Section"
+            name: "mailing_list"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+          - { label: "Body", name: "body", widget: "hidden" }
+
   - name: "ministries-pages"
     label: "Ministries"
     files:

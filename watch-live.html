@@ -2,24 +2,41 @@
 layout: false
 templateEngineOverride: njk
 permalink: watch-live.html
+seo_title: "Watch Live & Sermons | RCCG Mercy Court Baltimore"
+seo_description: "Watch RCCG Mercy Court live every Sunday at 10AM or catch up on past sermons. Join us online from anywhere and experience powerful worship and messages."
+og_image: "assets/images/2026/congregation/congregation-worship-service-01.jpg"
+hero:
+  image: "assets/images/2026/congregation/congregation-seated-service-01.jpg"
+  image_alt: "Congregation seated during worship service at Mercy Court"
+  headline: "WATCH"
+  headline_highlight: "LIVE"
+  subheading: "Join us online for worship, the Word, and fellowship — wherever you are."
+blog_section:
+  heading: "Latest from Mercy Court"
+give_section:
+  heading: "Give to Mercy Court"
+  body: "Your generosity keeps blessing lives, thank you for giving."
+mailing_list:
+  heading: "JOIN OUR MAILING LIST"
+  body: "We promise not to spam you, but send you edifying and amazing content regularly from RCCG Mercy Court."
 ---
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watch Live & Sermons | RCCG Mercy Court Baltimore</title>
-    <meta name="description" content="Watch RCCG Mercy Court live every Sunday at 10AM or catch up on past sermons. Join us online from anywhere and experience powerful worship and messages.">
+    <title>{{ seo_title }}</title>
+    <meta name="description" content="{{ seo_description }}">
     <link rel="canonical" href="https://mercycourt.org/watch-live">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="RCCG Mercy Court">
-    <meta property="og:title" content="Watch Live & Sermons | RCCG Mercy Court Baltimore">
-    <meta property="og:description" content="Watch RCCG Mercy Court live every Sunday at 10AM or catch up on past sermons. Join us online from anywhere and experience powerful worship and messages.">
+    <meta property="og:title" content="{{ seo_title }}">
+    <meta property="og:description" content="{{ seo_description }}">
     <meta property="og:url" content="https://mercycourt.org/watch-live">
-    <meta property="og:image" content="https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-01.jpg">
+    <meta property="og:image" content="https://mercycourt.org/{{ og_image }}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Watch Live & Sermons | RCCG Mercy Court Baltimore">
-    <meta name="twitter:description" content="Watch RCCG Mercy Court live every Sunday at 10AM or catch up on past sermons. Join us online from anywhere and experience powerful worship and messages.">
+    <meta name="twitter:title" content="{{ seo_title }}">
+    <meta name="twitter:description" content="{{ seo_description }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,15 +108,15 @@ permalink: watch-live.html
 
     <!-- Hero Section -->
     <section class="relative h-[65vh] flex items-center justify-center overflow-hidden" style="padding-top: 72px;">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/images/2026/congregation/congregation-seated-service-01.jpg');">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ hero.image }}');">
             <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
         </div>
         <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
             <h1 class="font-anton text-4xl md:text-7xl lg:text-8xl uppercase leading-[1.1] mb-4 text-white tracking-h1">
-                WATCH <span class="text-brand-red">LIVE</span>
+                {{ hero.headline }} <span class="text-brand-red">{{ hero.headline_highlight }}</span>
             </h1>
             <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto">
-                Join us online for worship, the Word, and fellowship — wherever you are.
+                {{ hero.subheading }}
             </p>
         </div>
     </section>
@@ -263,42 +280,24 @@ permalink: watch-live.html
         <div class="container mx-auto max-w-5xl">
             <div class="text-center mb-10">
                 <span class="inline-block text-xs font-bold uppercase tracking-widest mb-3" style="color: #E8541A;">From the Blog</span>
-                <h2 class="font-anton text-3xl md:text-4xl uppercase tracking-h2">Latest from Mercy Court</h2>
+                <h2 class="font-anton text-3xl md:text-4xl uppercase tracking-h2">{{ blog_section.heading }}</h2>
             </div>
             <div class="grid md:grid-cols-3 gap-6">
-                <a href="blog-posts/the-compound-effect.html" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 reveal">
+                {% for post in collections.posts | limit(3) %}
+                <a href="{{ post.url | cleanUrl }}" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 reveal">
                     <div style="height: 160px; overflow: hidden;">
-                        <img loading="lazy" src="assets/images/2026/blog-photos/planting-seed-grow-step-concept-in-garden-and-sunl-2026-03-05-11-53-22-utc.jpg" alt="The Compound Effect" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img loading="lazy" src="{{ post.data.hero_image }}" alt="{{ post.data.title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
                     <div class="p-5">
-                        <p class="text-gray-400 text-xs mb-1">May 18, 2026</p>
-                        <h3 class="font-bold leading-snug text-sm" style="color: #1B2A4A;">The Compound Effect: Why Little by Little Builds Real Wealth</h3>
+                        <p class="text-gray-400 text-xs mb-1">{{ post.date | postDate }}</p>
+                        <h3 class="font-bold leading-snug text-sm" style="color: #1B2A4A;">{{ post.data.title }}</h3>
                         <p class="font-bold text-xs mt-3 text-brand-red">Read More &rarr;</p>
                     </div>
                 </a>
-                <a href="blog-posts/repositioned-for-greatness.html" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 reveal">
-                    <div style="height: 160px; overflow: hidden;">
-                        <img loading="lazy" src="assets/images/2026/blog-photos/adventurous-adult-man-hiking-on-top-of-a-mountain-2026-03-24-23-52-07-utc (1).jpg" alt="Repositioned for Greatness" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    </div>
-                    <div class="p-5">
-                        <p class="text-gray-400 text-xs mb-1">May 11, 2026</p>
-                        <h3 class="font-bold leading-snug text-sm" style="color: #1B2A4A;">Repositioned for Greatness: 5 Keys to Unlock Your Potential</h3>
-                        <p class="font-bold text-xs mt-3 text-brand-red">Read More &rarr;</p>
-                    </div>
-                </a>
-                <a href="blog-posts/the-power-of-your-circle.html" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 reveal">
-                    <div style="height: 160px; overflow: hidden;">
-                        <img loading="lazy" src="assets/images/2026/congregation/congregation-worship-service-01.jpg" alt="The Power of Your Circle" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    </div>
-                    <div class="p-5">
-                        <p class="text-gray-400 text-xs mb-1">May 4, 2026</p>
-                        <h3 class="font-bold leading-snug text-sm" style="color: #1B2A4A;">The Power of Your Circle: 3 Friends You Need to Thrive</h3>
-                        <p class="font-bold text-xs mt-3 text-brand-red">Read More &rarr;</p>
-                    </div>
-                </a>
+                {% endfor %}
             </div>
             <div class="text-center mt-8">
-                <a href="blog.html" class="inline-block border-2 border-brand-dark text-brand-dark px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-brand-dark hover:text-white transition">View All Articles</a>
+                <a href="/blog" class="inline-block border-2 border-brand-dark text-brand-dark px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-brand-dark hover:text-white transition">View All Articles</a>
             </div>
         </div>
     </section>
@@ -308,21 +307,19 @@ permalink: watch-live.html
         <div class="container mx-auto max-w-4xl">
             <div class="border-l-4 border-brand-red pl-8">
                 <h2 class="font-anton text-4xl md:text-4xl uppercase mb-4 tracking-h2">
-                    Give to Mercy Court
+                    {{ give_section.heading }}
                 </h2>
-                <p class="text-gray-600 text-lg mb-4">
-                    Your generosity keeps blessing lives, thank you for giving.
-                </p>
+                <p class="text-gray-600 text-lg mb-4">{{ give_section.body }}</p>
                 <div class="flex flex-wrap items-center gap-x-4 gap-y-2 bg-gray-50 rounded-xl px-5 py-3 mb-6">
                     <span class="text-xs font-bold uppercase tracking-widest text-gray-500 shrink-0">Via Zelle:</span>
-                    <span class="font-bold text-gray-900"><span class="text-brand-red">(410) 900-9111</span> — RCCG Mercy Court</span>
+                    <span class="font-bold text-gray-900"><span class="text-brand-red">{{ site.zelle_phone }}</span> — {{ site.zelle_name }}</span>
                     <span class="text-gray-400 text-xs">No fees · Instant</span>
                 </div>
                 <div class="flex flex-wrap gap-4">
                     <button onclick="openGivingModal()" class="inline-block border-2 border-brand-dark text-brand-dark px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-brand-dark hover:text-white transition cursor-pointer">
                         Give Now
                     </button>
-                    <a href="contact.html" class="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition">
+                    <a href="/contact" class="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition">
                         Building Project
                     </a>
                 </div>
@@ -334,12 +331,9 @@ permalink: watch-live.html
     <section class="bg-brand-red py-16 px-6" style="padding-bottom: 60px;">
         <div class="container mx-auto max-w-2xl text-center">
             <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-h2">
-                JOIN OUR MAILING LIST
+                {{ mailing_list.heading }}
             </h2>
-            <p class="text-white/80 text-sm mb-8">
-                We promise not to spam you, but send you edifying and amazing
-                content regularly from RCCG Mercy Court.
-            </p>
+            <p class="text-white/80 text-sm mb-8">{{ mailing_list.body }}</p>
             <div class="max-w-md mx-auto">
                 <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
                 <style>
@@ -423,8 +417,8 @@ permalink: watch-live.html
                     <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3">Give via Zelle — No Fees · Instant</p>
                     <div class="flex flex-wrap items-center gap-4">
                         <div>
-                            <p class="font-bold text-gray-900 text-lg">(410) 900-9111</p>
-                            <p class="text-gray-500 text-xs">RCCG Mercy Court · Open Zelle in your bank app</p>
+                            <p class="font-bold text-gray-900 text-lg">{{ site.zelle_phone }}</p>
+                            <p class="text-gray-500 text-xs">{{ site.zelle_name }} · Open Zelle in your bank app</p>
                         </div>
                         <div class="hidden sm:block w-px h-8 bg-gray-200"></div>
                         <p class="text-gray-500 text-sm">Or give online via Zeffy below.</p>
@@ -433,7 +427,7 @@ permalink: watch-live.html
                 <iframe
                     id="giving-iframe"
                     src=""
-                    data-src="https://www.zeffy.com/en-US/embed/donation-form/general-giving-25"
+                    data-src="{{ site.zeffy_general }}"
                     allowpaymentrequest
                     style="width: 100%; height: 800px; border: none; display: block;"
                 ></iframe>

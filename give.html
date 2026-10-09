@@ -2,24 +2,87 @@
 layout: false
 templateEngineOverride: njk
 permalink: give.html
+seo_title: "Give & Support | RCCG Mercy Court Baltimore"
+seo_description: "Support the mission of RCCG Mercy Court. Your generosity helps us raise pacesetters, serve Baltimore, and make a lasting Kingdom impact. Give securely online."
+og_image: "assets/images/2026/congregation/congregation-worship-service-01.jpg"
+hero:
+  image: "assets/images/2026/congregation/worship-team-on-stage-01.jpg"
+  image_alt: "Worship team on stage at Mercy Court"
+  headline: "GIVE TO"
+  headline_highlight: "MERCY COURT"
+  subheading: "Your generosity keeps blessing lives. Thank you for giving."
+intro:
+  heading: "Give to Mercy Court"
+  body: "We believe that generosity is an act of worship and a reflection of God's love. Your financial support helps us reach more people, serve our community, and advance the kingdom of God."
+why:
+  heading: "WHY WE"
+  heading_highlight: "GIVE"
+  subheading: "Giving is an expression of our gratitude to God and our trust in His provision."
+  cards:
+    - title: "Worship"
+      body: "Giving is an act of worship. When we give, we acknowledge that everything we have comes from God."
+    - title: "Community"
+      body: "Your giving supports our community outreach programs, feeding the hungry, and serving those in need."
+    - title: "Mission"
+      body: "Your generosity funds our mission to spread the gospel and plant churches across communities."
+ways:
+  heading: "WAYS TO"
+  heading_highlight: "GIVE"
+  zelle:
+    badge: "Most Popular"
+    title: "Zelle"
+    body: "No fees · Instant"
+    button_text: "How to Give"
+    button_url: "#give-zelle"
+  online:
+    title: "Online"
+    body: "Give securely online through our website. One-time or recurring donations available."
+    button_text: "Give Online"
+    button_url: "#give-now"
+  inperson:
+    title: "In Person"
+    body: "Give during any of our services. Offering envelopes are available at the welcome desk."
+    button_text: "Visit Us"
+    button_url: "/contact"
+  mail:
+    title: "By Mail"
+    body: "Mail your gift to: RCCG Mercy Court, 529 Walker Avenue, Baltimore, MD 21212."
+    button_text: "Get Address"
+    button_url: "/contact"
+zelle_section:
+  heading: "GIVE VIA"
+  heading_highlight: "ZELLE"
+  intro: "Open your bank's Zelle feature and send to the number below. Quick, free, and funds arrive immediately."
+online_section:
+  heading: "GIVE"
+  heading_highlight: "NOW"
+  body: "Secure online giving powered by Zeffy — 100% of your donation goes to Mercy Court."
+building:
+  heading: "BUILDING PROJECT"
+  body: "Support our building project as we expand our facilities to serve more people and create a permanent home for Mercy Court."
+  button_text: "Contribute to Building Project"
+tax_info: "RCCG Mercy Court is a registered 501(c)(3) nonprofit organization. All donations are tax-deductible to the extent allowed by law. You will receive a giving statement for your records at the end of each year."
+mailing_list:
+  heading: "JOIN OUR MAILING LIST"
+  body: "We promise not to spam you, but send you edifying and amazing content regularly from RCCG Mercy Court."
 ---
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Give & Support | RCCG Mercy Court Baltimore</title>
-    <meta name="description" content="Support the mission of RCCG Mercy Court. Your generosity helps us raise pacesetters, serve Baltimore, and make a lasting Kingdom impact. Give securely online.">
+    <title>{{ seo_title }}</title>
+    <meta name="description" content="{{ seo_description }}">
     <link rel="canonical" href="https://mercycourt.org/give">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="RCCG Mercy Court">
-    <meta property="og:title" content="Give & Support | RCCG Mercy Court Baltimore">
-    <meta property="og:description" content="Support the mission of RCCG Mercy Court. Your generosity helps us raise pacesetters, serve Baltimore, and make a lasting Kingdom impact. Give securely online.">
+    <meta property="og:title" content="{{ seo_title }}">
+    <meta property="og:description" content="{{ seo_description }}">
     <meta property="og:url" content="https://mercycourt.org/give">
-    <meta property="og:image" content="https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-01.jpg">
+    <meta property="og:image" content="https://mercycourt.org/{{ og_image }}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Give & Support | RCCG Mercy Court Baltimore">
-    <meta name="twitter:description" content="Support the mission of RCCG Mercy Court. Your generosity helps us raise pacesetters, serve Baltimore, and make a lasting Kingdom impact. Give securely online.">
+    <meta name="twitter:title" content="{{ seo_title }}">
+    <meta name="twitter:description" content="{{ seo_description }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://www.zeffy.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,7 +110,7 @@ permalink: give.html
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Give & Support | RCCG Mercy Court Baltimore",
+    "name": "{{ seo_title }}",
     "url": "https://mercycourt.org/give.html",
     "publisher": {
       "@type": "Church",
@@ -87,15 +150,15 @@ permalink: give.html
 
     <!-- Hero Section -->
     <section class="relative h-[65vh] flex items-center justify-center overflow-hidden" style="padding-top: 72px;">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/images/2026/congregation/worship-team-on-stage-01.jpg');">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ hero.image }}');" role="img" aria-label="{{ hero.image_alt }}">
             <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
         </div>
         <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
             <h1 class="font-anton text-4xl md:text-7xl lg:text-8xl uppercase leading-[1.1] mb-4 text-white tracking-h1">
-                GIVE TO <span class="text-brand-red">MERCY COURT</span>
+                {{ hero.headline }} <span class="text-brand-red">{{ hero.headline_highlight }}</span>
             </h1>
             <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto">
-                Your generosity keeps blessing lives. Thank you for giving.
+                {{ hero.subheading }}
             </p>
         </div>
     </section>
@@ -105,19 +168,17 @@ permalink: give.html
         <div class="container mx-auto max-w-4xl text-center">
             <div class="border-l-4 border-brand-red pl-8 text-left mb-16">
                 <h2 class="font-anton text-4xl md:text-4xl uppercase mb-4 tracking-h2">
-                    Give to Mercy Court
+                    {{ intro.heading }}
                 </h2>
                 <p class="text-gray-600 text-lg">
-                    We believe that generosity is an act of worship and a reflection of God's love.
-                    Your financial support helps us reach more people, serve our community,
-                    and advance the kingdom of God.
+                    {{ intro.body }}
                 </p>
             </div>
 
             <div class="bg-gray-50 rounded-2xl px-8 py-6 inline-block mb-8 text-center">
                 <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Fastest Way to Give — Via Zelle</p>
-                <p class="font-bold text-2xl text-gray-900 mb-1">(410) 900-9111</p>
-                <p class="text-gray-500 text-sm">RCCG Mercy Court · No fees · Instant · <a href="#give-zelle" class="text-brand-red hover:underline">How it works</a></p>
+                <p class="font-bold text-2xl text-gray-900 mb-1">{{ site.zelle_phone }}</p>
+                <p class="text-gray-500 text-sm">{{ site.zelle_name }} · No fees · Instant · <a href="#give-zelle" class="text-brand-red hover:underline">How it works</a></p>
             </div>
             <div class="flex flex-wrap justify-center gap-6 mb-16">
                 <a href="#give-zelle" class="inline-block bg-brand-red text-white px-10 py-4 rounded-full font-bold uppercase text-lg hover:bg-[#C04E25] transition shadow-lg">
@@ -135,49 +196,29 @@ permalink: give.html
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-12">
                 <h2 class="font-anton text-4xl md:text-4xl uppercase text-white tracking-h2 mb-4">
-                    WHY WE <span class="text-brand-red">GIVE</span>
+                    {{ why.heading }} <span class="text-brand-red">{{ why.heading_highlight }}</span>
                 </h2>
                 <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                    Giving is an expression of our gratitude to God and our trust in His provision.
+                    {{ why.subheading }}
                 </p>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
+                {% set why_icons = [
+                    "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
+                    "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
+                    "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ] %}
+                {% for card in why.cards %}
                 <div class="text-center p-8">
                     <div class="w-16 h-16 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-6">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ why_icons[loop.index0] }}"/>
                         </svg>
                     </div>
-                    <h3 class="font-anton text-xl uppercase text-white mb-3 tracking-h3">Worship</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Giving is an act of worship. When we give, we acknowledge that everything
-                        we have comes from God.
-                    </p>
+                    <h3 class="font-anton text-xl uppercase text-white mb-3 tracking-h3">{{ card.title }}</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">{{ card.body }}</p>
                 </div>
-                <div class="text-center p-8">
-                    <div class="w-16 h-16 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-anton text-xl uppercase text-white mb-3 tracking-h3">Community</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Your giving supports our community outreach programs, feeding the hungry,
-                        and serving those in need.
-                    </p>
-                </div>
-                <div class="text-center p-8">
-                    <div class="w-16 h-16 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-anton text-xl uppercase text-white mb-3 tracking-h3">Mission</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Your generosity funds our mission to spread the gospel and plant
-                        churches across communities.
-                    </p>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -187,7 +228,7 @@ permalink: give.html
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-12">
                 <h2 class="font-anton text-4xl md:text-4xl uppercase tracking-h2 mb-4">
-                    WAYS TO <span class="text-brand-red">GIVE</span>
+                    {{ ways.heading }} <span class="text-brand-red">{{ ways.heading_highlight }}</span>
                 </h2>
             </div>
             <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-8">
@@ -197,12 +238,12 @@ permalink: give.html
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
                         </svg>
                     </div>
-                    <div class="inline-block bg-white/20 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3">Most Popular</div>
-                    <h3 class="font-anton text-xl uppercase mb-2 text-white tracking-h3">Zelle</h3>
-                    <p class="text-white font-bold text-sm mb-1">(410) 900-9111</p>
-                    <p class="text-white/80 text-xs leading-relaxed mb-4">RCCG Mercy Court · No fees · Instant</p>
-                    <a href="#give-zelle" class="inline-block bg-white text-brand-red px-6 py-2 rounded-full font-bold uppercase text-xs hover:bg-gray-100 transition">
-                        How to Give
+                    <div class="inline-block bg-white/20 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3">{{ ways.zelle.badge }}</div>
+                    <h3 class="font-anton text-xl uppercase mb-2 text-white tracking-h3">{{ ways.zelle.title }}</h3>
+                    <p class="text-white font-bold text-sm mb-1">{{ site.zelle_phone }}</p>
+                    <p class="text-white/80 text-xs leading-relaxed mb-4">{{ site.zelle_name }} · {{ ways.zelle.body }}</p>
+                    <a href="{{ ways.zelle.button_url }}" class="inline-block bg-white text-brand-red px-6 py-2 rounded-full font-bold uppercase text-xs hover:bg-gray-100 transition">
+                        {{ ways.zelle.button_text }}
                     </a>
                 </div>
                 <div class="bg-gray-50 rounded-xl p-8 text-center border border-gray-100 hover:shadow-lg transition reveal">
@@ -211,12 +252,10 @@ permalink: give.html
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                         </svg>
                     </div>
-                    <h3 class="font-anton text-xl uppercase mb-3 tracking-h3">Online</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                        Give securely online through our website. One-time or recurring donations available.
-                    </p>
-                    <a href="#give-now" class="inline-block bg-brand-red text-white px-6 py-2 rounded-full font-bold uppercase text-xs hover:bg-[#C04E25] transition">
-                        Give Online
+                    <h3 class="font-anton text-xl uppercase mb-3 tracking-h3">{{ ways.online.title }}</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">{{ ways.online.body }}</p>
+                    <a href="{{ ways.online.button_url }}" class="inline-block bg-brand-red text-white px-6 py-2 rounded-full font-bold uppercase text-xs hover:bg-[#C04E25] transition">
+                        {{ ways.online.button_text }}
                     </a>
                 </div>
                 <div class="bg-gray-50 rounded-xl p-8 text-center border border-gray-100 hover:shadow-lg transition reveal">
@@ -225,12 +264,10 @@ permalink: give.html
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                         </svg>
                     </div>
-                    <h3 class="font-anton text-xl uppercase mb-3 tracking-h3">In Person</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                        Give during any of our services. Offering envelopes are available at the welcome desk.
-                    </p>
-                    <a href="contact.html" class="inline-block bg-brand-red text-white px-6 py-2 rounded-full font-bold uppercase text-xs hover:bg-[#C04E25] transition">
-                        Visit Us
+                    <h3 class="font-anton text-xl uppercase mb-3 tracking-h3">{{ ways.inperson.title }}</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">{{ ways.inperson.body }}</p>
+                    <a href="{{ ways.inperson.button_url }}" class="inline-block bg-brand-red text-white px-6 py-2 rounded-full font-bold uppercase text-xs hover:bg-[#C04E25] transition">
+                        {{ ways.inperson.button_text }}
                     </a>
                 </div>
                 <div class="bg-gray-50 rounded-xl p-8 text-center border border-gray-100 hover:shadow-lg transition reveal">
@@ -239,12 +276,10 @@ permalink: give.html
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                         </svg>
                     </div>
-                    <h3 class="font-anton text-xl uppercase mb-3 tracking-h3">By Mail</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                        Mail your gift to: RCCG Mercy Court, 529 Walker Avenue, Baltimore, MD 21212.
-                    </p>
-                    <a href="contact.html" class="inline-block bg-brand-red text-white px-6 py-2 rounded-full font-bold uppercase text-xs hover:bg-[#C04E25] transition">
-                        Get Address
+                    <h3 class="font-anton text-xl uppercase mb-3 tracking-h3">{{ ways.mail.title }}</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">{{ ways.mail.body }}</p>
+                    <a href="{{ ways.mail.button_url }}" class="inline-block bg-brand-red text-white px-6 py-2 rounded-full font-bold uppercase text-xs hover:bg-[#C04E25] transition">
+                        {{ ways.mail.button_text }}
                     </a>
                 </div>
             </div>
@@ -261,20 +296,20 @@ permalink: give.html
                         Most Popular · No Fees
                     </div>
                     <h2 class="font-anton text-3xl md:text-4xl uppercase tracking-h2 mb-4">
-                        GIVE VIA <span class="text-brand-red">ZELLE</span>
+                        {{ zelle_section.heading }} <span class="text-brand-red">{{ zelle_section.heading_highlight }}</span>
                     </h2>
                     <p class="text-gray-600 text-base leading-relaxed max-w-xl mx-auto">
-                        Open your bank's Zelle feature and send to the number below. Quick, free, and funds arrive immediately.
+                        {{ zelle_section.intro }}
                     </p>
                 </div>
                 <div class="bg-gray-50 rounded-xl p-6 text-center mb-8">
                     <p class="text-xs uppercase font-bold tracking-widest text-gray-500 mb-2">Send Zelle to</p>
-                    <p class="font-bold text-3xl text-gray-900 mb-1">(410) 900-9111</p>
-                    <p class="text-gray-600 font-semibold">RCCG Mercy Court</p>
+                    <p class="font-bold text-3xl text-gray-900 mb-1">{{ site.zelle_phone }}</p>
+                    <p class="text-gray-600 font-semibold">{{ site.zelle_name }}</p>
                 </div>
                 <ol class="space-y-4 text-gray-600 text-sm">
                     <li class="flex gap-3"><span class="font-bold text-brand-red text-base leading-snug shrink-0">1.</span><span>Open your bank's app and find the <strong>Zelle</strong> feature (available in most major banking apps).</span></li>
-                    <li class="flex gap-3"><span class="font-bold text-brand-red text-base leading-snug shrink-0">2.</span><span>Send to <strong>(410) 900-9111</strong> — confirm the recipient name shows as <strong>RCCG Mercy Court</strong> before sending.</span></li>
+                    <li class="flex gap-3"><span class="font-bold text-brand-red text-base leading-snug shrink-0">2.</span><span>Send to <strong>{{ site.zelle_phone }}</strong> — confirm the recipient name shows as <strong>{{ site.zelle_name }}</strong> before sending.</span></li>
                     <li class="flex gap-3"><span class="font-bold text-brand-red text-base leading-snug shrink-0">3.</span><span>Enter your amount and add an optional note (e.g. "Tithe", "Building Fund"). That's it — funds arrive instantly!</span></li>
                 </ol>
             </div>
@@ -286,12 +321,12 @@ permalink: give.html
         <div class="container mx-auto max-w-3xl">
             <div class="text-center mb-10">
                 <h2 class="font-anton text-4xl uppercase tracking-h2 mb-4">
-                    GIVE <span class="text-brand-red">NOW</span>
+                    {{ online_section.heading }} <span class="text-brand-red">{{ online_section.heading_highlight }}</span>
                 </h2>
-                <p class="text-gray-600 text-sm">Secure online giving powered by Zeffy — 100% of your donation goes to Mercy Court.</p>
+                <p class="text-gray-600 text-sm">{{ online_section.body }}</p>
             </div>
             <iframe
-                src="https://www.zeffy.com/en-US/embed/donation-form/general-giving-25"
+                src="{{ site.zeffy_general }}"
                 allowpaymentrequest
                 style="width: 100%; height: 900px; border: none; display: block;"
             ></iframe>
@@ -302,14 +337,13 @@ permalink: give.html
     <section class="bg-brand-red py-16 px-6" style="padding-bottom: 60px;">
         <div class="container mx-auto max-w-4xl text-center">
             <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-h2">
-                BUILDING PROJECT
+                {{ building.heading }}
             </h2>
             <p class="text-white/90 text-lg max-w-2xl mx-auto mb-8">
-                Support our building project as we expand our facilities to serve more people
-                and create a permanent home for Mercy Court.
+                {{ building.body }}
             </p>
             <button onclick="openBuildingModal()" class="inline-block bg-white text-brand-red px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-gray-100 transition shadow-lg cursor-pointer">
-                Contribute to Building Project
+                {{ building.button_text }}
             </button>
         </div>
     </section>
@@ -317,10 +351,7 @@ permalink: give.html
     <!-- Tax Info -->
     <section class="bg-gray-50 py-16 px-6">
         <div class="container mx-auto max-w-4xl text-center">
-            <p class="text-gray-600 text-sm">
-                RCCG Mercy Court is a registered 501(c)(3) nonprofit organization. All donations are tax-deductible
-                to the extent allowed by law. You will receive a giving statement for your records at the end of each year.
-            </p>
+            <p class="text-gray-600 text-sm">{{ tax_info }}</p>
         </div>
     </section>
 
@@ -328,12 +359,9 @@ permalink: give.html
     <section class="bg-brand-red py-16 px-6">
         <div class="container mx-auto max-w-2xl text-center">
             <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-h2">
-                JOIN OUR MAILING LIST
+                {{ mailing_list.heading }}
             </h2>
-            <p class="text-white/80 text-sm mb-8">
-                We promise not to spam you, but send you edifying and amazing
-                content regularly from RCCG Mercy Court.
-            </p>
+            <p class="text-white/80 text-sm mb-8">{{ mailing_list.body }}</p>
             <div class="max-w-md mx-auto">
                 <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
                 <style>
@@ -415,7 +443,7 @@ permalink: give.html
                 <iframe
                     id="building-iframe"
                     src=""
-                    data-src="https://www.zeffy.com/en-US/embed/donation-form/building-project-3"
+                    data-src="{{ site.zeffy_building }}"
                     allowpaymentrequest
                     style="width: 100%; height: 800px; border: none; display: block;"
                 ></iframe>
