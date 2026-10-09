@@ -428,7 +428,7 @@ collections:
       - { label: "Template Engine", name: "templateEngineOverride", widget: "hidden", default: "njk" }
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/event-page.njk" }
       - { label: "Page Title", name: "title", widget: "string", hint: "Used in browser tab and SEO — e.g. One Bring One — Invite a Friend | Mercy Court" }
-      - { label: "URL Slug", name: "slug", widget: "string", hint: "Slug (target: 50–60 characters) — sets the page URL: /events/{slug}. Use lowercase letters and hyphens only, e.g. 12th-anniversary or one-bring-one." }
+      - { label: "URL Slug", name: "slug", widget: "string", hint: "Sets the page URL (/events/{slug}). Lowercase letters and hyphens only, e.g. p4-conference. If you duplicated an existing entry, change this before saving — the filename and URL both come from this field." }
       - { label: "SEO Description", name: "seo_description", widget: "text", hint: "Description (target: 120–160 characters)" }
       - { label: "OG / Share Image", name: "og_image", widget: "image", hint: "Keep under 500KB. This image appears when the page is shared on social media." }
       - label: "Publish Date"
