@@ -82,9 +82,14 @@ module.exports = function(eleventyConfig) {
     DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("LLLL d, yyyy")
   );
 
-  eleventyConfig.addFilter("isoDate", (dateObj) =>
-    DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-MM-dd")
-  );
+  eleventyConfig.addFilter("isoDate", (dateObj) => {
+    if (!dateObj) return "";
+    if (typeof dateObj === "string") {
+      const m = dateObj.match(/^(\d{4}-\d{2}-\d{2})/);
+      return m ? m[1] : "";
+    }
+    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-MM-dd");
+  });
 
   eleventyConfig.addFilter("whereData", (array, key, value) =>
     (array || []).filter((item) => item.data[key] === value)
