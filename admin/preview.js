@@ -2481,15 +2481,18 @@
 
   function MainPagesDispatch(props) {
     try {
+      // Decap 3.x file collections: entry.get('slug') = entry name, entry.get('path') = file path.
+      // Check both so the correct preview renders regardless of which one Decap populates first.
+      var slug = (props.entry && props.entry.get('slug')) || '';
       var path = (props.entry && props.entry.get('path')) || '';
-      if (path.indexOf('events/index') !== -1)  return EventsHubPreview(props);
-      if (path.indexOf('give') !== -1)           return GivePreview(props);
-      if (path.indexOf('watch-live') !== -1)     return WatchLivePreview(props);
-      if (path.indexOf('index') !== -1)           return HomePreview(props);
-      if (path.indexOf('about-us') !== -1)        return AboutPreview(props);
-      if (path.indexOf('contact') !== -1)         return ContactPreview(props);
-      if (path.indexOf('plan-your-visit') !== -1) return PlanYourVisitPreview(props);
-      if (path.indexOf('community-impact') !== -1) return CommunityImpactPreview(props);
+      if (slug === 'give'             || path.indexOf('give') !== -1)            return GivePreview(props);
+      if (slug === 'watch-live'       || path.indexOf('watch-live') !== -1)      return WatchLivePreview(props);
+      if (slug === 'events-hub'       || path.indexOf('events/index') !== -1)    return EventsHubPreview(props);
+      if (slug === 'home'             || path.indexOf('index') !== -1)           return HomePreview(props);
+      if (slug === 'about'            || path.indexOf('about-us') !== -1)        return AboutPreview(props);
+      if (slug === 'contact'          || path.indexOf('contact') !== -1)         return ContactPreview(props);
+      if (slug === 'plan-your-visit'  || path.indexOf('plan-your-visit') !== -1) return PlanYourVisitPreview(props);
+      if (slug === 'community-impact' || path.indexOf('community-impact') !== -1) return CommunityImpactPreview(props);
       return HomePreview(props);
     } catch (e) {
       return HomePreview(props);
