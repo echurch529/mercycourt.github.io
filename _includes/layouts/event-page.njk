@@ -155,35 +155,26 @@
             <span class="inline-block text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8" style="background: #E8541A;">{{ hero.badge }}</span>
             {% endif %}
             <h1 class="font-anton text-5xl md:text-7xl lg:text-8xl uppercase text-white tracking-h1 leading-tight mb-8">
-                {{ hero.headline }}
+                {{ hero_headline if hero_headline else hero.headline }}
             </h1>
             <p class="text-white/90 text-lg md:text-xl leading-relaxed mb-12" style="max-width: 600px;">
                 {{ hero.subheadline }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 {% if status != "past" %}
-                {% if hero.primary_cta_url %}
-                <a href="{{ hero.primary_cta_url }}" download class="text-white px-10 py-4 rounded-full font-bold uppercase text-sm tracking-wide inline-block transition-all" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
-                    {{ hero.primary_cta if hero.primary_cta else "SAVE THE DATE" }}
-                </a>
-                {% else %}
                 <button onclick="openVisitModal()" class="text-white px-10 py-4 rounded-full font-bold uppercase text-sm tracking-wide cursor-pointer border-0 transition-all" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
-                    {{ hero.primary_cta if hero.primary_cta else "PLAN MY VISIT" }}
+                    PLAN YOUR VISIT
                 </button>
+                {% if calendar_file %}
+                <a href="{{ calendar_file }}" download class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
+                    SAVE THE DATE
+                </a>
                 {% endif %}
+                {% if hero.secondary_cta_text and hero.secondary_cta_url != "#visit-modal" %}
+                <a href="{{ hero.secondary_cta_url }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
+                    {{ hero.secondary_cta_text }}
+                </a>
                 {% endif %}
-                {% if hero.secondary_cta_text %}
-                    {% if hero.secondary_cta_url == "#visit-modal" %}
-                    {% if status != "past" %}
-                    <button onclick="openVisitModal()" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide cursor-pointer bg-transparent">
-                        {{ hero.secondary_cta_text }}
-                    </button>
-                    {% endif %}
-                    {% else %}
-                    <a href="{{ hero.secondary_cta_url }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
-                        {{ hero.secondary_cta_text }}
-                    </a>
-                    {% endif %}
                 {% endif %}
             </div>
         </div>
@@ -195,31 +186,23 @@
     </section>
     {% else %}
     <section style="background: #0A0A0A; padding-top: 72px;">
+        <h1 class="sr-only">{{ hero_headline if hero_headline else title }}</h1>
         <img src="{{ hero.image }}" alt="{{ hero.image_alt | default(title) }}" class="w-full h-auto block">
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center px-6 py-10">
             {% if status != "past" %}
-            {% if hero.primary_cta_url %}
-            <a href="{{ hero.primary_cta_url }}" download class="text-white px-10 py-4 rounded-full font-bold uppercase text-sm tracking-wide inline-block transition-all" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
-                {{ hero.primary_cta if hero.primary_cta else "SAVE THE DATE" }}
-            </a>
-            {% else %}
             <button onclick="openVisitModal()" class="text-white px-10 py-4 rounded-full font-bold uppercase text-sm tracking-wide cursor-pointer border-0 transition-all" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
-                {{ hero.primary_cta if hero.primary_cta else "PLAN MY VISIT" }}
+                PLAN YOUR VISIT
             </button>
+            {% if calendar_file %}
+            <a href="{{ calendar_file }}" download class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
+                SAVE THE DATE
+            </a>
             {% endif %}
+            {% if hero.secondary_cta_text and hero.secondary_cta_url != "#visit-modal" %}
+            <a href="{{ hero.secondary_cta_url }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
+                {{ hero.secondary_cta_text }}
+            </a>
             {% endif %}
-            {% if hero.secondary_cta_text %}
-                {% if hero.secondary_cta_url == "#visit-modal" %}
-                {% if status != "past" %}
-                <button onclick="openVisitModal()" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide cursor-pointer bg-transparent">
-                    {{ hero.secondary_cta_text }}
-                </button>
-                {% endif %}
-                {% else %}
-                <a href="{{ hero.secondary_cta_url }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
-                    {{ hero.secondary_cta_text }}
-                </a>
-                {% endif %}
             {% endif %}
         </div>
     </section>
@@ -337,7 +320,9 @@
             {% endif %}
             <h2 class="font-anton text-4xl md:text-5xl uppercase mb-10 tracking-h2" style="color: #1B2A4A;">{{ welcome.heading }}</h2>
             {% for paragraph in welcome.body %}
-            <p class="text-gray-600 text-lg leading-relaxed mb-6">{{ paragraph }}</p>
+            {% for subpara in paragraph | split('\n') %}{% if subpara | trim %}
+            <p class="text-gray-600 text-lg leading-relaxed mb-6 text-left">{{ subpara | trim }}</p>
+            {% endif %}{% endfor %}
             {% endfor %}
             {% if status != "past" %}
             <button onclick="openVisitModal()" class="text-white px-12 py-4 rounded-full font-bold uppercase text-sm tracking-wide cursor-pointer border-0 transition-all mt-8" style="background: #E8541A;" onmouseover="this.style.background='#C04E25'" onmouseout="this.style.background='#E8541A'">
@@ -390,7 +375,9 @@
                     <p class="font-bold text-sm uppercase tracking-wide mb-6" style="color: #E8541A;">{{ speaker.title }}</p>
                     {% endif %}
                     {% if speaker.bio %}
-                    <p class="text-gray-600 text-lg leading-relaxed">{{ speaker.bio }}</p>
+                    {% for para in speaker.bio | split('\n') %}{% if para | trim %}
+                    <p class="text-gray-600 text-lg leading-relaxed mb-4 text-left">{{ para | trim }}</p>
+                    {% endif %}{% endfor %}
                     {% endif %}
                     {% if host_name %}
                     <p class="text-gray-500 text-sm mt-8">Hosted by <span class="font-bold" style="color: #1B2A4A;">{{ host_name }}</span></p>
@@ -540,7 +527,9 @@
                                 <option value=""></option>
                                 <option value="1">Friend or Family</option>
                                 <option value="2">Social Media</option>
-                                <option value="4">Google Search</option>
+                                <option value="32">Facebook or Instagram ad</option>
+                                <option value="64">Google search ad</option>
+                                <option value="4">Google Search (organic)</option>
                                 <option value="8">Drove Past the Church</option>
                                 <option value="16">Other</option>
                             </select>
@@ -570,7 +559,7 @@
                 </form>
             </div>
             <div id="plan-visit-success" style="display:none; text-align:center; padding:40px 20px;">
-                <p style="font-size:20px; color:#1B2A4A; font-weight:bold;">Thank you! We are so excited to meet you. See you Sunday at 529 Walker Avenue, Baltimore, MD 21212. Service begins at 10:00 AM.</p>
+                <p style="font-size:20px; color:#1B2A4A; font-weight:bold;">Thank you! We are so excited to meet you. {% if visit_thankyou %}{{ visit_thankyou }}{% else %}See you Sunday at 529 Walker Avenue, Baltimore, MD 21212. Service begins at 10:00 AM.{% endif %}</p>
             </div>
         </div>
     </div>
@@ -600,8 +589,12 @@
             const email = document.getElementById('mce-EMAIL-v').value;
             const phone = document.getElementById('mce-PHONE-v').value;
             const message = document.getElementById('mce-MMERGE10-v').value;
-            const howDidYouHear = document.querySelector('#mc-visit-plan-form [name="group[10562]"]').value;
-            const comingWith = document.querySelector('#mc-visit-plan-form [name="group[10563]"]').value;
+            const hearSelect = document.querySelector('#mc-visit-plan-form [name="group[10562]"]');
+            const howDidYouHearValue = hearSelect.value;
+            const howDidYouHear = hearSelect.selectedIndex > 0 ? hearSelect.options[hearSelect.selectedIndex].text : '';
+            const withSelect = document.querySelector('#mc-visit-plan-form [name="group[10563]"]');
+            const comingWithValue = withSelect.value;
+            const comingWith = withSelect.selectedIndex > 0 ? withSelect.options[withSelect.selectedIndex].text : '';
             fetch('https://formspree.io/f/xreddnbn', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -610,7 +603,7 @@
             const cbName = 'mc_cb_' + Date.now();
             const params = new URLSearchParams({
                 'FNAME': fname, 'LNAME': lname, 'EMAIL': email, 'PHONE': phone,
-                'MMERGE10': message, 'group[10562]': howDidYouHear, 'group[10563]': comingWith,
+                'MMERGE10': message, 'group[10562]': howDidYouHearValue, 'group[10563]': comingWithValue,
                 'tags': '5993', 'b_1f6d34239bf35c1b0512b77c8_888af1f4b9': '', 'c': cbName
             });
             window[cbName] = function() { delete window[cbName]; if (script.parentNode) script.parentNode.removeChild(script); };

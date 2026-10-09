@@ -1,0 +1,40 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//RCCG Mercy Court//P4 Conference 2026//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:P4 2026 — Prayer\, Praise\, Power & Prophetic
+X-WR-CALDESC:Three days of P4 at RCCG Mercy Court\, Baltimore. Oct 16–18\, 2026.
+BEGIN:VEVENT
+UID:p4-2026-opening-service@mercycourt.org
+DTSTART:20261016T230000Z
+DTEND:20261017T010000Z
+SUMMARY:P4 2026 — Opening Service
+DESCRIPTION:P4 2026: Prayer\, Praise\, Power & Prophetic — Opening Service\n
+ Rev. Samson Ajetomobi
+LOCATION:529 Walker Avenue\, Baltimore\, MD 21212
+URL:https://mercycourt.org/events/p4-conference
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:p4-2026-day-session@mercycourt.org
+DTSTART:20261017T150000Z
+DTEND:20261017T200000Z
+SUMMARY:P4 2026 — P4 Day Session
+DESCRIPTION:P4 2026: Prayer\, Praise\, Power & Prophetic — P4 Day Session\n
+ Rev. Samson Ajetomobi
+LOCATION:529 Walker Avenue\, Baltimore\, MD 21212
+URL:https://mercycourt.org/events/p4-conference
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:p4-2026-international-praise@mercycourt.org
+DTSTART:20261018T133000Z
+DTEND:20261018T163000Z
+SUMMARY:P4 2026 — International Praise
+DESCRIPTION:P4 2026: Prayer\, Praise\, Power & Prophetic — International Praise
+LOCATION:529 Walker Avenue\, Baltimore\, MD 21212
+URL:https://mercycourt.org/events/p4-conference
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

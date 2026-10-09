@@ -452,6 +452,8 @@ collections:
       - { label: "Card Summary", name: "card_summary", widget: "text", required: false, hint: "2–3 sentences shown on the /events/ hub card. Leave blank to omit." }
       - { label: "Card Image", name: "card_image", widget: "image", required: false, hint: "Optional thumbnail for the hub card. Falls back to the Hero image when blank." }
 
+      - { label: "Hero H1 (override)", name: "hero_headline", widget: "string", required: false, hint: "Optional. Overrides the hero headline as the page H1. Leave blank to use the hero headline (text mode) or page title (flyer mode)." }
+
       - label: "Hero"
         name: "hero"
         widget: "object"
@@ -462,10 +464,12 @@ collections:
           - { label: "Badge Pill Text", name: "badge", widget: "string", required: false, hint: "Small orange pill above the headline, e.g. WELCOME HOME. Leave blank to hide." }
           - { label: "Headline", name: "headline", widget: "string", required: false, hint: "Leave badge, headline, AND subheadline all blank for flyer mode: the image itself becomes the hero centerpiece (use when the artwork already shows the event info)." }
           - { label: "Subheadline", name: "subheadline", widget: "text", required: false }
-          - { label: "Primary CTA Button Text", name: "primary_cta", widget: "string", default: "PLAN MY VISIT", hint: "Opens the Plan My Visit modal by default. Set a Primary CTA URL below to turn it into a link instead (e.g. a calendar download)." }
-          - { label: "Primary CTA URL", name: "primary_cta_url", widget: "string", required: false, hint: "Optional. When set, the primary button links here (downloads when pointing to a .ics file). Leave blank to keep modal behaviour." }
-          - { label: "Secondary CTA Text", name: "secondary_cta_text", widget: "string", default: "WATCH ONLINE", required: false, hint: "Leave blank to hide the secondary button" }
-          - { label: "Secondary CTA URL", name: "secondary_cta_url", widget: "string", default: "/watch-live.html", required: false, hint: "Use #visit-modal to open the Plan My Visit modal instead of navigating away." }
+          - { label: "Primary CTA Button Text", name: "primary_cta", widget: "string", default: "PLAN MY VISIT", required: false, hint: "(Unused — the primary button is now always 'Plan Your Visit' opening the modal. Kept for data compatibility.)" }
+          - { label: "Primary CTA URL", name: "primary_cta_url", widget: "string", required: false, hint: "(Unused — use the top-level Calendar File field for the Save the Date button. Kept for data compatibility.)" }
+          - { label: "Secondary CTA Text", name: "secondary_cta_text", widget: "string", required: false, hint: "Optional extra button, e.g. WATCH ONLINE. Leave blank to hide. Note: #visit-modal URLs are ignored (Plan Your Visit is always shown)." }
+          - { label: "Secondary CTA URL", name: "secondary_cta_url", widget: "string", default: "/watch-live.html", required: false, hint: "URL for the extra CTA button. Do not use #visit-modal — the Plan Your Visit button is always shown." }
+
+      - { label: "Calendar File (.ics)", name: "calendar_file", widget: "file", required: false, hint: "Upload a .ics calendar file for the Save the Date button. If blank, the button is hidden. Name descriptively: e.g. p4-conference.ics" }
 
       - { label: "Countdown Heading", name: "countdown_heading", widget: "string", required: false, hint: "Heading above the countdown timer, e.g. The Celebration Begins In. Only shown when a Countdown Target is set." }
       - { label: "Countdown Target", name: "countdown_target", widget: "datetime", required: false, format: "YYYY-MM-DDTHH:mm:ssZ", hint: "Date and time the countdown ends (event start). Leave blank to hide the countdown section." }
@@ -564,6 +568,8 @@ collections:
           - { label: "Middle Column Line 1", name: "middle_line1", widget: "string", required: false, hint: "e.g. August 14–16, 2026" }
           - { label: "Middle Column Line 2", name: "middle_line2", widget: "string", required: false, hint: "e.g. Friday • Saturday • Sunday" }
           - { label: "Custom Note", name: "custom_note", widget: "string", required: false, hint: "Optional extra line, e.g. Doors open at 9:30 AM. Leave blank to hide." }
+
+      - { label: "Visit Form Thank-You Message", name: "visit_thankyou", widget: "string", required: false, hint: "Shown after the Plan Your Visit form is submitted. Leave blank for the default Sunday service message." }
 
       - label: "Final CTA Section"
         name: "cta_final"
