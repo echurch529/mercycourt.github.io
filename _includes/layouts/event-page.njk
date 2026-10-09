@@ -591,6 +591,8 @@
             const message = document.getElementById('mce-MMERGE10-v').value;
             const hearSelect = document.querySelector('#mc-visit-plan-form [name="group[10562]"]');
             const howDidYouHearValue = hearSelect.value;
+            // Send empty for IDs not yet created in Mailchimp; Formspree still gets the label
+            const howDidYouHearMailchimp = ['32', '64'].includes(howDidYouHearValue) ? '' : howDidYouHearValue;
             const howDidYouHear = hearSelect.selectedIndex > 0 ? hearSelect.options[hearSelect.selectedIndex].text : '';
             const withSelect = document.querySelector('#mc-visit-plan-form [name="group[10563]"]');
             const comingWithValue = withSelect.value;
@@ -603,7 +605,7 @@
             const cbName = 'mc_cb_' + Date.now();
             const params = new URLSearchParams({
                 'FNAME': fname, 'LNAME': lname, 'EMAIL': email, 'PHONE': phone,
-                'MMERGE10': message, 'group[10562]': howDidYouHearValue, 'group[10563]': comingWithValue,
+                'MMERGE10': message, 'group[10562]': howDidYouHearMailchimp, 'group[10563]': comingWithValue,
                 'tags': '5993', 'b_1f6d34239bf35c1b0512b77c8_888af1f4b9': '', 'c': cbName
             });
             window[cbName] = function() { delete window[cbName]; if (script.parentNode) script.parentNode.removeChild(script); };
