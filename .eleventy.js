@@ -121,6 +121,7 @@ module.exports = function(eleventyConfig) {
   );
 
   eleventyConfig.addFilter("urlencode", s => encodeURIComponent(String(s)));
+  eleventyConfig.addFilter("split", (str, sep) => String(str || "").split(sep));
 
   // Build-time linter: warns on common blog post authoring mistakes.
   // Warnings only — never fails the build or modifies output.
