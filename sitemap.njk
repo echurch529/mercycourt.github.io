@@ -78,12 +78,13 @@ permalink: "/sitemap.xml"
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <!-- Event pages: active + past included; hidden excluded. lastmod uses the file's own date field. -->
+  <!-- Event pages: active + past included; hidden excluded.
+       lastmod omitted — event files use the event date as their file date,
+       which is a future date for upcoming events and not a valid lastmod. -->
   {%- for event in collections.eventPages %}
   {%- if event.data.status != "hidden" %}
   <url>
-    <loc>https://mercycourt.org/events/{{ event.data.slug }}</loc>
-    <lastmod>{{ event.data.event_start_date if event.data.event_start_date else (event.date | isoDate) }}</lastmod>
+    <loc>https://mercycourt.org/events/{{ event.data.slug }}/</loc>
     <changefreq>{% if event.data.status == "active" %}weekly{% else %}yearly{% endif %}</changefreq>
     <priority>{% if event.data.status == "active" %}0.7{% else %}0.5{% endif %}</priority>
   </url>
