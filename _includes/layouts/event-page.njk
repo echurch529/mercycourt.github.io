@@ -363,9 +363,9 @@
                 <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2" style="color: #1B2A4A;">{{ schedule.heading }}</h2>
                 {% endif %}
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="flex flex-wrap justify-center gap-6">
                 {% for item in schedule.items %}
-                <div class="feature-card bg-white rounded-2xl p-8 shadow-sm text-center flex flex-col">
+                <div class="feature-card bg-white rounded-2xl p-8 shadow-sm text-center flex flex-col w-full sm:w-[calc(50%-12px)] lg:w-64">
                     <p class="font-bold text-xs uppercase tracking-widest mb-3" style="color: #E8541A;">{{ item.day }}</p>
                     <h3 class="font-anton text-2xl uppercase leading-tight mb-4" style="color: #1B2A4A;">{{ item.label }}</h3>
                     <p class="text-gray-600 mt-auto">{{ item.time }}</p>
@@ -418,9 +418,9 @@
                 <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2" style="color: #1B2A4A;">{{ features.heading }}</h2>
                 {% endif %}
             </div>
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="flex flex-wrap justify-center gap-8">
                 {% for card in features.cards %}
-                <div class="feature-card bg-white rounded-2xl p-10 shadow-sm">
+                <div class="feature-card bg-white rounded-2xl p-10 shadow-sm w-full md:w-[calc(50%-16px)]">
                     <div class="text-5xl mb-6">{{ card.emoji }}</div>
                     <h3 class="font-anton text-2xl uppercase mb-4" style="color: #1B2A4A;">{{ card.title }}</h3>
                     <p class="text-gray-600 leading-relaxed">{{ card.body }}</p>
@@ -436,13 +436,13 @@
     <section class="py-24 px-6 text-center" style="background: #E8541A;">
         <div class="container mx-auto max-w-4xl">
             <h2 class="font-anton text-4xl md:text-5xl uppercase text-white tracking-h2 mb-16">{{ logistics.heading }}</h2>
-            <div class="grid md:grid-cols-3 gap-10 mb-16">
-                <div>
+            <div class="flex flex-wrap justify-center gap-10 mb-16">
+                <div class="w-full md:w-60">
                     <div class="text-5xl mb-5">📍</div>
                     <h3 class="font-bold text-white text-lg uppercase tracking-wide mb-3">Location</h3>
                     <p class="text-white/90 leading-relaxed">{{ site.address_street }}<br>{{ site.address_city_state }}</p>
                 </div>
-                <div>
+                <div class="w-full md:w-60">
                     {% if logistics.middle_label %}
                     <div class="text-5xl mb-5">{{ logistics.middle_icon if logistics.middle_icon else "🗓️" }}</div>
                     <h3 class="font-bold text-white text-lg uppercase tracking-wide mb-3">{{ logistics.middle_label }}</h3>
@@ -453,7 +453,7 @@
                     <p class="text-white/90 leading-relaxed">{{ site.service_times.sunday.time }}<br>Every Sunday</p>
                     {% endif %}
                 </div>
-                <div>
+                <div class="w-full md:w-60">
                     <div class="text-5xl mb-5">🅿️</div>
                     <h3 class="font-bold text-white text-lg uppercase tracking-wide mb-3">Parking</h3>
                     <p class="text-white/90 leading-relaxed">Free parking<br>Available on site</p>
