@@ -540,6 +540,6 @@ article strong { color: #111827; font-weight: 700; }
         });
     </script>
     <script id="post-share-data" type="application/json">{"url":"https://mercycourt.org{{ page.url | cleanUrl }}","title":{{ title | dump | safe }}}</script>
-    <script>(function(){try{var d=JSON.parse(document.getElementById('post-share-data').textContent);var u=encodeURIComponent(d.url),t=encodeURIComponent(d.title);document.querySelectorAll('[data-share]').forEach(function(el){var s=el.getAttribute('data-share'),h;if(s==='facebook')h='https://www.facebook.com/sharer/sharer.php?u='+u;else if(s==='linkedin')h='https://www.linkedin.com/sharing/share-offsite/?url='+u;else if(s==='x')h='https://x.com/intent/post?text='+t+'%20'+u;else if(s==='email')h='mailto:?subject='+t+'&body='+u;if(h)el.setAttribute('href',h);});} catch(e){}})();</script>
+    <!--email_off--><script>(function(){try{var d=JSON.parse(document.getElementById('post-share-data').textContent);var u=encodeURIComponent(d.url),t=encodeURIComponent(d.title);document.querySelectorAll('[data-share]').forEach(function(el){var s=el.getAttribute('data-share'),h;if(s==='facebook')h='https://www.facebook.com/sharer/sharer.php?u='+u;else if(s==='linkedin')h='https://www.linkedin.com/sharing/share-offsite/?url='+u;else if(s==='x')h='https://x.com/intent/post?text='+t+'%20'+u;else if(s==='email')h='mailto:?subject='+t+'&body='+u;if(h)el.setAttribute('href',h);});} catch(e){}})();</script><!--/email_off-->
 </body>
 </html>
