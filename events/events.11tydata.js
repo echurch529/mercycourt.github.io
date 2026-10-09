@@ -1,5 +1,5 @@
 module.exports = {
   eleventyComputed: {
-    permalink: data => `/events/${data.slug}/`
+    permalink: data => data.slug ? `/events/${data.slug}/` : undefined
   }
 };
