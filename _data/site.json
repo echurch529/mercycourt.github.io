@@ -4,7 +4,9 @@
   "phone": "+1 (410) 900-9111",
   "email": "info@mercycourt.org",
   "service_times": {
-    "sunday":      { "label": "Sunday Service",           "time": "10:00 AM" },
+    "sunday":      { "label": "Sunday Services",          "time": "9:30 AM & 12:15 PM" },
+    "sunday_1":    { "label": "1st Service",              "time": "9:30 AM"  },
+    "sunday_2":    { "label": "2nd Service",              "time": "12:15 PM" },
     "wednesday":   { "label": "Bible Study",              "time": "7:00 PM"  },
     "friday":      { "label": "Prayer Meeting",           "time": "7:00 PM"  },
     "power_night": { "label": "Power Night (1st Friday)", "time": "7:00 PM"  }

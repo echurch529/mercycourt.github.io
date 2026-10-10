@@ -673,8 +673,8 @@
               )
             : h('div', { style: col },
                 h('div', { style: iconStyle }, '🕙'),
-                h('h3', { style: labelStyle }, 'Sunday Service'),
-                h('p', { style: valueStyle }, '10:00 AM', h('br'), 'Every Sunday')
+                h('h3', { style: labelStyle }, 'Sunday Services'),
+                h('p', { style: valueStyle }, '9:30 AM & 12:15 PM', h('br'), 'Every Sunday')
               ),
           h('div', { style: col },
             h('div', { style: iconStyle }, '🅿️'),
@@ -1660,7 +1660,7 @@
               ),
               h('div', { style: { background: '#0A0A0A', borderRadius: '16px', padding: '32px', color: '#fff' } },
                 h('h3', { style: { fontFamily: DISPLAY, fontSize: '22px', textTransform: 'uppercase', marginBottom: '24px' } }, 'Service Times'),
-                [['Sunday Service', '10:00 AM'], ['Wednesday Bible Study', '7:00 PM'], ['Friday Prayer Meeting', '7:00 PM']].map(function (row, i) {
+                [['Sunday Services', '9:30 AM & 12:15 PM'], ['Wednesday Bible Study', '7:00 PM'], ['Friday Prayer Meeting', '7:00 PM']].map(function (row, i) {
                   return h('div', { key: i, style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: i < 2 ? '1px solid #374151' : 'none', paddingBottom: i < 2 ? '12px' : 0, marginBottom: i < 2 ? '12px' : 0 } },
                     h('span', { style: { fontFamily: BODY, fontWeight: '600', fontSize: '14px' } }, row[0]),
                     h('span', { style: { fontFamily: BODY, fontWeight: '700', color: '#D95A2B', fontSize: '14px' } }, row[1])

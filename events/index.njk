@@ -19,7 +19,7 @@ current_events:
   intro: ""
 fallback:
   heading: "Join Us Every Sunday"
-  text: "9:30 AM \u2014 Morning Service\n529 Walker Avenue, Baltimore, MD 21212"
+  text: "1st Service 9:30 AM \u00b7 2nd Service 12:15 PM\n529 Walker Avenue, Baltimore, MD 21212"
   button_label: "Plan Your Visit"
   button_url: "/plan-your-visit"
 past_events:
@@ -143,7 +143,7 @@ past_events:
                 {%- if fallback.text %}
                 <p class="text-gray-500 text-base leading-relaxed mb-8">{{ fallback.text | replace("\n", "<br>") | safe }}</p>
                 {%- else %}
-                <p class="text-gray-500 text-base leading-relaxed mb-2">9:30 AM — Morning Service</p>
+                <p class="text-gray-500 text-base leading-relaxed mb-2">1st Service 9:30 AM · 2nd Service 12:15 PM</p>
                 <p class="text-gray-500 text-base leading-relaxed mb-8">529 Walker Avenue, Baltimore, MD 21212</p>
                 {%- endif %}
                 <a href="{{ fallback.button_url if fallback.button_url else '/plan-your-visit' }}" class="inline-block bg-brand-red text-white text-xs font-bold uppercase tracking-wide px-8 py-3 rounded-full hover:bg-[#C04E25] transition mb-8">{{ fallback.button_label if fallback.button_label else "Plan Your Visit" }}</a>
