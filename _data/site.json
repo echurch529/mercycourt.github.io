@@ -11,17 +11,17 @@
     "sunday_1": {
       "label": "1st Service",
       "time": "9:30 AM",
-      "duration": "about 2 hours",
+      "duration": "About 2 hours",
       "livestreamed": true,
       "childrens_ministry": true
     },
     "sunday_2": {
       "label": "2nd Service",
       "time": "12:00 PM",
-      "duration": "about 1 hour 30 minutes",
+      "duration": "About 1 hour 30 minutes",
       "livestreamed": false,
       "childrens_ministry": false,
-      "style": "a shorter, youthful service"
+      "style": "Shorter, youthful service"
     },
     "sunday_note": "First Sunday of the month: one service at 9:30 AM",
     "wednesday": {
