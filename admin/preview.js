@@ -1397,20 +1397,20 @@
       return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
         noticeBar(),
 
-        /* Hero Slides — shown stacked (static preview, no animation) */
+        /* Hero Slides — shown stacked at 2071/759 aspect ratio (static preview, no animation) */
         heroSlides.length > 0
           ? h('div', { style: { marginBottom: '4px' } },
               heroSlides.map(function(slide, i) {
-                var imgSrc = resolveImage(props, slide.image);
-                var hasText = !!(slide.headline);
-                var focalX = slide.focal_x || '50%';
-                var focalY = slide.focal_y || '50%';
-                return h('div', { key: i, style: { position: 'relative', height: '50vh', minHeight: '280px', overflow: 'hidden', marginBottom: '3px' } },
-                  h('img', { src: imgSrc, alt: slide.image_alt || '', style: { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: focalX + ' ' + focalY } }),
-                  h('div', { style: { position: 'absolute', inset: 0, background: hasText ? 'linear-gradient(to bottom,rgba(0,0,0,.6),rgba(0,0,0,.4),rgba(0,0,0,.7))' : 'rgba(0,0,0,.3)' } }),
+                var imgSrc   = resolveImage(props, slide.image);
+                var isText   = !!(slide.show_text_overlay);
+                var focalX   = slide.focal_x || '50%';
+                var focalY   = slide.focal_y || '50%';
+                return h('div', { key: i, style: { position: 'relative', width: '100%', paddingBottom: (759/2071*100).toFixed(4) + '%', overflow: 'hidden', marginBottom: '3px', background: '#0A0A0A' } },
+                  h('img', { src: imgSrc, alt: slide.image_alt || '', style: { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: isText ? 'cover' : 'contain', objectPosition: focalX + ' ' + focalY } }),
+                  h('div', { style: { position: 'absolute', inset: 0, background: isText ? 'linear-gradient(to bottom,rgba(0,0,0,.6),rgba(0,0,0,.4),rgba(0,0,0,.7))' : 'rgba(0,0,0,.3)' } }),
                   h('div', { style: { position: 'absolute', top: '10px', left: '10px', background: 'rgba(0,0,0,.6)', color: '#9ca3af', fontSize: '10px', fontFamily: BODY, padding: '3px 10px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase' } },
-                    'Slide ' + (i + 1) + ' of ' + heroSlides.length + (i === 0 ? ' · H1' : ' · H2')),
-                  hasText && h('div', { style: { position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' } },
+                    'Slide ' + (i + 1) + ' of ' + heroSlides.length + ' · ' + (isText ? 'Text overlay' : 'Flyer') + (i === 0 ? ' · H1' : ' · H2')),
+                  isText && h('div', { style: { position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' } },
                     h('div', { style: { textAlign: 'center', maxWidth: '800px' } },
                       slide.badge && h('span', { style: { display: 'inline-block', background: 'rgba(255,255,255,.2)', color: '#fff', fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '.1em', padding: '5px 14px', borderRadius: '9999px', marginBottom: '14px' } }, slide.badge),
                       splitHeadline(slide.headline || '', slide.headline_highlight || '', 'clamp(28px,5vw,64px)'),
@@ -1421,7 +1421,7 @@
                       )
                     )
                   ),
-                  !hasText && slide.slide_link && h('div', { style: { position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)' } },
+                  !isText && slide.slide_link && h('div', { style: { position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)' } },
                     h('span', { style: { display: 'inline-block', background: '#D95A2B', color: '#fff', padding: '9px 24px', borderRadius: '9999px', fontFamily: BODY, fontWeight: '700', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '.05em' } }, 'Learn More')
                   )
                 );
