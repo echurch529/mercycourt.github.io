@@ -158,6 +158,9 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
 <style>
 #hero-carousel [role="tab"]{width:10px;height:10px;border-radius:50%;border:none;cursor:pointer;padding:0;background:rgba(255,255,255,0.5);transition:background .3s ease,transform .3s ease}
 #hero-carousel [role="tab"][aria-selected="true"]{background:#fff;transform:scale(1.3)}
+.hero-slide-img{object-fit:cover}
+@media (min-width:768px){.hero-flyer #hero-aspect{aspect-ratio:2071/759}}
+@media (max-width:767px){.hero-flyer .hero-slide-img{object-fit:contain;background:#0A0A0A}}
 </style>
 </head>
 <body class="font-lato bg-white text-gray-900">
@@ -175,15 +178,19 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
     {%- if _active.length == 0 -%}{%- set _active = hero_slides -%}{%- endif -%}
     {%- set _count = _active | length -%}
     {%- set _secs = (hero_seconds if hero_seconds else 6) | int -%}
+    {%- set _hasText = (_active | map(attribute="headline") | select | list | length) > 0 -%}
     <section
       id="hero-carousel"
       aria-roledescription="carousel"
       aria-label="Homepage hero"
-      class="relative overflow-hidden"
-      style="padding-top: 72px; height: 100vh;"
+      class="relative{% if not _hasText %} hero-flyer{% endif %}"
+      style="padding-top: 72px;{% if _hasText %} height: 100vh; overflow: hidden;{% endif %}"
       data-seconds="{{ _secs }}"
       data-count="{{ _count }}"
     >
+      <div id="hero-aspect"
+           class="w-full overflow-hidden{% if _hasText %} absolute inset-0{% else %} relative{% endif %}"
+      >
       <div id="hero-track"
            class="absolute inset-0 flex"
            style="width: {{ _count * 100 }}%; will-change: transform; transition: transform 0.6s ease;"
@@ -197,17 +204,24 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
           {%- if not loop.first %} aria-hidden="true" inert{% endif %}
           class="relative flex-none"
           style="width: {{ (100 / _count) | round(5) }}%;"
+          data-mw="{{ '1080' if slide.mobile_image else '2071' }}"
+          data-mh="{{ '1350' if slide.mobile_image else '759' }}"
         >
-          {# Background image — eager + high priority for slide 1, lazy for the rest #}
-          <img
-            src="{{ slide.image }}"
-            alt="{{ slide.image_alt | default('') }}"
-            loading="{{ 'eager' if loop.first else 'lazy' }}"
-            {% if loop.first %}fetchpriority="high"{% endif %}
-            width="1920" height="1080"
-            class="absolute inset-0 w-full h-full object-cover"
-            style="object-position: {{ slide.focal_x | default('50%') }} {{ slide.focal_y | default('50%') }};"
-          >
+          {# Image — <picture> serves mobile version when available; eager + high-priority on slide 1 #}
+          <picture class="absolute inset-0 block w-full h-full">
+            {%- if slide.mobile_image -%}
+            <source media="(max-width: 767px)" srcset="{{ slide.mobile_image }}" width="1080" height="1350">
+            {%- endif -%}
+            <img
+              src="{{ slide.image }}"
+              alt="{{ slide.mobile_image_alt | default(slide.image_alt) | default('') }}"
+              loading="{{ 'eager' if loop.first else 'lazy' }}"
+              {%- if loop.first %} fetchpriority="high"{% endif %}
+              width="2071" height="759"
+              class="w-full h-full hero-slide-img"
+              style="object-position: {{ slide.focal_x | default('50%') }} {{ slide.focal_y | default('50%') }};"
+            >
+          </picture>
           {# Overlay — gradient when text is shown, lighter scrim for flyer mode #}
           {%- if slide.headline or slide.subheading -%}
           <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" aria-hidden="true"></div>
@@ -322,17 +336,40 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
         <svg id="icon-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
       </button>
       {%- endif -%}
+      </div>{# /hero-aspect #}
     </section>
     <script>
     (function(){
-      var count = parseInt(document.getElementById('hero-carousel').dataset.count, 10);
+      var section   = document.getElementById('hero-carousel');
+      var heroAspect = document.getElementById('hero-aspect');
+      var count     = parseInt(section.dataset.count, 10);
+      var isFlyer   = section.classList.contains('hero-flyer');
+
+      /* ── Mobile height for flyer-mode (runs even with 1 slide) ── */
+      if (isFlyer && heroAspect) {
+        function updateMobileH() {
+          if (window.innerWidth >= 768) { heroAspect.style.removeProperty('height'); return; }
+          var vw = window.innerWidth, maxH = 0;
+          for (var i = 0; i < count; i++) {
+            var s = document.getElementById('hero-slide-' + i);
+            var mw = parseInt(s.dataset.mw, 10) || 2071;
+            var mh = parseInt(s.dataset.mh, 10) || 759;
+            maxH = Math.max(maxH, vw * mh / mw);
+          }
+          heroAspect.style.height = maxH + 'px';
+        }
+        updateMobileH();
+        var resizeT;
+        window.addEventListener('resize', function(){ clearTimeout(resizeT); resizeT = setTimeout(updateMobileH, 100); }, { passive: true });
+      }
+
       if (count < 2) return;
-      var secs  = parseInt(document.getElementById('hero-carousel').dataset.seconds, 10) || 6;
-      var track    = document.getElementById('hero-track');
-      var section  = document.getElementById('hero-carousel');
-      var pauseBtn = document.getElementById('hero-pause');
-      var prevBtn  = document.getElementById('hero-prev');
-      var nextBtn  = document.getElementById('hero-next');
+
+      var secs      = parseInt(section.dataset.seconds, 10) || 6;
+      var track     = document.getElementById('hero-track');
+      var pauseBtn  = document.getElementById('hero-pause');
+      var prevBtn   = document.getElementById('hero-prev');
+      var nextBtn   = document.getElementById('hero-next');
       var iconPause = document.getElementById('icon-pause');
       var iconPlay  = document.getElementById('icon-play');
       var current = 0, manualPause = false, timer = null;
@@ -343,7 +380,6 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
       function dot(i){   return document.getElementById('hero-dot-'   + i); }
 
       function goTo(n){
-        var prev = current;
         current = ((n % count) + count) % count;
         track.style.transform = 'translateX(-' + (current * 100 / count) + '%)';
         for (var i = 0; i < count; i++){
