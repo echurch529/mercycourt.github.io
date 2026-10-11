@@ -7,13 +7,16 @@ leadership:
 templateEngineOverride: njk
 layout: false
 permalink: index.html
-hero:
-  image: /assets/images/cms-uploads/refined-guest-portraits-on-a-cinematic-banner.jpeg
-  headline: IT'S OUR YEAR OF
-  headline_highlight: BETTER THINGS
-  tagline: The home of pacesetters, where we experience God and enjoy life
-  show_hero_text: false
-  event_url: /events/p4-conference
+hero_seconds: 6
+hero_slides:
+  - image: /assets/images/cms-uploads/refined-guest-portraits-on-a-cinematic-banner.jpeg
+    image_alt: >-
+      P4 Conference — IT'S OUR YEAR OF BETTER THINGS — RCCG Mercy Court,
+      Baltimore MD
+    focal_x: "50%"
+    focal_y: "50%"
+    slide_title: IT'S OUR YEAR OF BETTER THINGS
+    slide_link: /events/p4-conference
 about:
   body1: We are dedicated to raising Christ-like pacesetters who through God's
     mercy maximize their potentials and enjoy life. Our mission centers on
@@ -152,51 +155,248 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
     <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=1027268596866855&ev=PageView&noscript=1"/></noscript>
     <!-- End Meta Pixel Code -->
 <style>{%- include "components/heading-tracking.njk" -%}</style>
+<style>
+#hero-carousel [role="tab"]{width:10px;height:10px;border-radius:50%;border:none;cursor:pointer;padding:0;background:rgba(255,255,255,0.5);transition:background .3s ease,transform .3s ease}
+#hero-carousel [role="tab"][aria-selected="true"]{background:#fff;transform:scale(1.3)}
+</style>
 </head>
 <body class="font-lato bg-white text-gray-900">
 
     <!-- Navigation -->
     {% include "nav.njk" %}
 
-    <!-- Hero Section -->
-    {% if hero.show_hero_text == false %}
-    <section class="relative overflow-hidden" style="padding-top: 72px;">
-        {% if hero.event_url %}
-        <a href="{{ hero.event_url }}" aria-label="Learn more about this event">
-            <img src="{{ hero.image }}" alt="{{ hero.image_alt | default('') }}" class="w-full block" style="max-height:100vh; object-fit:cover;">
-        </a>
-        <div class="bg-brand-dark text-white text-center py-4 px-6">
-            <p class="text-sm uppercase tracking-widest font-bold mb-2">{{ hero.headline }} <span class="text-brand-red">{{ hero.headline_highlight }}</span></p>
-            <a href="{{ hero.event_url }}" class="inline-block bg-brand-red text-white px-8 py-2.5 rounded-full text-xs font-bold uppercase tracking-wide hover:bg-[#C04E25] transition">Learn More</a>
-        </div>
-        {% else %}
-        <img src="{{ hero.image }}" alt="{{ hero.image_alt | default('') }}" class="w-full block" style="max-height:100vh; object-fit:cover;">
-        {% endif %}
-    </section>
-    {% else %}
-    <section class="relative h-[100vh] flex items-center justify-center overflow-hidden" style="padding-top: 72px;">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ hero.image }}');">
-            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
-        </div>
-        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
-            <h1 class="font-anton text-5xl md:text-8xl lg:text-9xl uppercase leading-[1.1] mb-6 text-white tracking-h1">
-                {{ hero.headline }}<br>
-                <span class="text-brand-red">{{ hero.headline_highlight }}</span>
-            </h1>
-            <p class="text-white/90 text-xl md:text-2xl mb-10 font-light max-w-3xl mx-auto">
-                {{ hero.tagline }}
-            </p>
-            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
-                <a href="/plan-your-visit" class="bg-brand-red text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition tracking-wide">
-                    Plan Your Visit
-                </a>
-                <a href="/watch-live" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">
-                    Watch Online
-                </a>
+    <!-- Hero Carousel -->
+    {%- set _active = [] -%}
+    {%- for slide in hero_slides -%}
+      {%- if not slide.show_until or slide.show_until >= buildDate -%}
+        {%- set _active = _active.concat([slide]) -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if _active.length == 0 -%}{%- set _active = hero_slides -%}{%- endif -%}
+    {%- set _count = _active | length -%}
+    {%- set _secs = (hero_seconds if hero_seconds else 6) | int -%}
+    <section
+      id="hero-carousel"
+      aria-roledescription="carousel"
+      aria-label="Homepage hero"
+      class="relative overflow-hidden"
+      style="padding-top: 72px; height: 100vh;"
+      data-seconds="{{ _secs }}"
+      data-count="{{ _count }}"
+    >
+      <div id="hero-track"
+           class="absolute inset-0 flex"
+           style="width: {{ _count * 100 }}%; will-change: transform; transition: transform 0.6s ease;"
+      >
+        {%- for slide in _active -%}
+        <div
+          id="hero-slide-{{ loop.index0 }}"
+          role="group"
+          aria-roledescription="slide"
+          aria-label="Slide {{ loop.index }} of {{ _count }}"
+          {%- if not loop.first %} aria-hidden="true" inert{% endif %}
+          class="relative flex-none"
+          style="width: {{ (100 / _count) | round(5) }}%;"
+        >
+          {# Background image — eager + high priority for slide 1, lazy for the rest #}
+          <img
+            src="{{ slide.image }}"
+            alt="{{ slide.image_alt | default('') }}"
+            loading="{{ 'eager' if loop.first else 'lazy' }}"
+            {% if loop.first %}fetchpriority="high"{% endif %}
+            width="1920" height="1080"
+            class="absolute inset-0 w-full h-full object-cover"
+            style="object-position: {{ slide.focal_x | default('50%') }} {{ slide.focal_y | default('50%') }};"
+          >
+          {# Overlay — gradient when text is shown, lighter scrim for flyer mode #}
+          {%- if slide.headline or slide.subheading -%}
+          <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" aria-hidden="true"></div>
+          {%- else -%}
+          <div class="absolute inset-0" style="background:rgba(0,0,0,0.3);" aria-hidden="true"></div>
+          {%- endif -%}
+          {# Accessible heading — visible in text-overlay mode, sr-only in flyer mode #}
+          {%- if slide.headline -%}
+            {%- if loop.first -%}
+            <div class="absolute inset-0 z-10 flex items-center justify-center px-6">
+              <div class="text-center max-w-5xl mx-auto">
+                {%- if slide.badge -%}
+                <span class="inline-block bg-white/20 text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6 backdrop-blur-sm">{{ slide.badge }}</span>
+                {%- endif -%}
+                <h1 class="font-anton text-5xl md:text-8xl lg:text-9xl uppercase leading-[1.1] mb-6 text-white tracking-h1">
+                  {{ slide.headline }}<br>
+                  {%- if slide.headline_highlight -%}<span class="text-brand-red">{{ slide.headline_highlight }}</span>{%- endif -%}
+                </h1>
+                {%- if slide.subheading -%}
+                <p class="text-white/90 text-xl md:text-2xl mb-10 font-light max-w-3xl mx-auto">{{ slide.subheading }}</p>
+                {%- endif -%}
+                <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+                  {%- if slide.primary_text -%}
+                  <a href="{{ slide.primary_url | default('/plan-your-visit') }}" class="bg-brand-red text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition tracking-wide">{{ slide.primary_text }}</a>
+                  {%- endif -%}
+                  {%- if slide.secondary_text -%}
+                  <a href="{{ slide.secondary_url | default('/watch-live') }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">{{ slide.secondary_text }}</a>
+                  {%- endif -%}
+                </div>
+              </div>
             </div>
+            {%- else -%}
+            <div class="absolute inset-0 z-10 flex items-center justify-center px-6">
+              <div class="text-center max-w-5xl mx-auto">
+                {%- if slide.badge -%}
+                <span class="inline-block bg-white/20 text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6 backdrop-blur-sm">{{ slide.badge }}</span>
+                {%- endif -%}
+                <h2 class="font-anton text-5xl md:text-8xl lg:text-9xl uppercase leading-[1.1] mb-6 text-white tracking-h1">
+                  {{ slide.headline }}<br>
+                  {%- if slide.headline_highlight -%}<span class="text-brand-red">{{ slide.headline_highlight }}</span>{%- endif -%}
+                </h2>
+                {%- if slide.subheading -%}
+                <p class="text-white/90 text-xl md:text-2xl mb-10 font-light max-w-3xl mx-auto">{{ slide.subheading }}</p>
+                {%- endif -%}
+                <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+                  {%- if slide.primary_text -%}
+                  <a href="{{ slide.primary_url | default('/plan-your-visit') }}" class="bg-brand-red text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition tracking-wide">{{ slide.primary_text }}</a>
+                  {%- endif -%}
+                  {%- if slide.secondary_text -%}
+                  <a href="{{ slide.secondary_url | default('/watch-live') }}" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-white hover:text-black transition tracking-wide">{{ slide.secondary_text }}</a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+            {%- endif -%}
+          {%- else -%}
+            {# Flyer mode: accessible hidden heading taken from slide_title #}
+            {%- if loop.first -%}
+            <h1 class="sr-only">{{ slide.slide_title | default('') }}</h1>
+            {%- else -%}
+            <h2 class="sr-only">{{ slide.slide_title | default('') }}</h2>
+            {%- endif -%}
+          {%- endif -%}
+          {# Whole-slide link + Learn More button when slide_link is set #}
+          {%- if slide.slide_link -%}
+          <a href="{{ slide.slide_link }}"
+             class="absolute inset-0 z-10 block focus:outline-none focus:ring-4 focus:ring-white focus:ring-inset"
+             aria-label="{{ slide.slide_title | default(slide.headline) | default('Learn more') }}"></a>
+          <div class="absolute bottom-20 inset-x-0 z-20 flex justify-center pointer-events-none" aria-hidden="true">
+            <span class="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm tracking-wide shadow-lg">
+              Learn More
+            </span>
+          </div>
+          {%- endif -%}
         </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if _count > 1 -%}
+      {# Prev / Next arrows — desktop only #}
+      <button id="hero-prev"
+              class="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 items-center justify-center rounded-full bg-black/40 hover:bg-black/70 text-white transition focus:outline-none focus:ring-2 focus:ring-white"
+              aria-label="Previous slide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button id="hero-next"
+              class="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 items-center justify-center rounded-full bg-black/40 hover:bg-black/70 text-white transition focus:outline-none focus:ring-2 focus:ring-white"
+              aria-label="Next slide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      {# Dot indicators #}
+      <div role="tablist" aria-label="Hero slides" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3">
+        {%- for slide in _active -%}
+        <button
+          role="tab"
+          id="hero-dot-{{ loop.index0 }}"
+          aria-label="Go to slide {{ loop.index }}"
+          aria-selected="{{ 'true' if loop.first else 'false' }}"
+          class="focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 focus:ring-offset-black"
+        ></button>
+        {%- endfor -%}
+      </div>
+
+      {# Pause / Play button #}
+      <button id="hero-pause"
+              aria-label="Pause slideshow"
+              aria-pressed="false"
+              class="absolute bottom-4 right-6 z-30 w-8 h-8 flex items-center justify-center text-white/60 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-white rounded-full"
+      >
+        <svg id="icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        <svg id="icon-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+      {%- endif -%}
     </section>
-    {% endif %}
+    <script>
+    (function(){
+      var count = parseInt(document.getElementById('hero-carousel').dataset.count, 10);
+      if (count < 2) return;
+      var secs  = parseInt(document.getElementById('hero-carousel').dataset.seconds, 10) || 6;
+      var track    = document.getElementById('hero-track');
+      var section  = document.getElementById('hero-carousel');
+      var pauseBtn = document.getElementById('hero-pause');
+      var prevBtn  = document.getElementById('hero-prev');
+      var nextBtn  = document.getElementById('hero-next');
+      var iconPause = document.getElementById('icon-pause');
+      var iconPlay  = document.getElementById('icon-play');
+      var current = 0, manualPause = false, timer = null;
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced) track.style.transition = 'none';
+
+      function slide(i){ return document.getElementById('hero-slide-' + i); }
+      function dot(i){   return document.getElementById('hero-dot-'   + i); }
+
+      function goTo(n){
+        var prev = current;
+        current = ((n % count) + count) % count;
+        track.style.transform = 'translateX(-' + (current * 100 / count) + '%)';
+        for (var i = 0; i < count; i++){
+          var s = slide(i), d = dot(i);
+          if (i === current){
+            s.removeAttribute('aria-hidden'); s.removeAttribute('inert');
+            if (d) d.setAttribute('aria-selected','true');
+          } else {
+            s.setAttribute('aria-hidden','true'); s.setAttribute('inert','');
+            if (d) d.setAttribute('aria-selected','false');
+          }
+        }
+      }
+
+      function startTimer(){ if (reduced || manualPause) return; clearInterval(timer); timer = setInterval(function(){ goTo(current + 1); }, secs * 1000); }
+      function stopTimer(){  clearInterval(timer); timer = null; }
+
+      startTimer();
+
+      if (prevBtn) prevBtn.addEventListener('click', function(){ goTo(current - 1); stopTimer(); startTimer(); });
+      if (nextBtn) nextBtn.addEventListener('click', function(){ goTo(current + 1); stopTimer(); startTimer(); });
+
+      for (var j = 0; j < count; j++){
+        (function(idx){ var d = dot(idx); if (d) d.addEventListener('click', function(){ goTo(idx); stopTimer(); startTimer(); }); })(j);
+      }
+
+      if (pauseBtn) pauseBtn.addEventListener('click', function(){
+        manualPause = !manualPause;
+        pauseBtn.setAttribute('aria-pressed', manualPause ? 'true' : 'false');
+        pauseBtn.setAttribute('aria-label',   manualPause ? 'Play slideshow' : 'Pause slideshow');
+        iconPause.style.display = manualPause ? 'none' : '';
+        iconPlay.style.display  = manualPause ? ''     : 'none';
+        manualPause ? stopTimer() : startTimer();
+      });
+
+      section.addEventListener('mouseenter', function(){ if (!manualPause) stopTimer(); });
+      section.addEventListener('mouseleave', function(){ if (!manualPause && !reduced) startTimer(); });
+      section.addEventListener('focusin',  function(){ if (!manualPause) stopTimer(); });
+      section.addEventListener('focusout', function(e){ if (!section.contains(e.relatedTarget) && !manualPause && !reduced) startTimer(); });
+
+      section.addEventListener('keydown', function(e){
+        if (e.key === 'ArrowLeft')  { goTo(current - 1); stopTimer(); startTimer(); }
+        else if (e.key === 'ArrowRight') { goTo(current + 1); stopTimer(); startTimer(); }
+      });
+
+      var touchX = 0;
+      section.addEventListener('touchstart', function(e){ touchX = e.touches[0].clientX; }, { passive: true });
+      section.addEventListener('touchend',   function(e){
+        var dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 50){ goTo(dx < 0 ? current + 1 : current - 1); stopTimer(); startTimer(); }
+      }, { passive: true });
+    })();
+    </script>
 
     <!-- About Section -->
     <section id="about" class="bg-white pt-12 md:pt-24 pb-10 px-6">

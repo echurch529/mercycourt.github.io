@@ -23,17 +23,39 @@ collections:
         label: "Homepage"
         file: "index.html"
         fields:
-          - label: "Hero"
-            name: "hero"
-            widget: "object"
-            collapsed: true
+          - label: "Seconds per Slide"
+            name: "hero_seconds"
+            widget: "number"
+            value_type: "int"
+            default: 6
+            min: 4
+            max: 10
+            required: false
+            hint: "How long each slide is shown before advancing (4–10 s). Only applies when there is more than one slide."
+          - label: "Hero Slides"
+            name: "hero_slides"
+            widget: "list"
+            label_singular: "Slide"
+            min: 1
+            max: 3
+            summary: "{{fields.slide_title}} {{fields.headline}}"
+            hint: "Put the most important slide first. Up to 3 slides. Keep headlines short."
             fields:
-              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
-              - { label: "Headline (first line)", name: "headline", widget: "string", required: false, hint: "e.g. IT'S OUR YEAR OF" }
-              - { label: "Headline Highlight (red, 2nd line)", name: "headline_highlight", widget: "string", required: false, hint: "e.g. BETTER THINGS" }
-              - { label: "Tagline", name: "tagline", widget: "string", required: false }
-              - { label: "Show Hero Text Overlay", name: "show_hero_text", widget: "boolean", default: true, required: false, hint: "Turn OFF if the hero image already contains all the needed text and details — e.g. a seasonal flyer or announcement graphic. When off, the image fills the hero at natural size with no headline, tagline, or buttons overlaid." }
-              - { label: "Event Link URL", name: "event_url", widget: "string", required: false, hint: "Optional. When Show Hero Text is OFF (flyer mode), this links the flyer to the event page and shows a 'Learn More' button below it. Leave blank for a non-event hero. Example: /events/12th-anniversary.html" }
+              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Keep under 500 KB. Compress at squoosh.app or tinypng.com. Rename descriptively before uploading." }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string", required: false, hint: "Required whenever an image is set. For a flyer or event banner, include the key words from the image — event name, date, and place — e.g. 'P4 Conference — 12 Oct 2026 — RCCG Mercy Court, Baltimore'. Screen readers read this aloud and search engines index it." }
+              - { label: "Image – Horizontal position", name: "focal_x", widget: "select", default: "50%", required: false, hint: "If a face or key detail is cut off at the sides, move toward that edge.", options: [{ label: "Left", value: "0%" }, { label: "Center-left", value: "25%" }, { label: "Center", value: "50%" }, { label: "Center-right", value: "75%" }, { label: "Right", value: "100%" }] }
+              - { label: "Image – Vertical position", name: "focal_y", widget: "select", default: "50%", required: false, hint: "Use 'Top' to keep the top of the photo visible — e.g. when heads are cut off.", options: [{ label: "Top", value: "0%" }, { label: "Upper", value: "25%" }, { label: "Center", value: "50%" }, { label: "Lower", value: "75%" }, { label: "Bottom", value: "100%" }] }
+              - { label: "Badge", name: "badge", widget: "string", required: false, hint: "Optional small pill above the headline — e.g. 'ANNOUNCING' or 'NEW SERIES'. Leave blank for no badge." }
+              - { label: "Headline (first line)", name: "headline", widget: "string", required: false, hint: "Large text overlaid on the image. Leave blank if the headline text is part of the image itself (flyer mode)." }
+              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string", required: false }
+              - { label: "Subheading", name: "subheading", widget: "string", required: false, hint: "Smaller text below the headline. Leave blank for a clean image-only slide." }
+              - { label: "Primary Button Text", name: "primary_text", widget: "string", required: false, hint: "e.g. 'Plan Your Visit'" }
+              - { label: "Primary Button Link", name: "primary_url", widget: "string", required: false, hint: "e.g. /plan-your-visit" }
+              - { label: "Secondary Button Text", name: "secondary_text", widget: "string", required: false }
+              - { label: "Secondary Button Link", name: "secondary_url", widget: "string", required: false }
+              - { label: "Slide Title (for accessibility)", name: "slide_title", widget: "string", required: false, hint: "Hidden heading used when Headline is blank (flyer mode). Also used as the screen-reader label for the whole-slide link. Required when Headline is blank." }
+              - { label: "Slide Link", name: "slide_link", widget: "string", required: false, hint: "Optional. Makes the entire slide clickable — e.g. /events/12th-anniversary. A 'Learn More' button appears at the bottom of the slide." }
+              - { label: "Show Until", name: "show_until", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: false, hint: "Optional. After this date the slide is hidden at the next site build — not at the exact moment the date passes." }
           - label: "About Section"
             name: "about"
             widget: "object"
