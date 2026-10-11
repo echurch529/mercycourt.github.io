@@ -475,6 +475,131 @@ collections:
               - { label: "Body", name: "body", widget: "text", required: false }
           - { label: "Body", name: "body", widget: "hidden" }
 
+      - name: "sunday-services"
+        label: "Sunday Services"
+        file: "sunday-services.html"
+        fields:
+          - { label: "SEO Title", name: "title", widget: "string", required: false }
+          - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
+          - { label: "OG Image", name: "og_image", widget: "image", required: false, hint: "Keep under 500KB. Compress before uploading." }
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Badge", name: "badge", widget: "string", required: false }
+              - { label: "Headline (first line)", name: "headline", widget: "string", required: false }
+              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string", required: false }
+              - { label: "Subheading", name: "subheading", widget: "string", required: false }
+              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Desktop: 2071 × 759 px. Compress before uploading." }
+              - { label: "Mobile Image", name: "mobile_image", widget: "image", required: false, hint: "Portrait: 1080 × 1350 px." }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string", required: false, hint: "Required when an image is set." }
+              - { label: "Image – Horizontal position", name: "focal_x", widget: "select", default: "50%", required: false, options: [{ label: "Left", value: "0%" }, { label: "Center-left", value: "25%" }, { label: "Center", value: "50%" }, { label: "Center-right", value: "75%" }, { label: "Right", value: "100%" }] }
+              - { label: "Image – Vertical position", name: "focal_y", widget: "select", default: "50%", required: false, options: [{ label: "Top", value: "0%" }, { label: "Upper", value: "25%" }, { label: "Center", value: "50%" }, { label: "Lower", value: "75%" }, { label: "Bottom", value: "100%" }] }
+              - { label: "Primary Button Text", name: "primary_cta", widget: "string", required: false }
+              - { label: "Secondary Button Text", name: "secondary_cta", widget: "string", required: false }
+              - { label: "Secondary Button URL", name: "secondary_url", widget: "string", required: false }
+          - label: "Service Times Section"
+            name: "service_times"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Section Heading", name: "heading", widget: "string", required: false, hint: "The heading above the service times cards. Times are pulled from site.json." }
+          - label: "Why — Our Heart"
+            name: "why"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - label: "Body Paragraphs"
+                name: "body"
+                widget: "list"
+                field: { label: "Paragraph", name: "paragraph", widget: "text", required: false }
+                required: false
+              - { label: "Scripture Text", name: "scripture_text", widget: "string", required: false }
+              - { label: "Scripture Reference", name: "scripture_ref", widget: "string", required: false }
+              - { label: "Supporting Image", name: "image", widget: "image", required: false }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string", required: false }
+              - { label: "Closing Link Text", name: "closing_text", widget: "string", required: false }
+              - { label: "Closing Link URL", name: "closing_url", widget: "string", required: false }
+          - label: "Who It's For"
+            name: "who"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Intro", name: "intro", widget: "text", required: false }
+              - label: "Cards"
+                name: "cards"
+                widget: "list"
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: "Title", name: "title", widget: "string", required: false }
+                  - { label: "Body", name: "body", widget: "text", required: false }
+                required: false
+              - { label: "Supporting Image", name: "image", widget: "image", required: false }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string", required: false }
+              - { label: "Closing Text", name: "closing_text", widget: "text", required: false }
+              - { label: "Closing Link URL", name: "closing_url", widget: "string", required: false }
+          - label: "What to Expect"
+            name: "expect"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Intro", name: "intro", widget: "text", required: false }
+              - label: "Cards"
+                name: "cards"
+                widget: "list"
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: "Title", name: "title", widget: "string", required: false }
+                  - { label: "Body", name: "body", widget: "text", required: false }
+                  - { label: "Link Text", name: "link_text", widget: "string", required: false }
+                  - { label: "Link URL", name: "link_url", widget: "string", required: false }
+                required: false
+              - { label: "Supporting Image", name: "image", widget: "image", required: false }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string", required: false }
+          - label: "Mid-page CTA"
+            name: "cta_mid"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Body", name: "body", widget: "text", required: false }
+              - { label: "Button Label", name: "button_label", widget: "string", required: false }
+              - { label: "Secondary Link Label", name: "secondary_label", widget: "string", required: false }
+              - { label: "Secondary Link URL", name: "secondary_url", widget: "string", required: false }
+          - label: "FAQ"
+            name: "faq"
+            widget: "list"
+            summary: "{{fields.q}}"
+            fields:
+              - { label: "Question", name: "q", widget: "string", required: false }
+              - { label: "Answer", name: "a", widget: "text", required: false }
+            required: false
+          - label: "Final CTA"
+            name: "cta_final"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Body", name: "body", widget: "text", required: false }
+              - { label: "Background Image", name: "bg_image", widget: "image", required: false, hint: "Wide photo, will be darkened for text readability." }
+              - { label: "Background Image Alt Text", name: "bg_image_alt", widget: "string", required: false }
+              - { label: "Primary Button Label", name: "primary_label", widget: "string", required: false }
+              - { label: "Secondary Button Label", name: "secondary_label", widget: "string", required: false }
+              - { label: "Secondary Button URL", name: "secondary_url", widget: "string", required: false }
+              - { label: "Link 1 Label", name: "link_1_label", widget: "string", required: false }
+              - { label: "Link 1 URL", name: "link_1_url", widget: "string", required: false }
+              - { label: "Link 2 Label", name: "link_2_label", widget: "string", required: false }
+              - { label: "Link 2 URL", name: "link_2_url", widget: "string", required: false }
+              - { label: "Link 3 Label", name: "link_3_label", widget: "string", required: false }
+              - { label: "Link 3 URL", name: "link_3_url", widget: "string", required: false }
+
   - name: "ministries-pages"
     label: "Ministries"
     files:

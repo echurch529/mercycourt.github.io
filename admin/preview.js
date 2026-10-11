@@ -2511,12 +2511,93 @@
     );
   }
 
+
+  function SundayServicesPreview(props) {
+    // Hardcoded service times for preview (sync with site.json if times change)
+    // Instances: sunday_1.time (9:30 AM), sunday_2.time (12:00 PM)
+    var S1_TIME = '9:30 AM';
+    var S1_LABEL = '1st Service';
+    var S1_DURATION = 'about 2 hours';
+    var S2_TIME = '12:00 PM';
+    var S2_LABEL = '2nd Service';
+    var S2_DURATION = 'about 1 hour 30 minutes';
+    var S2_STYLE = 'a shorter, youthful service';
+    var SUNDAY_NOTE = 'First Sunday of the month: one service at 9:30 AM';
+
+    var entry = props.entry;
+    var getF = function(k) { return entry && entry.getIn ? (entry.getIn(['data', k]) || '') : ''; };
+    var hero = entry && entry.getIn ? (entry.getIn(['data', 'hero']) || null) : null;
+    var why = entry && entry.getIn ? (entry.getIn(['data', 'why']) || null) : null;
+    var cta_final = entry && entry.getIn ? (entry.getIn(['data', 'cta_final']) || null) : null;
+    var faq = entry && entry.getIn ? (entry.getIn(['data', 'faq']) || []) : [];
+    var toJS = function(v) { return v && v.toJS ? v.toJS() : (v || null); };
+
+    var heroD = toJS(hero) || {};
+    var whyD = toJS(why) || {};
+    var ctaFinalD = toJS(cta_final) || {};
+    var faqArr = toJS(faq) || [];
+
+    return h('div', { style: { fontFamily: 'Lato, sans-serif', color: '#1B2A4A', background: '#fff' } },
+      // Hero
+      h('section', { style: { background: '#1B2A4A', padding: '80px 24px', textAlign: 'center', color: '#fff' } },
+        heroD.badge ? h('span', { style: { background: '#E8541A', color: '#fff', borderRadius: '50px', padding: '6px 16px', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '16px', display: 'inline-block' } }, heroD.badge) : null,
+        h('h1', { style: { fontFamily: 'Anton, sans-serif', fontSize: '3rem', textTransform: 'uppercase', lineHeight: 1.1, marginBottom: '8px' } }, heroD.headline || 'Two Services. One Family.'),
+        h('p', { style: { color: '#E8541A', fontFamily: 'Anton, sans-serif', fontSize: '2.5rem', textTransform: 'uppercase', marginBottom: '16px' } }, heroD.headline_highlight || 'No One Left Behind.'),
+        h('p', { style: { color: 'rgba(255,255,255,0.85)', maxWidth: '560px', margin: '0 auto 32px', lineHeight: 1.6 } }, heroD.subheading || '')
+      ),
+      // Service times
+      h('section', { style: { background: '#F9FAFB', padding: '60px 24px', textAlign: 'center' } },
+        h('h2', { style: { fontFamily: 'Anton, sans-serif', fontSize: '2rem', textTransform: 'uppercase', marginBottom: '32px' } }, 'Join Us This Sunday'),
+        h('div', { style: { display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap' } },
+          h('div', { style: { background: '#fff', borderRadius: '16px', padding: '32px', flex: '1', maxWidth: '320px', borderTop: '4px solid #E8541A', textAlign: 'center' } },
+            h('p', { style: { fontSize: '2rem', fontWeight: 700, color: '#E8541A' } }, S1_TIME),
+            h('p', { style: { fontWeight: 700, marginBottom: '8px' } }, S1_LABEL),
+            h('p', { style: { color: '#6B7280', fontSize: '0.875rem' } }, S1_DURATION)
+          ),
+          h('div', { style: { background: '#fff', borderRadius: '16px', padding: '32px', flex: '1', maxWidth: '320px', borderTop: '4px solid #1B2A4A', textAlign: 'center' } },
+            h('p', { style: { fontSize: '2rem', fontWeight: 700, color: '#1B2A4A' } }, S2_TIME),
+            h('p', { style: { fontWeight: 700, marginBottom: '8px' } }, S2_LABEL),
+            h('p', { style: { color: '#6B7280', fontSize: '0.875rem' } }, S2_STYLE + ' · ' + S2_DURATION)
+          )
+        ),
+        h('p', { style: { marginTop: '24px', color: '#6B7280', fontSize: '0.875rem' } }, SUNDAY_NOTE)
+      ),
+      // Why
+      h('section', { style: { padding: '80px 24px', maxWidth: '720px', margin: '0 auto' } },
+        whyD.eyebrow ? h('p', { style: { color: '#E8541A', textTransform: 'uppercase', fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.1em', marginBottom: '8px' } }, whyD.eyebrow) : null,
+        whyD.heading ? h('h2', { style: { fontFamily: 'Anton, sans-serif', fontSize: '2rem', textTransform: 'uppercase', marginBottom: '24px' } }, whyD.heading) : null,
+        whyD.scripture_text ? h('blockquote', { style: { borderLeft: '4px solid #E8541A', paddingLeft: '16px', fontStyle: 'italic', color: '#4B5563', marginBottom: '24px' } },
+          '"' + whyD.scripture_text + '"',
+          h('cite', { style: { display: 'block', fontStyle: 'normal', fontWeight: 700, marginTop: '8px', fontSize: '0.875rem' } }, '— ' + (whyD.scripture_ref || ''))
+        ) : null
+      ),
+      // FAQ preview
+      faqArr.length > 0 ? h('section', { style: { background: '#F9FAFB', padding: '60px 24px', maxWidth: '720px', margin: '0 auto' } },
+        h('h2', { style: { fontFamily: 'Anton, sans-serif', fontSize: '2rem', textTransform: 'uppercase', marginBottom: '24px' } }, 'Common Questions'),
+        h('ul', { style: { listStyle: 'none', padding: 0 } },
+          faqArr.slice(0, 4).map(function(item, i) {
+            return h('li', { key: i, style: { borderBottom: '1px solid #E5E7EB', padding: '16px 0' } },
+              h('p', { style: { fontWeight: 700 } }, item.q),
+              h('p', { style: { color: '#6B7280', marginTop: '4px' } }, item.a)
+            );
+          })
+        )
+      ) : null,
+      // Final CTA
+      h('section', { style: { background: '#1B2A4A', padding: '80px 24px', textAlign: 'center', color: '#fff' } },
+        h('h2', { style: { fontFamily: 'Anton, sans-serif', fontSize: '2rem', textTransform: 'uppercase', marginBottom: '16px' } }, ctaFinalD.heading || 'Everyone Is Welcome Here'),
+        h('p', { style: { color: 'rgba(255,255,255,0.8)', maxWidth: '560px', margin: '0 auto' } }, ctaFinalD.body || '')
+      )
+    );
+  }
+
   function MainPagesDispatch(props) {
     try {
       // Decap 3.x file collections: entry.get('slug') = entry name, entry.get('path') = file path.
       // Check both so the correct preview renders regardless of which one Decap populates first.
       var slug = (props.entry && props.entry.get('slug')) || '';
       var path = (props.entry && props.entry.get('path')) || '';
+      if (slug === 'sunday-services'  || path.indexOf('sunday-services') !== -1) return SundayServicesPreview(props);
       if (slug === 'give'             || path.indexOf('give') !== -1)            return GivePreview(props);
       if (slug === 'watch-live'       || path.indexOf('watch-live') !== -1)      return WatchLivePreview(props);
       if (slug === 'events-hub'       || path.indexOf('events/index') !== -1)    return EventsHubPreview(props);
