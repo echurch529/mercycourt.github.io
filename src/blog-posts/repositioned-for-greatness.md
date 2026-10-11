@@ -1,5 +1,6 @@
 ---
 title: "Repositioned for Greatness: 5 Keys to Unlock Your Potential"
+slug: blog-posts/repositioned-for-greatness
 seo_title: "Repositioned for Greatness: 5 Keys | Mercy Court"
 seo_description: Feeling stuck despite working hard? Learn 5 practical ways to
   reposition yourself — mentally, spiritually, and emotionally — for the life
@@ -8,13 +9,17 @@ date: 2026-05-11
 author: Dr. John Itakpe
 category: inspiration
 featured: false
+community_impact: false
 hero_image: /assets/images/2026/blog-photos/adventurous-adult-man-hiking-on-top-of-a-mountain-2026-03-24-23-52-07-utc
   (1).jpg
 hero_image_alt: Man on a mountain summit
+hero_focal_x: 50%
+hero_focal_y: 25%
 excerpt: Greatness is rarely about luck — it's about position. Discover 5
   practical keys to reposition yourself mentally, spiritually, and emotionally
   for the life you were made for.
 read_time: 5
+show_article_image: true
 scripture_references:
   - Jeremiah 29:11
   - Proverbs 11:3
