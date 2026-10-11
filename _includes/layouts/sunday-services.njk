@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ seo_description }}">
+    <link rel="canonical" href="https://mercycourt.org{{ page.url | cleanUrl }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="RCCG Mercy Court">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ seo_description }}">
+    <meta property="og:url" content="https://mercycourt.org{{ page.url | cleanUrl }}">
+    {%- set _og_image = og_image -%}
+    {%- set _og_alt = hero.image_alt if hero.image_alt else title -%}
+    {%- include "og-meta.njk" -%}
+    <meta name="twitter:card" content="summary_large_image">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-red': '#D95A2B',
+                        'brand-dark': '#0A0A0A',
+                        'brand-footer': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        'anton': ['Anton', 'sans-serif'],
+                        'lato': ['Lato', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JWGVNRLKJL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JWGVNRLKJL');
+    </script>
+    <script src="/assets/js/analytics.js" defer></script>
+    <!-- Meta Pixel Code -->
+    <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1027268596866855'); fbq('track', 'PageView');</script>
+    <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=1027268596866855&ev=PageView&noscript=1"/></noscript>
+    <!-- End Meta Pixel Code -->
+    <style>
+        {%- include "components/heading-tracking.njk" -%}
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+    </style>
+    <!-- FAQPage structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+        {%- for item in faq %}
+        {
+            "@type": "Question",
+            "name": {{ item.q | dump }},
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ item.a | dump }}
+            }
+        }{% if not loop.last %},{% endif %}
+        {%- endfor %}
+        ]
+    }
+    </script>
+</head>
+<body class="font-lato bg-white text-gray-900">
+
+    {%- include "nav.njk" -%}
+
+    <!-- 1. Hero -->
+    <section class="relative overflow-hidden flex items-center justify-center text-white text-center" style="min-height:75vh;{% if hero.image %}background-image:url('{{ hero.image }}');background-size:cover;background-position:{{ hero.focal_x | default('50%') }} {{ hero.focal_y | default('50%') }};{% else %}background:#0A0A0A;{% endif %}padding-top:72px;">
+        {%- if hero.image %}<div class="absolute inset-0 bg-black/60"></div>{%- endif %}
+        <div class="relative z-10 px-6 max-w-3xl mx-auto py-16">
+            {%- if hero.badge %}<p class="text-brand-red text-xs font-bold uppercase tracking-widest mb-5">{{ hero.badge }}</p>{%- endif %}
+            <h1 class="font-anton text-5xl sm:text-7xl md:text-8xl uppercase tracking-h1 leading-tight mb-4">
+                {{ hero.headline }}
+                {%- if hero.headline_highlight %}<br><span class="text-brand-red">{{ hero.headline_highlight }}</span>{%- endif %}
+            </h1>
+            {%- if hero.subheading %}<p class="text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">{{ hero.subheading }}</p>{%- endif %}
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="openVisitModal()" class="inline-block bg-brand-red text-white text-sm font-bold uppercase tracking-wide px-10 py-4 rounded-full hover:bg-[#C04E25] transition">{{ hero.primary_cta if hero.primary_cta else "Plan Your Visit" }}</button>
+                {%- if hero.secondary_cta %}
+                <a href="{{ hero.secondary_url if hero.secondary_url else '/watch-live' }}" class="inline-block border border-white/50 text-white text-sm font-bold uppercase tracking-wide px-10 py-4 rounded-full hover:bg-white/10 transition">{{ hero.secondary_cta }}</a>
+                {%- endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Service Times -->
+    <section class="py-20 px-6 bg-white">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2 text-gray-900 mb-3 text-center">{{ service_times.heading if service_times.heading else "Join Us This Sunday" }}</h2>
+            <div class="w-16 h-1 bg-brand-red mx-auto mb-12"></div>
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <!-- 1st Service -->
+                <div class="rounded-2xl border-2 border-brand-red p-8 bg-white shadow-sm">
+                    <p class="text-brand-red text-xs font-bold uppercase tracking-widest mb-2">{{ site.service_times.sunday_1.label }}</p>
+                    <p class="font-anton text-5xl text-gray-900 mb-6">{{ site.service_times.sunday_1.time }}</p>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-brand-red mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Full Sunday service
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-brand-red mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            {{ site.service_times.sunday_1.duration }}
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-brand-red mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            God's Heritage children's ministry available
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-brand-red mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Livestreamed on Watch Live
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-brand-red mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            {{ site.address_street }}, {{ site.address_city_state }}
+                        </li>
+                    </ul>
+                </div>
+                <!-- 2nd Service -->
+                <div class="rounded-2xl border border-gray-200 p-8 bg-white shadow-sm">
+                    <p class="text-brand-red text-xs font-bold uppercase tracking-widest mb-2">{{ site.service_times.sunday_2.label }}</p>
+                    <p class="font-anton text-5xl text-gray-900 mb-6">{{ site.service_times.sunday_2.time }}</p>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-brand-red mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            {{ site.service_times.sunday_2.style }}
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-brand-red mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            {{ site.service_times.sunday_2.duration }}
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-gray-300 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                            No children's ministry
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-gray-300 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+                            In person only
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-brand-red mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            {{ site.address_street }}, {{ site.address_city_state }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-center text-gray-500 text-sm mb-2">{{ site.service_times.sunday_note }}</p>
+            <p class="text-center text-gray-400 text-sm">Free parking is available on site. <a href="/plan-your-visit" class="text-brand-red hover:underline">Getting here and what to expect →</a></p>
+        </div>
+    </section>
+
+    <!-- 3. Why a Second Service -->
+    <section class="py-20 px-6 bg-gray-50">
+        <div class="container mx-auto max-w-5xl">
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <div>
+                    {%- if why.eyebrow %}<p class="text-brand-red text-xs font-bold uppercase tracking-widest mb-4">{{ why.eyebrow }}</p>{%- endif %}
+                    <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2 text-gray-900 mb-3">{{ why.heading }}</h2>
+                    <div class="w-16 h-1 bg-brand-red mb-8"></div>
+                    {%- if why.body %}
+                    <div class="space-y-4 mb-8">
+                        {%- for para in why.body %}
+                        <p class="text-gray-600 leading-relaxed">{{ para }}</p>
+                        {%- endfor %}
+                    </div>
+                    {%- endif %}
+                    {%- if why.scripture_text %}
+                    <blockquote class="border-l-4 border-brand-red pl-6 mb-8">
+                        <p class="text-gray-700 italic leading-relaxed mb-2">"{{ why.scripture_text }}"</p>
+                        {%- if why.scripture_ref %}<cite class="text-brand-red text-sm font-bold not-italic">— {{ why.scripture_ref }}</cite>{%- endif %}
+                    </blockquote>
+                    {%- endif %}
+                    {%- if why.closing_text %}
+                    <a href="{{ why.closing_url if why.closing_url else '/about-us' }}" class="text-brand-red font-semibold hover:underline">{{ why.closing_text }} →</a>
+                    {%- endif %}
+                </div>
+                <div class="reveal">
+                    {%- if why.image %}
+                    <img src="{{ why.image }}" alt="{{ why.image_alt }}" class="rounded-2xl w-full object-cover shadow-lg" style="aspect-ratio:3/2;">
+                    {%- else %}
+                    <div class="rounded-2xl bg-brand-dark flex items-center justify-center" style="aspect-ratio:3/2;">
+                        <span class="font-anton text-white/20 text-2xl uppercase tracking-h3">Mercy Court</span>
+                    </div>
+                    {%- endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Who It's For -->
+    <section class="py-20 px-6 bg-white">
+        <div class="container mx-auto max-w-5xl">
+            {%- if who.eyebrow %}<p class="text-brand-red text-xs font-bold uppercase tracking-widest mb-4 text-center">{{ who.eyebrow }}</p>{%- endif %}
+            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2 text-gray-900 mb-3 text-center">{{ who.heading }}</h2>
+            <div class="w-16 h-1 bg-brand-red mx-auto mb-6"></div>
+            {%- if who.intro %}<p class="text-gray-500 text-base leading-relaxed mb-12 max-w-2xl mx-auto text-center">{{ who.intro }}</p>{%- endif %}
+            {%- if who.cards %}
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                {%- for card in who.cards %}
+                <div class="bg-gray-50 rounded-2xl p-8 reveal">
+                    <h3 class="font-anton text-xl uppercase tracking-h3 text-gray-900 mb-3">{{ card.title }}</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">{{ card.body }}</p>
+                </div>
+                {%- endfor %}
+            </div>
+            {%- endif %}
+            {%- if who.image %}
+            <div class="mb-10 reveal">
+                <img src="{{ who.image }}" alt="{{ who.image_alt }}" class="rounded-2xl w-full object-cover shadow-sm" style="max-height:400px;object-fit:cover;">
+            </div>
+            {%- endif %}
+            {%- if who.closing_text %}
+            <p class="text-center text-gray-600 leading-relaxed">
+                <a href="{{ who.closing_url if who.closing_url else '/ministries' }}" class="hover:text-brand-red transition">{{ who.closing_text }}</a>
+            </p>
+            {%- endif %}
+        </div>
+    </section>
+
+    <!-- 5. What to Expect -->
+    <section class="py-20 px-6 bg-gray-50">
+        <div class="container mx-auto max-w-5xl">
+            {%- if expect.eyebrow %}<p class="text-brand-red text-xs font-bold uppercase tracking-widest mb-4 text-center">{{ expect.eyebrow }}</p>{%- endif %}
+            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2 text-gray-900 mb-3 text-center">{{ expect.heading }}</h2>
+            <div class="w-16 h-1 bg-brand-red mx-auto mb-6"></div>
+            {%- if expect.intro %}<p class="text-gray-500 text-base leading-relaxed mb-12 max-w-2xl mx-auto text-center">{{ expect.intro }}</p>{%- endif %}
+            {%- if expect.cards %}
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                {%- for card in expect.cards %}
+                <div class="bg-white rounded-2xl p-6 shadow-sm reveal">
+                    <div class="w-10 h-10 bg-brand-red/10 rounded-xl flex items-center justify-center mb-4">
+                        {%- if loop.index == 1 %}
+                        <svg class="w-5 h-5 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+                        {%- elif loop.index == 2 %}
+                        <svg class="w-5 h-5 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        {%- elif loop.index == 3 %}
+                        <svg class="w-5 h-5 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        {%- else %}
+                        <svg class="w-5 h-5 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                        {%- endif %}
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2 text-sm">{{ card.title }}</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">{{ card.body }}{%- if card.link_text %} <a href="{{ card.link_url }}" class="text-brand-red hover:underline">{{ card.link_text }}</a>{%- endif %}</p>
+                </div>
+                {%- endfor %}
+            </div>
+            {%- endif %}
+            {%- if expect.image %}
+            <div class="reveal">
+                <img src="{{ expect.image }}" alt="{{ expect.image_alt }}" class="rounded-2xl w-full object-cover shadow-sm" style="max-height:400px;object-fit:cover;">
+            </div>
+            {%- endif %}
+        </div>
+    </section>
+
+    <!-- 6. Mid CTA Band -->
+    <section class="py-16 px-6 bg-brand-red text-white text-center">
+        <div class="container mx-auto max-w-2xl">
+            <h2 class="font-anton text-3xl md:text-4xl uppercase tracking-h2 mb-4">{{ cta_mid.heading if cta_mid.heading else "Your Seat Is Reserved" }}</h2>
+            {%- if cta_mid.body %}<p class="text-white/80 leading-relaxed mb-8">{{ cta_mid.body }}</p>{%- endif %}
+            <button onclick="openVisitModal()" class="inline-block bg-white text-brand-red text-sm font-bold uppercase tracking-wide px-10 py-4 rounded-full hover:bg-gray-100 transition">{{ cta_mid.button_label if cta_mid.button_label else "Plan Your Visit" }}</button>
+            {%- if cta_mid.secondary_label %}
+            <div class="mt-4">
+                <a href="{{ cta_mid.secondary_url if cta_mid.secondary_url else '/watch-live' }}" class="text-white/70 text-sm hover:text-white transition">{{ cta_mid.secondary_label }}</a>
+            </div>
+            {%- endif %}
+        </div>
+    </section>
+
+    <!-- 7. FAQ -->
+    <section class="py-20 px-6 bg-white">
+        <div class="container mx-auto max-w-3xl">
+            <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2 text-gray-900 mb-3 text-center">FREQUENTLY ASKED QUESTIONS</h2>
+            <div class="w-16 h-1 bg-brand-red mx-auto mb-12"></div>
+            {%- if faq %}
+            <div class="space-y-3">
+                {%- for item in faq %}
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between font-semibold text-gray-900 hover:text-brand-red transition-colors" onclick="toggleSsFaq(this, 'ss-faq-{{ loop.index }}')" aria-expanded="false">
+                        <span>{{ item.q }}</span>
+                        <svg class="faq-icon w-5 h-5 flex-shrink-0 ml-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div id="ss-faq-{{ loop.index }}" class="ss-faq-answer hidden px-6 pb-5">
+                        <p class="text-gray-500 leading-relaxed">{{ item.a }}</p>
+                    </div>
+                </div>
+                {%- endfor %}
+            </div>
+            {%- endif %}
+        </div>
+    </section>
+
+    <!-- 8. Final CTA -->
+    <section class="relative py-24 px-6 text-white text-center overflow-hidden" style="{% if cta_final.bg_image %}background-image:url('{{ cta_final.bg_image }}');background-size:cover;background-position:center;{% else %}background:#0A0A0A;{% endif %}">
+        {%- if cta_final.bg_image %}<div class="absolute inset-0 bg-black/65"></div>{%- endif %}
+        <div class="relative z-10 container mx-auto max-w-2xl">
+            <h2 class="font-anton text-4xl md:text-6xl uppercase tracking-h2 mb-4">{{ cta_final.heading if cta_final.heading else "Everyone Is Welcome Here" }}</h2>
+            {%- if cta_final.body %}<p class="text-white/70 leading-relaxed mb-10 text-lg">{{ cta_final.body }}</p>{%- endif %}
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <button onclick="openVisitModal()" class="inline-block bg-brand-red text-white text-sm font-bold uppercase tracking-wide px-10 py-4 rounded-full hover:bg-[#C04E25] transition">{{ cta_final.primary_label if cta_final.primary_label else "Plan Your Visit" }}</button>
+                {%- if cta_final.secondary_label %}
+                <a href="{{ cta_final.secondary_url if cta_final.secondary_url else '/events/one-bring-one/' }}" class="inline-block border border-white/50 text-white text-sm font-bold uppercase tracking-wide px-10 py-4 rounded-full hover:bg-white/10 transition">{{ cta_final.secondary_label }}</a>
+                {%- endif %}
+            </div>
+            <div class="flex flex-wrap gap-6 justify-center text-sm">
+                {%- if cta_final.link_1_label %}<a href="{{ cta_final.link_1_url if cta_final.link_1_url else '/watch-live' }}" class="text-white/60 hover:text-white transition">{{ cta_final.link_1_label }}</a>{%- endif %}
+                {%- if cta_final.link_2_label %}<a href="{{ cta_final.link_2_url if cta_final.link_2_url else '/blog' }}" class="text-white/60 hover:text-white transition">{{ cta_final.link_2_label }}</a>{%- endif %}
+                {%- if cta_final.link_3_label %}<a href="{{ cta_final.link_3_url if cta_final.link_3_url else '/contact' }}" class="text-white/60 hover:text-white transition">{{ cta_final.link_3_label }}</a>{%- endif %}
+            </div>
+        </div>
+    </section>
+
+    {%- include "footer.njk" -%}
+    {%- include "visit-modal.njk" -%}
+
+    <script>
+        function toggleSsFaq(btn, answerId) {
+            var answer = document.getElementById(answerId);
+            var isOpen = !answer.classList.contains('hidden');
+            document.querySelectorAll('.ss-faq-answer').forEach(function(el) { el.classList.add('hidden'); });
+            document.querySelectorAll('[onclick^="toggleSsFaq"]').forEach(function(el) {
+                el.style.color = '';
+                el.setAttribute('aria-expanded', 'false');
+                el.querySelector('.faq-icon').style.transform = '';
+            });
+            if (!isOpen) {
+                answer.classList.remove('hidden');
+                btn.style.color = '#D95A2B';
+                btn.setAttribute('aria-expanded', 'true');
+                btn.querySelector('.faq-icon').style.transform = 'rotate(180deg)';
+            }
+        }
+        var revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+    </script>
+</body>
+</html>
