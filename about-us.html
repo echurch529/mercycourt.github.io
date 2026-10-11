@@ -35,7 +35,9 @@ testimonials:
     <meta property="og:title" content="About Us | RCCG Mercy Court — Baltimore Church">
     <meta property="og:description" content="Discover RCCG Mercy Court's vision and leadership. Pastors John and Rosemary Itakpe lead a Baltimore community dedicated to raising Christ-like pacesetters.">
     <meta property="og:url" content="https://mercycourt.org/about-us">
-    <meta property="og:image" content="https://mercycourt.org/assets/images/2026/leadership/PJ-and-PA.jpeg">
+    {%- set _og_image = "https://mercycourt.org/assets/images/2026/leadership/PJ-and-PA.jpeg" -%}
+    {%- set _og_alt = "Pastors John and Rosemary Itakpe of RCCG Mercy Court" -%}
+    {%- include "og-meta.njk" -%}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="About Us | RCCG Mercy Court — Baltimore Church">
     <meta name="twitter:description" content="Discover RCCG Mercy Court's vision and leadership. Pastors John and Rosemary Itakpe lead a Baltimore community dedicated to raising Christ-like pacesetters.">

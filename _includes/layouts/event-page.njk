@@ -11,7 +11,9 @@
     <meta property="og:title" content="{{ title }}">
     <meta property="og:description" content="{{ seo_description }}">
     <meta property="og:url" content="https://mercycourt.org{{ page.url | cleanUrl }}">
-    <meta property="og:image" content="https://mercycourt.org{{ og_image }}">
+    {%- set _og_image = og_image -%}
+    {%- set _og_alt = hero.image_alt if hero.image_alt else title -%}
+    {%- include "og-meta.njk" -%}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ title }}">
     <meta name="twitter:description" content="{{ seo_description }}">

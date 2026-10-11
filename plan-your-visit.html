@@ -44,7 +44,9 @@ faq:
     <meta property="og:title" content="Plan Your First Visit | RCCG Mercy Court — Baltimore, MD">
     <meta property="og:description" content="Planning your first visit to Mercy Court? Find out what to expect, get answers to common questions, and let us know you are coming. We can't wait to meet you.">
     <meta property="og:url" content="https://mercycourt.org/plan-your-visit">
-    <meta property="og:image" content="https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-02.jpg">
+    {%- set _og_image = "https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-02.jpg" -%}
+    {%- set _og_alt = "RCCG Mercy Court congregation during Sunday worship" -%}
+    {%- include "og-meta.njk" -%}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Plan Your First Visit | RCCG Mercy Court — Baltimore, MD">
     <meta name="twitter:description" content="Planning your first visit to Mercy Court? Find out what to expect, get answers to common questions, and let us know you are coming. We can't wait to meet you.">

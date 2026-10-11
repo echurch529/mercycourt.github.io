@@ -45,7 +45,9 @@ ministries:
     <meta property="og:title" content="Our Ministries | RCCG Mercy Court Baltimore">
     <meta property="og:description" content="Explore Mercy Court's ministries: Tehillah Voices worship, youth ministry, God's Heritage children's ministry, and community outreach. Find your place.">
     <meta property="og:url" content="https://mercycourt.org/ministries">
-    <meta property="og:image" content="https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-01.jpg">
+    {%- set _og_image = "https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-01.jpg" -%}
+    {%- set _og_alt = "RCCG Mercy Court congregation during Sunday worship" -%}
+    {%- include "og-meta.njk" -%}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Our Ministries | RCCG Mercy Court Baltimore">
     <meta name="twitter:description" content="Explore Mercy Court's ministries: Tehillah Voices worship, youth ministry, God's Heritage children's ministry, and community outreach. Find your place.">

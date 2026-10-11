@@ -26,7 +26,9 @@ section:
     <meta property="og:title" content="Blog | Faith, Growth & Community | RCCG Mercy Court">
     <meta property="og:description" content="Read the latest articles from RCCG Mercy Court on faith, personal growth, community, and inspiration. New posts published regularly.">
     <meta property="og:url" content="https://mercycourt.org/blog">
-    <meta property="og:image" content="https://mercycourt.org/assets/images/2026/community-outreach/outreach-community-event-02.jpg">
+    {%- set _og_image = "https://mercycourt.org/assets/images/2026/community-outreach/outreach-community-event-02.jpg" -%}
+    {%- set _og_alt = "Mercy Court community outreach event" -%}
+    {%- include "og-meta.njk" -%}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Blog | Faith, Growth & Community | RCCG Mercy Court">
     <meta name="twitter:description" content="Read the latest articles from RCCG Mercy Court on faith, personal growth, community, and inspiration. New posts published regularly.">

@@ -39,13 +39,9 @@ past_events:
     <meta property="og:title" content="{{ title }}">
     <meta property="og:description" content="{{ seo_description }}">
     <meta property="og:url" content="https://mercycourt.org/events/">
-    {%- if og_image %}
-    {%- if 'https://' in og_image %}
-    <meta property="og:image" content="{{ og_image }}">
-    {%- else %}
-    <meta property="og:image" content="https://mercycourt.org{{ og_image }}">
-    {%- endif %}
-    {%- endif %}
+    {%- set _og_image = og_image -%}
+    {%- set _og_alt = title -%}
+    {%- include "og-meta.njk" -%}
     <meta name="twitter:card" content="summary_large_image">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">

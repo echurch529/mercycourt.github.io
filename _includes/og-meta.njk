@@ -1,0 +1,11 @@
+{%- set _src = _og_image if _og_image else site.og_image_default -%}
+{%- if "https://" in _src or "http://" in _src -%}
+  {%- set _ogUrl = _src -%}
+{%- elif _src and _src[0] == "/" -%}
+  {%- set _ogUrl = "https://mercycourt.org" + _src -%}
+{%- else -%}
+  {%- set _ogUrl = "https://mercycourt.org/" + _src -%}
+{%- endif -%}
+<meta property="og:image" content="{{ _ogUrl }}">
+<meta property="og:image:alt" content="{{ _og_alt }}">
+<meta name="twitter:image" content="{{ _ogUrl }}">

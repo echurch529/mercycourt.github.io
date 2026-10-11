@@ -55,7 +55,9 @@ scripture_ref: Psalm 100:4
     <meta property="og:title" content="Tehillah Voices Worship Ministry | RCCG Mercy Court">
     <meta property="og:description" content="Tehillah Voices is RCCG Mercy Court's worship ministry — creating space for authentic encounters with God through music, prayer, and corporate worship.">
     <meta property="og:url" content="https://mercycourt.org/tehillah-voices">
-    <meta property="og:image" content="https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-01.jpg">
+    {%- set _og_image = "https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-01.jpg" -%}
+    {%- set _og_alt = "RCCG Mercy Court congregation during Sunday worship" -%}
+    {%- include "og-meta.njk" -%}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Tehillah Voices Worship Ministry | RCCG Mercy Court">
     <meta name="twitter:description" content="Tehillah Voices is RCCG Mercy Court's worship ministry — creating space for authentic encounters with God through music, prayer, and corporate worship.">
