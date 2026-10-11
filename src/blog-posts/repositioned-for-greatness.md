@@ -1,6 +1,6 @@
 ---
 title: "Repositioned for Greatness: 5 Keys to Unlock Your Potential"
-slug: blog-posts/repositioned-for-greatness
+slug: repositioned-for-greatness
 seo_title: "Repositioned for Greatness: 5 Keys | Mercy Court"
 seo_description: Feeling stuck despite working hard? Learn 5 practical ways to
   reposition yourself — mentally, spiritually, and emotionally — for the life

@@ -1,5 +1,6 @@
 ---
 title: "Introducing be.lievi.ng: Mercy Court's Bible Study App Built for the World"
+slug: mercy-court-launches-believing-bible-study-app
 seo_title: "Mercy Court Launches be.lievi.ng Bible App | Mercy Court"
 seo_description: "Mercy Court has launched be.lievi.ng — a free, study-first Bible app with AI-powered tools, smart notes, colour-coded highlights, and character search."
 date: 2026-06-01

@@ -28,37 +28,37 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
-              - { label: "Headline (first line)", name: "headline", widget: "string", hint: "e.g. IT'S OUR YEAR OF" }
-              - { label: "Headline Highlight (red, 2nd line)", name: "headline_highlight", widget: "string", hint: "e.g. BETTER THINGS" }
-              - { label: "Tagline", name: "tagline", widget: "string" }
-              - { label: "Show Hero Text Overlay", name: "show_hero_text", widget: "boolean", default: true, hint: "Turn OFF if the hero image already contains all the needed text and details — e.g. a seasonal flyer or announcement graphic. When off, the image fills the hero at natural size with no headline, tagline, or buttons overlaid." }
+              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Headline (first line)", name: "headline", widget: "string", required: false, hint: "e.g. IT'S OUR YEAR OF" }
+              - { label: "Headline Highlight (red, 2nd line)", name: "headline_highlight", widget: "string", required: false, hint: "e.g. BETTER THINGS" }
+              - { label: "Tagline", name: "tagline", widget: "string", required: false }
+              - { label: "Show Hero Text Overlay", name: "show_hero_text", widget: "boolean", default: true, required: false, hint: "Turn OFF if the hero image already contains all the needed text and details — e.g. a seasonal flyer or announcement graphic. When off, the image fills the hero at natural size with no headline, tagline, or buttons overlaid." }
               - { label: "Event Link URL", name: "event_url", widget: "string", required: false, hint: "Optional. When Show Hero Text is OFF (flyer mode), this links the flyer to the event page and shows a 'Learn More' button below it. Leave blank for a non-event hero. Example: /events/12th-anniversary.html" }
           - label: "About Section"
             name: "about"
             widget: "object"
             fields:
-              - { label: "Paragraph 1", name: "body1", widget: "text" }
-              - { label: "Paragraph 2", name: "body2", widget: "text" }
-          - { label: "Mission Body", name: "mission_body", widget: "text" }
+              - { label: "Paragraph 1", name: "body1", widget: "text", required: false }
+              - { label: "Paragraph 2", name: "body2", widget: "text", required: false }
+          - { label: "Mission Body", name: "mission_body", widget: "text", required: false }
           - label: "Leadership Section"
             name: "leadership"
             widget: "object"
             fields:
-              - { label: "Bio", name: "bio", widget: "text" }
-              - { label: "Blockquote", name: "blockquote", widget: "string" }
+              - { label: "Bio", name: "bio", widget: "text", required: false }
+              - { label: "Blockquote", name: "blockquote", widget: "string", required: false }
           - label: "Ministry Cards"
             name: "ministries"
             widget: "list"
             summary: "{{fields.title}}"
             fields:
-              - { label: "Image", name: "image", widget: "image", hint: "Keep under 300KB. Compress at squoosh.app or tinypng.com before uploading." }
-              - { label: "Image Alt Text", name: "image_alt", widget: "string", hint: "Describe the image for screen readers and image search — e.g. 'Worship team leading Sunday service at Mercy Court'" }
-              - { label: "Card Title", name: "title", widget: "string" }
-              - { label: "Card Subtitle", name: "subtitle", widget: "string" }
-              - { label: "Description", name: "body", widget: "text" }
-              - { label: "Link URL", name: "link", widget: "string", hint: "e.g. tehillah-voices.html" }
-          - { label: "CTA Section Body", name: "cta_body", widget: "text" }
+              - { label: "Image", name: "image", widget: "image", required: false, hint: "Keep under 300KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string", required: false, hint: "Describe the image for screen readers and image search — e.g. 'Worship team leading Sunday service at Mercy Court'" }
+              - { label: "Card Title", name: "title", widget: "string", required: false }
+              - { label: "Card Subtitle", name: "subtitle", widget: "string", required: false }
+              - { label: "Description", name: "body", widget: "text", required: false }
+              - { label: "Link URL", name: "link", widget: "string", required: false, hint: "e.g. tehillah-voices.html" }
+          - { label: "CTA Section Body", name: "cta_body", widget: "text", required: false }
           - { label: "Body", name: "body", widget: "hidden" }
 
       - name: "about"
@@ -70,30 +70,30 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
-              - { label: "Headline (first line)", name: "headline", widget: "string", hint: "e.g. IN CHRIST, FOR CHRIST," }
-              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string", hint: "e.g. WITH JOY!" }
-          - { label: "We Serve God — Paragraph 1", name: "serve_body1", widget: "text" }
-          - { label: "We Serve God — Paragraph 2", name: "serve_body2", widget: "text" }
+              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Headline (first line)", name: "headline", widget: "string", required: false, hint: "e.g. IN CHRIST, FOR CHRIST," }
+              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string", required: false, hint: "e.g. WITH JOY!" }
+          - { label: "We Serve God — Paragraph 1", name: "serve_body1", widget: "text", required: false }
+          - { label: "We Serve God — Paragraph 2", name: "serve_body2", widget: "text", required: false }
           - label: "Pastor"
             name: "pastor"
             widget: "object"
             fields:
-              - { label: "Photo", name: "photo", widget: "image", hint: "Keep under 300KB. Compress at squoosh.app or tinypng.com before uploading." }
-              - { label: "Photo Alt Text", name: "photo_alt", widget: "string", hint: "Describe the photo for screen readers — e.g. 'Pastor John and Pastor Rosemary Itakpe'" }
-              - { label: "Bio Paragraph 1", name: "bio1", widget: "text" }
-              - { label: "Bio Paragraph 2", name: "bio2", widget: "text" }
-              - { label: "Bio Paragraph 3", name: "bio3", widget: "text" }
-          - { label: "Vision — Paragraph 1", name: "vision_body1", widget: "text" }
-          - { label: "Vision — Paragraph 2", name: "vision_body2", widget: "text" }
+              - { label: "Photo", name: "photo", widget: "image", required: false, hint: "Keep under 300KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Photo Alt Text", name: "photo_alt", widget: "string", required: false, hint: "Describe the photo for screen readers — e.g. 'Pastor John and Pastor Rosemary Itakpe'" }
+              - { label: "Bio Paragraph 1", name: "bio1", widget: "text", required: false }
+              - { label: "Bio Paragraph 2", name: "bio2", widget: "text", required: false }
+              - { label: "Bio Paragraph 3", name: "bio3", widget: "text", required: false }
+          - { label: "Vision — Paragraph 1", name: "vision_body1", widget: "text", required: false }
+          - { label: "Vision — Paragraph 2", name: "vision_body2", widget: "text", required: false }
           - label: "Testimonials"
             name: "testimonials"
             widget: "list"
             summary: "{{fields.title}}"
             fields:
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Quote", name: "quote", widget: "text" }
-              - { label: "Attribution", name: "attribution", widget: "string", hint: "e.g. A Mercy Court Member" }
+              - { label: "Title", name: "title", widget: "string", required: false }
+              - { label: "Quote", name: "quote", widget: "text", required: false }
+              - { label: "Attribution", name: "attribution", widget: "string", required: false, hint: "e.g. A Mercy Court Member" }
           - { label: "Body", name: "body", widget: "hidden" }
 
       - name: "contact"
@@ -105,7 +105,7 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
           - { label: "Body", name: "body", widget: "hidden" }
 
       - name: "plan-your-visit"
@@ -117,19 +117,19 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
-              - { label: "Hero Image Alt Text", name: "image_alt", widget: "string", hint: "Describe the image for screen readers and image search — e.g. 'Mercy Court congregation during Sunday worship'" }
-          - { label: "Welcome Paragraph 1", name: "welcome_body1", widget: "text" }
-          - { label: "Welcome Paragraph 2", name: "welcome_body2", widget: "text" }
-          - { label: "Welcome Paragraph 3", name: "welcome_body3", widget: "text" }
-          - { label: "Welcome Video URL", name: "video_url", widget: "string", hint: "YouTube embed URL e.g. https://www.youtube.com/embed/..." }
+              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Hero Image Alt Text", name: "image_alt", widget: "string", required: false, hint: "Describe the image for screen readers and image search — e.g. 'Mercy Court congregation during Sunday worship'" }
+          - { label: "Welcome Paragraph 1", name: "welcome_body1", widget: "text", required: false }
+          - { label: "Welcome Paragraph 2", name: "welcome_body2", widget: "text", required: false }
+          - { label: "Welcome Paragraph 3", name: "welcome_body3", widget: "text", required: false }
+          - { label: "Welcome Video URL", name: "video_url", widget: "string", required: false, hint: "YouTube embed URL e.g. https://www.youtube.com/embed/..." }
           - label: "FAQ"
             name: "faq"
             widget: "list"
             summary: "{{fields.question}}"
             fields:
-              - { label: "Question", name: "question", widget: "string" }
-              - { label: "Answer", name: "answer", widget: "text" }
+              - { label: "Question", name: "question", widget: "string", required: false }
+              - { label: "Answer", name: "answer", widget: "text", required: false }
           - { label: "Body", name: "body", widget: "hidden" }
 
       - name: "community-impact"
@@ -141,64 +141,64 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
-              - { label: "Subtitle", name: "subtitle", widget: "string" }
+              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
           - label: "Mission Section"
             name: "mission"
             widget: "object"
             fields:
-              - { label: "Paragraph 1", name: "body1", widget: "text" }
-              - { label: "Paragraph 2", name: "body2", widget: "text" }
-              - { label: "Paragraph 3", name: "body3", widget: "text" }
+              - { label: "Paragraph 1", name: "body1", widget: "text", required: false }
+              - { label: "Paragraph 2", name: "body2", widget: "text", required: false }
+              - { label: "Paragraph 3", name: "body3", widget: "text", required: false }
           - label: "Impact Stats"
             name: "stats"
             widget: "list"
             summary: "{{fields.number}} — {{fields.label}}"
             fields:
-              - { label: "Number", name: "number", widget: "string", hint: "e.g. 60+ or 8,500+" }
-              - { label: "Label", name: "label", widget: "string" }
-          - { label: "Pantry Hours Line", name: "pantry_hours", widget: "string", hint: "One-line summary shown in the orange banner" }
+              - { label: "Number", name: "number", widget: "string", required: false, hint: "e.g. 60+ or 8,500+" }
+              - { label: "Label", name: "label", widget: "string", required: false }
+          - { label: "Pantry Hours Line", name: "pantry_hours", widget: "string", required: false, hint: "One-line summary shown in the orange banner" }
           - label: "Programs"
             name: "programs"
             widget: "list"
             summary: "{{fields.emoji}} {{fields.title}}"
             fields:
-              - { label: "Emoji", name: "emoji", widget: "string" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Emoji", name: "emoji", widget: "string", required: false }
+              - { label: "Title", name: "title", widget: "string", required: false }
+              - { label: "Body", name: "body", widget: "text", required: false }
           - label: "Community Partners"
             name: "partners"
             widget: "list"
             summary: "{{fields.partner_name}}"
             fields:
-              - { label: "Partner Name", name: "partner_name", widget: "string" }
-              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Partner Name", name: "partner_name", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
           - label: "Testimonials"
             name: "testimonials"
             widget: "list"
             summary: "{{fields.attribution}}"
             fields:
-              - { label: "Quote", name: "quote", widget: "text" }
-              - { label: "Attribution", name: "attribution", widget: "string" }
+              - { label: "Quote", name: "quote", widget: "text", required: false }
+              - { label: "Attribution", name: "attribution", widget: "string", required: false }
           - label: "Food Pantry Highlight"
             name: "pantry_highlight"
             widget: "object"
             fields:
-              - { label: "Paragraph 1", name: "body1", widget: "text" }
-              - { label: "Paragraph 2", name: "body2", widget: "text" }
-              - { label: "Paragraph 3", name: "body3", widget: "text" }
+              - { label: "Paragraph 1", name: "body1", widget: "text", required: false }
+              - { label: "Paragraph 2", name: "body2", widget: "text", required: false }
+              - { label: "Paragraph 3", name: "body3", widget: "text", required: false }
           - label: "Future Goals"
             name: "goals"
             widget: "list"
             summary: "{{fields.emoji}} {{fields.title}}"
             fields:
-              - { label: "Emoji", name: "emoji", widget: "string" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Body", name: "body", widget: "text" }
-          - { label: "Volunteer Section — Paragraph 1", name: "volunteer_intro1", widget: "text" }
-          - { label: "Volunteer Section — Paragraph 2", name: "volunteer_intro2", widget: "text" }
-          - { label: "Volunteer Form Endpoint", name: "volunteer_form_endpoint", widget: "string", hint: "Formspree URL e.g. https://formspree.io/f/xxxxxxx" }
-          - { label: "Grant/Anchor Section Body", name: "grant_body", widget: "text" }
+              - { label: "Emoji", name: "emoji", widget: "string", required: false }
+              - { label: "Title", name: "title", widget: "string", required: false }
+              - { label: "Body", name: "body", widget: "text", required: false }
+          - { label: "Volunteer Section — Paragraph 1", name: "volunteer_intro1", widget: "text", required: false }
+          - { label: "Volunteer Section — Paragraph 2", name: "volunteer_intro2", widget: "text", required: false }
+          - { label: "Volunteer Form Endpoint", name: "volunteer_form_endpoint", widget: "string", required: false, hint: "Formspree URL e.g. https://formspree.io/f/xxxxxxx" }
+          - { label: "Grant/Anchor Section Body", name: "grant_body", widget: "text", required: false }
           - { label: "Body", name: "body", widget: "hidden" }
 
       - name: "blog"
@@ -217,19 +217,19 @@ collections:
             widget: "object"
             collapsed: false
             fields:
-              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
-              - { label: "Background Image Alt Text", name: "image_alt", widget: "string", hint: "Describe the image for screen readers — e.g. 'Mercy Court community outreach volunteers'" }
-              - { label: "Headline (first line)", name: "headline", widget: "string", hint: "e.g. Welcome to" }
-              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string", hint: "e.g. Mercy Court Blog" }
-              - { label: "Tagline", name: "tagline", widget: "string" }
+              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Background Image Alt Text", name: "image_alt", widget: "string", required: false, hint: "Describe the image for screen readers — e.g. 'Mercy Court community outreach volunteers'" }
+              - { label: "Headline (first line)", name: "headline", widget: "string", required: false, hint: "e.g. Welcome to" }
+              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string", required: false, hint: "e.g. Mercy Court Blog" }
+              - { label: "Tagline", name: "tagline", widget: "string", required: false }
           - label: "Section Intro"
             name: "section"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Heading (first part)", name: "heading", widget: "string", hint: "The non-red part of the section heading, e.g. 'News &'" }
-              - { label: "Heading Highlight (red word)", name: "heading_highlight", widget: "string", hint: "e.g. Updates" }
-              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Heading (first part)", name: "heading", widget: "string", required: false, hint: "The non-red part of the section heading, e.g. 'News &'" }
+              - { label: "Heading Highlight (red word)", name: "heading_highlight", widget: "string", required: false, hint: "e.g. Updates" }
+              - { label: "Description", name: "description", widget: "text", required: false }
           - { label: "Body", name: "body", widget: "hidden" }
 
       - name: "events-hub"
@@ -238,15 +238,15 @@ collections:
         fields:
           - widget: note
             name: "events_hub_guide"
-            label: "\u2139\ufe0f How the Events Hub Works"
+            label: "ℹ️ How the Events Hub Works"
             hint: |
               HERO — Edit the badge, title, subheading, and optional background image below. Leave the image blank for the default dark background. |
               CURRENT EVENTS — Cards appear automatically from Event Pages with Status = Active. |
               NO CURRENT EVENTS — The fallback block shows when no active events exist. |
               PAST EVENTS — Cards appear automatically from Event Pages with Status = Past. |
               EVENT CARDS — To add, edit, or archive an event, go to Event Pages.
-          - { label: "SEO Title", name: "title", widget: "string", hint: "Browser-tab title and og:title, e.g. 'Events | RCCG Mercy Court'" }
-          - { label: "SEO Description", name: "seo_description", widget: "text", hint: "Description (target: 120\u2013160 characters)" }
+          - { label: "SEO Title", name: "title", widget: "string", required: false, hint: "Browser-tab title and og:title, e.g. 'Events | RCCG Mercy Court'" }
+          - { label: "SEO Description", name: "seo_description", widget: "text", required: false, hint: "Description (target: 120–160 characters)" }
           - { label: "OG / Share Image", name: "og_image", widget: "image", required: false, hint: "Image shown when the page is shared on social media. Leave blank to keep the current default." }
           - label: "Hero"
             name: "hero"
@@ -254,19 +254,19 @@ collections:
             collapsed: false
             fields:
               - { label: "Badge Text", name: "badge", widget: "string", required: false, hint: "Small text above the title, e.g. 'RCCG Mercy Court'. Leave blank to hide." }
-              - { label: "Title", name: "title", widget: "string", hint: "Large hero heading, e.g. 'Events'" }
+              - { label: "Title", name: "title", widget: "string", required: false, hint: "Large hero heading, e.g. 'Events'" }
               - { label: "Subheading", name: "subheading", widget: "string", required: false, hint: "Smaller text below the title. Leave blank to hide." }
               - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Optional hero background image. Leave blank for the default dark background. Keep under 500KB." }
               - { label: "Background Image Alt Text", name: "image_alt", widget: "string", required: false, hint: "Describe the image for screen readers — only needed when a background image is set." }
-              - { label: "Image \u2013 Horizontal position", name: "focal_x", widget: "select", default: "50%", required: false, hint: "Shift the focal point if the subject is cut off.", options: [{ label: "Left", value: "0%" }, { label: "Center-left", value: "25%" }, { label: "Center", value: "50%" }, { label: "Center-right", value: "75%" }, { label: "Right", value: "100%" }] }
-              - { label: "Image \u2013 Vertical position", name: "focal_y", widget: "select", default: "50%", required: false, options: [{ label: "Top", value: "0%" }, { label: "Upper", value: "25%" }, { label: "Center", value: "50%" }, { label: "Lower", value: "75%" }, { label: "Bottom", value: "100%" }] }
+              - { label: "Image – Horizontal position", name: "focal_x", widget: "select", default: "50%", required: false, hint: "Shift the focal point if the subject is cut off.", options: [{ label: "Left", value: "0%" }, { label: "Center-left", value: "25%" }, { label: "Center", value: "50%" }, { label: "Center-right", value: "75%" }, { label: "Right", value: "100%" }] }
+              - { label: "Image – Vertical position", name: "focal_y", widget: "select", default: "50%", required: false, options: [{ label: "Top", value: "0%" }, { label: "Upper", value: "25%" }, { label: "Center", value: "50%" }, { label: "Lower", value: "75%" }, { label: "Bottom", value: "100%" }] }
           - label: "Current Events Section"
             name: "current_events"
             widget: "object"
             collapsed: true
             hint: "Event cards are managed in Event Pages. Set an event's Status to Active to show it here."
             fields:
-              - { label: "Section Heading", name: "heading", widget: "string", default: "Current Events" }
+              - { label: "Section Heading", name: "heading", widget: "string", default: "Current Events", required: false }
               - { label: "Intro Text", name: "intro", widget: "text", required: false, hint: "Optional paragraph below the heading. Leave blank to omit." }
           - label: "No Current Events Fallback"
             name: "fallback"
@@ -274,17 +274,17 @@ collections:
             collapsed: true
             hint: "Shown when no events are active."
             fields:
-              - { label: "Heading", name: "heading", widget: "string", default: "Join Us Every Sunday" }
-              - { label: "Text", name: "text", widget: "text", hint: "Service times and address. Use a new line for each line of text." }
-              - { label: "Button Label", name: "button_label", widget: "string", default: "Plan Your Visit" }
-              - { label: "Button URL", name: "button_url", widget: "string", default: "/plan-your-visit" }
+              - { label: "Heading", name: "heading", widget: "string", default: "Join Us Every Sunday", required: false }
+              - { label: "Text", name: "text", widget: "text", required: false, hint: "Service times and address. Use a new line for each line of text." }
+              - { label: "Button Label", name: "button_label", widget: "string", default: "Plan Your Visit", required: false }
+              - { label: "Button URL", name: "button_url", widget: "string", default: "/plan-your-visit", required: false }
           - label: "Past Events Section"
             name: "past_events"
             widget: "object"
             collapsed: true
             hint: "Event cards are managed in Event Pages. Set an event's Status to Past to show it here."
             fields:
-              - { label: "Section Heading", name: "heading", widget: "string", default: "Past Events" }
+              - { label: "Section Heading", name: "heading", widget: "string", default: "Past Events", required: false }
               - { label: "Intro Text", name: "intro", widget: "text", required: false, hint: "Optional paragraph below the heading. Leave blank to omit." }
           - { label: "Body", name: "body", widget: "hidden" }
 
@@ -292,34 +292,34 @@ collections:
         label: "Give"
         file: "give.html"
         fields:
-          - { label: "SEO Title", name: "seo_title", widget: "string" }
-          - { label: "SEO Description", name: "seo_description", widget: "text" }
-          - { label: "OG Image", name: "og_image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+          - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
+          - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
+          - { label: "OG Image", name: "og_image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
           - label: "Hero"
             name: "hero"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB." }
-              - { label: "Image Alt Text", name: "image_alt", widget: "string" }
-              - { label: "Headline (first line)", name: "headline", widget: "string" }
-              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string" }
-              - { label: "Subheading", name: "subheading", widget: "string" }
+              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Keep under 500KB." }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string", required: false }
+              - { label: "Headline (first line)", name: "headline", widget: "string", required: false }
+              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string", required: false }
+              - { label: "Subheading", name: "subheading", widget: "string", required: false }
           - label: "Intro"
             name: "intro"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Body", name: "body", widget: "text", required: false }
           - label: "Why We Give"
             name: "why"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Heading Highlight (red)", name: "heading_highlight", widget: "string" }
-              - { label: "Subheading", name: "subheading", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Heading Highlight (red)", name: "heading_highlight", widget: "string", required: false }
+              - { label: "Subheading", name: "subheading", widget: "string", required: false }
               - label: "Cards"
                 name: "cards"
                 widget: "list"
@@ -327,127 +327,127 @@ collections:
                 max: 3
                 min: 3
                 fields:
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Body", name: "body", widget: "text" }
+                  - { label: "Title", name: "title", widget: "string", required: false }
+                  - { label: "Body", name: "body", widget: "text", required: false }
           - label: "Ways to Give"
             name: "ways"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Heading Highlight (red)", name: "heading_highlight", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Heading Highlight (red)", name: "heading_highlight", widget: "string", required: false }
               - label: "Zelle Card"
                 name: "zelle"
                 widget: "object"
                 fields:
-                  - { label: "Badge Text", name: "badge", widget: "string" }
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Body", name: "body", widget: "string" }
-                  - { label: "Button Text", name: "button_text", widget: "string" }
-                  - { label: "Button URL", name: "button_url", widget: "string" }
+                  - { label: "Badge Text", name: "badge", widget: "string", required: false }
+                  - { label: "Title", name: "title", widget: "string", required: false }
+                  - { label: "Body", name: "body", widget: "string", required: false }
+                  - { label: "Button Text", name: "button_text", widget: "string", required: false }
+                  - { label: "Button URL", name: "button_url", widget: "string", required: false }
               - label: "Online Card"
                 name: "online"
                 widget: "object"
                 fields:
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Body", name: "body", widget: "text" }
-                  - { label: "Button Text", name: "button_text", widget: "string" }
-                  - { label: "Button URL", name: "button_url", widget: "string" }
+                  - { label: "Title", name: "title", widget: "string", required: false }
+                  - { label: "Body", name: "body", widget: "text", required: false }
+                  - { label: "Button Text", name: "button_text", widget: "string", required: false }
+                  - { label: "Button URL", name: "button_url", widget: "string", required: false }
               - label: "In Person Card"
                 name: "inperson"
                 widget: "object"
                 fields:
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Body", name: "body", widget: "text" }
-                  - { label: "Button Text", name: "button_text", widget: "string" }
-                  - { label: "Button URL", name: "button_url", widget: "string" }
+                  - { label: "Title", name: "title", widget: "string", required: false }
+                  - { label: "Body", name: "body", widget: "text", required: false }
+                  - { label: "Button Text", name: "button_text", widget: "string", required: false }
+                  - { label: "Button URL", name: "button_url", widget: "string", required: false }
               - label: "By Mail Card"
                 name: "mail"
                 widget: "object"
                 fields:
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Body", name: "body", widget: "text" }
-                  - { label: "Button Text", name: "button_text", widget: "string" }
-                  - { label: "Button URL", name: "button_url", widget: "string" }
+                  - { label: "Title", name: "title", widget: "string", required: false }
+                  - { label: "Body", name: "body", widget: "text", required: false }
+                  - { label: "Button Text", name: "button_text", widget: "string", required: false }
+                  - { label: "Button URL", name: "button_url", widget: "string", required: false }
           - label: "Give via Zelle Section"
             name: "zelle_section"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Heading Highlight (red)", name: "heading_highlight", widget: "string" }
-              - { label: "Intro Text", name: "intro", widget: "text" }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Heading Highlight (red)", name: "heading_highlight", widget: "string", required: false }
+              - { label: "Intro Text", name: "intro", widget: "text", required: false }
           - label: "Online Giving Section"
             name: "online_section"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Heading Highlight (red)", name: "heading_highlight", widget: "string" }
-              - { label: "Body", name: "body", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Heading Highlight (red)", name: "heading_highlight", widget: "string", required: false }
+              - { label: "Body", name: "body", widget: "string", required: false }
           - label: "Building Project Section"
             name: "building"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Body", name: "body", widget: "text" }
-              - { label: "Button Text", name: "button_text", widget: "string" }
-          - { label: "Tax Info", name: "tax_info", widget: "text" }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Body", name: "body", widget: "text", required: false }
+              - { label: "Button Text", name: "button_text", widget: "string", required: false }
+          - { label: "Tax Info", name: "tax_info", widget: "text", required: false }
           - label: "Mailing List Section"
             name: "mailing_list"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Body", name: "body", widget: "text", required: false }
           - { label: "Body", name: "body", widget: "hidden" }
 
       - name: "watch-live"
         label: "Watch Live"
         file: "watch-live.html"
         fields:
-          - { label: "SEO Title", name: "seo_title", widget: "string" }
-          - { label: "SEO Description", name: "seo_description", widget: "text" }
-          - { label: "OG Image", name: "og_image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+          - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
+          - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
+          - { label: "OG Image", name: "og_image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
           - label: "Hero"
             name: "hero"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB." }
-              - { label: "Image Alt Text", name: "image_alt", widget: "string" }
-              - { label: "Headline (first line)", name: "headline", widget: "string" }
-              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string" }
-              - { label: "Subheading", name: "subheading", widget: "string" }
+              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Keep under 500KB." }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string", required: false }
+              - { label: "Headline (first line)", name: "headline", widget: "string", required: false }
+              - { label: "Headline Highlight (red, second line)", name: "headline_highlight", widget: "string", required: false }
+              - { label: "Subheading", name: "subheading", widget: "string", required: false }
           - label: "Blog Section"
             name: "blog_section"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Section Heading", name: "heading", widget: "string" }
+              - { label: "Section Heading", name: "heading", widget: "string", required: false }
           - label: "Give Section"
             name: "give_section"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Body", name: "body", widget: "text", required: false }
           - label: "Testimony Section"
             name: "testimony_section"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Body", name: "body", widget: "text" }
-              - { label: "Button Text", name: "button_text", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Body", name: "body", widget: "text", required: false }
+              - { label: "Button Text", name: "button_text", widget: "string", required: false }
           - label: "Mailing List Section"
             name: "mailing_list"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Body", name: "body", widget: "text", required: false }
           - { label: "Body", name: "body", widget: "hidden" }
 
   - name: "ministries-pages"
@@ -463,20 +463,20 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
-              - { label: "Subtitle", name: "subtitle", widget: "string" }
-          - { label: "Intro Eyebrow", name: "intro_eyebrow", widget: "string" }
-          - { label: "Intro Body", name: "intro_body", widget: "text" }
+              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+          - { label: "Intro Eyebrow", name: "intro_eyebrow", widget: "string", required: false }
+          - { label: "Intro Body", name: "intro_body", widget: "text", required: false }
           - label: "Ministry Cards"
             name: "ministries"
             widget: "list"
             summary: "{{fields.title}}"
             fields:
-              - { label: "Image", name: "image", widget: "image", hint: "Keep under 300KB. Compress at squoosh.app or tinypng.com before uploading." }
-              - { label: "Image Alt Text", name: "image_alt", widget: "string", hint: "Describe the image for screen readers and image search — e.g. 'Worship team leading Sunday service at Mercy Court'" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Description", name: "description", widget: "text" }
-              - { label: "Link URL", name: "link", widget: "string", hint: "Relative path, e.g. mercy-kidz.html" }
+              - { label: "Image", name: "image", widget: "image", required: false, hint: "Keep under 300KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string", required: false, hint: "Describe the image for screen readers and image search — e.g. 'Worship team leading Sunday service at Mercy Court'" }
+              - { label: "Title", name: "title", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Link URL", name: "link", widget: "string", required: false, hint: "Relative path, e.g. mercy-kidz.html" }
 
       - name: "tehillah"
         label: "Tehillah Voices"
@@ -487,42 +487,42 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
-              - { label: "Badge Text", name: "badge", widget: "string" }
-              - { label: "Tagline", name: "tagline", widget: "string" }
+              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Badge Text", name: "badge", widget: "string", required: false }
+              - { label: "Tagline", name: "tagline", widget: "string", required: false }
           - label: "Vision Section"
             name: "vision"
             widget: "object"
             fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Body", name: "body", widget: "text", required: false }
           - label: "Gallery (3 photos)"
             name: "gallery"
             widget: "list"
             max: 3
             fields:
-              - { label: "Image", name: "image", widget: "image", hint: "Keep under 300KB. Compress at squoosh.app or tinypng.com before uploading." }
-              - { label: "Alt Text", name: "alt", widget: "string", hint: "Describe the photo for screen readers and image search — e.g. 'Tehillah Voices worship team during Sunday service'" }
+              - { label: "Image", name: "image", widget: "image", required: false, hint: "Keep under 300KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Alt Text", name: "alt", widget: "string", required: false, hint: "Describe the photo for screen readers and image search — e.g. 'Tehillah Voices worship team during Sunday service'" }
           - label: "About Section"
             name: "about"
             widget: "object"
             fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "First Paragraph", name: "body1", widget: "text" }
-              - { label: "Second Paragraph", name: "body2", widget: "text" }
-              - { label: "Instagram URL", name: "instagram_url", widget: "string", hint: "Full URL e.g. https://www.instagram.com/tehillahvoices/" }
-          - { label: "YouTube Embed URL", name: "youtube_url", widget: "string", hint: "Full embed URL e.g. https://www.youtube.com/embed/..." }
-          - { label: "YouTube Playlist URL", name: "youtube_playlist_url", widget: "string", hint: "Full playlist URL for the Watch on YouTube button" }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "First Paragraph", name: "body1", widget: "text", required: false }
+              - { label: "Second Paragraph", name: "body2", widget: "text", required: false }
+              - { label: "Instagram URL", name: "instagram_url", widget: "string", required: false, hint: "Full URL e.g. https://www.instagram.com/tehillahvoices/" }
+          - { label: "YouTube Embed URL", name: "youtube_url", widget: "string", required: false, hint: "Full embed URL e.g. https://www.youtube.com/embed/..." }
+          - { label: "YouTube Playlist URL", name: "youtube_playlist_url", widget: "string", required: false, hint: "Full playlist URL for the Watch on YouTube button" }
           - label: "Join the Worship Team Section"
             name: "join"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Paragraph 1", name: "body1", widget: "text" }
-              - { label: "Paragraph 2", name: "body2", widget: "text" }
-          - { label: "Join the Team Form URL", name: "join_url", widget: "string", hint: "Microsoft Forms URL" }
-          - { label: "Scripture Quote", name: "scripture_quote", widget: "string" }
-          - { label: "Scripture Reference", name: "scripture_ref", widget: "string", hint: "e.g. Psalm 100:4" }
+              - { label: "Paragraph 1", name: "body1", widget: "text", required: false }
+              - { label: "Paragraph 2", name: "body2", widget: "text", required: false }
+          - { label: "Join the Team Form URL", name: "join_url", widget: "string", required: false, hint: "Microsoft Forms URL" }
+          - { label: "Scripture Quote", name: "scripture_quote", widget: "string", required: false }
+          - { label: "Scripture Reference", name: "scripture_ref", widget: "string", required: false, hint: "e.g. Psalm 100:4" }
 
       - name: "mercy-kidz"
         label: "Mercy Kidz (God's Heritage)"
@@ -533,50 +533,50 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
-              - { label: "Tagline", name: "tagline", widget: "string" }
-          - { label: "About Section Body", name: "about_body", widget: "text" }
-          - { label: "Mission Heading (first part)", name: "mission_heading_prefix", widget: "string" }
-          - { label: "Mission Heading (highlighted in red)", name: "mission_heading_highlight", widget: "string" }
-          - { label: "Mission Body", name: "mission_body", widget: "text" }
-          - { label: "Who We Serve — Intro Text", name: "who_we_serve_intro", widget: "text" }
+              - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+              - { label: "Tagline", name: "tagline", widget: "string", required: false }
+          - { label: "About Section Body", name: "about_body", widget: "text", required: false }
+          - { label: "Mission Heading (first part)", name: "mission_heading_prefix", widget: "string", required: false }
+          - { label: "Mission Heading (highlighted in red)", name: "mission_heading_highlight", widget: "string", required: false }
+          - { label: "Mission Body", name: "mission_body", widget: "text", required: false }
+          - { label: "Who We Serve — Intro Text", name: "who_we_serve_intro", widget: "text", required: false }
           - label: "Age Groups"
             name: "age_groups"
             widget: "list"
             summary: "{{fields.class_name}} ({{fields.age_range}})"
             fields:
-              - { label: "Class Name", name: "class_name", widget: "string", hint: "e.g. Seeds, Seedlings, Sprouts, Vines" }
-              - { label: "Age Range", name: "age_range", widget: "string", hint: "e.g. Infant – 3 years" }
-              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Class Name", name: "class_name", widget: "string", required: false, hint: "e.g. Seeds, Seedlings, Sprouts, Vines" }
+              - { label: "Age Range", name: "age_range", widget: "string", required: false, hint: "e.g. Infant – 3 years" }
+              - { label: "Description", name: "description", widget: "text", required: false }
           - label: "Our Farmers (Teachers) Section"
             name: "farmers"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Paragraph 1", name: "body1", widget: "text" }
-              - { label: "Paragraph 2", name: "body2", widget: "text" }
-              - { label: "Paragraph 3", name: "body3", widget: "text" }
+              - { label: "Paragraph 1", name: "body1", widget: "text", required: false }
+              - { label: "Paragraph 2", name: "body2", widget: "text", required: false }
+              - { label: "Paragraph 3", name: "body3", widget: "text", required: false }
           - label: "Yearly Programs"
             name: "yearly_programs"
             widget: "list"
             summary: "{{fields.program_name}}"
             fields:
-              - { label: "Program Name", name: "program_name", widget: "string" }
+              - { label: "Program Name", name: "program_name", widget: "string", required: false }
           - label: "Social Media Links"
             name: "connect"
             widget: "object"
             fields:
-              - { label: "Instagram URL", name: "instagram_url", widget: "string", hint: "Full URL e.g. https://www.instagram.com/gods.heritage.kids" }
-              - { label: "Instagram Handle", name: "instagram_handle", widget: "string", hint: "e.g. @gods.heritage.kids" }
-              - { label: "YouTube URL", name: "youtube_url", widget: "string", hint: "Full URL e.g. https://www.youtube.com/@godsheritagekids" }
-              - { label: "YouTube Handle", name: "youtube_handle", widget: "string", hint: "e.g. @godsheritagekids" }
+              - { label: "Instagram URL", name: "instagram_url", widget: "string", required: false, hint: "Full URL e.g. https://www.instagram.com/gods.heritage.kids" }
+              - { label: "Instagram Handle", name: "instagram_handle", widget: "string", required: false, hint: "e.g. @gods.heritage.kids" }
+              - { label: "YouTube URL", name: "youtube_url", widget: "string", required: false, hint: "Full URL e.g. https://www.youtube.com/@godsheritagekids" }
+              - { label: "YouTube Handle", name: "youtube_handle", widget: "string", required: false, hint: "e.g. @godsheritagekids" }
           - label: "FAQ"
             name: "faq"
             widget: "list"
             summary: "{{fields.question}}"
             fields:
-              - { label: "Question", name: "question", widget: "string" }
-              - { label: "Answer", name: "answer", widget: "text" }
+              - { label: "Question", name: "question", widget: "string", required: false }
+              - { label: "Answer", name: "answer", widget: "text", required: false }
 
   - name: "events"
     label: "Event Pages"
@@ -591,14 +591,15 @@ collections:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/event-page.njk" }
       - { label: "Page Title", name: "title", widget: "string", hint: "Used in browser tab and SEO — e.g. One Bring One — Invite a Friend | Mercy Court" }
       - { label: "URL Slug", name: "slug", widget: "string", hint: "Sets the page URL (/events/{slug}). Lowercase letters and hyphens only, e.g. p4-conference. If you duplicated an existing entry, change this before saving — the filename and URL both come from this field." }
-      - { label: "SEO Description", name: "seo_description", widget: "text", hint: "Description (target: 120–160 characters)" }
-      - { label: "OG / Share Image", name: "og_image", widget: "image", hint: "Keep under 500KB. This image appears when the page is shared on social media." }
+      - { label: "SEO Description", name: "seo_description", widget: "text", required: false, hint: "Description (target: 120–160 characters)" }
+      - { label: "OG / Share Image", name: "og_image", widget: "image", required: false, hint: "Keep under 500KB. This image appears when the page is shared on social media." }
       - label: "Publish Date"
         name: "date"
         widget: "datetime"
         format: "YYYY-MM-DD"
         time_format: false
-      - { label: "Nav Label", name: "nav_label", widget: "string", hint: "Short name shown in the Events dropdown (e.g. '12th Anniversary'). Keep under 30 characters." }
+        required: false
+      - { label: "Nav Label", name: "nav_label", widget: "string", required: false, hint: "Short name shown in the Events dropdown (e.g. '12th Anniversary'). Keep under 30 characters." }
       - label: "Status"
         name: "status"
         widget: "select"
@@ -621,8 +622,8 @@ collections:
         widget: "object"
         collapsed: true
         fields:
-          - { label: "Background Image", name: "image", widget: "image", hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
-          - { label: "Hero Image Alt Text", name: "image_alt", widget: "string", hint: "Describe the image for screen readers and image search — e.g. 'Mercy Court congregation during Sunday worship service'" }
+          - { label: "Background Image", name: "image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
+          - { label: "Hero Image Alt Text", name: "image_alt", widget: "string", required: false, hint: "Describe the image for screen readers and image search — e.g. 'Mercy Court congregation during Sunday worship service'. Required whenever an image is set." }
           - { label: "Badge Pill Text", name: "badge", widget: "string", required: false, hint: "Small orange pill above the headline, e.g. WELCOME HOME. Leave blank to hide." }
           - { label: "Headline", name: "headline", widget: "string", required: false, hint: "Leave badge, headline, AND subheadline all blank for flyer mode: the image itself becomes the hero centerpiece (use when the artwork already shows the event info)." }
           - { label: "Subheadline", name: "subheadline", widget: "text", required: false }
@@ -651,8 +652,8 @@ collections:
             required: false
             summary: "{{fields.attribution}}"
             fields:
-              - { label: "Quote", name: "quote", widget: "text" }
-              - { label: "Attribution", name: "attribution", widget: "string" }
+              - { label: "Quote", name: "quote", widget: "text", required: false }
+              - { label: "Attribution", name: "attribution", widget: "string", required: false }
 
       - label: "Welcome / Message Section"
         name: "welcome"
@@ -683,9 +684,9 @@ collections:
             summary: "{{fields.day}} — {{fields.label}}"
             hint: "Leave empty to hide this entire section"
             fields:
-              - { label: "Day", name: "day", widget: "string", hint: "e.g. Friday, Aug 14" }
-              - { label: "Time", name: "time", widget: "string", hint: "e.g. 7:00 PM or 11:00 AM – 1:00 PM" }
-              - { label: "Event Name", name: "label", widget: "string", hint: "e.g. Tehillah Album Launch" }
+              - { label: "Day", name: "day", widget: "string", required: false, hint: "e.g. Friday, Aug 14" }
+              - { label: "Time", name: "time", widget: "string", required: false, hint: "e.g. 7:00 PM or 11:00 AM – 1:00 PM" }
+              - { label: "Event Name", name: "label", widget: "string", required: false, hint: "e.g. Tehillah Album Launch" }
 
       - label: "Guest Speaker Spotlight"
         name: "speaker"
@@ -714,9 +715,9 @@ collections:
             required: false
             summary: "{{fields.emoji}} {{fields.title}}"
             fields:
-              - { label: "Emoji", name: "emoji", widget: "string" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Emoji", name: "emoji", widget: "string", required: false }
+              - { label: "Title", name: "title", widget: "string", required: false }
+              - { label: "Body", name: "body", widget: "text", required: false }
 
       - label: "Service Logistics Section"
         name: "logistics"
@@ -777,35 +778,36 @@ collections:
           COMMUNITY IMPACT — Turn on "Community Impact Feature" to feature this post in the news section on the Community Impact page.
       - { label: "Title", name: "title", widget: "string" }
       - { label: "URL Slug", name: "slug", widget: "string", hint: "Slug — derive from the title, shortened if needed. Lowercase letters and hyphens only, no leading slash. e.g. baltimore-food-pantry-outreach not /baltimore-food-pantry-outreach." }
-      - { label: "SEO Title", name: "seo_title", widget: "string", hint: "Search-engine title. Must end with | Mercy Court — e.g. 'Total Commitment to God: 5 Keys | Mercy Court'. Target 50–60 characters." }
-      - { label: "SEO Description", name: "seo_description", widget: "text", hint: "Description (target: 120–160 characters)" }
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: false, hint: "Search-engine title. Must end with | Mercy Court — e.g. 'Total Commitment to God: 5 Keys | Mercy Court'. Target 50–60 characters." }
+      - { label: "SEO Description", name: "seo_description", widget: "text", required: false, hint: "Description (target: 120–160 characters)" }
       - label: "Publish Date"
         name: "date"
         widget: "datetime"
         format: "YYYY-MM-DD"
         time_format: false
-      - { label: "Author", name: "author", widget: "string", default: "Mercy Court Team" }
+      - { label: "Author", name: "author", widget: "string", default: "Mercy Court Team", required: false }
       - label: "Category"
         name: "category"
         widget: "select"
+        required: false
         options:
           - { label: "News", value: "news" }
           - { label: "Events", value: "events" }
           - { label: "Inspiration", value: "inspiration" }
-      - { label: "Featured Post", name: "featured", widget: "boolean", default: false }
-      - { label: "Community Impact Feature", name: "community_impact", widget: "boolean", default: false, hint: "Turn ON to feature this post in the 'Latest News' section on the Community Impact page." }
-      - { label: "Hero Image", name: "hero_image", widget: "image", hint: "Rename the file descriptively before uploading (e.g. total-commitment-hero.jpg, not IMG_1234.jpg or stockphoto.jpg). Keep under 500KB — compress at squoosh.app or tinypng.com." }
-      - { label: "Hero Image Alt Text", name: "hero_image_alt", widget: "string", hint: "Describe the image for screen readers and image search — e.g. 'Open Bible on wooden table with morning light'" }
+      - { label: "Featured Post", name: "featured", widget: "boolean", default: false, required: false }
+      - { label: "Community Impact Feature", name: "community_impact", widget: "boolean", default: false, required: false, hint: "Turn ON to feature this post in the 'Latest News' section on the Community Impact page." }
+      - { label: "Hero Image", name: "hero_image", widget: "image", required: false, hint: "Rename the file descriptively before uploading (e.g. total-commitment-hero.jpg, not IMG_1234.jpg or stockphoto.jpg). Keep under 500KB — compress at squoosh.app or tinypng.com." }
+      - { label: "Hero Image Alt Text", name: "hero_image_alt", widget: "string", required: false, hint: "Required whenever an image is set. Describe the image for screen readers and image search — e.g. 'Open Bible on wooden table with morning light'" }
       - { label: "Hero image – Horizontal position", name: "hero_focal_x", widget: "select", default: "50%", required: false, hint: "If part of the photo is cut off (e.g. someone's head or a face at the edge), move the position toward that part.", options: [{ label: "Left", value: "0%" }, { label: "Center-left", value: "25%" }, { label: "Center", value: "50%" }, { label: "Center-right", value: "75%" }, { label: "Right", value: "100%" }] }
       - { label: "Hero image – Vertical position", name: "hero_focal_y", widget: "select", default: "50%", required: false, hint: "Top keeps the top of the photo visible. Use this when heads are cut off at the top.", options: [{ label: "Top", value: "0%" }, { label: "Upper", value: "25%" }, { label: "Center", value: "50%" }, { label: "Lower", value: "75%" }, { label: "Bottom", value: "100%" }] }
-      - { label: "Excerpt", name: "excerpt", widget: "text" }
-      - { label: "Read Time (minutes)", name: "read_time", widget: "number", value_type: "int", default: 5 }
-      - { label: "Show Article Image", name: "show_article_image", widget: "boolean", default: false, hint: "Turn ON to show an article image. Alt text is required for the image to appear on the site." }
+      - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+      - { label: "Read Time (minutes)", name: "read_time", widget: "number", value_type: "int", default: 5, required: false }
+      - { label: "Show Article Image", name: "show_article_image", widget: "boolean", default: false, required: false, hint: "Turn ON to show an article image. Alt text is required for the image to appear on the site." }
       - { label: "Article Image", name: "article_image", widget: "image", required: false, hint: "Upload at 862 × 602px (2× for sharp display on retina screens and iPads). Landscape. Under 500KB. JPG or WebP." }
-      - { label: "Article Image Alt Text", name: "article_image_alt", widget: "string", required: false, hint: "Required for the image to appear. Describe the image for screen readers — e.g. 'Pastor John praying with congregation'." }
+      - { label: "Article Image Alt Text", name: "article_image_alt", widget: "string", required: false, hint: "Required whenever an image is set. Describe the image for screen readers — e.g. 'Pastor John praying with congregation'." }
       - { label: "Article image – Horizontal position", name: "article_focal_x", widget: "select", default: "50%", required: false, hint: "If part of the photo is cut off (e.g. someone's head or a face at the edge), move the position toward that part.", options: [{ label: "Left", value: "0%" }, { label: "Center-left", value: "25%" }, { label: "Center", value: "50%" }, { label: "Center-right", value: "75%" }, { label: "Right", value: "100%" }] }
       - { label: "Article image – Vertical position", name: "article_focal_y", widget: "select", default: "50%", required: false, hint: "Top keeps the top of the photo visible. Use this when heads are cut off at the top.", options: [{ label: "Top", value: "0%" }, { label: "Upper", value: "25%" }, { label: "Center", value: "50%" }, { label: "Lower", value: "75%" }, { label: "Bottom", value: "100%" }] }
-      - { label: "Body", name: "body", widget: "markdown", hint: "Use ## for major sections, ### for FAQ sub-headings. Links: [link text](url) — never leave placeholder text. Numbered lists are for actual lists, not section headings." }
+      - { label: "Body", name: "body", widget: "markdown", required: false, hint: "Use ## for major sections, ### for FAQ sub-headings. Links: [link text](url) — never leave placeholder text. Numbered lists are for actual lists, not section headings." }
       - label: "Scripture References"
         name: "scripture_references"
         widget: "list"
@@ -817,5 +819,5 @@ collections:
         required: false
         hint: "Optional FAQ entries — renders a visible FAQ section at the bottom of the post AND adds FAQPage structured data for search engines (helps Google show FAQ rich results)."
         fields:
-          - { label: "Question", name: "question", widget: "string" }
-          - { label: "Answer", name: "answer", widget: "text" }
+          - { label: "Question", name: "question", widget: "string", required: false }
+          - { label: "Answer", name: "answer", widget: "text", required: false }

@@ -1,5 +1,6 @@
 ---
 title: "The Compound Effect: Why Little by Little Builds Real Wealth"
+slug: the-compound-effect
 seo_title: "The Compound Effect: Little by Little Wins | Mercy Court"
 seo_description: "Tired of chasing quick wins? Discover why slow, consistent growth is the most powerful strategy for your life — and how to start applying it today."
 date: 2026-05-18

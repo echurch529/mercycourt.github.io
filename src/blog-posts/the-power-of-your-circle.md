@@ -1,5 +1,6 @@
 ---
 title: "The Power of Your Circle: 3 Friends You Need to Thrive"
+slug: the-power-of-your-circle
 seo_title: "The Power of Your Circle: 3 Key Friends | Mercy Court"
 seo_description: "Your friendships shape your future. Discover the 3 types of friends every person needs to grow, stay grounded, and reach their God-given potential."
 date: 2026-05-04
