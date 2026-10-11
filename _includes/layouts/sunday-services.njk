@@ -167,8 +167,8 @@
     <!-- 3. Why a Second Service -->
     <section class="py-20 px-6 bg-gray-50">
         <div class="container mx-auto max-w-5xl">
-            <div class="grid lg:grid-cols-2 gap-16 items-start">
-                <div>
+            <div class="{% if why.image %}grid lg:grid-cols-2 gap-16{% endif %} items-start">
+                <div class="{% if not why.image %}max-w-3xl{% endif %}">
                     {%- if why.eyebrow %}<p class="text-brand-red text-xs font-bold uppercase tracking-widest mb-4">{{ why.eyebrow }}</p>{%- endif %}
                     <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2 text-gray-900 mb-3">{{ why.heading }}</h2>
                     <div class="w-16 h-1 bg-brand-red mb-8"></div>
@@ -189,13 +189,11 @@
                     <a href="{{ why.closing_url if why.closing_url else '/about-us' }}" class="text-brand-red font-semibold hover:underline">{{ why.closing_text }} →</a>
                     {%- endif %}
                 </div>
+                {%- if why.image %}
                 <div class="reveal">
-                    {%- if why.image %}
                     <img src="{{ why.image }}" alt="{{ why.image_alt }}" class="rounded-2xl w-full object-cover shadow-lg" style="aspect-ratio:3/2;">
-                    {%- else %}
-                    <div class="rounded-2xl bg-gray-100" style="aspect-ratio:3/2;"></div>
-                    {%- endif %}
                 </div>
+                {%- endif %}
             </div>
         </div>
     </section>
