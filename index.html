@@ -70,19 +70,19 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RCCG Mercy Court | Church in Baltimore, MD</title>
-    <meta name="description" content="Welcome to RCCG Mercy Court — a vibrant church in Baltimore, MD. Join us Sundays at 9:30 AM &amp; 12:15 PM at 529 Walker Avenue. Experience faith, community, and purpose.">
+    <meta name="description" content="Welcome to RCCG Mercy Court — a vibrant church in Baltimore, MD. Join us Sundays at 9:30 AM &amp; 12:00 PM at 529 Walker Avenue. Experience faith, community, and purpose.">
     <link rel="canonical" href="https://mercycourt.org/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="RCCG Mercy Court">
     <meta property="og:title" content="RCCG Mercy Court | Church in Baltimore, MD">
-    <meta property="og:description" content="Welcome to RCCG Mercy Court — a vibrant church in Baltimore, MD. Join us Sundays at 9:30 AM &amp; 12:15 PM at 529 Walker Avenue. Experience faith, community, and purpose.">
+    <meta property="og:description" content="Welcome to RCCG Mercy Court — a vibrant church in Baltimore, MD. Join us Sundays at 9:30 AM &amp; 12:00 PM at 529 Walker Avenue. Experience faith, community, and purpose.">
     <meta property="og:url" content="https://mercycourt.org/">
     {%- set _og_image = "https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-01.jpg" -%}
     {%- set _og_alt = "RCCG Mercy Court congregation during Sunday worship" -%}
     {%- include "og-meta.njk" -%}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="RCCG Mercy Court | Church in Baltimore, MD">
-    <meta name="twitter:description" content="Welcome to RCCG Mercy Court — a vibrant church in Baltimore, MD. Join us Sundays at 9:30 AM &amp; 12:15 PM at 529 Walker Avenue. Experience faith, community, and purpose.">
+    <meta name="twitter:description" content="Welcome to RCCG Mercy Court — a vibrant church in Baltimore, MD. Join us Sundays at 9:30 AM &amp; 12:00 PM at 529 Walker Avenue. Experience faith, community, and purpose.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://www.zeffy.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -132,8 +132,8 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
       {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": "Sunday",
-        "opens": "12:15",
-        "closes": "14:15"
+        "opens": "12:00",
+        "closes": "14:00"
       }
     ],
     "image": "https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-01.jpg"
@@ -601,7 +601,8 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
                 <div class="bg-gray-50 rounded-lg p-8 hover:shadow-xl transition duration-300 border-l-4 border-brand-red reveal">
                     <h3 class="font-anton text-3xl uppercase mb-4">Sunday Services</h3>
                     <p class="text-2xl font-bold text-brand-red mb-1">1st Service 9:30 AM</p>
-                    <p class="text-2xl font-bold text-brand-red mb-4">2nd Service 12:15 PM</p>
+                    <p class="text-2xl font-bold text-brand-red mb-2">2nd Service 12:00 PM</p>
+                    <p class="text-sm text-gray-400 mb-4">{{ site.service_times.sunday_note }}</p>
                     <p class="text-gray-600 mb-6">
                         Join us every Sunday for dynamic worship, powerful preaching, and fellowship.
                     </p>

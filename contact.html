@@ -195,9 +195,12 @@ hero:
                     <div class="bg-brand-dark rounded-xl p-8 text-white">
                         <h3 class="font-anton text-2xl uppercase mb-6 tracking-tight">Service Times</h3>
                         <div class="space-y-4">
-                            <div class="flex justify-between items-center border-b border-gray-700 pb-3">
-                                <span class="font-semibold">Sunday Services</span>
-                                <span class="text-brand-red font-bold">9:30 AM &amp; 12:15 PM</span>
+                            <div class="border-b border-gray-700 pb-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-semibold">Sunday Services</span>
+                                    <span class="text-brand-red font-bold">9:30 AM &amp; 12:00 PM</span>
+                                </div>
+                                <p class="text-gray-400 text-xs mt-1">{{ site.service_times.sunday_note }}</p>
                             </div>
                             <div class="flex justify-between items-center border-b border-gray-700 pb-3">
                                 <span class="font-semibold">Wednesday Bible Study</span>

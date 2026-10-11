@@ -6,7 +6,7 @@
   "service_times": {
     "sunday": {
       "label": "Sunday Services",
-      "time": "9:30 AM & 12:15 PM"
+      "time": "9:30 AM & 12:00 PM"
     },
     "sunday_1": {
       "label": "1st Service",
@@ -14,8 +14,9 @@
     },
     "sunday_2": {
       "label": "2nd Service",
-      "time": "12:15 PM"
+      "time": "12:00 PM"
     },
+    "sunday_note": "First Sunday of the month: one service at 9:30 AM",
     "wednesday": {
       "label": "Bible Study",
       "time": "7:00 PM"
