@@ -433,6 +433,14 @@ collections:
             fields:
               - { label: "Heading", name: "heading", widget: "string" }
               - { label: "Body", name: "body", widget: "text" }
+          - label: "Testimony Section"
+            name: "testimony_section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Button Text", name: "button_text", widget: "string" }
           - label: "Mailing List Section"
             name: "mailing_list"
             widget: "object"

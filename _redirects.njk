@@ -24,6 +24,8 @@ https://www.mercycourt.org/* https://mercycourt.org/:splat 301
 /one-bring-one.html /events/one-bring-one 301
 /one-bring-one /events/one-bring-one 301
 /pages/*.html /pages/:splat 301
+/testimony  {{ site.testimony_form_url }}  302
+/testimony/ {{ site.testimony_form_url }}  302
 {%- for page in collections.eventPages %}
 {%- if page.data.status == "hidden" %}
 /events/{{ page.data.slug }} {{ page.data.redirect_to | default('/events/') }} 301

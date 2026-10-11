@@ -2412,8 +2412,9 @@
     var data    = (dataMap && dataMap.toJS) ? dataMap.toJS() : {};
     var hero    = data.hero         || {};
     var blog    = data.blog_section || {};
-    var give    = data.give_section || {};
-    var mail    = data.mailing_list || {};
+    var give    = data.give_section      || {};
+    var test    = data.testimony_section || {};
+    var mail    = data.mailing_list      || {};
 
     var imgUrl = hero.image ? resolveImage(props, hero.image) : '';
     var heroStyle = {
@@ -2468,6 +2469,20 @@
             marginBottom: '1rem' } }, give.heading || 'Give to Mercy Court'),
           give.body ? h('p', { style: { color: '#6b7280', fontSize: '1.125rem',
             marginBottom: '1.5rem' } }, give.body) : null
+        )
+      ),
+      h('section', { style: { padding: '5rem 1.5rem', background: '#0A0A0A', textAlign: 'center' } },
+        h('div', { style: { maxWidth: '48rem', margin: '0 auto' } },
+          h('p', { style: { color: '#D95A2B', fontSize: '0.75rem', fontWeight: 700,
+            textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem' } }, 'Your Story Matters'),
+          h('h2', { style: { fontFamily: DISPLAY, fontSize: '2.5rem', textTransform: 'uppercase',
+            color: '#fff', marginBottom: '1.5rem' } }, test.heading || 'Share Your Testimony'),
+          test.body ? h('p', { style: { color: 'rgba(255,255,255,0.7)', fontSize: '1.125rem',
+            lineHeight: 1.7, marginBottom: '2.5rem' } }, test.body) : null,
+          h('span', { style: { display: 'inline-block', background: '#D95A2B', color: '#fff',
+            fontSize: '0.875rem', fontWeight: 700, textTransform: 'uppercase',
+            letterSpacing: '0.05em', padding: '1rem 2.5rem', borderRadius: '9999px' } },
+            test.button_text || 'Share Your Testimony')
         )
       ),
       h('section', { style: redSecStyle },
