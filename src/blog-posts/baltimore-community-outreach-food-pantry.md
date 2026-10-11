@@ -1,5 +1,5 @@
 ---
-title: "FREE FOOD, NO STIGMA: INSIDE MERCY COURT'S YEAR-ROUND COMMUNITY OUTREACH"
+title: "Free Food, No Stigma: Inside Mercy Court's Year-Round Community Outreach"
 slug: baltimore-community-outreach-food-pantry
 seo_title: Free Food Pantry & Community Outreach in Baltimore | Mercy Court
 seo_description: Need free food in Baltimore? See Mercy Court's full weekly
