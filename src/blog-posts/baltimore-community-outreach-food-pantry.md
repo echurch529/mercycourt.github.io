@@ -1,7 +1,7 @@
 ---
 title: "Free Food, No Stigma: Inside Mercy Court's Year-Round Community Outreach"
 slug: baltimore-community-outreach-food-pantry
-seo_title: Free Food Pantry & Community Outreach in Baltimore | Mercy Court
+seo_title: "Free Food Pantry & Outreach in Baltimore | Mercy Court"
 seo_description: Need free food in Baltimore? See Mercy Court's full weekly
   outreach schedule, from food pantry to senior meal delivery, serving the
   community 5 days a week.
@@ -97,3 +97,4 @@ Everything is free and open to everyone, no ticket, no RSVP, no church membershi
 If you or someone you know could use free groceries this week, there's no application, no eligibility check, and no appointment needed. Just show up during any of the windows above.
 
 For questions, volunteering, or partnership inquiries, [visit our Community Impact page](/community-impact).
+

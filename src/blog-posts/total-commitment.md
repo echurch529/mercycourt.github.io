@@ -2,9 +2,7 @@
 title: "TOTAL COMMITMENT TO GOD: 5 BIBLICAL KEYS FROM ABRAHAM AND ISAAC"
 slug: total-commitment
 seo_title: "Total Commitment to God: 5 Biblical Keys | Mercy Court"
-seo_description: What does total commitment to God really cost? Discover 5
-  biblical keys to full surrender from Abraham and Isaac's test in Genesis 22,
-  and find your own answer.
+seo_description: "What does total commitment to God really cost? Discover 5 biblical keys to full surrender from Abraham and Isaac's test in Genesis 22, and find your answer."
 date: 2026-08-09
 author: Pastor (Dr.) John Itakpe
 category: inspiration
@@ -92,3 +90,4 @@ It means that waiting to obey God, whether out of fear, convenience, or a desire
 ### How do I know what my "Isaac" is?
 
 Your Isaac is whatever you'd struggle to release if you sensed God asking for it, whether that's an ambition, a relationship, a habit, or the thing your security is built on. It's usually not sinful in itself. The question is whether it sits above your obedience to God.
+
