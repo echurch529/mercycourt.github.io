@@ -353,9 +353,6 @@ mailing_list:
                     <button onclick="openGivingModal()" class="inline-block border-2 border-brand-dark text-brand-dark px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-brand-dark hover:text-white transition cursor-pointer">
                         Give Now
                     </button>
-                    <a href="/contact" class="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition">
-                        Building Project
-                    </a>
                 </div>
             </div>
         </div>
@@ -493,24 +490,31 @@ mailing_list:
 
     <script>
     function loadStreamPlayer() {
-        var facade = document.getElementById('stream-facade');
-        var iframe = document.getElementById('stream-iframe');
+        var facade  = document.getElementById('stream-facade');
+        var iframe  = document.getElementById('stream-iframe');
         var loading = document.getElementById('stream-loading');
-        if (iframe.src) return; // already loaded
+        if (iframe.src) return;
         if (window._mcStreamId) {
-            iframe.src = 'https://www.youtube.com/embed/' + window._mcStreamId + (window._mcStreamIsLive ? '?autoplay=1' : '?autoplay=1');
+            iframe.src = 'https://www.youtube.com/embed/' + window._mcStreamId + '?autoplay=1';
             facade.classList.add('hidden');
             iframe.classList.remove('hidden');
+        } else if (window._mcStreamFailed) {
+            window.open('https://www.youtube.com/@RCCGMercyCourt/live', '_blank', 'noopener,noreferrer');
         } else {
-            // API still loading - show loading spinner, set up listener
             facade.classList.add('hidden');
             loading.classList.remove('hidden');
+            var deadline = Date.now() + 5000;
             var poll = setInterval(function() {
                 if (window._mcStreamId) {
                     clearInterval(poll);
                     iframe.src = 'https://www.youtube.com/embed/' + window._mcStreamId + '?autoplay=1';
                     loading.classList.add('hidden');
                     iframe.classList.remove('hidden');
+                } else if (window._mcStreamFailed || Date.now() > deadline) {
+                    clearInterval(poll);
+                    window._mcStreamFailed = true;
+                    loading.classList.add('hidden');
+                    facade.classList.remove('hidden');
                 }
             }, 200);
         }
@@ -607,14 +611,12 @@ mailing_list:
                 }).join('');
 
             } catch (err) {
-                // Fallback: replace skeleton with a YouTube link
-                document.getElementById('stream-facade').classList.add('hidden');
-                document.getElementById('stream-loading').classList.remove('hidden');
-                document.getElementById('stream-loading').innerHTML =
-                    '<div class="text-white/60 text-center p-12 text-lg">Stream unavailable. <a href="https://www.youtube.com/@RCCGMercyCourt" target="_blank" rel="noopener noreferrer" class="text-brand-red underline">Watch on YouTube &rarr;</a></div>';
+                window._mcStreamFailed = true;
+                document.getElementById('stream-loading').classList.add('hidden');
+                document.getElementById('stream-facade').classList.remove('hidden');
                 document.getElementById('sermons-grid').innerHTML =
-                    '<div class="col-span-3 text-center text-gray-400 py-8">Could not load recent sermons. <a href="https://www.youtube.com/@RCCGMercyCourt" target="_blank" rel="noopener noreferrer" class="text-brand-red underline">View on YouTube &rarr;</a></div>';
-                console.error('YouTube API error:', err);
+                    '<div class="col-span-3 text-center text-gray-400 py-8">Could not load recent sermons. <a href="https://www.youtube.com/@RCCGMercyCourt" target="_blank" rel="noopener noreferrer" class="text-brand-red underline">View on YouTube →</a></div>';
+                console.warn('YouTube API error:', err);
             }
         })();
     </script>

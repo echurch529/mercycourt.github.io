@@ -410,14 +410,6 @@ collections:
               - { label: "Heading", name: "heading", widget: "string", required: false }
               - { label: "Heading Highlight (red)", name: "heading_highlight", widget: "string", required: false }
               - { label: "Body", name: "body", widget: "string", required: false }
-          - label: "Building Project Section"
-            name: "building"
-            widget: "object"
-            collapsed: true
-            fields:
-              - { label: "Heading", name: "heading", widget: "string", required: false }
-              - { label: "Body", name: "body", widget: "text", required: false }
-              - { label: "Button Text", name: "button_text", widget: "string", required: false }
           - { label: "Tax Info", name: "tax_info", widget: "text", required: false }
           - label: "Mailing List Section"
             name: "mailing_list"

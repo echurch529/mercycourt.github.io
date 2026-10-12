@@ -57,10 +57,6 @@ online_section:
   heading: "GIVE"
   heading_highlight: "NOW"
   body: "Secure online giving powered by Zeffy — 100% of your donation goes to Mercy Court."
-building:
-  heading: "BUILDING PROJECT"
-  body: "Support our building project as we expand our facilities to serve more people and create a permanent home for Mercy Court."
-  button_text: "Contribute to Building Project"
 tax_info: "RCCG Mercy Court is a registered 501(c)(3) nonprofit organization. All donations are tax-deductible to the extent allowed by law. You will receive a giving statement for your records at the end of each year."
 mailing_list:
   heading: "JOIN OUR MAILING LIST"
@@ -363,20 +359,6 @@ mailing_list:
         </div>
     </section>
 
-    <!-- Building Project -->
-    <section class="bg-brand-red py-16 px-6" style="padding-bottom: 60px;">
-        <div class="container mx-auto max-w-4xl text-center">
-            <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-h2">
-                {{ building.heading }}
-            </h2>
-            <p class="text-white/90 text-lg max-w-2xl mx-auto mb-8">
-                {{ building.body }}
-            </p>
-            <button onclick="openBuildingModal()" class="inline-block bg-white text-brand-red px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-gray-100 transition shadow-lg cursor-pointer">
-                {{ building.button_text }}
-            </button>
-        </div>
-    </section>
 
     <!-- Tax Info -->
     <section class="bg-gray-50 py-16 px-6">
@@ -457,50 +439,6 @@ mailing_list:
     <!-- Footer -->
 </main>
     {%- include "footer.njk" -%}
-
-    <!-- Building Project Modal -->
-    <div id="building-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden" aria-modal="true" role="dialog">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeBuildingModal()"></div>
-        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 overflow-hidden" style="max-height: 90vh;">
-            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-                <h2 class="font-anton text-xl uppercase tracking-h2">Building Project</h2>
-                <button onclick="closeBuildingModal()" class="text-gray-400 hover:text-gray-700 transition" aria-label="Close">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                </button>
-            </div>
-            <div style="overflow-y: auto; max-height: calc(90vh - 65px);">
-                <iframe
-                    id="building-iframe"
-                    title="Building project donation form"
-                    src=""
-                    data-src="{{ site.zeffy_building }}"
-                    allowpaymentrequest
-                    style="width: 100%; height: 800px; border: none; display: block;"
-                ></iframe>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openBuildingModal() {
-            const modal = document.getElementById('building-modal');
-            const iframe = document.getElementById('building-iframe');
-            if (!iframe.src || iframe.src === window.location.href) {
-                iframe.src = iframe.dataset.src;
-            }
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeBuildingModal() {
-            document.getElementById('building-modal').classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeBuildingModal();
-        });
-    </script>
 <script>
 (function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');obs.unobserve(entry.target);}});},{threshold:0.12});document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});})();
 </script>
