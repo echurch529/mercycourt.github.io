@@ -153,7 +153,7 @@ mailing_list:
                    class="absolute inset-0 hidden flex items-center justify-center bg-gray-900"
                    style="z-index:10;cursor:pointer;"
                    onclick="loadStreamPlayer(event)"
-                   aria-label="Watch RCCG Mercy Court live stream">
+                   aria-label="Click to Watch — RCCG Mercy Court live stream">
                     <img id="stream-thumb" src="/assets/images/2026/congregation/congregation-seated-service-01.jpg" alt="RCCG Mercy Court — click to watch" class="absolute inset-0 w-full h-full object-cover opacity-70">
                     <div class="relative z-10 flex flex-col items-center gap-3" style="pointer-events:none;">
                         <div class="w-20 h-20 bg-brand-red/90 rounded-full flex items-center justify-center hover:bg-brand-red transition">
@@ -174,7 +174,7 @@ mailing_list:
                 </iframe>
             </div>
             <div class="text-center mt-6">
-                <a href="https://www.youtube.com/@RCCGMercyCourt" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-brand-red text-white px-6 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition">
+                <a href="https://www.youtube.com/@RCCGMercyCourt" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#B84A20] text-white px-6 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#9A3E1C] transition">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                     View Our YouTube Channel
                 </a>
@@ -235,7 +235,7 @@ mailing_list:
             <h2 class="font-anton text-4xl md:text-5xl uppercase tracking-h2 text-white mb-6">{{ testimony_section.heading }}</h2>
             <p class="text-white/70 text-lg leading-relaxed mb-10 max-w-2xl mx-auto">{{ testimony_section.body }}</p>
             <a href="/testimony" target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center gap-2 bg-brand-red text-white text-sm font-bold uppercase tracking-wide px-10 py-4 rounded-full hover:bg-[#C04E25] transition">
+               class="inline-flex items-center gap-2 bg-[#B84A20] text-white text-sm font-bold uppercase tracking-wide px-10 py-4 rounded-full hover:bg-[#9A3E1C] transition">
                 {{ testimony_section.button_text }}
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
@@ -324,7 +324,7 @@ mailing_list:
     <section class="bg-gray-50 py-16 px-6">
         <div class="container mx-auto max-w-5xl">
             <div class="text-center mb-10">
-                <span class="inline-block text-xs font-bold uppercase tracking-widest mb-3" style="color: #E8541A;">From the Blog</span>
+                <span class="inline-block text-xs font-bold uppercase tracking-widest mb-3" style="color: #B84A20;">From the Blog</span>
                 <h2 class="font-anton text-3xl md:text-4xl uppercase tracking-h2">{{ blog_section.heading }}</h2>
             </div>
             <div class="grid md:grid-cols-3 gap-6">
@@ -357,8 +357,8 @@ mailing_list:
                 <p class="text-gray-600 text-lg mb-4">{{ give_section.body }}</p>
                 <div class="flex flex-wrap items-center gap-x-4 gap-y-2 bg-gray-50 rounded-xl px-5 py-3 mb-6">
                     <span class="text-xs font-bold uppercase tracking-widest text-gray-500 shrink-0">Via Zelle:</span>
-                    <span class="font-bold text-gray-900"><span class="text-brand-red">{{ site.zelle_phone }}</span> — {{ site.zelle_name }}</span>
-                    <span class="text-gray-400 text-xs">No fees · Instant</span>
+                    <span class="font-bold text-gray-900"><span class="text-[#B84A20]">{{ site.zelle_phone }}</span> — {{ site.zelle_name }}</span>
+                    <span class="text-gray-600 text-xs">No fees · Instant</span>
                 </div>
                 <div class="flex flex-wrap gap-4">
                     <button onclick="openGivingModal()" class="inline-block border-2 border-brand-dark text-brand-dark px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-brand-dark hover:text-white transition cursor-pointer">
@@ -370,12 +370,12 @@ mailing_list:
     </section>
 
     <!-- Join Our Mailing List -->
-    <section class="bg-brand-red py-16 px-6" style="padding-bottom: 60px;">
+    <section class="bg-[#B84A20] py-16 px-6" style="padding-bottom: 60px;">
         <div class="container mx-auto max-w-2xl text-center">
             <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-h2">
                 {{ mailing_list.heading }}
             </h2>
-            <p class="text-white/80 text-sm mb-8">{{ mailing_list.body }}</p>
+            <p class="text-white text-sm mb-8">{{ mailing_list.body }}</p>
             <div class="max-w-md mx-auto">
                 <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
                 <style>
@@ -405,7 +405,7 @@ mailing_list:
                         border-radius: 9999px;
                         border: 2px solid transparent;
                         background: #FFFFFF;
-                        color: #E8541A;
+                        color: #B84A20;
                         font-weight: 700;
                         font-size: 14px;
                         text-transform: uppercase;
@@ -597,7 +597,7 @@ mailing_list:
                         + '<svg class="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
                         + '</div></div></div>'
                         + '<div class="p-6">'
-                        + '<p class="text-brand-red text-xs font-bold uppercase mb-2">' + date + '</p>'
+                        + '<p class="text-[#B84A20] text-xs font-bold uppercase mb-2">' + date + '</p>'
                         + '<h3 class="font-bold text-lg mb-2 leading-snug">' + title + '</h3>'
                         + '<p class="text-gray-500 text-sm">RCCG Mercy Court</p>'
                         + '</div></a>';
