@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "screenshot.js",
   "scripts": {
-    "build": "eleventy",
+    "build": "eleventy && node seo-check.js",
+    "check": "node seo-check.js",
     "start": "eleventy --serve --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

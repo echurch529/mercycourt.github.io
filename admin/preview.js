@@ -2591,6 +2591,78 @@
     );
   }
 
+  /* ── seo-counter custom widget ─────────────────────────────────────────────
+     A string/textarea input with a live character counter.
+     Config options (YAML): max, target_min, target_max, multiline.           */
+  (function registerSeoCounter() {
+    var Comp = React && React.Component;
+    if (!Comp) return; // preact path: fall back to string widget
+
+    function SeoCounterControl(props) {
+      Comp.call(this, props);
+      this.state = { value: props.value || '' };
+      this.handleChange = this.handleChange.bind(this);
+    }
+    SeoCounterControl.prototype = Object.create(Comp.prototype);
+    SeoCounterControl.prototype.constructor = SeoCounterControl;
+
+    SeoCounterControl.prototype.handleChange = function (e) {
+      var val = e.target.value;
+      this.setState({ value: val });
+      this.props.onChange(val);
+    };
+
+    SeoCounterControl.prototype.isValid = function () {
+      var max = (this.props.field && this.props.field.get('max')) || 65;
+      var len = (this.state.value || '').length;
+      if (len > max) {
+        return { error: { type: 'CUSTOM', message: 'Must be ' + max + ' characters or fewer (currently ' + len + ').' } };
+      }
+      return true;
+    };
+
+    SeoCounterControl.prototype.render = function () {
+      var field      = this.props.field;
+      var max        = (field && field.get('max'))        || 65;
+      var targetMin  = (field && field.get('target_min')) || null;
+      var targetMax  = (field && field.get('target_max')) || null;
+      var multiline  = (field && field.get('multiline'))  || false;
+      var val        = this.state.value || '';
+      var len        = val.length;
+
+      var countColor = len > max        ? '#ef4444'
+                     : len > max - 5   ? '#f59e0b'
+                     :                   '#6b7280';
+
+      var inputStyle = {
+        width: '100%', padding: '8px 10px', border: '1px solid #ddd',
+        borderRadius: '4px', fontFamily: 'inherit', fontSize: '14px',
+        boxSizing: 'border-box', lineHeight: '1.5'
+      };
+
+      return h('div', null,
+        multiline
+          ? h('textarea', { value: val, onChange: this.handleChange,
+              rows: 3, style: Object.assign({}, inputStyle, { resize: 'vertical' }) })
+          : h('input', { type: 'text', value: val, onChange: this.handleChange, style: inputStyle }),
+        h('div', { style: { marginTop: '4px', display: 'flex', justifyContent: 'space-between', fontSize: '11px' } },
+          h('span', { style: { color: '#9ca3af' } },
+            (targetMin && targetMax) ? 'Target: ' + targetMin + '–' + targetMax + ' chars' : ''
+          ),
+          h('span', { style: { fontWeight: '600', color: countColor } },
+            len + ' / ' + max
+          )
+        )
+      );
+    };
+
+    function SeoCounterPreview(props) {
+      return h('span', null, props.value || '');
+    }
+
+    window.CMS.registerWidget('seo-counter', SeoCounterControl, SeoCounterPreview);
+  })();
+
   function MainPagesDispatch(props) {
     try {
       // Decap 3.x file collections: entry.get('slug') = entry name, entry.get('path') = file path.

@@ -270,8 +270,8 @@ collections:
               NO CURRENT EVENTS — The fallback block shows when no active events exist. |
               PAST EVENTS — Cards appear automatically from Event Pages with Status = Past. |
               EVENT CARDS — To add, edit, or archive an event, go to Event Pages.
-          - { label: "SEO Title", name: "title", widget: "string", required: false, hint: "Browser-tab title and og:title, e.g. 'Events | RCCG Mercy Court'" }
-          - { label: "SEO Description", name: "seo_description", widget: "text", required: false, hint: "Description (target: 120–160 characters)" }
+          - { label: "SEO Title", name: "title", widget: "seo-counter", required: false, hint: "Browser-tab title and og:title, e.g. 'Events | RCCG Mercy Court'", max: 65, target_min: 50, target_max: 60 }
+          - { label: "SEO Description", name: "seo_description", widget: "seo-counter", multiline: true, required: false, hint: "Description (target: 120–160 characters)", max: 160, target_min: 120, target_max: 155 }
           - { label: "OG / Share Image", name: "og_image", widget: "image", required: false, hint: "Image shown when the page is shared on social media. Leave blank to keep the current default." }
           - label: "Hero"
             name: "hero"
@@ -317,8 +317,8 @@ collections:
         label: "Give"
         file: "give.html"
         fields:
-          - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
-          - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
+          - { label: "SEO Title", name: "seo_title", widget: "seo-counter", required: false, max: 65, target_min: 50, target_max: 60 }
+          - { label: "SEO Description", name: "seo_description", widget: "seo-counter", multiline: true, required: false, hint: "Description (target: 120–160 characters)", max: 160, target_min: 120, target_max: 155 }
           - { label: "OG Image", name: "og_image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
           - label: "Hero"
             name: "hero"
@@ -432,8 +432,8 @@ collections:
         label: "Watch Live"
         file: "watch-live.html"
         fields:
-          - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
-          - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
+          - { label: "SEO Title", name: "seo_title", widget: "seo-counter", required: false, max: 65, target_min: 50, target_max: 60 }
+          - { label: "SEO Description", name: "seo_description", widget: "seo-counter", multiline: true, required: false, hint: "Description (target: 120–160 characters)", max: 160, target_min: 120, target_max: 155 }
           - { label: "OG Image", name: "og_image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
           - label: "Hero"
             name: "hero"
@@ -479,8 +479,8 @@ collections:
         label: "Sunday Services"
         file: "sunday-services.html"
         fields:
-          - { label: "SEO Title", name: "title", widget: "string", required: false }
-          - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
+          - { label: "SEO Title", name: "seo_title", widget: "seo-counter", required: false, hint: "Browser-tab title. Leave blank to use the Page Title field.", max: 65, target_min: 50, target_max: 60 }
+          - { label: "SEO Description", name: "seo_description", widget: "seo-counter", multiline: true, required: false, hint: "Description (target: 120–160 characters)", max: 160, target_min: 120, target_max: 155 }
           - { label: "OG Image", name: "og_image", widget: "image", required: false, hint: "Keep under 500KB. Compress before uploading." }
           - label: "Hero"
             name: "hero"
@@ -739,9 +739,9 @@ collections:
     fields:
       - { label: "Template Engine", name: "templateEngineOverride", widget: "hidden", default: "njk" }
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/event-page.njk" }
-      - { label: "Page Title", name: "title", widget: "string", hint: "Used in browser tab and SEO — e.g. One Bring One — Invite a Friend | Mercy Court" }
+      - { label: "Page Title", name: "title", widget: "seo-counter", hint: "Used in browser tab and SEO — e.g. One Bring One — Invite a Friend | Mercy Court", max: 65, target_min: 50, target_max: 60 }
       - { label: "URL Slug", name: "slug", widget: "string", hint: "Sets the page URL (/events/{slug}). Lowercase letters and hyphens only, e.g. p4-conference. If you duplicated an existing entry, change this before saving — the filename and URL both come from this field." }
-      - { label: "SEO Description", name: "seo_description", widget: "text", required: false, hint: "Description (target: 120–160 characters)" }
+      - { label: "SEO Description", name: "seo_description", widget: "seo-counter", multiline: true, required: false, hint: "Description (target: 120–160 characters)", max: 160, target_min: 120, target_max: 155 }
       - { label: "OG / Share Image", name: "og_image", widget: "image", required: false, hint: "Keep under 500KB. This image appears when the page is shared on social media." }
       - label: "Publish Date"
         name: "date"
@@ -764,6 +764,7 @@ collections:
       - { label: "Event Date (display)", name: "event_date", widget: "string", required: false, hint: "Free-text date label shown on hub cards, e.g. 'Every Sunday' or 'Aug 14–16, 2026'. Leave blank to omit." }
       - { label: "Card Summary", name: "card_summary", widget: "text", required: false, hint: "2–3 sentences shown on the /events/ hub card. Leave blank to omit." }
       - { label: "Card Image", name: "card_image", widget: "image", required: false, hint: "Optional thumbnail for the hub card. Falls back to the Hero image when blank." }
+      - { label: "Card Image Alt Text", name: "card_image_alt", widget: "string", required: false, hint: "Alt text for the card thumbnail. Required when Card Image is set. Falls back to the Hero image alt, then the event title." }
 
       - { label: "Hero H1 (override)", name: "hero_headline", widget: "string", required: false, hint: "Optional. Overrides the hero headline as the page H1. Leave blank to use the hero headline (text mode) or page title (flyer mode)." }
 
@@ -928,8 +929,8 @@ collections:
           COMMUNITY IMPACT — Turn on "Community Impact Feature" to feature this post in the news section on the Community Impact page.
       - { label: "Title", name: "title", widget: "string" }
       - { label: "URL Slug", name: "slug", widget: "string", hint: "Slug — derive from the title, shortened if needed. Lowercase letters and hyphens only, no leading slash. e.g. baltimore-food-pantry-outreach not /baltimore-food-pantry-outreach." }
-      - { label: "SEO Title", name: "seo_title", widget: "string", required: false, hint: "Search-engine title. Must end with | Mercy Court — e.g. 'Total Commitment to God: 5 Keys | Mercy Court'. Target 50–60 characters." }
-      - { label: "SEO Description", name: "seo_description", widget: "text", required: false, hint: "Description (target: 120–160 characters)" }
+      - { label: "SEO Title", name: "seo_title", widget: "seo-counter", required: false, hint: "Search-engine title. Must end with | Mercy Court — e.g. 'Total Commitment to God: 5 Keys | Mercy Court'. Target 50–60 characters.", max: 65, target_min: 50, target_max: 60 }
+      - { label: "SEO Description", name: "seo_description", widget: "seo-counter", multiline: true, required: false, hint: "Description (target: 120–160 characters)", max: 160, target_min: 120, target_max: 155 }
       - label: "Publish Date"
         name: "date"
         widget: "datetime"
