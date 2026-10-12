@@ -186,7 +186,7 @@
         var howDidYouHear = document.querySelector('#mc-visit-plan-form [name="group[10562]"]').value;
         var comingWith = document.querySelector('#mc-visit-plan-form [name="group[10563]"]').value;
 
-        // Step 1 — Submit to Formspree via fetch
+        // Step 1 — Submit to Formspree; fire conversion events only on confirmed success
         fetch('https://formspree.io/f/xreddnbn', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -200,7 +200,19 @@
                 howDidYouHear: howDidYouHear,
                 comingWith: comingWith
             })
-        });
+        }).then(function(resp) {
+            if (resp.ok) {
+                if (typeof fbq === 'function') {
+                    fbq('track', 'Lead', { content_name: 'plan_your_visit' });
+                }
+                if (typeof gtag === 'function') {
+                    gtag('event', 'generate_lead', {
+                        form: 'plan_your_visit',
+                        service: servicePreference || 'No preference'
+                    });
+                }
+            }
+        }).catch(function(){});
 
         // Step 2 — Submit to Mailchimp via JSONP
         var cbName = 'mc_cb_' + Date.now();

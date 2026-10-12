@@ -86,7 +86,6 @@ mailing_list:
     <meta name="twitter:title" content="{{ seo_title }}">
     <meta name="twitter:description" content="{{ seo_description }}">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://www.zeffy.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -107,7 +106,7 @@ mailing_list:
             }
         }
     </script>
-    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/1f6d34239bf35c1b0512b77c8/08dc922941bacce45fba209ed.js");</script>
+    <script>window.addEventListener('load',function(){var m=document.createElement('script');m.async=1;m.src='https://chimpstatic.com/mcjs-connected/js/users/1f6d34239bf35c1b0512b77c8/08dc922941bacce45fba209ed.js';document.head.appendChild(m);},false);</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -149,6 +148,7 @@ mailing_list:
 
     <!-- Navigation -->
     {% include "nav.njk" %}
+<main id="main-content">
 
     <!-- Hero Section -->
     <section class="relative h-[65vh] flex items-center justify-center overflow-hidden" style="padding-top: 72px;">
@@ -327,11 +327,39 @@ mailing_list:
                 </h2>
                 <p class="text-gray-600 text-sm">{{ online_section.body }}</p>
             </div>
-            <iframe
-                src="{{ site.zeffy_general }}"
-                allowpaymentrequest
-                style="width: 100%; height: 900px; border: none; display: block;"
-            ></iframe>
+            <div id="give-now-iframe-wrap" style="min-height:200px;">
+                <div id="give-now-placeholder" style="width:100%;height:200px;display:flex;align-items:center;justify-content:center;background:#f9fafb;border-radius:12px;border:1px solid #e5e7eb;">
+                    <div style="text-align:center;">
+                        <div style="width:36px;height:36px;border:3px solid #D95A2B;border-top-color:transparent;border-radius:50%;animation:mc-spin 0.8s linear infinite;margin:0 auto 12px;"></div>
+                        <p style="color:#6b7280;font-size:14px;font-family:'Lato',sans-serif;">Loading donation form…</p>
+                    </div>
+                </div>
+            </div>
+            <style>@keyframes mc-spin{to{transform:rotate(360deg)}}</style>
+            <script>
+            (function(){
+                var wrap = document.getElementById('give-now-iframe-wrap');
+                var loaded = false;
+                function loadIframe() {
+                    if (loaded) return;
+                    loaded = true;
+                    var iframe = document.createElement('iframe');
+                    iframe.src = '{{ site.zeffy_general }}';
+                    iframe.title = 'Donation form';
+                    iframe.setAttribute('allowpaymentrequest','');
+                    iframe.style.cssText = 'width:100%;height:900px;border:none;display:block;';
+                    document.getElementById('give-now-placeholder').replaceWith(iframe);
+                }
+                if ('IntersectionObserver' in window) {
+                    var obs = new IntersectionObserver(function(entries) {
+                        if (entries[0].isIntersecting) { loadIframe(); obs.disconnect(); }
+                    }, { rootMargin: '300px 0px' });
+                    obs.observe(wrap);
+                } else {
+                    loadIframe();
+                }
+            })();
+            </script>
         </div>
     </section>
 
@@ -427,6 +455,7 @@ mailing_list:
     </section>
 
     <!-- Footer -->
+</main>
     {%- include "footer.njk" -%}
 
     <!-- Building Project Modal -->
@@ -444,6 +473,7 @@ mailing_list:
             <div style="overflow-y: auto; max-height: calc(90vh - 65px);">
                 <iframe
                     id="building-iframe"
+                    title="Building project donation form"
                     src=""
                     data-src="{{ site.zeffy_building }}"
                     allowpaymentrequest

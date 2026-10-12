@@ -82,6 +82,7 @@ past_events:
 <body class="font-lato bg-white text-gray-900">
 
     {%- include "nav.njk" -%}
+<main id="main-content">
 
     <!-- Hero -->
     <section class="relative overflow-hidden flex items-center justify-center text-white text-center" style="height: 55vh; min-height: 340px; {% if hero.image %}background-image: url('{{ hero.image }}'); background-size: cover; background-position: {{ hero.focal_x | default('50%') }} {{ hero.focal_y | default('50%') }};{% else %}background: #0A0A0A;{% endif %} padding-top: 72px;">
@@ -193,6 +194,7 @@ past_events:
     </section>
     {% endif %}
 
+</main>
     {%- include "footer.njk" -%}
 
 </body>
