@@ -8,6 +8,10 @@ function _escAttr(s){return String(s).replace(/"/g,"&quot;").replace(/'/g,"&#39;
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets");
+  eleventyConfig.addPassthroughCopy("favicon.ico");
+  eleventyConfig.addPassthroughCopy("favicon-32x32.png");
+  eleventyConfig.addPassthroughCopy("favicon-16x16.png");
+  eleventyConfig.addPassthroughCopy("apple-touch-icon.png");
 
   // Pin markdown-it with html:true (Eleventy 2.0 default — explicit to guard future upgrades)
   eleventyConfig.setLibrary("md", md);
