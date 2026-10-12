@@ -141,16 +141,22 @@ mailing_list:
                 <div id="live-badge" class="hidden absolute top-4 left-4 z-10 flex items-center gap-2 bg-red-600 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">
                     <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE
                 </div>
-                <!-- Click-to-play facade -->
-                <div id="stream-facade" class="absolute inset-0 hidden cursor-pointer flex items-center justify-center bg-gray-900" onclick="loadStreamPlayer()" role="button" aria-label="Play RCCG Mercy Court stream" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')loadStreamPlayer()">
+                <!-- Click-to-play facade — real link so mobile browsers allow navigation -->
+                <a id="stream-facade"
+                   href="https://www.youtube.com/@RCCGMercyCourt/live"
+                   target="_blank" rel="noopener noreferrer"
+                   class="absolute inset-0 hidden flex items-center justify-center bg-gray-900"
+                   style="z-index:10;cursor:pointer;"
+                   onclick="loadStreamPlayer(event)"
+                   aria-label="Watch RCCG Mercy Court live stream">
                     <img id="stream-thumb" src="/assets/images/2026/congregation/congregation-seated-service-01.jpg" alt="RCCG Mercy Court — click to watch" class="absolute inset-0 w-full h-full object-cover opacity-70">
-                    <div class="relative z-10 flex flex-col items-center gap-3">
+                    <div class="relative z-10 flex flex-col items-center gap-3" style="pointer-events:none;">
                         <div class="w-20 h-20 bg-brand-red/90 rounded-full flex items-center justify-center hover:bg-brand-red transition">
                             <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
                         <p class="text-white text-sm font-bold uppercase tracking-widest">Click to Watch</p>
                     </div>
-                </div>
+                </a>
                 <!-- Dynamic embed -->
                 <iframe
                     id="stream-iframe"
@@ -489,35 +495,17 @@ mailing_list:
     </script>
 
     <script>
-    function loadStreamPlayer() {
-        var facade  = document.getElementById('stream-facade');
-        var iframe  = document.getElementById('stream-iframe');
-        var loading = document.getElementById('stream-loading');
-        if (iframe.src) return;
+    function loadStreamPlayer(e) {
+        var iframe = document.getElementById('stream-iframe');
+        if (iframe.src) { if (e) e.preventDefault(); return; }
         if (window._mcStreamId) {
+            if (e) e.preventDefault();
+            var facade = document.getElementById('stream-facade');
             iframe.src = 'https://www.youtube.com/embed/' + window._mcStreamId + '?autoplay=1';
             facade.classList.add('hidden');
             iframe.classList.remove('hidden');
-        } else if (window._mcStreamFailed) {
-            window.open('https://www.youtube.com/@RCCGMercyCourt/live', '_blank', 'noopener,noreferrer');
-        } else {
-            facade.classList.add('hidden');
-            loading.classList.remove('hidden');
-            var deadline = Date.now() + 5000;
-            var poll = setInterval(function() {
-                if (window._mcStreamId) {
-                    clearInterval(poll);
-                    iframe.src = 'https://www.youtube.com/embed/' + window._mcStreamId + '?autoplay=1';
-                    loading.classList.add('hidden');
-                    iframe.classList.remove('hidden');
-                } else if (window._mcStreamFailed || Date.now() > deadline) {
-                    clearInterval(poll);
-                    window._mcStreamFailed = true;
-                    loading.classList.add('hidden');
-                    facade.classList.remove('hidden');
-                }
-            }, 200);
         }
+        // No stream ID yet: let the <a href> navigate to YouTube naturally — no polling, no popup
     }
     </script>
     <!-- YouTube Live + Recent Sermons -->
