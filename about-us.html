@@ -26,6 +26,11 @@ testimonials:
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | RCCG Mercy Court — Baltimore Church</title>
     <meta name="description" content="Discover RCCG Mercy Court's vision and leadership. Pastors John and Rosemary Itakpe lead a Baltimore community dedicated to raising Christ-like pacesetters.">
@@ -42,7 +47,6 @@ testimonials:
     <meta name="twitter:title" content="About Us | RCCG Mercy Court — Baltimore Church">
     <meta name="twitter:description" content="Discover RCCG Mercy Court's vision and leadership. Pastors John and Rosemary Itakpe lead a Baltimore community dedicated to raising Christ-like pacesetters.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://www.zeffy.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -63,7 +67,7 @@ testimonials:
             }
         }
     </script>
-    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/1f6d34239bf35c1b0512b77c8/08dc922941bacce45fba209ed.js");</script>
+    <script>window.addEventListener('load',function(){var m=document.createElement('script');m.async=1;m.src='https://chimpstatic.com/mcjs-connected/js/users/1f6d34239bf35c1b0512b77c8/08dc922941bacce45fba209ed.js';document.head.appendChild(m);},false);</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -111,6 +115,7 @@ testimonials:
 
     <!-- Navigation -->
     {% include "nav.njk" %}
+<main id="main-content">
 
     <!-- Hero Section -->
     <section class="relative h-[65vh] flex items-center justify-center overflow-hidden" style="padding-top: 72px;">
@@ -407,9 +412,6 @@ testimonials:
                     <button onclick="openGivingModal()" class="inline-block border-2 border-brand-dark text-brand-dark px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-brand-dark hover:text-white transition cursor-pointer">
                         Give Now
                     </button>
-                    <button onclick="openBuildingModal()" class="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition cursor-pointer">
-                        Building Project
-                    </button>
                 </div>
             </div>
         </div>
@@ -488,32 +490,10 @@ testimonials:
     </section>
 
     <!-- Footer -->
+</main>
     {%- include "footer.njk" -%}
 
 
-    <!-- Building Project Modal -->
-    <div id="building-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden" aria-modal="true" role="dialog">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeBuildingModal()"></div>
-        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 overflow-hidden" style="max-height: 90vh;">
-            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-                <h2 class="font-anton text-xl uppercase tracking-h2">Building Project</h2>
-                <button onclick="closeBuildingModal()" class="text-gray-400 hover:text-gray-700 transition" aria-label="Close">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                </button>
-            </div>
-            <div style="overflow-y: auto; max-height: calc(90vh - 65px);">
-                <iframe
-                    id="building-iframe"
-                    src=""
-                    data-src="https://www.zeffy.com/en-US/embed/donation-form/building-project-3"
-                    allowpaymentrequest
-                    style="width: 100%; height: 800px; border: none; display: block;"
-                ></iframe>
-            </div>
-        </div>
-    </div>
 
     <!-- Giving Modal -->
     <div id="giving-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden" aria-modal="true" role="dialog">
@@ -539,7 +519,7 @@ testimonials:
                         <p class="text-gray-500 text-sm">Or give online via Zeffy below.</p>
                     </div>
                 </div>
-                <iframe
+                <iframe title="Donation form"
                     id="giving-iframe"
                     src=""
                     data-src="https://www.zeffy.com/en-US/embed/donation-form/general-giving-25"
@@ -565,21 +545,8 @@ testimonials:
             document.getElementById('giving-modal').classList.add('hidden');
             document.body.style.overflow = '';
         }
-        function openBuildingModal() {
-            const modal = document.getElementById('building-modal');
-            const iframe = document.getElementById('building-iframe');
-            if (!iframe.src || iframe.src === window.location.href) {
-                iframe.src = iframe.dataset.src;
-            }
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeBuildingModal() {
-            document.getElementById('building-modal').classList.add('hidden');
-            document.body.style.overflow = '';
-        }
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') { closeGivingModal(); closeBuildingModal(); }
+            if (e.key === 'Escape') { closeGivingModal(); }
         });
     </script>
 <script>

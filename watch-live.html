@@ -28,6 +28,11 @@ mailing_list:
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ seo_title }}</title>
     <meta name="description" content="{{ seo_description }}">
@@ -64,7 +69,7 @@ mailing_list:
             }
         }
     </script>
-    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/1f6d34239bf35c1b0512b77c8/08dc922941bacce45fba209ed.js");</script>
+    <script>window.addEventListener('load',function(){var m=document.createElement('script');m.async=1;m.src='https://chimpstatic.com/mcjs-connected/js/users/1f6d34239bf35c1b0512b77c8/08dc922941bacce45fba209ed.js';document.head.appendChild(m);},false);</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -111,6 +116,7 @@ mailing_list:
 
     <!-- Navigation -->
     {% include "nav.njk" %}
+<main id="main-content">
 
     <!-- Hero Section -->
     <section class="relative h-[65vh] flex items-center justify-center overflow-hidden" style="padding-top: 72px;">
@@ -140,6 +146,22 @@ mailing_list:
                 <div id="live-badge" class="hidden absolute top-4 left-4 z-10 flex items-center gap-2 bg-red-600 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">
                     <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE
                 </div>
+                <!-- Click-to-play facade — real link so mobile browsers allow navigation -->
+                <a id="stream-facade"
+                   href="https://www.youtube.com/@RCCGMercyCourt/live"
+                   target="_blank" rel="noopener noreferrer"
+                   class="absolute inset-0 hidden flex items-center justify-center bg-gray-900"
+                   style="z-index:10;cursor:pointer;"
+                   onclick="loadStreamPlayer(event)"
+                   aria-label="Watch RCCG Mercy Court live stream">
+                    <img id="stream-thumb" src="/assets/images/2026/congregation/congregation-seated-service-01.jpg" alt="RCCG Mercy Court — click to watch" class="absolute inset-0 w-full h-full object-cover opacity-70">
+                    <div class="relative z-10 flex flex-col items-center gap-3" style="pointer-events:none;">
+                        <div class="w-20 h-20 bg-brand-red/90 rounded-full flex items-center justify-center hover:bg-brand-red transition">
+                            <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <p class="text-white text-sm font-bold uppercase tracking-widest">Click to Watch</p>
+                    </div>
+                </a>
                 <!-- Dynamic embed -->
                 <iframe
                     id="stream-iframe"
@@ -307,7 +329,7 @@ mailing_list:
             </div>
             <div class="grid md:grid-cols-3 gap-6">
                 {% for post in collections.posts | limit(3) %}
-                <a href="{{ post.url | cleanUrl }}" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 reveal">
+                <a href="{{ post.url | cleanUrl }}" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 reveal" aria-label="Read {{ post.data.title }}">
                     <div style="height: 160px; overflow: hidden;">
                         <img loading="lazy" src="{{ post.data.hero_image }}" alt="{{ post.data.title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
@@ -342,9 +364,6 @@ mailing_list:
                     <button onclick="openGivingModal()" class="inline-block border-2 border-brand-dark text-brand-dark px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-brand-dark hover:text-white transition cursor-pointer">
                         Give Now
                     </button>
-                    <a href="/contact" class="inline-block bg-brand-red text-white px-8 py-3 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition">
-                        Building Project
-                    </a>
                 </div>
             </div>
         </div>
@@ -420,6 +439,7 @@ mailing_list:
     </section>
 
     <!-- Footer -->
+</main>
     {%- include "footer.njk" -%}
 
 
@@ -449,6 +469,7 @@ mailing_list:
                 </div>
                 <iframe
                     id="giving-iframe"
+                    title="Donation form"
                     src=""
                     data-src="{{ site.zeffy_general }}"
                     allowpaymentrequest
@@ -478,6 +499,20 @@ mailing_list:
         });
     </script>
 
+    <script>
+    function loadStreamPlayer(e) {
+        var iframe = document.getElementById('stream-iframe');
+        if (iframe.src) { if (e) e.preventDefault(); return; }
+        if (window._mcStreamId) {
+            if (e) e.preventDefault();
+            var facade = document.getElementById('stream-facade');
+            iframe.src = 'https://www.youtube.com/embed/' + window._mcStreamId + '?autoplay=1';
+            facade.classList.add('hidden');
+            iframe.classList.remove('hidden');
+        }
+        // No stream ID yet: let the <a href> navigate to YouTube naturally — no polling, no popup
+    }
+    </script>
     <!-- YouTube Live + Recent Sermons -->
     <script>
         (async function () {
@@ -535,12 +570,15 @@ mailing_list:
                     return true;
                 }).slice(0, 3);
 
-                // Update main embed
+                // Store embedId for click-to-play; show facade
                 const embedId = liveId || recent[0].snippet.resourceId.videoId;
-                const iframe  = document.getElementById('stream-iframe');
-                iframe.src = `https://www.youtube.com/embed/${embedId}` + (liveId ? '?autoplay=1' : '');
+                window._mcStreamId = embedId;
+                window._mcStreamIsLive = !!liveId;
+                // Update facade thumbnail to actual video thumbnail
+                const thumbUrl = 'https://i.ytimg.com/vi/' + embedId + '/maxresdefault.jpg';
+                document.getElementById('stream-thumb').src = thumbUrl;
                 document.getElementById('stream-loading').classList.add('hidden');
-                iframe.classList.remove('hidden');
+                document.getElementById('stream-facade').classList.remove('hidden');
                 if (liveId) document.getElementById('live-badge').classList.remove('hidden');
 
                 // Populate Recent Sermons grid
@@ -566,12 +604,12 @@ mailing_list:
                 }).join('');
 
             } catch (err) {
-                // Fallback: replace skeleton with a YouTube link
-                document.getElementById('stream-loading').innerHTML =
-                    '<div class="text-white/60 text-center p-12 text-lg">Stream unavailable. <a href="https://www.youtube.com/@RCCGMercyCourt" target="_blank" rel="noopener noreferrer" class="text-brand-red underline">Watch on YouTube &rarr;</a></div>';
+                window._mcStreamFailed = true;
+                document.getElementById('stream-loading').classList.add('hidden');
+                document.getElementById('stream-facade').classList.remove('hidden');
                 document.getElementById('sermons-grid').innerHTML =
-                    '<div class="col-span-3 text-center text-gray-400 py-8">Could not load recent sermons. <a href="https://www.youtube.com/@RCCGMercyCourt" target="_blank" rel="noopener noreferrer" class="text-brand-red underline">View on YouTube &rarr;</a></div>';
-                console.error('YouTube API error:', err);
+                    '<div class="col-span-3 text-center text-gray-400 py-8">Could not load recent sermons. <a href="https://www.youtube.com/@RCCGMercyCourt" target="_blank" rel="noopener noreferrer" class="text-brand-red underline">View on YouTube →</a></div>';
+                console.warn('YouTube API error:', err);
             }
         })();
     </script>

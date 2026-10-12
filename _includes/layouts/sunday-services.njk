@@ -2,6 +2,11 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {%- set _seo_title = seo_title if seo_title else title -%}
     <title>{{ _seo_title }}</title>
@@ -79,6 +84,7 @@
 <body class="font-lato bg-white text-gray-900">
 
     {%- include "nav.njk" -%}
+<main id="main-content">
 
     <!-- 1. Hero -->
     <section class="relative overflow-hidden flex items-center justify-center text-white text-center" style="min-height:75vh;{% if hero.image %}background-image:url('{{ hero.image }}');background-size:cover;background-position:{{ hero.focal_x | default('50%') }} {{ hero.focal_y | default('50%') }};{% else %}background:#0A0A0A;{% endif %}padding-top:72px;">
@@ -322,6 +328,7 @@
         </div>
     </section>
 
+</main>
     {%- include "footer.njk" -%}
     {%- include "visit-modal.njk" -%}
 

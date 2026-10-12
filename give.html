@@ -57,10 +57,6 @@ online_section:
   heading: "GIVE"
   heading_highlight: "NOW"
   body: "Secure online giving powered by Zeffy — 100% of your donation goes to Mercy Court."
-building:
-  heading: "BUILDING PROJECT"
-  body: "Support our building project as we expand our facilities to serve more people and create a permanent home for Mercy Court."
-  button_text: "Contribute to Building Project"
 tax_info: "RCCG Mercy Court is a registered 501(c)(3) nonprofit organization. All donations are tax-deductible to the extent allowed by law. You will receive a giving statement for your records at the end of each year."
 mailing_list:
   heading: "JOIN OUR MAILING LIST"
@@ -70,6 +66,11 @@ mailing_list:
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ seo_title }}</title>
     <meta name="description" content="{{ seo_description }}">
@@ -86,7 +87,6 @@ mailing_list:
     <meta name="twitter:title" content="{{ seo_title }}">
     <meta name="twitter:description" content="{{ seo_description }}">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://www.zeffy.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -107,7 +107,7 @@ mailing_list:
             }
         }
     </script>
-    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/1f6d34239bf35c1b0512b77c8/08dc922941bacce45fba209ed.js");</script>
+    <script>window.addEventListener('load',function(){var m=document.createElement('script');m.async=1;m.src='https://chimpstatic.com/mcjs-connected/js/users/1f6d34239bf35c1b0512b77c8/08dc922941bacce45fba209ed.js';document.head.appendChild(m);},false);</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -149,6 +149,7 @@ mailing_list:
 
     <!-- Navigation -->
     {% include "nav.njk" %}
+<main id="main-content">
 
     <!-- Hero Section -->
     <section class="relative h-[65vh] flex items-center justify-center overflow-hidden" style="padding-top: 72px;">
@@ -312,7 +313,7 @@ mailing_list:
                 <ol class="space-y-4 text-gray-600 text-sm">
                     <li class="flex gap-3"><span class="font-bold text-brand-red text-base leading-snug shrink-0">1.</span><span>Open your bank's app and find the <strong>Zelle</strong> feature (available in most major banking apps).</span></li>
                     <li class="flex gap-3"><span class="font-bold text-brand-red text-base leading-snug shrink-0">2.</span><span>Send to <strong>{{ site.zelle_phone }}</strong> — confirm the recipient name shows as <strong>{{ site.zelle_name }}</strong> before sending.</span></li>
-                    <li class="flex gap-3"><span class="font-bold text-brand-red text-base leading-snug shrink-0">3.</span><span>Enter your amount and add an optional note (e.g. "Tithe", "Building Fund"). That's it — funds arrive instantly!</span></li>
+                    <li class="flex gap-3"><span class="font-bold text-brand-red text-base leading-snug shrink-0">3.</span><span>Enter your amount and add an optional note (e.g. "Tithe"). That's it — funds arrive instantly!</span></li>
                 </ol>
             </div>
         </div>
@@ -327,28 +328,42 @@ mailing_list:
                 </h2>
                 <p class="text-gray-600 text-sm">{{ online_section.body }}</p>
             </div>
-            <iframe
-                src="{{ site.zeffy_general }}"
-                allowpaymentrequest
-                style="width: 100%; height: 900px; border: none; display: block;"
-            ></iframe>
+            <div id="give-now-iframe-wrap" style="min-height:200px;">
+                <div id="give-now-placeholder" style="width:100%;height:200px;display:flex;align-items:center;justify-content:center;background:#f9fafb;border-radius:12px;border:1px solid #e5e7eb;">
+                    <div style="text-align:center;">
+                        <div style="width:36px;height:36px;border:3px solid #D95A2B;border-top-color:transparent;border-radius:50%;animation:mc-spin 0.8s linear infinite;margin:0 auto 12px;"></div>
+                        <p style="color:#6b7280;font-size:14px;font-family:'Lato',sans-serif;">Loading donation form…</p>
+                    </div>
+                </div>
+            </div>
+            <style>@keyframes mc-spin{to{transform:rotate(360deg)}}</style>
+            <script>
+            (function(){
+                var wrap = document.getElementById('give-now-iframe-wrap');
+                var loaded = false;
+                function loadIframe() {
+                    if (loaded) return;
+                    loaded = true;
+                    var iframe = document.createElement('iframe');
+                    iframe.src = '{{ site.zeffy_general }}';
+                    iframe.title = 'Donation form';
+                    iframe.setAttribute('allowpaymentrequest','');
+                    iframe.style.cssText = 'width:100%;height:900px;border:none;display:block;';
+                    document.getElementById('give-now-placeholder').replaceWith(iframe);
+                }
+                if ('IntersectionObserver' in window) {
+                    var obs = new IntersectionObserver(function(entries) {
+                        if (entries[0].isIntersecting) { loadIframe(); obs.disconnect(); }
+                    }, { rootMargin: '300px 0px' });
+                    obs.observe(wrap);
+                } else {
+                    loadIframe();
+                }
+            })();
+            </script>
         </div>
     </section>
 
-    <!-- Building Project -->
-    <section class="bg-brand-red py-16 px-6" style="padding-bottom: 60px;">
-        <div class="container mx-auto max-w-4xl text-center">
-            <h2 class="font-anton text-3xl md:text-4xl uppercase mb-4 text-white tracking-h2">
-                {{ building.heading }}
-            </h2>
-            <p class="text-white/90 text-lg max-w-2xl mx-auto mb-8">
-                {{ building.body }}
-            </p>
-            <button onclick="openBuildingModal()" class="inline-block bg-white text-brand-red px-10 py-4 rounded-full font-bold uppercase text-sm hover:bg-gray-100 transition shadow-lg cursor-pointer">
-                {{ building.button_text }}
-            </button>
-        </div>
-    </section>
 
     <!-- Tax Info -->
     <section class="bg-gray-50 py-16 px-6">
@@ -427,50 +442,8 @@ mailing_list:
     </section>
 
     <!-- Footer -->
+</main>
     {%- include "footer.njk" -%}
-
-    <!-- Building Project Modal -->
-    <div id="building-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden" aria-modal="true" role="dialog">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeBuildingModal()"></div>
-        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 overflow-hidden" style="max-height: 90vh;">
-            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-                <h2 class="font-anton text-xl uppercase tracking-h2">Building Project</h2>
-                <button onclick="closeBuildingModal()" class="text-gray-400 hover:text-gray-700 transition" aria-label="Close">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                </button>
-            </div>
-            <div style="overflow-y: auto; max-height: calc(90vh - 65px);">
-                <iframe
-                    id="building-iframe"
-                    src=""
-                    data-src="{{ site.zeffy_building }}"
-                    allowpaymentrequest
-                    style="width: 100%; height: 800px; border: none; display: block;"
-                ></iframe>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openBuildingModal() {
-            const modal = document.getElementById('building-modal');
-            const iframe = document.getElementById('building-iframe');
-            if (!iframe.src || iframe.src === window.location.href) {
-                iframe.src = iframe.dataset.src;
-            }
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeBuildingModal() {
-            document.getElementById('building-modal').classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeBuildingModal();
-        });
-    </script>
 <script>
 (function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');obs.unobserve(entry.target);}});},{threshold:0.12});document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});})();
 </script>

@@ -2331,7 +2331,6 @@
     var ways    = data.ways    || {};
     var zs      = data.zelle_section  || {};
     var os      = data.online_section || {};
-    var building = data.building || {};
 
     var imgUrl = hero.image ? resolveImage(props, hero.image) : '';
     var heroStyle = {
@@ -2413,12 +2412,6 @@
           zs.intro ? h('p', { style: { color: '#6b7280' } }, zs.intro) : null
         )
       ),
-      h('section', { style: redSecStyle },
-        h('h2', { style: { fontFamily: DISPLAY, fontSize: '2rem', textTransform: 'uppercase',
-          color: '#fff', marginBottom: '1rem' } }, building.heading || 'BUILDING PROJECT'),
-        building.body ? h('p', { style: { color: 'rgba(255,255,255,0.85)', maxWidth: '42rem',
-          margin: '0 auto 2rem', lineHeight: '1.6' } }, building.body) : null
-      )
     );
   }
 
