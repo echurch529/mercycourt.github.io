@@ -146,22 +146,6 @@ mailing_list:
                 <div id="live-badge" class="hidden absolute top-4 left-4 z-10 flex items-center gap-2 bg-red-600 text-white text-xs font-bold uppercase px-3 py-1 rounded-full shadow-lg">
                     <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE
                 </div>
-                <!-- Click-to-play facade — real link so mobile browsers allow navigation -->
-                <a id="stream-facade"
-                   href="https://www.youtube.com/@RCCGMercyCourt/live"
-                   target="_blank" rel="noopener noreferrer"
-                   class="absolute inset-0 hidden flex items-center justify-center bg-gray-900"
-                   style="z-index:10;cursor:pointer;"
-                   onclick="loadStreamPlayer(event)"
-                   aria-label="Watch RCCG Mercy Court live stream">
-                    <img id="stream-thumb" src="/assets/images/2026/congregation/congregation-seated-service-01.jpg" alt="RCCG Mercy Court — click to watch" class="absolute inset-0 w-full h-full object-cover opacity-70">
-                    <div class="relative z-10 flex flex-col items-center gap-3" style="pointer-events:none;">
-                        <div class="w-20 h-20 bg-brand-red/90 rounded-full flex items-center justify-center hover:bg-brand-red transition">
-                            <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                        <p class="text-white text-sm font-bold uppercase tracking-widest">Click to Watch</p>
-                    </div>
-                </a>
                 <!-- Dynamic embed -->
                 <iframe
                     id="stream-iframe"
@@ -499,20 +483,6 @@ mailing_list:
         });
     </script>
 
-    <script>
-    function loadStreamPlayer(e) {
-        var iframe = document.getElementById('stream-iframe');
-        if (iframe.src) { if (e) e.preventDefault(); return; }
-        if (window._mcStreamId) {
-            if (e) e.preventDefault();
-            var facade = document.getElementById('stream-facade');
-            iframe.src = 'https://www.youtube.com/embed/' + window._mcStreamId + '?autoplay=1';
-            facade.classList.add('hidden');
-            iframe.classList.remove('hidden');
-        }
-        // No stream ID yet: let the <a href> navigate to YouTube naturally — no polling, no popup
-    }
-    </script>
     <!-- YouTube Live + Recent Sermons -->
     <script>
         (async function () {
@@ -570,15 +540,12 @@ mailing_list:
                     return true;
                 }).slice(0, 3);
 
-                // Store embedId for click-to-play; show facade
+                // Update main embed
                 const embedId = liveId || recent[0].snippet.resourceId.videoId;
-                window._mcStreamId = embedId;
-                window._mcStreamIsLive = !!liveId;
-                // Update facade thumbnail to actual video thumbnail
-                const thumbUrl = 'https://i.ytimg.com/vi/' + embedId + '/maxresdefault.jpg';
-                document.getElementById('stream-thumb').src = thumbUrl;
+                const iframe  = document.getElementById('stream-iframe');
+                iframe.src = `https://www.youtube.com/embed/${embedId}` + (liveId ? '?autoplay=1' : '');
                 document.getElementById('stream-loading').classList.add('hidden');
-                document.getElementById('stream-facade').classList.remove('hidden');
+                iframe.classList.remove('hidden');
                 if (liveId) document.getElementById('live-badge').classList.remove('hidden');
 
                 // Populate Recent Sermons grid
@@ -604,12 +571,12 @@ mailing_list:
                 }).join('');
 
             } catch (err) {
-                window._mcStreamFailed = true;
-                document.getElementById('stream-loading').classList.add('hidden');
-                document.getElementById('stream-facade').classList.remove('hidden');
+                // Fallback: replace skeleton with a YouTube link
+                document.getElementById('stream-loading').innerHTML =
+                    '<div class="text-white/60 text-center p-12 text-lg">Stream unavailable. <a href="https://www.youtube.com/@RCCGMercyCourt" target="_blank" rel="noopener noreferrer" class="text-brand-red underline">Watch on YouTube &rarr;</a></div>';
                 document.getElementById('sermons-grid').innerHTML =
-                    '<div class="col-span-3 text-center text-gray-400 py-8">Could not load recent sermons. <a href="https://www.youtube.com/@RCCGMercyCourt" target="_blank" rel="noopener noreferrer" class="text-brand-red underline">View on YouTube →</a></div>';
-                console.warn('YouTube API error:', err);
+                    '<div class="col-span-3 text-center text-gray-400 py-8">Could not load recent sermons. <a href="https://www.youtube.com/@RCCGMercyCourt" target="_blank" rel="noopener noreferrer" class="text-brand-red underline">View on YouTube &rarr;</a></div>';
+                console.error('YouTube API error:', err);
             }
         })();
     </script>
