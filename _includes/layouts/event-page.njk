@@ -628,7 +628,19 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify({ firstName: fname, lastName: lname, email: email, phone: phone, message: message, howDidYouHear: howDidYouHear, comingWith: comingWith })
-            });
+            }).then(function(resp) {
+                if (resp.ok) {
+                    if (typeof fbq === 'function') {
+                        fbq('track', 'Lead', { content_name: 'plan_your_visit' });
+                    }
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'generate_lead', {
+                            form: 'plan_your_visit',
+                            service: 'event'
+                        });
+                    }
+                }
+            }).catch(function(){});
             const cbName = 'mc_cb_' + Date.now();
             const params = new URLSearchParams({
                 'FNAME': fname, 'LNAME': lname, 'EMAIL': email, 'PHONE': phone,
