@@ -6,63 +6,81 @@ permalink: "/sitemap.xml"
   <!-- Core pages -->
   <url>
     <loc>https://mercycourt.org/</loc>
+    <lastmod>{{ lastmod["index.html"] | default(buildDate) }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://mercycourt.org/about-us</loc>
+    <lastmod>{{ lastmod["about-us.html"] | default(buildDate) }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mercycourt.org/plan-your-visit</loc>
+    <lastmod>{{ lastmod["plan-your-visit.html"] | default(buildDate) }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://mercycourt.org/contact</loc>
+    <lastmod>{{ lastmod["contact.html"] | default(buildDate) }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mercycourt.org/give</loc>
+    <lastmod>{{ lastmod["give.html"] | default(buildDate) }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mercycourt.org/watch-live</loc>
+    <lastmod>{{ lastmod["watch-live.html"] | default(buildDate) }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mercycourt.org/sunday-services</loc>
+    <lastmod>{{ lastmod["sunday-services.html"] | default(buildDate) }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mercycourt.org/community-impact</loc>
+    <lastmod>{{ lastmod["community-impact.html"] | default(buildDate) }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mercycourt.org/testimony</loc>
+    <lastmod>{{ lastmod["_redirects.njk"] | default(buildDate) }}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
   <!-- Ministries -->
   <url>
     <loc>https://mercycourt.org/ministries</loc>
+    <lastmod>{{ lastmod["ministries.html"] | default(buildDate) }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mercycourt.org/tehillah-voices</loc>
+    <lastmod>{{ lastmod["tehillah-voices.html"] | default(buildDate) }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mercycourt.org/mercy-kidz</loc>
+    <lastmod>{{ lastmod["mercy-kidz.html"] | default(buildDate) }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Blog index -->
   <url>
     <loc>https://mercycourt.org/blog</loc>
+    <lastmod>{{ lastmod["blog.njk"] | default(buildDate) }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -71,7 +89,7 @@ permalink: "/sitemap.xml"
   {%- if not post.data.draft %}
   <url>
     <loc>https://mercycourt.org{{ post.url | cleanUrl }}</loc>
-    <lastmod>{{ post.date | isoDate }}</lastmod>
+    <lastmod>{{ lastmod[post.inputPath | replace("./", "")] | default(buildDate) }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -80,16 +98,16 @@ permalink: "/sitemap.xml"
   <!-- Events hub -->
   <url>
     <loc>https://mercycourt.org/events/</loc>
+    <lastmod>{{ lastmod["events/index.njk"] | default(buildDate) }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <!-- Event pages: active + past included; hidden excluded.
-       lastmod omitted — event files use the event date as their file date,
-       which is a future date for upcoming events and not a valid lastmod. -->
+  <!-- Event pages: active + past, non-noindex included; hidden and noindex excluded -->
   {%- for event in collections.eventPages %}
-  {%- if event.data.status != "hidden" %}
+  {%- if event.data.status != "hidden" and not event.data.noindex %}
   <url>
     <loc>https://mercycourt.org/events/{{ event.data.slug }}/</loc>
+    <lastmod>{{ lastmod[event.inputPath | replace("./", "")] | default(buildDate) }}</lastmod>
     <changefreq>{% if event.data.status == "active" %}weekly{% else %}yearly{% endif %}</changefreq>
     <priority>{% if event.data.status == "active" %}0.7{% else %}0.5{% endif %}</priority>
   </url>
