@@ -6,6 +6,7 @@
 {%- else -%}
   {%- set _ogUrl = "https://mercycourt.org/" + _src -%}
 {%- endif -%}
+{%- if noindex %}<meta name="robots" content="noindex, follow">{% endif %}
 <meta property="og:image" content="{{ _ogUrl }}">
 <meta property="og:image:alt" content="{{ _og_alt }}">
 <meta name="twitter:image" content="{{ _ogUrl }}">
