@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "screenshot.js",
   "scripts": {
-    "build": "eleventy && node seo-check.js --strict",
+    "build": "git fetch --unshallow 2>/dev/null || true && eleventy && node seo-check.js --strict",
     "check": "node seo-check.js",
     "start": "eleventy --serve --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
