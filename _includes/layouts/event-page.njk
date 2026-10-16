@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <meta name="description" content="{{ seo_description }}">
+    {%- if noindex %}<meta name="robots" content="noindex, follow">{% endif %}
     <link rel="canonical" href="https://mercycourt.org{{ page.url | cleanUrl }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="RCCG Mercy Court">
