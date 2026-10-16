@@ -752,6 +752,7 @@ collections:
           - { label: "Past",    value: "past" }
           - { label: "Hidden",  value: "hidden" }
       - { label: "Redirect To", name: "redirect_to", widget: "string", default: "/events/", required: false, hint: "Only used when Status is Hidden. Where to send visitors." }
+      - { label: "Hide from search engines", name: "noindex", widget: "boolean", default: true, hint: "When on, this page won't appear in Google search results and is excluded from the sitemap. Use for event pages you're promoting via social media rather than organic search." }
       - { label: "Event Start Date", name: "event_start_date", widget: "datetime", format: "YYYY-MM-DD", time_format: false, required: false, hint: "The first day of the event. Used to sort Current Events (soonest first) and Past Events (newest first). Leave blank to sort by publish date." }
       - { label: "Event Date (display)", name: "event_date", widget: "string", required: false, hint: "Free-text date label shown on hub cards, e.g. 'Every Sunday' or 'Aug 14–16, 2026'. Leave blank to omit." }
       - { label: "Card Summary", name: "card_summary", widget: "text", required: false, hint: "2–3 sentences shown on the /events/ hub card. Leave blank to omit." }
