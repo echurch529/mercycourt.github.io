@@ -70,10 +70,10 @@
         {%- for item in faq %}
         {
             "@type": "Question",
-            "name": {{ item.q | dump }},
+            "name": {{ item.q | dump | safe }},
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": {{ item.a | dump }}
+                "text": {{ item.a | dump | safe }}
             }
         }{% if not loop.last %},{% endif %}
         {%- endfor %}
