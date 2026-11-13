@@ -48,18 +48,21 @@ eleventyExcludeFromCollections: true
 /sunday-services.html               /sunday-services        301
 /ministries.html                    /ministries             301
 /tehillah-voices.html               /tehillah-voices        301
-/events/12th-anniversary.html       /events/12th-anniversary    301
-/events/one-bring-one.html          /events/one-bring-one       301
+/events/12th-anniversary.html       /events/                    301
+/events/one-bring-one.html          /events/                    301
 /events/p4-conference.html          /events/p4-conference       301
 /events/12th-anniversary-1.html     /events/p4-conference       301
 /events/12th-anniversary-1          /events/p4-conference       301
 /mercy-kidz-registration.html       /mercy-kidz-registration    301
-/one-bring-one.html                 /events/one-bring-one       301
-/one-bring-one                      /events/one-bring-one       301
+/one-bring-one.html                 /events/                    301
+/one-bring-one                      /events/                    301
 
-# Testimony form
-/testimony   {{ site.testimony_form_url }}  302
-/testimony/  {{ site.testimony_form_url }}  302
+# .html canonical for new testimony page
+/testimony.html  /testimony  301
+
+# Past event pages — redirect to hub (trailing-slash; no-slash handled by CMS hidden loop)
+/events/12th-anniversary/           /events/                    301
+/events/one-bring-one/              /events/                    301
 
 # Hidden event redirects (managed by CMS — do not edit below this line)
 {%- for page in collections.eventPages %}
