@@ -17,12 +17,19 @@
     // Phone clicks
     if (href.startsWith('tel:')) {
       track('phone_clicked', { page: page });
+      track('click_call', { link_location: page });
       return;
     }
 
     // Email clicks
     if (href.startsWith('mailto:')) {
       track('email_clicked', { page: page });
+      return;
+    }
+
+    // Directions clicks — checked before generic href matchers
+    if (/google\.com\/maps|maps\.app\.goo\.gl|goo\.gl\/maps|maps\.apple\.com/i.test(href)) {
+      track('get_directions', { link_location: page });
       return;
     }
 
