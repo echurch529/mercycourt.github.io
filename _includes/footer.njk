@@ -37,7 +37,8 @@
                     <ul class="space-y-2 text-sm text-gray-400">
                         <li>{{ site.address_street }}</li>
                         <li>{{ site.address_city_state }}</li>
-                        <li class="pt-2">{{ site.phone }}</li>
+                        <li class="pt-2"><a href="tel:{{ site.phone | replace('(','') | replace(')','') | replace(' ','') | replace('-','') }}" class="hover:text-white transition">{{ site.phone }}</a></li>
+                        <li><a href="https://www.google.com/maps/dir/?api=1&destination=529+Walker+Ave,+Baltimore,+MD+21212" target="_blank" rel="noopener" class="hover:text-white transition">Get Directions →</a></li>
                         <li>{{ site.email }}</li>
                     </ul>
                 </div>
