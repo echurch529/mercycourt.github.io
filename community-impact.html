@@ -584,6 +584,9 @@ grant_body: "Mercy Court stands as a trusted anchor in Baltimore, addressing foo
                     </form>
                     <div id="volunteer-success" class="hidden text-center py-10">
                         <div class="text-5xl mb-4">🙌</div>
+                    <div id="volunteer-error" class="hidden text-center py-4">
+                        <p class="text-red-600 text-sm font-medium">Something went wrong. Please try again or call us at <a href="tel:+14109009111" class="underline">{{ site.phone }}</a>.</p>
+                    </div>
                         <p class="text-white text-xl font-bold leading-relaxed">
                             Thank you for your interest! Our team will be in touch with next steps.
                         </p>
@@ -746,15 +749,17 @@ grant_body: "Mercy Court stands as a trusted anchor in Baltimore, addressing foo
                 if (response.ok) {
                     document.getElementById('volunteer-success').classList.remove('hidden');
                     form.classList.add('hidden');
+                    if (typeof gtag === 'function') gtag('event', 'generate_lead', { form: 'volunteer' });
+                    if (typeof fbq  === 'function') fbq('track', 'Lead', { content_name: 'volunteer' });
                 } else {
                     btn.disabled = false;
                     btn.textContent = originalText;
-                    alert('Something went wrong. Please try again.');
+                    document.getElementById('volunteer-error').classList.remove('hidden');
                 }
             } catch (err) {
                 btn.disabled = false;
                 btn.textContent = originalText;
-                alert('Network error. Please check your connection and try again.');
+                document.getElementById('volunteer-error').classList.remove('hidden');
             }
         });
     </script>
