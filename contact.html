@@ -125,7 +125,7 @@ hero:
                     <h2 class="font-anton text-3xl uppercase mb-2 tracking-tight">Send Us a Message</h2>
                     <p class="text-gray-500 text-sm mb-8">Fill out the form below and we'll get back to you shortly.</p>
 
-                    <form class="space-y-6" action="https://formspree.io/f/meedlpel" method="POST">
+                    <form id="contact-form" class="space-y-6">
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-semibold mb-2">First Name</label>
@@ -152,6 +152,14 @@ hero:
                             Send Message
                         </button>
                     </form>
+                    <div id="contact-success" class="hidden text-center py-10">
+                        <svg class="w-14 h-14 mx-auto mb-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <h3 class="font-bold text-xl mb-2">Message Sent!</h3>
+                        <p class="text-gray-500">Thank you for reaching out. We'll get back to you shortly.</p>
+                    </div>
+                    <div id="contact-error" class="hidden text-center py-4">
+                        <p class="text-red-600 text-sm">Something went wrong. Please try again or call us at <a href="tel:+14109009111" class="underline">{{ site.phone }}</a>.</p>
+                    </div>
                 </div>
 
                 <!-- Contact Details -->
@@ -170,6 +178,7 @@ hero:
                                 <div>
                                     <p class="font-semibold">Address</p>
                                     <p class="text-gray-600">{{ site.address_street }}<br>{{ site.address_city_state }}</p>
+                                    <a href="https://www.google.com/maps/dir/?api=1&destination=529+Walker+Ave,+Baltimore,+MD+21212" target="_blank" rel="noopener" class="text-brand-red text-sm font-semibold hover:underline mt-1 inline-block">Get Directions →</a>
                                 </div>
                             </div>
                             <div class="flex items-start gap-4">
@@ -180,7 +189,7 @@ hero:
                                 </div>
                                 <div>
                                     <p class="font-semibold">Phone</p>
-                                    <p class="text-gray-600">{{ site.phone }}</p>
+                                    <a href="tel:{{ site.phone | replace('(','') | replace(')','') | replace(' ','') | replace('-','') }}" class="text-gray-600 hover:text-brand-red transition">{{ site.phone }}</a>
                                 </div>
                             </div>
                             <div class="flex items-start gap-4">
@@ -408,10 +417,34 @@ hero:
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeGivingModal();
         });
-        document.querySelector('form[action*="formspree"]').addEventListener('submit', function() {
-            var btn = this.querySelector('button[type="submit"]');
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            var btn = this.querySelector('[type=submit]');
             btn.disabled = true;
             btn.textContent = 'Sending…';
+            var data = {};
+            new FormData(this).forEach(function(v, k) { data[k] = v; });
+            try {
+                var resp = await fetch('https://formspree.io/f/meedlpel', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (resp.ok) {
+                    this.classList.add('hidden');
+                    document.getElementById('contact-success').classList.remove('hidden');
+                    if (typeof gtag === 'function') gtag('event', 'generate_lead', { form: 'contact' });
+                    if (typeof fbq  === 'function') fbq('track', 'Lead', { content_name: 'contact' });
+                } else {
+                    document.getElementById('contact-error').classList.remove('hidden');
+                    btn.disabled = false;
+                    btn.textContent = 'Send Message';
+                }
+            } catch(_) {
+                document.getElementById('contact-error').classList.remove('hidden');
+                btn.disabled = false;
+                btn.textContent = 'Send Message';
+            }
         });
     </script>
 </body>
