@@ -392,6 +392,11 @@ faq:
                     <p class="text-gray-400 text-sm leading-relaxed">After service, show your matching security label — your child is released only to you.</p>
                 </div>
             </div>
+            <div class="text-center mt-12">
+                <button onclick="openVisitModal()" class="inline-block bg-brand-red text-white px-8 py-4 rounded-full font-bold uppercase text-sm hover:bg-[#C04E25] transition tracking-wide">
+                    Plan Your Family's Visit
+                </button>
+            </div>
         </div>
     </section>
 
@@ -765,6 +770,8 @@ faq:
 <script>
 (function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');obs.unobserve(entry.target);}});},{threshold:0.12});document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});})();
 </script>
+{% set visitFormName = 'mercy_kidz' %}
+{%- include "visit-modal.njk" -%}
 </body>
 </html>
 
