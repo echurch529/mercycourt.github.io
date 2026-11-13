@@ -203,11 +203,11 @@
         }).then(function(resp) {
             if (resp.ok) {
                 if (typeof fbq === 'function') {
-                    fbq('track', 'Lead', { content_name: 'plan_your_visit' });
+                    fbq('track', 'Lead', { content_name: '{{ visitFormName | default("plan_your_visit") }}' });
                 }
                 if (typeof gtag === 'function') {
                     gtag('event', 'generate_lead', {
-                        form: 'plan_your_visit',
+                        form: '{{ visitFormName | default("plan_your_visit") }}',
                         service: servicePreference || 'No preference'
                     });
                 }
