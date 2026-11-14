@@ -2,6 +2,8 @@
 layout: false
 templateEngineOverride: njk
 permalink: contact.html
+seo_title: "Contact Us | RCCG Mercy Court — 529 Walker Ave, Baltimore"
+seo_description: "Get in touch with RCCG Mercy Court. Visit us at 529 Walker Ave, Baltimore, MD 21212, call (410) 900-9111, or send a message using the form on this page."
 hero:
   image: "/assets/images/2026/congregation/congregation-worship-service-01.jpg"
 ---
@@ -15,20 +17,20 @@ hero:
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | RCCG Mercy Court — 529 Walker Ave, Baltimore</title>
-    <meta name="description" content="Get in touch with RCCG Mercy Court. Visit us at 529 Walker Avenue, Baltimore, MD 21212. Call (410) 900-9111 or send us a message online.">
+    <title>{{ seo_title }}</title>
+    <meta name="description" content="{{ seo_description }}">
     <link rel="canonical" href="https://mercycourt.org/contact">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="RCCG Mercy Court">
-    <meta property="og:title" content="Contact Us | RCCG Mercy Court — 529 Walker Ave, Baltimore">
-    <meta property="og:description" content="Get in touch with RCCG Mercy Court. Visit us at 529 Walker Avenue, Baltimore, MD 21212. Call (410) 900-9111 or send us a message online.">
+    <meta property="og:title" content="{{ seo_title }}">
+    <meta property="og:description" content="{{ seo_description }}">
     <meta property="og:url" content="https://mercycourt.org/contact">
     {%- set _og_image = "https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-01.jpg" -%}
     {%- set _og_alt = "RCCG Mercy Court congregation during Sunday worship" -%}
     {%- include "og-meta.njk" -%}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Contact Us | RCCG Mercy Court — 529 Walker Ave, Baltimore">
-    <meta name="twitter:description" content="Get in touch with RCCG Mercy Court. Visit us at 529 Walker Avenue, Baltimore, MD 21212. Call (410) 900-9111 or send us a message online.">
+    <meta name="twitter:title" content="{{ seo_title }}">
+    <meta name="twitter:description" content="{{ seo_description }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

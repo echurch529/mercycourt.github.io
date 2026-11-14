@@ -1,5 +1,7 @@
 ---
 templateEngineOverride: njk
+seo_title: "About Us | RCCG Mercy Court — Baltimore Church"
+seo_description: "Meet lead pastors John and Rosemary Itakpe and discover Mercy Court’s mission: raising Christ-like pacesetters to maximize their God-given potential."
 hero:
   image: "/assets/images/2026/congregation/congregation-worship-service-02.jpg"
   headline: "IN CHRIST, FOR CHRIST,"
@@ -32,20 +34,20 @@ testimonials:
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | RCCG Mercy Court — Baltimore Church</title>
-    <meta name="description" content="Discover RCCG Mercy Court's vision and leadership. Pastors John and Rosemary Itakpe lead a Baltimore community dedicated to raising Christ-like pacesetters.">
+    <title>{{ seo_title }}</title>
+    <meta name="description" content="{{ seo_description }}">
     <link rel="canonical" href="https://mercycourt.org/about-us">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="RCCG Mercy Court">
-    <meta property="og:title" content="About Us | RCCG Mercy Court — Baltimore Church">
-    <meta property="og:description" content="Discover RCCG Mercy Court's vision and leadership. Pastors John and Rosemary Itakpe lead a Baltimore community dedicated to raising Christ-like pacesetters.">
+    <meta property="og:title" content="{{ seo_title }}">
+    <meta property="og:description" content="{{ seo_description }}">
     <meta property="og:url" content="https://mercycourt.org/about-us">
     {%- set _og_image = "https://mercycourt.org/assets/images/2026/leadership/PJ-and-PA.jpeg" -%}
     {%- set _og_alt = "Pastors John and Rosemary Itakpe of RCCG Mercy Court" -%}
     {%- include "og-meta.njk" -%}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="About Us | RCCG Mercy Court — Baltimore Church">
-    <meta name="twitter:description" content="Discover RCCG Mercy Court's vision and leadership. Pastors John and Rosemary Itakpe lead a Baltimore community dedicated to raising Christ-like pacesetters.">
+    <meta name="twitter:title" content="{{ seo_title }}">
+    <meta name="twitter:description" content="{{ seo_description }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

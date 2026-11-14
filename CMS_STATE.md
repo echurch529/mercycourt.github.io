@@ -1117,3 +1117,37 @@ Five issues found in mobile review of homepage screenshot:
 - Instagram: `https://www.instagram.com/mercycourt/`
 - YouTube: `https://www.youtube.com/@RCCGMercyCourt`
 - TikTok: `https://www.tiktok.com/@rccgmercycourt`
+
+---
+
+## SEO Phase 2 — seo_title / seo_description fields (2026-11-13)
+
+**Branch:** `seo/phase-2-meta`
+
+### New CMS fields added (seo_title + seo_description + og_image)
+
+| Collection | File | Notes |
+|---|---|---|
+| `home` | `index.html` | Homepage |
+| `about` | `about-us.html` | About Us |
+| `contact` | `contact.html` | Contact |
+| `plan-your-visit` | `plan-your-visit.html` | Plan Your Visit |
+| `ministries` | `ministries.html` | Ministries Overview |
+
+Widget config: `seo_title` → `seo-counter`, max 65, warn at 60. `seo_description` → `seo-counter` multiline, max 155, target 120–155.
+
+### Updated fields
+
+- `watch-live` / `seo_description`: `max: 160` → `max: 155`, hint updated to match new limit.
+
+### Template changes
+
+All 5 new pages wired: `<title>{{ seo_title }}</title>`, `<meta name="description" content="{{ seo_description }}">`, og:title, og:description, twitter:title, twitter:description.
+
+`testimony.html`: `seo_title` frontmatter field added (was `title`-only); `seo_description` updated; all 6 meta tags wired.
+
+`watch-live.html`: frontmatter values updated only (template already used variables).
+
+### preview.js
+
+`seoTitle` / `seoDesc` extraction vars added to HomePreview, AboutPreview, ContactPreview, PlanYourVisitPreview, MinistriesPreview (not rendered — consistent with existing WatchLivePreview pattern).
