@@ -317,7 +317,7 @@
             <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <button onclick="openVisitModal()" class="inline-block bg-brand-red text-white text-sm font-bold uppercase tracking-wide px-10 py-4 rounded-full hover:bg-[#C04E25] transition">{{ cta_final.primary_label if cta_final.primary_label else "Plan Your Visit" }}</button>
                 {%- if cta_final.secondary_label %}
-                <a href="{{ cta_final.secondary_url if cta_final.secondary_url else '/events/one-bring-one/' }}" class="inline-block border border-white/50 text-white text-sm font-bold uppercase tracking-wide px-10 py-4 rounded-full hover:bg-white/10 transition">{{ cta_final.secondary_label }}</a>
+                <a href="{{ cta_final.secondary_url if cta_final.secondary_url else '/events/' }}" class="inline-block border border-white/50 text-white text-sm font-bold uppercase tracking-wide px-10 py-4 rounded-full hover:bg-white/10 transition">{{ cta_final.secondary_label }}</a>
                 {%- endif %}
             </div>
             <div class="flex flex-wrap gap-6 justify-center text-sm">

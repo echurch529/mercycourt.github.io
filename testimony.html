@@ -1,0 +1,98 @@
+---
+layout: false
+templateEngineOverride: njk
+permalink: testimony.html
+title: Share Your Testimony | RCCG Mercy Court
+seo_description: "Share what God has done in your life with the RCCG Mercy Court family. Every testimony is a witness to His faithfulness."
+og_image: /assets/images/2026/congregation/congregation-worship-service-01.jpg
+---
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Testimony | RCCG Mercy Court</title>
+    <meta name="description" content="Share what God has done in your life with the RCCG Mercy Court family. Every testimony is a witness to His faithfulness.">
+    <link rel="canonical" href="https://mercycourt.org/testimony">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="RCCG Mercy Court">
+    <meta property="og:title" content="Share Your Testimony | RCCG Mercy Court">
+    <meta property="og:description" content="Share what God has done in your life with the RCCG Mercy Court family. Every testimony is a witness to His faithfulness.">
+    <meta property="og:url" content="https://mercycourt.org/testimony">
+    {%- set _og_image = "/assets/images/2026/congregation/congregation-worship-service-01.jpg" -%}
+    {%- set _og_alt = "RCCG Mercy Court congregation during Sunday worship" -%}
+    {%- include "og-meta.njk" -%}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Share Your Testimony | RCCG Mercy Court">
+    <meta name="twitter:description" content="Share what God has done in your life with the RCCG Mercy Court family. Every testimony is a witness to His faithfulness.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-red': '#D95A2B',
+                        'brand-dark': '#0A0A0A',
+                        'brand-footer': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        'anton': ['Anton', 'sans-serif'],
+                        'lato': ['Lato', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JWGVNRLKJL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JWGVNRLKJL');
+    </script>
+    <script src="/assets/js/analytics.js" defer></script>
+    <!-- Meta Pixel Code -->
+    <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1027268596866855'); fbq('track', 'PageView');</script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1027268596866855&ev=PageView&noscript=1" alt=""/></noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+<body class="font-lato bg-white text-gray-900">
+
+    {%- include "nav.njk" -%}
+
+<main id="main-content">
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden flex items-center justify-center text-white text-center" style="height: 55vh; min-height: 340px; background-image: url('/assets/images/2026/congregation/congregation-worship-service-01.jpg'); background-size: cover; background-position: center; padding-top: 72px;">
+        <div class="absolute inset-0 bg-black/55"></div>
+        <div class="relative z-10 px-6">
+            <p class="text-brand-red text-xs font-bold uppercase tracking-widest mb-4">RCCG Mercy Court</p>
+            <h1 class="font-anton text-6xl md:text-8xl uppercase leading-none mb-5" style="letter-spacing: 0.04em;">Share Your Testimony</h1>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto max-w-2xl text-center">
+            <p class="text-gray-600 text-lg leading-relaxed mb-10">Your story matters — to God, to this church family, and to the people who need to hear it. If God has moved in your life through answered prayer, healing, provision, or a fresh start, take a moment to share what He has done.</p>
+            <a href="{{ site.testimony_form_url }}" target="_blank" rel="noopener noreferrer"
+               class="inline-block bg-brand-red text-white text-sm font-bold uppercase tracking-wide px-10 py-4 rounded-full hover:bg-[#C04E25] transition">
+                Share Your Testimony
+            </a>
+        </div>
+    </section>
+
+</main>
+
+    {%- include "footer.njk" -%}
+
+</body>
+</html>
