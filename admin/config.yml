@@ -23,6 +23,9 @@ collections:
         label: "Homepage"
         file: "index.html"
         fields:
+          - { label: "SEO Title", name: "seo_title", widget: "seo-counter", required: false, max: 65, target_min: 50, target_max: 60 }
+          - { label: "SEO Description", name: "seo_description", widget: "seo-counter", multiline: true, required: false, hint: "Description (target: 120–155 characters)", max: 155, target_min: 120, target_max: 155 }
+          - { label: "OG / Share Image", name: "og_image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
           - label: "Seconds per Slide"
             name: "hero_seconds"
             widget: "number"
@@ -90,6 +93,9 @@ collections:
         label: "About Us"
         file: "about-us.html"
         fields:
+          - { label: "SEO Title", name: "seo_title", widget: "seo-counter", required: false, max: 65, target_min: 50, target_max: 60 }
+          - { label: "SEO Description", name: "seo_description", widget: "seo-counter", multiline: true, required: false, hint: "Description (target: 120–155 characters)", max: 155, target_min: 120, target_max: 155 }
+          - { label: "OG / Share Image", name: "og_image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
           - label: "Hero"
             name: "hero"
             widget: "object"
@@ -125,6 +131,9 @@ collections:
         label: "Contact"
         file: "contact.html"
         fields:
+          - { label: "SEO Title", name: "seo_title", widget: "seo-counter", required: false, max: 65, target_min: 50, target_max: 60 }
+          - { label: "SEO Description", name: "seo_description", widget: "seo-counter", multiline: true, required: false, hint: "Description (target: 120–155 characters)", max: 155, target_min: 120, target_max: 155 }
+          - { label: "OG / Share Image", name: "og_image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
           - label: "Hero"
             name: "hero"
             widget: "object"
@@ -137,6 +146,9 @@ collections:
         label: "Plan Your Visit"
         file: "plan-your-visit.html"
         fields:
+          - { label: "SEO Title", name: "seo_title", widget: "seo-counter", required: false, max: 65, target_min: 50, target_max: 60 }
+          - { label: "SEO Description", name: "seo_description", widget: "seo-counter", multiline: true, required: false, hint: "Description (target: 120–155 characters)", max: 155, target_min: 120, target_max: 155 }
+          - { label: "OG / Share Image", name: "og_image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
           - label: "Hero"
             name: "hero"
             widget: "object"
@@ -425,7 +437,7 @@ collections:
         file: "watch-live.html"
         fields:
           - { label: "SEO Title", name: "seo_title", widget: "seo-counter", required: false, max: 65, target_min: 50, target_max: 60 }
-          - { label: "SEO Description", name: "seo_description", widget: "seo-counter", multiline: true, required: false, hint: "Description (target: 120–160 characters)", max: 160, target_min: 120, target_max: 155 }
+          - { label: "SEO Description", name: "seo_description", widget: "seo-counter", multiline: true, required: false, hint: "Description (target: 120–155 characters)", max: 155, target_min: 120, target_max: 155 }
           - { label: "OG Image", name: "og_image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
           - label: "Hero"
             name: "hero"
@@ -600,6 +612,9 @@ collections:
         label: "Ministries Overview"
         file: "ministries.html"
         fields:
+          - { label: "SEO Title", name: "seo_title", widget: "seo-counter", required: false, max: 65, target_min: 50, target_max: 60 }
+          - { label: "SEO Description", name: "seo_description", widget: "seo-counter", multiline: true, required: false, hint: "Description (target: 120–155 characters)", max: 155, target_min: 120, target_max: 155 }
+          - { label: "OG / Share Image", name: "og_image", widget: "image", required: false, hint: "Keep under 500KB. Compress at squoosh.app or tinypng.com before uploading." }
           - label: "Hero"
             name: "hero"
             widget: "object"

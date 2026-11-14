@@ -1393,6 +1393,8 @@
       var about      = data.about       || {};
       var leadership = data.leadership  || {};
       var mins       = data.ministries  || [];
+      var seoTitle = data.seo_title        || '';
+      var seoDesc  = data.seo_description  || '';
 
       return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
         noticeBar(),
@@ -1534,6 +1536,8 @@
       var hero     = data.hero    || {};
       var pastor   = data.pastor  || {};
       var tests    = data.testimonials || [];
+      var seoTitle = data.seo_title        || '';
+      var seoDesc  = data.seo_description  || '';
 
       return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
         noticeBar(),
@@ -1627,6 +1631,8 @@
     try {
       var data = getData(props);
       var hero = data.hero || {};
+      var seoTitle = data.seo_title        || '';
+      var seoDesc  = data.seo_description  || '';
 
       var infoRow = function (icon, label, value) {
         return h('div', { style: { display: 'flex', alignItems: 'flex-start', gap: '16px', marginBottom: '20px' } },
@@ -1703,6 +1709,8 @@
       var data = getData(props);
       var hero = data.hero || {};
       var faq  = data.faq  || [];
+      var seoTitle = data.seo_title        || '';
+      var seoDesc  = data.seo_description  || '';
 
       return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
         noticeBar(),
@@ -1937,6 +1945,8 @@
       var data = getData(props);
       var hero = data.hero || {};
       var mins = data.ministries || [];
+      var seoTitle = data.seo_title        || '';
+      var seoDesc  = data.seo_description  || '';
 
       return h('div', { style: { fontFamily: BODY, background: '#fff', margin: 0, padding: 0 } },
         noticeBar(),
