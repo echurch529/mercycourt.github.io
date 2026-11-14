@@ -104,36 +104,75 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
     <script>window.addEventListener('load',function(){var m=document.createElement('script');m.async=1;m.src='https://chimpstatic.com/mcjs-connected/js/users/1f6d34239bf35c1b0512b77c8/08dc922941bacce45fba209ed.js';document.head.appendChild(m);},false);</script>
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Church",
-    "name": "RCCG Mercy Court",
-    "url": "https://mercycourt.org",
-    "description": "RCCG Mercy Court is a vibrant church in Baltimore, MD dedicated to raising Christ-like pacesetters in faith and purpose.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "529 Walker Avenue",
-      "addressLocality": "Baltimore",
-      "addressRegion": "MD",
-      "postalCode": "21212",
-      "addressCountry": "US"
-    },
-    "telephone": "+14109009111",
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Sunday",
-        "opens": "09:30",
-        "closes": "11:30"
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://mercycourt.org/#organization",
+      "name": "RCCG Mercy Court",
+      "alternateName": "Redeemed Christian Church of God Mercy Court",
+      "url": "https://mercycourt.org/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://mercycourt.org/assets/images/MC%20LOGO%201080PX%20black.png"
       },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Sunday",
-        "opens": "12:00",
-        "closes": "14:00"
+      "telephone": "+1-410-900-9111",
+      "sameAs": [
+        "https://www.facebook.com/rccgmercycourt",
+        "https://www.instagram.com/mercycourt/",
+        "https://www.youtube.com/@RCCGMercyCourt",
+        "https://www.tiktok.com/@rccgmercycourt"
+      ],
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Redeemed Christian Church of God",
+        "alternateName": "RCCG"
+      },
+      "location": {
+        "@id": "https://mercycourt.org/#church"
+      },
+      "image": "https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-01.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "529 Walker Avenue",
+        "addressLocality": "Baltimore",
+        "addressRegion": "MD",
+        "postalCode": "21212",
+        "addressCountry": "US"
       }
-    ],
-    "image": "https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-01.jpg"
-  }
+    },
+    {
+      "@type": "Church",
+      "@id": "https://mercycourt.org/#church",
+      "name": "RCCG Mercy Court",
+      "url": "https://mercycourt.org/",
+      "telephone": "+1-410-900-9111",
+      "image": "https://mercycourt.org/assets/images/2026/congregation/congregation-worship-service-01.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "529 Walker Avenue",
+        "addressLocality": "Baltimore",
+        "addressRegion": "MD",
+        "postalCode": "21212",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 39.3716287,
+        "longitude": -76.6085156
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mercycourt.org/#website",
+      "url": "https://mercycourt.org/",
+      "name": "RCCG Mercy Court",
+      "publisher": {
+        "@id": "https://mercycourt.org/#organization"
+      }
+    }
+  ]
+}
   </script>
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JWGVNRLKJL"></script>
@@ -868,4 +907,5 @@ cta_body: Don't just exist—thrive! Join us this Sunday and discover how God
 </script>
 </body>
 </html>
+
 
