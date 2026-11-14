@@ -1,10 +1,15 @@
 // Cloudflare Pages middleware
-// Returns 410 Gone for retired WordPress-style permalink URLs (/slug/)
-// that would otherwise resolve as 404s. These are old blog posts that
-// are intentionally removed — 410 tells Google to drop them from the index.
+// 1. Returns 410 Gone for retired WordPress-style permalink URLs (/slug/)
+//    that would otherwise resolve as 404s. These are old blog posts that
+//    are intentionally removed — 410 tells Google to drop them from the index.
+// 2. Adds X-Robots-Tag: noindex, nofollow to all responses on *.pages.dev
+//    preview domains so they never appear in search results.
 export async function onRequest(context) {
   const url = new URL(context.request.url);
   const path = url.pathname;
+  const isPreview = url.hostname.endsWith('.pages.dev');
+
+  let response;
 
   // Match root-level slug with trailing slash: /some-post-slug/
   // This is the old WordPress permalink format used by retired posts.
@@ -12,15 +17,27 @@ export async function onRequest(context) {
   if (/^\/[a-z0-9][a-z0-9-]*\/$/.test(path)) {
     const upstream = await context.next();
     if (upstream.status === 404) {
-      return new Response(goneHtml(path), {
+      response = new Response(goneHtml(path), {
         status: 410,
         headers: { 'Content-Type': 'text/html;charset=UTF-8' },
       });
+    } else {
+      response = upstream;
     }
-    return upstream;
+  } else {
+    response = await context.next();
   }
 
-  return context.next();
+  if (isPreview) {
+    const headers = new Headers(response.headers);
+    headers.set('X-Robots-Tag', 'noindex, nofollow');
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    });
+  }
+  return response;
 }
 
 function goneHtml(path) {
