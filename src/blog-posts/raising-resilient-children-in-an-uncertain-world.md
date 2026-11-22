@@ -7,8 +7,8 @@ date: 2026-10-31
 author: "Emmanuel Adebayo"
 category: inspiration
 featured: false
-hero_image: "REPLACE_ME"
-hero_image_alt: "REPLACE_ME"
+hero_image: "/assets/images/2026/blog-photos/childrens-takeover-2026-his-plans-my-future.jpg"
+hero_image_alt: "Children in matching 'His Plans, My Future' sweatshirts standing on stage, one boy holding a microphone, with adults beside them."
 excerpt: "We cannot predict the world our children will grow into. We can give them a trustworthy compass, a home where struggle can be spoken, and a love that is never conditional."
 read_time: 6
 scripture_references:
