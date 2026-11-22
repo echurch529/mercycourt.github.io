@@ -466,7 +466,8 @@ grant_body: "Mercy Court stands as a trusted anchor in Baltimore, addressing foo
             <div class="grid md:grid-cols-3 gap-8">
                 {% if communityPosts.length %}
                 {% for post in communityPosts %}
-                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
+                  <a href="{{ post.url | cleanUrl }}" aria-label="Read {{ post.data.title }}" class="group block">
                     <div class="relative h-48 overflow-hidden">
                         <img loading="lazy" src="{{ post.data.hero_image }}" alt="{{ post.data.hero_image_alt }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" style="object-position:{{ post.data.hero_focal_x | default('50%', true) }} {{ post.data.hero_focal_y | default('50%', true) }};">
                     </div>
@@ -477,8 +478,9 @@ grant_body: "Mercy Court stands as a trusted anchor in Baltimore, addressing foo
                         </div>
                         <h3 class="font-anton text-xl uppercase tracking-h3 mb-2">{{ post.data.title }}</h3>
                         <p class="text-gray-600 text-sm leading-relaxed mb-4">{{ post.data.excerpt }}</p>
-                        <a href="{{ post.url | cleanUrl }}" class="text-brand-red font-bold text-sm uppercase hover:underline" aria-label="Read {{ post.data.title }}">Read More &rarr;</a>
+                        <span class="text-brand-red font-bold text-sm uppercase group-hover:underline">Read More &rarr;</span>
                     </div>
+                  </a>
                 </article>
                 {% endfor %}
                 {% else %}
