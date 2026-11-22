@@ -1,23 +1,27 @@
 ---
-title: "Raising Resilient Children in an Uncertain World"
+title: Raising Resilient Children in an Uncertain World
 slug: raising-resilient-children-in-an-uncertain-world
-seo_title: "Raising Resilient Children | Mercy Court"
-seo_description: "Practical, faith-rooted ways to raise resilient children in an uncertain world: give them a compass, make room for honest struggle, and lead with hope."
+seo_title: Raising Resilient Children | Mercy Court
+seo_description: "Practical, faith-rooted ways to raise resilient children in an
+  uncertain world: give them a compass, make room for honest struggle, and lead
+  with hope."
 date: 2026-10-31
-author: "Emmanuel Adebayo"
+author: Emmanuel Adebayo
 category: inspiration
 featured: false
-hero_image: "/assets/images/2026/blog-photos/childrens-takeover-2026-his-plans-my-future.jpg"
-hero_image_alt: "Children in matching 'His Plans, My Future' sweatshirts standing on stage, one boy holding a microphone, with adults beside them."
-excerpt: "We cannot predict the world our children will grow into. We can give them a trustworthy compass, a home where struggle can be spoken, and a love that is never conditional."
+hero_image: /assets/images/2026/blog-photos/childrens-takeover-2026-his-plans-my-future.jpg
+hero_image_alt: Children in matching 'His Plans, My Future' sweatshirts standing
+  on stage, one boy holding a microphone, with adults beside them.
+excerpt: We cannot predict the world our children will grow into. We can give
+  them a trustworthy compass, a home where struggle can be spoken, and a love
+  that is never conditional.
 read_time: 6
 scripture_references:
-  - "Proverbs 10:22"
-  - "Proverbs 22:6"
-  - "Proverbs 29:11"
+  - Proverbs 10:22
+  - Proverbs 22:6
+  - Proverbs 29:11
 ---
-
-A 2023 Pew Research Center survey found that 47% of U.S. adults under 50 who do not have children cited "the state of the world" as a reason they don't expect to have any. It is not hard to understand why. Children today face things their parents never contended with, and in the age of technology, the weight of that reality can feel crushing. Even some parents who have children sometimes wonder, quietly, whether they made the right choice.
+A 2024 Pew Research Center survey found that 38% of U.S. adults under 50 who say they are unlikely to ever have children cite concerns about the state of the world as a reason. It is not hard to understand why. Children today face things their parents never contended with, and in the age of technology, the weight of that reality can feel crushing. Even some parents who have children sometimes wonder, quietly, whether they made the right choice.
 
 These concerns are real, but they do not tell the whole story. Children are a blessing from the Lord, and it is His blessing that makes rich, without sorrow added to it (Proverbs 10:22). Watching a child grow at different stages of life is one of the most precious experiences a parent can have. And yet the question remains: how do we raise children well in a world that keeps getting more uncertain, confusing, and chaotic?
 
