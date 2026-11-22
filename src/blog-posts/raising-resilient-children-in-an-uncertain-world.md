@@ -8,10 +8,11 @@ seo_description: "Practical, faith-rooted ways to raise resilient children in an
 date: 2026-10-31
 author: Emmanuel Adebayo
 category: inspiration
-featured: false
+featured: true
 hero_image: /assets/images/2026/blog-photos/childrens-takeover-2026-his-plans-my-future.jpg
 hero_image_alt: Children in matching 'His Plans, My Future' sweatshirts standing
   on stage, one boy holding a microphone, with adults beside them.
+hero_focal_x: 50%
 excerpt: We cannot predict the world our children will grow into. We can give
   them a trustworthy compass, a home where struggle can be spoken, and a love
   that is never conditional.
@@ -21,7 +22,8 @@ scripture_references:
   - Proverbs 22:6
   - Proverbs 29:11
 ---
-A 2024 Pew Research Center survey found that 38% of U.S. adults under 50 who say they are unlikely to ever have children cite concerns about the state of the world as a reason. It is not hard to understand why. Children today face things their parents never contended with, and in the age of technology, the weight of that reality can feel crushing. Even some parents who have children sometimes wonder, quietly, whether they made the right choice.
+
+A 2023 Pew Research Center survey found that 47% of U.S. adults under 50 who do not have children cited "the state of the world" as a reason they don't expect to have any. It is not hard to understand why. Children today face things their parents never contended with, and in the age of technology, the weight of that reality can feel crushing. Even some parents who have children sometimes wonder, quietly, whether they made the right choice.
 
 These concerns are real, but they do not tell the whole story. Children are a blessing from the Lord, and it is His blessing that makes rich, without sorrow added to it (Proverbs 10:22). Watching a child grow at different stages of life is one of the most precious experiences a parent can have. And yet the question remains: how do we raise children well in a world that keeps getting more uncertain, confusing, and chaotic?
 
